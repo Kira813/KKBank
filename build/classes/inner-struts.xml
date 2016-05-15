@@ -1,0 +1,58 @@
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 管理员登陆 -->
+	<package name="login" extends="default" namespace="/">
+		<default-interceptor-ref name="adiStack" />
+		<action name="toLogin" 
+			class="com.kkbank.business.web.LoginManageAction"
+			method="toLogin" >
+		</action>
+		<action name="login" 
+			class="com.kkbank.business.web.LoginManageAction"
+			method="login" >
+		</action>
+		<action name="loginOut" 
+			class="com.kkbank.business.web.LoginManageAction"
+			method="toLogin" >
+		</action>
+		<action name="index" 
+			class="com.kkbank.business.web.LoginManageAction"
+			method="index" >
+		</action>
+	</package>
+	
+	<!-- 用户 -->
+	<package name="user" extends="default" namespace="/user">
+		<default-interceptor-ref name="loginStack" />
+		<action name="*User" 
+			class="com.kkbank.business.web.UserManageAction"
+			method="{1}User">
+			<result name="manageUser">/jsp/modifyUser.jsp</result>
+			<result name="listUser">/jsp/listUser.jsp</result>
+		</action>
+		<action name="modifyUser" 
+			class="com.kkbank.business.web.UserManageAction"
+			method="modifyUser">
+			<result type="redirectAction">
+				<param name="actionName">listUser</param>
+			</result>
+		</action>
+		<action name="delUser" 
+			class="com.kkbank.business.web.UserManageAction"
+			method="delUser">
+			<result type="redirectAction">
+				<param name="actionName">listUser</param>
+			</result>
+		</action>
+		<action name="addUser" 
+			class="com.kkbank.business.web.UserManageAction"
+			method="addUser">
+			 <result type="redirectAction">
+				<param name="actionName">listUser</param>4
+			</result>
+			<result name="SUCCESS">/jsp/SUCCESS.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,51 @@
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 指定web应用的默认编码集 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<!-- 配置文件修改时是否自动重新加载该文件，默认值为false,开发阶段最好打开 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	
+	<package name="default" extends="struts-default, json-default">
+		
+		<interceptors>
+			<!-- 该拦截器可以打印出浏览器访问的action类是哪个 -->
+			<interceptor name="adi" class="com.kkbank.util.filter.ActionDebugInterceptor" />
+			<!-- 登陆权限控制 -->
+			<interceptor name="login" class="com.kkbank.util.filter.LoginFilter" />
+			<!-- 管理员权限控制 -->
+			<interceptor name="admin" class="com.kkbank.util.filter.AdminFilter" />
+			
+			<!-- 调试拦截栈 -->
+			<interceptor-stack name="adiStack">
+				<interceptor-ref name="adi" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<!-- 登录拦截栈 -->
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="adi" />
+				<interceptor-ref name="login" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<!-- 管理员拦截栈 -->
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="loginStack" />
+				<interceptor-ref name="admin" />
+			</interceptor-stack>
+
+		</interceptors>
+		
+		<global-results>
+			<result name="index">/index.jsp</result>
+			<result name="toLogin">/jsp/login.jsp</result>
+			<result name="toMessage">/jsp/message.jsp</result>
+		</global-results>
+		
+	</package>
+	<include file="inner-struts.xml" />
+</struts>
+
