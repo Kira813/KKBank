@@ -10,7 +10,7 @@ import com.kkbank.domain.Customer;
 public class CustomerDao extends HibernateDaoSupport implements ICustomerDao{
 	public Customer get(String ID){ //加载Customer实例
 		return getHibernateTemplate()
-				.get(Customer.class, ID);//标识属性符
+			.get(Customer.class, ID);//标识属性符
 	}
 	//return刚刚保存的实例的标识属性值  ID是String类型
 	public String save(Customer customer){

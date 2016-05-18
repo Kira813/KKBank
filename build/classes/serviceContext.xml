@@ -16,17 +16,17 @@
 		class="com.kkbank.business.service.impl.UserService"
 		parent="userServiceTmpl" />
 	
-		<bean id="customerServiceTmpl" abstract="true" lazy-init="true"
+	<bean id="customerServiceTmpl" abstract="true" lazy-init="true"
 		p:customerDao-ref="CustomerDao"
 		/>	
-	<bean id="CustomerService"
+	<bean id="customerService"
 		class="com.kkbank.business.service.impl.CustomerService"
 		parent="customerServiceTmpl" />
 		
 	<bean id="accountServiceTmpl" abstract="true" lazy-init="true"
 		p:accountDao-ref="AccountDao"
 		/>
-	<bean id="AccountService"
+	<bean id="accountService"
 		class="com.kkbank.business.service.impl.AccountService"
 		parent="accountServiceTmpl" />
 		

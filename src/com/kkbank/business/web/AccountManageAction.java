@@ -9,6 +9,7 @@ import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
+import com.meeting.domain.User;
 import com.opensymphony.xwork2.ActionContext;
 
 public class AccountManageAction {
@@ -22,40 +23,53 @@ public class AccountManageAction {
 	private String ID;
 	private String ac_No;
 	private String password;
+	private String password1;
+	private String password2;
 	private double balance;
 	private int status;
 	private Customer customer;
+	private String name;
 
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 	
-	public String manageAccount() throws Exception{
-		Account account = accountService.getAccount(ac_No);
-		ActionContext ctx = ActionContext.getContext();
-		ctx.put("account", account);
-		return "manageAccount";
-	}
-	
-	public String listAccount() throws Exception{
-		List<Account> list = accountService.listAccount();
-		ActionContext ctx = ActionContext.getContext();
-		ctx.put("listaccount", list);
-	
-		return "listAccount";
-	}
-	
 	public String addAccount() throws Exception{
+		Customer customer = new Customer();
+		Account account = new Account();
+		customer.setID(ID);
+		customer.setName(name);
+		account.setPassword(password1);
+		account.setPassword(password2);
+		if(customerService.checkCustomer(customer) == true){
+			if(password1==password2){
+			customer = customerService.getCustomer(customer);
+			ActionContext.getContext().getSession().put("customer", customer);
+			ActionContext.getContext().getSession().put("ID", customer.getID());
+			ActionContext.getContext().getSession().put("name", customer.getName());
+			ActionContext.getContext().getSession().put("name", customer.getName());
+			return "SUCCESS";}else
+				{
+					ActionContext.getContext().put("tip", "密码不一致，请重新输入");
+					return "opencard";
+				}
+		}
+		ActionContext.getContext().put("tip", "身份证或姓名错误");
+		return "opencard";
 		resultMap = new HashMap<String, Object>();
-		Customer customer = customerService.getCustomer(ID);
-		accountService.addAccount(ID,ac_No,password,balance,
+		customer = customerService.getCustomer(ID);
+		 accountService.addAccount(ID,ac_No,password,balance,
 				status, customer);
+		return "SUCCESS";
+	}
+	
+	public String openCard() throws Exception {
 		return "SUCCESS";
 	}
 	public String getID() {
 		return ID;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String id) {
+		ID = id;
 	}
 
 	public String getAc_No() {
@@ -109,12 +123,19 @@ public class AccountManageAction {
 		this.resultMap = resultMap;
 	}
 
-	public IAccountService getUserService() {
+	public IAccountService getAccountService() {
 		return accountService;
 	}
 
 	public void setAccountService(IAccountService accountService) {
 		this.accountService = accountService;
+	}
+	public ICustomerService getCustomerService() {
+		return customerService;
+	}
+
+	public void setCustomerService(ICustomerService customerService) {
+		this.customerService = customerService;
 	}
 
 }

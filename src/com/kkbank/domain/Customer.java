@@ -12,12 +12,15 @@ public class Customer {
 		super();
 	}
 
+	
+
 	public Customer(String name, String iD, Set<Account> accounts) {
 		super();
 		this.name = name;
 		ID = iD;
 		this.accounts = accounts;
 	}
+
 
 	public String getName() {
 		return name;

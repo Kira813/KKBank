@@ -24,12 +24,21 @@
 	</package>
 	
 	<!-- account -->
-	<package name="account" extends="default" namespace="/account">	
-	<action name="openCard"
-		class="com.kkbank.business.web.AccountManageAction"
-		method="addAccount">
-			 <result name="SUCCESS">/jsp/SUCCESS.jsp</result>
-	</action>
+	<package name="account" extends="default" namespace="/account">
+	<default-interceptor-ref name="adiStack" />
+	<!-- jump to opencard.jsp -->
+	
+		<action name="openCard"
+			class="com.kkbank.business.web.AccountManageAction"
+			method="openCard">
+				 <result name="SUCCESS">/jsp/openCard.jsp</result>
+		</action>
+		
+		<action name="addAccount"
+			class="com.kkbank.business.web.AccountManageAction"
+			method="addAccount">
+				 <result name="SUCCESS">/jsp/successOpen.jsp</result>
+		</action>
 
 	</package>
 	

@@ -20,15 +20,15 @@
 		${listuser }
 		<table>
 		<s:iterator value="#listuser" status="st">
-                                  <tr>
-                                    <td>${id}</td>
-                                    <td>${username }</td>
-                                    <td>${pwd}</td>
-                                    <td>${power }</td>
-                                    <strong>${id}</strong>
-                                    <td><a href="user/manageUser.action?id=${id}" class="btn btn-primary btn-xs">编辑</a></td>
-                                    <td><a href="user/delUser.action?id=${id }" class="btn btn-primary btn-xs">删除</a></td>
-                                  </tr>
+	            <tr>
+	              <td>${id}</td>
+	              <td>${username }</td>
+	              <td>${pwd}</td>
+	              <td>${power }</td>
+	              <strong>${id}</strong>
+	              <td><a href="user/manageUser.action?id=${id}" class="btn btn-primary btn-xs">编辑</a></td>
+	              <td><a href="user/delUser.action?id=${id }" class="btn btn-primary btn-xs">删除</a></td>
+	            </tr>
           </s:iterator>
           </table>
 	</div>

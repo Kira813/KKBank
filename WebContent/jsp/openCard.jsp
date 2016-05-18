@@ -7,11 +7,12 @@
 <title>Opening a debit card</title>
 </head>
 <body>
-	<form action="account/addAccount.action">
-		name:<input type="text" name="name">
+	<form action="account/addAccount.action" method="post">
+		name:<input type="text" name="customer.name">
 		ID:<input type="text" name="ID">
-		PIN:<input type="text" name="password">
-		PIN Again:<input type="text" name="password">
+		PIN:<input type="text" name="password1">
+		PIN Again:<input type="text" name="password2">
+		<input type="submit" value="tijiao">
 	</form>
 </body>
 </html>

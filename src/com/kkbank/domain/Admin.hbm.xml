@@ -4,10 +4,8 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.kkbank.domain">
 	<class name="Admin" table="admin">
-		<id name="adm_id">
-			<generator class="identity" />
-		</id>
-		<property name="admin" not-null="true"/>
+		<id name="adm_id"></id>
+		<property name="aName" not-null="true"/>
 		<property name="psd" not-null="true"/>
 	</class>
 </hibernate-mapping>

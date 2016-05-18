@@ -3,7 +3,7 @@ package com.kkbank.domain;
 public class Admin {
 	
 	private String adm_id;
-	private String admin;
+	private String aName;
 	private String psd;
 	
 	
@@ -11,19 +11,22 @@ public class Admin {
 		super();
 	}
 	
-	public Admin(String adm_id, String admin, String psd) {
+	public Admin(String adm_id, String aName, String psd) {
 		super();
 		this.adm_id = adm_id;
-		this.admin = admin;
+		this.aName = aName;
 		this.psd = psd;
 	}
 	
-	public String getAdmin() {
-		return admin;
+
+	public String getaName() {
+		return aName;
 	}
-	public void setAdmin(String admin) {
-		this.admin = admin;
+
+	public void setaName(String aName) {
+		this.aName = aName;
 	}
+
 	public String getPsd() {
 		return psd;
 	}
@@ -42,7 +45,7 @@ public class Admin {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((adm_id == null) ? 0 : adm_id.hashCode());
-		result = prime * result + ((admin == null) ? 0 : admin.hashCode());
+		result = prime * result + ((aName == null) ? 0 : aName.hashCode());
 		result = prime * result + ((psd == null) ? 0 : psd.hashCode());
 		return result;
 	}
@@ -61,10 +64,10 @@ public class Admin {
 				return false;
 		} else if (!adm_id.equals(other.adm_id))
 			return false;
-		if (admin == null) {
-			if (other.admin != null)
+		if (aName == null) {
+			if (other.aName != null)
 				return false;
-		} else if (!admin.equals(other.admin))
+		} else if (!aName.equals(other.aName))
 			return false;
 		if (psd == null) {
 			if (other.psd != null)
