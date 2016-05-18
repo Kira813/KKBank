@@ -8,12 +8,26 @@
 
 	<!-- 配置业务逻辑组件的模板 -->
 	
+
 	<bean id="userServiceTmpl" abstract="true" lazy-init="true"
 		p:userDao-ref="UserDao"
-		/>
-		
+		/>	
 	<bean id="userService"
 		class="com.kkbank.business.service.impl.UserService"
 		parent="userServiceTmpl" />
+	
+		<bean id="customerServiceTmpl" abstract="true" lazy-init="true"
+		p:customerDao-ref="CustomerDao"
+		/>	
+	<bean id="CustomerService"
+		class="com.kkbank.business.service.impl.CustomerService"
+		parent="customerServiceTmpl" />
+		
+	<bean id="accountServiceTmpl" abstract="true" lazy-init="true"
+		p:accountDao-ref="AccountDao"
+		/>
+	<bean id="AccountService"
+		class="com.kkbank.business.service.impl.AccountService"
+		parent="accountServiceTmpl" />
 		
 </beans>

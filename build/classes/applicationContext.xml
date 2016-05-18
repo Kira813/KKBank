@@ -64,6 +64,9 @@
 	    <property name="mappingResources">
 	        <list>
 	        	<value>com/kkbank/domain/User.hbm.xml</value>
+	        	<value>com/kkbank/domain/Admin.hbm.xml</value>
+	        	<value>com/kkbank/domain/Account.hbm.xml</value>
+	        	<value>com/kkbank/domain/Customer.hbm.xml</value>
 	        </list>
         </property>
 		

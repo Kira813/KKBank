@@ -31,13 +31,14 @@ public class UserManageAction extends ActionSupport{
 		List<User> list = userService.listUser();
 		ActionContext ctx = ActionContext.getContext();
 		ctx.put("listuser", list);
+	
 		return "listUser";
 	}
 	
 	public String addUser() throws Exception{
 		resultMap = new HashMap<String, Object>();
 		userService.addUser(username, pwd, power);
-		return SUCCESS;
+		return "SUCCESS";
 	}
 	
 	public String modifyUser(){

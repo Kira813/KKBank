@@ -13,4 +13,13 @@
 	<bean id="UserDao"
 		class="com.kkbank.business.dao.impl.UserDao"
 		parent="daoTemplate" />
+	<bean id="AdminDao"
+		class="com.kkbank.business.dao.impl.AdminDao"
+		parent="daoTemplate" />
+	<bean id="AccountDao"
+		class="com.kkbank.business.dao.impl.AccountDao"
+		parent="daoTemplate" />
+	<bean id="CustomerDao"
+		class="com.kkbank.business.dao.impl.CustomerDao"
+		parent="daoTemplate" />
 </beans>

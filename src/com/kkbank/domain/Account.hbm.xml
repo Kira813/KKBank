@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.kkbank.domain">
+	<class name="Account" table="account">
+		<id name="ac_No" >
+			<generator class="uuid" />
+		</id>
+		<!-- 
+		     1) uuid.hex 
+				由Hibernate基于128 位唯一值产生算法生成16 进制数值（编码后以长度32 的字符串表示）作为主键。
+			 2) uuid.string
+				与uuid.hex 类似，只是生成的主键未进行编码（长度16）。在某些数据库中可能出现问题（如PostgreSQL）。
+		 -->
+		<property name="ID" not-null="true"/>
+		<property name="password" not-null="true"/>
+		<property name="balance" not-null="true"/>
+		<property name="status" not-null="true"/>
+		
+		<many-to-one name="customer" column="customer_id"
+			class="Customer" lazy="false" />
+	</class>
+</hibernate-mapping>
