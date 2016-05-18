@@ -7,7 +7,7 @@ import com.kkbank.domain.Customer;
 
 
 public interface IAccountService {
-	String addAccount(String ID, String ac_No, String password, double balance,
+	String addAccount(String ID, String password, double balance,
 			int status, Customer customer);
 
 	void delAccount(String ac_No);

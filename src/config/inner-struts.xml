@@ -5,74 +5,65 @@
 	<!-- 管理员登陆 -->
 	<package name="login" extends="default" namespace="/">
 		<default-interceptor-ref name="adiStack" />
-		<action name="toLogin" 
-			class="com.kkbank.business.web.LoginManageAction"
-			method="toLogin" >
+		<action name="toLogin" class="com.kkbank.business.web.LoginManageAction"
+			method="toLogin">
 		</action>
-		<action name="login" 
-			class="com.kkbank.business.web.LoginManageAction"
-			method="login" >
+		<action name="login" class="com.kkbank.business.web.LoginManageAction"
+			method="login">
 		</action>
-		<action name="loginOut" 
-			class="com.kkbank.business.web.LoginManageAction"
-			method="toLogin" >
+		<action name="loginOut" class="com.kkbank.business.web.LoginManageAction"
+			method="toLogin">
 		</action>
-		<action name="index" 
-			class="com.kkbank.business.web.LoginManageAction"
-			method="index" >
+		<action name="index" class="com.kkbank.business.web.LoginManageAction"
+			method="index">
 		</action>
 	</package>
-	
+
 	<!-- account -->
 	<package name="account" extends="default" namespace="/account">
-	<default-interceptor-ref name="adiStack" />
-	<!-- jump to opencard.jsp -->
-	
-		<action name="openCard"
-			class="com.kkbank.business.web.AccountManageAction"
+		<default-interceptor-ref name="adiStack" />
+		<!-- jump to opencard.jsp -->
+
+		<action name="openCard" class="com.kkbank.business.web.AccountManageAction"
 			method="openCard">
-				 <result name="SUCCESS">/jsp/openCard.jsp</result>
+			<result name="SUCCESS">/jsp/openCard.jsp</result>
 		</action>
-		
-		<action name="addAccount"
-			class="com.kkbank.business.web.AccountManageAction"
+
+		<action name="addAccount" class="com.kkbank.business.web.AccountManageAction"
 			method="addAccount">
-				 <result name="SUCCESS">/jsp/successOpen.jsp</result>
+			<result name="opencard">/jsp/openCard.jsp</result>
+			<result name="SUCCESS">/jsp/successOpen.jsp</result>
 		</action>
 
 	</package>
-	
+
 	<!-- 用户 -->
 	<package name="user" extends="default" namespace="/user">
-		<default-interceptor-ref name="loginStack" />               <!-- 这里不懂 -->	
-		<action name="*User" 
-			class="com.kkbank.business.web.UserManageAction"
+		<default-interceptor-ref name="loginStack" />               <!-- 这里不懂 --><!-- 这个是登陆拦截器，判断登陆权限 -->
+		<action name="*User" class="com.kkbank.business.web.UserManageAction"
 			method="{1}User">
 			<result name="manageUser">/jsp/modifyUser.jsp</result>
 			<result name="listUser">/jsp/listUser.jsp</result>
 		</action>
-		<action name="modifyUser" 
-			class="com.kkbank.business.web.UserManageAction"
+		<action name="modifyUser" class="com.kkbank.business.web.UserManageAction"
 			method="modifyUser">
 			<result type="redirectAction">
 				<param name="actionName">listUser</param>
 			</result>
 		</action>
-		<action name="delUser" 
-			class="com.kkbank.business.web.UserManageAction"
+		<action name="delUser" class="com.kkbank.business.web.UserManageAction"
 			method="delUser">
 			<result type="redirectAction">
 				<param name="actionName">listUser</param>
 			</result>
 		</action>
-		<action name="addUser" 
-			class="com.kkbank.business.web.UserManageAction"
+		<action name="addUser" class="com.kkbank.business.web.UserManageAction"
 			method="addUser">
-			 <result name="SUCCESS">/jsp/SUCCESS.jsp</result>
-			 <result type="redirectAction">
+			<result name="SUCCESS">/jsp/SUCCESS.jsp</result>
+			<result type="redirectAction">
 				<param name="actionName">listUser</param>
 			</result>
-				
+
 		</action>
 	</package>
 </struts>

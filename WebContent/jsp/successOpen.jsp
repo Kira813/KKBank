@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Your account is: ${ac_No}
-	<input type="button" value="return">
+	<p>Hello, ${customer.name }.</p>
+	<p>Your account is: ${account.ac_No}</p>
+	<a href="openCard.action">return main page</a>
 </body>
 </html>

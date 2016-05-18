@@ -1,7 +1,6 @@
 package com.kkbank.business.web;
 
 import java.util.HashMap;
-import java.util.List;
 
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ICustomerService;
@@ -9,61 +8,55 @@ import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
-import com.meeting.domain.User;
 import com.opensymphony.xwork2.ActionContext;
 
 public class AccountManageAction {
-	//private static final long serialVersionUID = 1L;
-	/*  serialVersionUID用来作为Java对象序列化中的版本标示之用； 
-	如果一个序列化类没有声明这样一个static final的产量，JVM会根据各种参数为这个类计算一个； 
-	对于同样一个类，不同版本的JDK可能会得出不同的serivalVersionUID;   */
+	// private static final long serialVersionUID = 1L;
+	/*
+	 * serialVersionUID用来作为Java对象序列化中的版本标示之用； 如果一个序列化类没有声明这样一个static
+	 * final的产量，JVM会根据各种参数为这个类计算一个； 对于同样一个类，不同版本的JDK可能会得出不同的serivalVersionUID;
+	 */
 	protected IAccountService accountService = new AccountService();
 	protected ICustomerService customerService = new CustomerService();
-	
+
 	private String ID;
 	private String ac_No;
 	private String password;
 	private String password1;
-	private String password2;
 	private double balance;
 	private int status;
 	private Customer customer;
 	private String name;
 
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
-	
-	public String addAccount() throws Exception{
+
+	public String addAccount() throws Exception {
 		Customer customer = new Customer();
-		Account account = new Account();
 		customer.setID(ID);
 		customer.setName(name);
-		account.setPassword(password1);
-		account.setPassword(password2);
-		if(customerService.checkCustomer(customer) == true){
-			if(password1==password2){
+
+		if (customerService.checkCustomer(customer) == true) {
 			customer = customerService.getCustomer(customer);
+
+			// 创建一个 account, 并通过返回的 ac_no 获取到刚创建的 account
+			String ac_no = accountService.addAccount(ID, password1, 0.0, 1,
+					customer);
+			Account account = accountService.getAccount(ac_no);
+
 			ActionContext.getContext().getSession().put("customer", customer);
-			ActionContext.getContext().getSession().put("ID", customer.getID());
-			ActionContext.getContext().getSession().put("name", customer.getName());
-			ActionContext.getContext().getSession().put("name", customer.getName());
-			return "SUCCESS";}else
-				{
-					ActionContext.getContext().put("tip", "密码不一致，请重新输入");
-					return "opencard";
-				}
+			ActionContext.getContext().getSession().put("account", account);
+
+			return "SUCCESS";
 		}
+
 		ActionContext.getContext().put("tip", "身份证或姓名错误");
 		return "opencard";
-		resultMap = new HashMap<String, Object>();
-		customer = customerService.getCustomer(ID);
-		 accountService.addAccount(ID,ac_No,password,balance,
-				status, customer);
-		return "SUCCESS";
 	}
-	
+
 	public String openCard() throws Exception {
 		return "SUCCESS";
 	}
+
 	public String getID() {
 		return ID;
 	}
@@ -88,6 +81,22 @@ public class AccountManageAction {
 		this.password = password;
 	}
 
+	public String getPassword1() {
+		return password1;
+	}
+
+	public void setPassword1(String password1) {
+		this.password1 = password1;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public double getBalance() {
 		return balance;
 	}
@@ -104,17 +113,14 @@ public class AccountManageAction {
 		this.status = status;
 	}
 
-
 	public Customer getCustomer() {
 		return customer;
 	}
 
-
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
-	
+
 	public HashMap<String, Object> getResultMap() {
 		return resultMap;
 	}
@@ -130,6 +136,7 @@ public class AccountManageAction {
 	public void setAccountService(IAccountService accountService) {
 		this.accountService = accountService;
 	}
+
 	public ICustomerService getCustomerService() {
 		return customerService;
 	}
