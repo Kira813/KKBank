@@ -4,19 +4,11 @@
 <struts>
 
 	<!-- 管理员登陆 -->
-	<package name="login" extends="default" namespace="/">
+	<package name="navigation" extends="default" namespace="/">
 		<default-interceptor-ref name="adiStack" />
-		<action name="toLogin" class="com.kkbank.business.web.LoginManageAction"
-			method="toLogin">
-		</action>
-		<action name="login" class="com.kkbank.business.web.LoginManageAction"
-			method="login">
-		</action>
-		<action name="loginOut" class="com.kkbank.business.web.LoginManageAction"
-			method="toLogin">
-		</action>
-		<action name="index" class="com.kkbank.business.web.LoginManageAction"
-			method="index">
+		<action name="index" class="com.kkbank.business.web.NavigationManageAction"
+			method="toIndex">
+			<result name="SUCCESS">/jsp/index.jsp</result>
 		</action>
 	</package>
 	

@@ -37,7 +37,7 @@ public class withdrawAction {
 			accountService.updateAccount(account);
 			return "SUCCESS";
 		}
-		ActionContext.getContext().put("tips2", "账号错误");
+		ActionContext.getContext().put("tips2", "Error Account Number");
 		return "SUCCESS";
 
 	}
