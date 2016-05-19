@@ -24,7 +24,7 @@ public class AccountService implements IAccountService {
 		account.setCustomer(customer);
 		
 		String timestamp = new Date().getTime() + "";
-		String random = (int)Math.floor(Math.random() * 1000000) + "";
+		String random = (int)Math.floor(Math.random() * 1000000) + ""; //对一个数进行下取整
 		String ac_No = timestamp.substring(0, 10) + random;
 		
 		account.setAc_No(ac_No);
@@ -60,6 +60,13 @@ public class AccountService implements IAccountService {
 
 	public void setAccountDao(IAccountDao accountDao) {
 		this.accountDao = accountDao;
+	}
+	
+	public boolean checkAccount(Account account) {
+		if(accountDao.get(account).size()>0){
+			return true;
+		}
+		return false;
 	}
 
 }

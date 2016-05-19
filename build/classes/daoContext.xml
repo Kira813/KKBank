@@ -10,6 +10,9 @@
 	<bean id="daoTemplate" abstract="true" lazy-init="true"
 		p:sessionFactory-ref="sessionFactory" />
 	
+	<bean id="SupervisorDao"
+		class="com.kkbank.business.dao.impl.SupervisorDao"
+		parent="daoTemplate" />
 	<bean id="UserDao"
 		class="com.kkbank.business.dao.impl.UserDao"
 		parent="daoTemplate" />

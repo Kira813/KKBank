@@ -36,7 +36,7 @@ public class CustomerDao extends HibernateDaoSupport implements ICustomerDao{
 	}
 
 	public List<Customer> get(Customer Customer) {
-		System.out.println(Customer.getName());
+		//System.out.println(Customer.getName()); 输出到控制台
 		return this.getSession()
 				.createQuery("from Customer c where c.ID=? and c.name=?")
 				.setParameter(0, Customer.getID())

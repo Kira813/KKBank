@@ -2,6 +2,7 @@
           "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
           "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
+
 	<!-- 管理员登陆 -->
 	<package name="login" extends="default" namespace="/">
 		<default-interceptor-ref name="adiStack" />
@@ -18,7 +19,7 @@
 			method="index">
 		</action>
 	</package>
-
+	
 	<!-- account -->
 	<package name="account" extends="default" namespace="/account">
 		<default-interceptor-ref name="adiStack" />
@@ -33,6 +34,16 @@
 			method="addAccount">
 			<result name="opencard">/jsp/openCard.jsp</result>
 			<result name="SUCCESS">/jsp/successOpen.jsp</result>
+		</action>
+		
+		<action name="returnMain" class="com.kkbank.business.web.AccountManageAction"
+			method="returnMain">
+			<result name="SUCCESS">/jsp/index.jsp</result>
+		</action>
+		
+		<action name="withdraw" class="com.kkbank.business.web.withdrawAction"
+			method="withdraw">
+			<result name="SUCCESS">/jsp/withdrawal.jsp</result>
 		</action>
 
 	</package>

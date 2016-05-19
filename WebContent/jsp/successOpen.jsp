@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>Hello, ${customer.name }.</p>
+	<p>Hello, ${customer.name }.</p> <!-- 从ActionContext中取出 -->
 	<p>Your account is: ${account.ac_No}</p>
-	<a href="openCard.action">return main page</a>
+	<a href="returnMain.action">return main page</a> <!-- action调用jsp -->
 </body>
 </html>

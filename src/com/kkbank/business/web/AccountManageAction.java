@@ -48,12 +48,16 @@ public class AccountManageAction {
 
 			return "SUCCESS";
 		}
-
-		ActionContext.getContext().put("tip", "身份证或姓名错误");
+		//ActionContext都是用来存放数据的。Struts2本身会在其中放入不少数据，而使用者也可以放入自己想要的数据
+		ActionContext.getContext().put("tips", "身份证或姓名错误");
 		return "opencard";
 	}
 
 	public String openCard() throws Exception {
+		return "SUCCESS";
+	}
+	
+	public String returnMain() throws Exception {
 		return "SUCCESS";
 	}
 

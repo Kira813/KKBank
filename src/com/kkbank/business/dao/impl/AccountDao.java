@@ -6,6 +6,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.kkbank.business.dao.IAccountDao;
 import com.kkbank.domain.Account;
+import com.kkbank.domain.Customer;
 
 public class AccountDao extends HibernateDaoSupport implements IAccountDao {
 	public Account get(String ac_No) { // 加载Account实例
@@ -32,6 +33,12 @@ public class AccountDao extends HibernateDaoSupport implements IAccountDao {
 
 	public List<Account> findAllAccount() {
 		return (List<Account>) getHibernateTemplate().find("from Account");
+	}
+	public List<Account> get(Account account) {
+		return this.getSession()
+				.createQuery("from Account a where a.ac_No=?")
+				.setParameter(0, account.getAc_No()) //A/a
+				.list();
 	}
 
 }

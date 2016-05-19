@@ -7,6 +7,7 @@ import com.kkbank.domain.Customer;
 
 
 public interface IAccountService {
+	//ac_No是自动生成的
 	String addAccount(String ID, String password, double balance,
 			int status, Customer customer);
 
@@ -19,6 +20,8 @@ public interface IAccountService {
 	List<Account> listAccount();
 
 	Account getAccount(String ac_No);
+	
+	boolean checkAccount(Account account);
 
 
 }

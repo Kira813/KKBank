@@ -8,7 +8,13 @@
 
 	<!-- 配置业务逻辑组件的模板 -->
 	
-
+	<bean id="supervisorServiceTmpl" abstract="true" lazy-init="true"
+		p:supervisorDao-ref="SupervisorDao"
+		/>	
+	<bean id="supervisorService"
+		class="com.kkbank.business.service.impl.SupervisorService"
+		parent="supervisorServiceTmpl" />
+		
 	<bean id="userServiceTmpl" abstract="true" lazy-init="true"
 		p:userDao-ref="UserDao"
 		/>	
