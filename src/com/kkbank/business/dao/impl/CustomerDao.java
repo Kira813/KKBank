@@ -34,6 +34,10 @@ public class CustomerDao extends HibernateDaoSupport implements ICustomerDao{
 		return (List<Customer>)getHibernateTemplate()
 				.find("from Customer");
 	}
+	public List<Customer> find(String ID){	
+		return (List<Customer>)getHibernateTemplate()
+				.find("from Customer c where c.ID=?", ID);
+	}
 
 	public List<Customer> get(Customer Customer) {
 		//System.out.println(Customer.getName()); 输出到控制台

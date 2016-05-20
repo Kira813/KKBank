@@ -68,5 +68,8 @@ public class AccountService implements IAccountService {
 		}
 		return false;
 	}
+	public List<Account> listAccount(String ID) {
+		return accountDao.findAllAccount(ID);
+	}
 
 }

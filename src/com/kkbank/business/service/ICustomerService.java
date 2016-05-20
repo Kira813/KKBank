@@ -20,4 +20,6 @@ public interface ICustomerService {
 	Customer getCustomer(Customer customer);
 
 	boolean checkCustomer(Customer customer);
+	
+	List<Customer> find(String ID);
 }

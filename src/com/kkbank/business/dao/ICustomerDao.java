@@ -18,4 +18,6 @@ public interface ICustomerDao {
 	void delete(String ID);
 	
 	List<Customer> findAllCustomer();
+	
+	List<Customer> find(String ID);
 }

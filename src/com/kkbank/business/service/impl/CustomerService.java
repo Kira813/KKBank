@@ -68,6 +68,9 @@ public class CustomerService implements ICustomerService{
 		this.customerDao = customerDao;
 	}
 
+	public List<Customer> find(String ID){
+		return customerDao.find(ID);
+	}
 
 
 	

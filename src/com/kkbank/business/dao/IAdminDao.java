@@ -18,4 +18,6 @@ public interface IAdminDao {
 	void delete(String adm_id);
 	
 	List<Admin> findAllAdmin();
+	
+	boolean login(String adm_id, String psd);
 }
