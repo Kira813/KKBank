@@ -12,8 +12,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./headMeta.jsp"%></head>
 <body class="skin-blue">
-	<%@include file="./header.jsp"%>
-</head>
+<%@include file="./header.jsp"%>
 <div class="wrapper row-offcanvas row-offcanvas-left">
 	<!-- Left side column. contains the logo and sidebar -->
 	<%@include file="./sidebar.jsp"%>
@@ -40,16 +39,10 @@
 										name="auth_code" class="form-control">
 								</div>
 								<p>${tips2 }</p>
-<<<<<<< HEAD
-							</div>
-							<div class="box-footer">
-								<button type="submit" class="btn btn-primary">Submit</button>
-=======
 								<p>${tip3 }</p>
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Confirm</button>
->>>>>>> origin/master
 								<a class="btn btn-primary" href="index.action">Return</a>
 							</div>
 						</form>

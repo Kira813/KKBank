@@ -13,15 +13,13 @@ public class Customer {
 		super();
 	}
 
-	
-
-	public Customer(String name, String iD, Set<Account> accounts) {
+	public Customer(String name, String iD, Set<Account> accounts, User user) {
 		super();
 		this.name = name;
 		ID = iD;
 		this.accounts = accounts;
+		this.user = user;
 	}
-
 
 	public String getName() {
 		return name;
@@ -47,6 +45,14 @@ public class Customer {
 		this.accounts = accounts;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -55,6 +61,7 @@ public class Customer {
 		result = prime * result
 				+ ((accounts == null) ? 0 : accounts.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -82,8 +89,12 @@ public class Customer {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
 	}
 	
-
 }

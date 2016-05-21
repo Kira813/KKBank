@@ -12,8 +12,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./headMeta.jsp"%></head>
 <body class="skin-blue">
-	<%@include file="./header.jsp"%>
-</head>
+<%@include file="./header.jsp"%>
 <div class="wrapper row-offcanvas row-offcanvas-left">
 	<!-- Left side column. contains the logo and sidebar -->
 	<%@include file="./sidebar.jsp"%>

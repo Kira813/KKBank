@@ -5,28 +5,28 @@ public class User {
 	private String username;
 	private String pwd;
 	private String email;
+	private Customer customer;
 	
 	public User() {
 		super();
 	}
 
-
-	public User(String ID, String username, String pwd, String email) {
+	public User(String iD, String username, String pwd, String email,
+			Customer customer) {
 		super();
-		this.ID = ID;
+		ID = iD;
 		this.username = username;
 		this.pwd = pwd;
 		this.email = email;
+		this.customer = customer;
 	}
-
-
 
 	public String getID() {
 		return ID;
 	}
 
-	public void setID(String ID) {
-		this.ID = ID;
+	public void setID(String iD) {
+		ID = iD;
 	}
 
 	public String getUsername() {
@@ -45,30 +45,35 @@ public class User {
 		this.pwd = pwd;
 	}
 
-
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		result = prime * result
+				+ ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((pwd == null) ? 0 : pwd.hashCode());
 		result = prime * result
 				+ ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -83,6 +88,11 @@ public class User {
 			if (other.ID != null)
 				return false;
 		} else if (!ID.equals(other.ID))
+			return false;
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -101,8 +111,5 @@ public class User {
 			return false;
 		return true;
 	}
-
-
-
-
+	
 }

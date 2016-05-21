@@ -4,19 +4,19 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.kkbank.domain">
 	<class name="Customer" table="customer">
-		<id name="ID"> </id>
-		<property name="name" not-null="true"/>
-		<!-- 
-			cascade属性的可能值有:
-   			all: 所有情况下均进行关联操作，即save-update和delete。
-    		none: 所有情况下均不进行关联操作。这是默认值。 
-    		save-update: 在执行save/update/saveOrUpdate时进行关联操作。 
-    		delete: 在执行delete 时进行关联操作。
-		 -->
+		<id name="ID">
+		</id>
+		<property name="name" not-null="true" />
+		<!-- cascade属性的可能值有: all: 所有情况下均进行关联操作，即save-update和delete。 none: 所有情况下均不进行关联操作。这是默认值。 
+			save-update: 在执行save/update/saveOrUpdate时进行关联操作。 delete: 在执行delete 时进行关联操作。 -->
 		<!-- KEY外键 -->
-		<set name="accounts" inverse="true" >
-                <key column="customer_id" ></key> 
-                <one-to-many class="Account"/>
-        </set>
+		<set name="accounts" inverse="true">
+			<key column="customer_id"></key>
+			<one-to-many class="Account" />
+		</set>
+
+		<many-to-one name="user" class="User" unique="true">
+			<column name="user_id"></column>
+		</many-to-one>
 	</class>
 </hibernate-mapping>

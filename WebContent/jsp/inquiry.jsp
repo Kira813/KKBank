@@ -13,11 +13,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="/jsp/headMeta.jsp"%></head>
 <body class="skin-blue">
-	<%@include file="/jsp/header.jsp"%>
-</head>
-</title>KK Bank</title>
-</head>
-<body>
+<%@include file="/jsp/header.jsp"%>
 <div class="wrapper row-offcanvas row-offcanvas-left">
 	<!-- Left side column. contains the logo and sidebar -->
 	<%@include file="/jsp/sidebar.jsp"%>
