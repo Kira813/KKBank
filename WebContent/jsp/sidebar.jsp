@@ -16,7 +16,11 @@
                 </a>
             </li>
             <li data-tag="user">
+<<<<<<< HEAD
                 <a href="index.action">
+=======
+                <a href="inquiry.jsp">
+>>>>>>> origin/master
                     <i class="fa fa-user"></i><span>inquiry</span>
                 </a>
             </li>
@@ -26,7 +30,11 @@
                 </a>
             </li>
             <li data-tag="user">
+<<<<<<< HEAD
                 <a href="index.action">
+=======
+                <a href="deposit.jsp">
+>>>>>>> origin/master
                     <i class="fa fa-user"></i><span>deposit</span>
                 </a>
             </li>

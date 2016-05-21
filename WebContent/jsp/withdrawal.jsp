@@ -40,9 +40,16 @@
 										name="auth_code" class="form-control">
 								</div>
 								<p>${tips2 }</p>
+<<<<<<< HEAD
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Submit</button>
+=======
+								<p>${tip3 }</p>
+							</div>
+							<div class="box-footer">
+								<button type="submit" class="btn btn-primary">Confirm</button>
+>>>>>>> origin/master
 								<a class="btn btn-primary" href="index.action">Return</a>
 							</div>
 						</form>
@@ -106,6 +113,8 @@
 	
 						// submit the form
 						form.submit();
+						alert('balance reduce success');
+						//return "index";
 					});
 				close.addEventListener('click', function() {
 					self.hide();

@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <section class="content">
                 <div class="row">
                 	<div class="col-md-12">
-                		<h1 style="text-align:center">Welcome to KKBank</h1>
+                		<h1 style="text-align:center">Welcome to KKBank,Administrator ${ad_id} </h1>
                 	</div>
                 </div>
             </section>

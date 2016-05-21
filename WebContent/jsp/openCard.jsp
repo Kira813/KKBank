@@ -37,11 +37,11 @@
 								</div>
 								<div class="form-group">
 									<label>PIN</label>
-									<input type="password" name="password1" class="form-control">
+									<input type="password" name="password1" class="form-control" id="password1" required="required">
 								</div>
 								<div class="form-group">
 									<label>PIN Again</label>
-									<input type="password" name="password2" class="form-control">
+									<input type="password" name="password2" class="form-control" id="password2" required="required">
 								</div>
 								<p>${tips }</p>
 							</div>

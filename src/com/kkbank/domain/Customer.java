@@ -7,6 +7,7 @@ public class Customer {
 	private String name;
 	private String ID;
 	private Set<Account> accounts;
+	private User user;
 	
 	public Customer() {
 		super();

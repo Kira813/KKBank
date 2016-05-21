@@ -14,14 +14,14 @@ public class UserManageAction extends ActionSupport{
 
 	protected IUserService userService = new UserService();
 	
-	private Integer id;
+	private String ID;
 	private String username;
 	private String pwd;
-	private Integer power;
+	private String email;
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 	
 	public String manageUser() throws Exception{
-		User user = userService.getUser(id);
+		User user = userService.getUser(ID);
 		ActionContext ctx = ActionContext.getContext();
 		ctx.put("user", user);
 		return "manageUser";
@@ -37,33 +37,46 @@ public class UserManageAction extends ActionSupport{
 	
 	public String addUser() throws Exception{
 		resultMap = new HashMap<String, Object>();
-		userService.addUser(username, pwd, power);
+		userService.addUser(ID,username, pwd, email);
 		return "SUCCESS";
 	}
 	
 	public String modifyUser(){
 		resultMap = new HashMap<String, Object>();
-		User user = userService.getUser(id);
+		User user = userService.getUser(ID);
 		user.setUsername(username);
 		user.setPwd(pwd);
-		user.setPower(power);
+		user.setEmail(email);
 		userService.updateUser(user);
 		return SUCCESS;
 	}
 	
 	public String delUser() throws Exception{
 		resultMap = new HashMap<String, Object>();
-		userService.delUser(id);
+		userService.delUser(ID);
 		return SUCCESS;
 	}
 	
-	public Integer getId() {
-		return id;
+
+
+	public String getID() {
+		return ID;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+
+	public void setID(String iD) {
+		ID = iD;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 
 	public String getUsername() {
 		return username;
@@ -81,13 +94,6 @@ public class UserManageAction extends ActionSupport{
 		this.pwd = pwd;
 	}
 
-	public Integer getPower() {
-		return power;
-	}
-
-	public void setPower(Integer power) {
-		this.power = power;
-	}
 
 	public HashMap<String, Object> getResultMap() {
 		return resultMap;

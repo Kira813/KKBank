@@ -6,11 +6,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="<%=basePath%>">
-    <%@ taglib uri="/struts-tags" prefix="s"%>
-    <%@include file="./jsp/headMeta.jsp" %></head>
-<body class="skin-blue">
-hello
+<base href="<%=basePath%>">
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@include file="./headMeta.jsp" %></head>
+<title>Insert title here</title>
+</head>
+<body>
+Hi!
+
 </body>
-<%@include file="./jsp/javascript.jsp" %>
+<%@include file="./javascript.jsp" %>
 </html>

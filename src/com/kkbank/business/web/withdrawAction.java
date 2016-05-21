@@ -16,6 +16,7 @@ public class withdrawAction {
 	private String ac_No;
 	private double balance;
 	private double amount;
+
 	
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 

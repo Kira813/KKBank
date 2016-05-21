@@ -22,6 +22,8 @@ public interface IAccountService {
 	Account getAccount(String ac_No);
 	
 	boolean checkAccount(Account account);
+	
+	List<Account> listAccount(String ID);
 
 
 }

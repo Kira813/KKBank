@@ -10,16 +10,18 @@ import com.kkbank.domain.User;
 public class UserService implements IUserService{
 	IUserDao userDao = new UserDao();
 	@Override
-	public Integer addUser(String username, String pwd, Integer power) {
+	public String addUser(String ID,String username, String pwd, String email) {
 		User user = new User();
+		user.setID(ID);
 		user.setUsername(username);
 		user.setPwd(pwd);
-		user.setPower(power);
+		user.setPwd(pwd);
+		user.setEmail(email);
 		return userDao.save(user);
 	}
 
 	@Override
-	public void delUser(Integer id) {
+	public void delUser(String id) {
 		userDao.delete(id);
 		
 	}
@@ -42,7 +44,7 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public User getUser(Integer id) {
+	public User getUser(String id) {
 		return userDao.get(id);
 	}
 

@@ -19,4 +19,6 @@ public interface IAccountDao {
 	void delete(String ac_No);
 	
 	List<Account> findAllAccount();
+	
+	List<Account> findAllAccount(String ID);
 }

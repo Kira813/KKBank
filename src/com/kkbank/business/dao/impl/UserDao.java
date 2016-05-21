@@ -10,7 +10,7 @@ import com.kkbank.domain.User;
 
 public class UserDao extends HibernateDaoSupport implements IUserDao{
 
-	public User get(Integer id){
+	public User get(String id){
 		return getHibernateTemplate().get(User.class, id);
 	}
 	
@@ -22,8 +22,8 @@ public class UserDao extends HibernateDaoSupport implements IUserDao{
 				.list();
 	}
 
-	public Integer save(User user){
-		return (Integer)getHibernateTemplate()
+	public String save(User user){
+		return (String)getHibernateTemplate()
 			.save(user);
 	}
 	
@@ -35,7 +35,7 @@ public class UserDao extends HibernateDaoSupport implements IUserDao{
 		getHibernateTemplate().delete(user);
 	}
 	
-	public void delete(Integer id){
+	public void delete(String id){
 		getHibernateTemplate().delete(get(id));
 	}
 	

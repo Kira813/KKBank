@@ -43,5 +43,17 @@ public class AdminDao extends HibernateDaoSupport implements IAdminDao {
 				.setParameter(1, admin.getPsd())
 				.list();
 	}
+	
+	public boolean login(String adm_id, String psd){
+		String[] adminlist = new String[2];
+		adminlist[0] = adm_id;
+		adminlist[1] = psd;
+		
+		List adminList = this.getHibernateTemplate().find("from Admin a where a.adm_id=? and a.psd=?", adminlist);
+		if(adminList.size() == 1){
+			return true;
+		}
+		return false;
+	}
 
 }
