@@ -74,7 +74,6 @@ public class AdminDepositAction extends ActionSupport{
 			return SUCCESS;
 		}
 	}
-	
 	//各属性的getter & setter
 	public IAccountService getAccountService() {
 		return accountService;

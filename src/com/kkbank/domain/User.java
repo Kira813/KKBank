@@ -1,29 +1,32 @@
 package com.kkbank.domain;
 
 public class User {
-	private Integer id;
+	private String ID;
 	private String username;
 	private String pwd;
-	private Integer power;
+	private String email;
 	
 	public User() {
 		super();
 	}
 
-	public User(Integer id, String username, String pwd, Integer power) {
+
+	public User(String ID, String username, String pwd, String email) {
 		super();
-		this.id = id;
+		this.ID = ID;
 		this.username = username;
 		this.pwd = pwd;
-		this.power = power;
+		this.email = email;
 	}
 
-	public Integer getId() {
-		return id;
+
+
+	public String getID() {
+		return ID;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 
 	public String getUsername() {
@@ -42,23 +45,30 @@ public class User {
 		this.pwd = pwd;
 	}
 
-	public Integer getPower() {
-		return power;
+
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setPower(Integer power) {
-		this.power = power;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((pwd == null) ? 0 : pwd.hashCode());
 		result = prime * result
 				+ ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -69,10 +79,20 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (ID == null) {
+			if (other.ID != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!ID.equals(other.ID))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (pwd == null) {
+			if (other.pwd != null)
+				return false;
+		} else if (!pwd.equals(other.pwd))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -81,5 +101,8 @@ public class User {
 			return false;
 		return true;
 	}
+
+
+
 
 }

@@ -24,7 +24,7 @@ public class AdminInquiryAction extends ActionSupport{
 	private String sta_msg;
 	private String msg;
 
-	//默认处理的 execute方法
+
 	public String execute()
 	{
 		if(ID == null)
@@ -61,7 +61,7 @@ public class AdminInquiryAction extends ActionSupport{
 		}
 	}
 	
-	//各属性的getter & setter
+
 	public IAccountService getAccountService() {
 		return accountService;
 	}

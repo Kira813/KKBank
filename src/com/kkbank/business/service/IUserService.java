@@ -7,9 +7,9 @@ import com.kkbank.domain.User;
 
 public interface IUserService {
 
-	Integer addUser(String username, String pwd, Integer power);
+	String addUser(String ID,String username, String pwd, String email);
 
-	void delUser(Integer id);
+	void delUser(String id);
 
 	void delUser(User user);
 
@@ -17,7 +17,7 @@ public interface IUserService {
 
 	List<User> listUser();
 
-	User getUser(Integer id);
+	User getUser(String id);
 
 	User getUser(User user);
 

@@ -4,11 +4,9 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.kkbank.domain">
 	<class name="User" table="user">
-		<id name="id">
-			<generator class="identity" />
-		</id>
+		<id name="ID"></id>
 		<property name="username" not-null="true"/>
 		<property name="pwd" not-null="true"/>
-		<property name="power" not-null="true"/>
+		<property name="email" not-null="true"/>
 	</class>
 </hibernate-mapping>
