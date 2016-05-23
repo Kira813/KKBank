@@ -1,6 +1,7 @@
 package com.kkbank.business.web;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ICustomerService;
@@ -31,6 +32,17 @@ public class AccountManageAction extends ActionSupport{
 
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
+	
+	public String delAccount() throws Exception{		
+		List<Account> acList = accountService.listAccount(ID);
+		if(acList.size() != 0){
+			ac_No = acList.get(0).getAc_No();
+			accountService.delAccount(ac_No);
+			return SUCCESS;
+		}
+		return SUCCESS;
+	}
+	
 	public String addAccount() throws Exception {
 		Customer customer = new Customer();
 		customer.setID(ID);

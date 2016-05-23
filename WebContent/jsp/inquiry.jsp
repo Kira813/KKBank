@@ -25,7 +25,7 @@
 						<div class="box-header">
 							<h3 class="box-title">Inquiry the card status</h3>
 						</div>
-						<form role="form" action="inquiry" method="post">
+						<form role="form" action="admin/inquiry" method="post">
 							<div class="box-body">
 								<div class="form-group">
 									<label>ID</label>
@@ -44,5 +44,6 @@
 		</section>
 	</aside>
 </div>
+
 </body>
 </html>
