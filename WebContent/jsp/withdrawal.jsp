@@ -38,8 +38,6 @@
 									<label for="inputUsername">Auth Code</label> <input type="password"
 										name="auth_code" class="form-control">
 								</div>
-								<p>${tips2 }</p>
-								<p>${tips3 }</p>
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Confirm</button>
@@ -52,7 +50,7 @@
 		</section>
 	</aside>
 </div>
-<div class="modal" id="dialog">
+<div class="modal fade" id="authCode_dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -66,6 +64,7 @@
 				<form role="form">
 					<div class="box-body">
 						<div class="form-group">
+							<label>Please input Auth Code to continue</label>
 							<input type="password" name="tmp_auth_code" class="form-control">
 						</div>
 					</div>
@@ -78,7 +77,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal" id="dialog1">
+<div class="modal fade" id="simpleDialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -86,15 +85,9 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
+				<h4 class="modal-title">Warn</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group" >
-							<h3 class="modal-title">Balance reduced successfully!</h3>
-						</div>
-					</div>
-				</form>
 			</div>
 			<div class="modal-footer">
 				<a class="btn btn-primary" href="index.action">Return</a>
@@ -104,69 +97,81 @@
 </div>
 </body>
 <%@include file="./javascript.jsp"%>
+<script type="text/javascript" src="js/authCode.js"></script>
 <script type="text/javascript">
-	(function() {
-		var form = document.querySelector('form');
-		var dialog = {
-			box : document.getElementById('dialog'),
-			show : function(msg) {
-				this.box.style.display = 'block';
-			},
-			hide : function() {
-				this.box.style.display = 'none';
-			},
-			init : function() {
-				var confirm = this.box.querySelector('.dialog-confirm');
-				var close = this.box.querySelector('.dialog-close');
-				var self = this;
-				confirm.addEventListener('click', function() {
-						// get auth_code and send it to server
-						var tmp_auth_code = self.box.querySelector('input[name=tmp_auth_code]');
-						var auth_code = form.querySelector('input[name=auth_code]');
+	// 文本提示弹窗
+	// 可以是 dialog.show('我要跟你说什么');
+	// 也可以 dialog.hide() 隐藏
+	// 页面上必须存在 simpleDialog 才行
+	var dialog = {
+		el: $('#simpleDialog'),
+		show: function(msg) {
+			this.el.find('.modal-body').text(msg);
+			this.el.modal('show');
+		},
+		hide: function() {
+			this.el.modal('hide');
+		}
+	};
 	
-						// set auth_code(form hidden input) value as tmp_auth_code
-						auth_code.value = tmp_auth_code.value;
-												
-						// submit the form
-						form.submit();
-						//return "index"
+	// 提交表单
+	$('form').on('submit', function(e) {
+		var ac_No = $('input[name=ac_No]');
+		var amount = $('input[name=amount]');
+		var auth_code = $('input[name=auth_code]');
+		
+		if(!ac_No.val()) {
+			// 校验 ac_No 是否存在
+			dialog.show('ac_No can\'t be blank');
+			e.preventDefault();
+			return false;
+			
+		} else if(!amount.val()) {
+			// 校验 amount 是否存在
+			dialog.show('amount can\'t be blank');
+			e.preventDefault();
+			return false;
+		}
+		
+		// 校验 amount 是否大于 50000
+		if(amount.val() > 50000 && !auth_code.val()) {
+			$('#authCode_dialog').modal('show');
+			$('#authCode_dialog input').val('').focus();
+			
+			e.preventDefault();
+			return false;
+		}
+	});
+	
+	// 点击 Auth Code 的提交按钮
+	$('#authCode_dialog .dialog-confirm').on('click', function() {
+		var auth_code_tmp = $('#authCode_dialog input[name=tmp_auth_code]').val();
 
-					});
-				close.addEventListener('click', function() {
-					self.hide();
-				});
-			}
-		};
-		var dialog1 = {
-				box : document.getElementById('dialog1'),
-				show : function(msg) {
-					this.box.style.display = 'block';
+		if(auth_code_tmp) {
+			// 通过请求校验 Auth Code 是否正确
+			validAuthCode(auth_code_tmp, 
+				// Auth Code 是正确的
+				function() {
+					// 把这个填写到取款的 form 里面
+					$('input[name=auth_code]').val(auth_code_tmp);
+					// 提交表单
+					$('form').submit();
 				},
-				hide : function() {
-					this.box.style.display = 'none';
-				},
-				init : function() {
-					var close = this.box.querySelector('.dialog-close');
-					var self = this;
+				// Auth Code 是错误的
+				function() {
+					// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
+					$('#authCode_dialog').modal('hide');
+					// 弹出提示弹窗，说 auth_code 不正确
+					dialog.show('auth_code is not right');
 				}
-			};
-		dialog.init();
-		dialog1.init();
-		form.addEventListener('submit', function(e) {
-			var amount = form.querySelector('input[name=amount]');
-			if(amount.value<=50000){
-				dialog1.show('some code');
-				e.preventDefault();
-				return false;
-			}
-			if (amount.value > 50000) {
-				dialog.show('some code');
-				e.preventDefault();
-				return false;
-			}
-
+			);
+		}
+	});
 	
-		})
-	})();
+	// 从后台拿到 tips, 并通过弹窗显示
+	var tips = '${tips}';
+	if(tips) {
+		dialog.show(tips);
+	}
 </script>
 </html>

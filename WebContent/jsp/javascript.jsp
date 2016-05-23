@@ -22,7 +22,6 @@
 
 <!-- AdminLTE App -->
 <script src="resource/js/AdminLTE/app.js" type="text/javascript"></script>
-<script src="resource/js/init.js" type="text/javascript"></script>
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="resource/js/AdminLTE/dashboard.js" type="text/javascript"></script> -->

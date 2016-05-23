@@ -87,4 +87,16 @@
 		</action>
 	</package>
 	
+	<!-- Ajax 接口 -->
+	<package name="ajax" extends="default" namespace="/ajax">
+		<default-interceptor-ref name="adiStack" />
+		<action name="validAuthCodeAjax" class="com.kkbank.business.web.withdrawAction"
+			method="validAuthCodeAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+	</package>
+	
 </struts>

@@ -2,6 +2,8 @@ package com.kkbank.business.web;
 
 import java.util.HashMap;
 
+import net.sf.json.JSONObject;
+
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ICustomerService;
 import com.kkbank.business.service.ISupervisorService;
@@ -24,30 +26,61 @@ public class withdrawAction extends ActionSupport {
 	private double amount;
 	private String tips3;
 
-	
+	// 用于返回 JSON
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
 	public String withdraw() throws Exception {
 		Account account = new Account();
 		Supervisor supervisor = new Supervisor();
+		String tips = null;
+		
 		supervisor.setAuth_code(auth_code);
 		account.setAc_No(ac_No);
-		if(accountService.checkAccount(account) == true){
-			account = accountService.getAccount(ac_No);//get数据库实例 
-			balance = account.getBalance();
-			balance = balance - amount;
-			account.setBalance(balance);
-			accountService.updateAccount(account);
-			return SUCCESS;
-		}
-//		else if(supervisorService.getAuthCode(auth_code)==null){
-//			tips3 = "Auth code incorrect!";
-//			return SUCCESS;
-//		}
 		
-		ActionContext.getContext().put("tips2", "wrong account!");
+		// 判断 Account
+		if(accountService.checkAccount(account) == true){
+			// 再次判断 auth_code, 其中 ac_No 用来判断是否为用户提交表单的动作，不是提交表单的话不显示 tips
+			if(!validAuthCode(auth_code) && ac_No != null) {
+				tips = "Auth code incorrect!";
+				
+			} else {
+				// 减少余额
+				account = accountService.getAccount(ac_No);//get数据库实例 
+				balance = account.getBalance();
+				balance = balance - amount;
+				account.setBalance(balance);
+				accountService.updateAccount(account);
+				
+				tips = "Reduce balance success";
+			}
+			
+		} else if(ac_No != null) {
+			tips = "wrong account!";
+		}
+		
+		ActionContext.getContext().put("tips", tips);
+		
 		return SUCCESS;
 	}
+	
+	/**
+	 * ajax 接口，判断 auth ccode
+	 **/
+	public String validAuthCodeAjax() throws Exception {
+		resultMap = new HashMap<String, Object>();
+		Boolean status = validAuthCode(auth_code);
+		// 把状态放进 HashMap 里面，再通过 struts 配置将 HashMap 以 JSON 格式响应给 JavaScript
+		resultMap.put("status", status);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 判断 auth code 基本方法，供其他 action 调用 
+	 **/
+	public boolean validAuthCode(String auth_code) {
+		return supervisorService.isValid(auth_code);
+	}
+	
 	public double getBalance() {
 		return balance;
 	}
@@ -92,5 +125,12 @@ public class withdrawAction extends ActionSupport {
 		this.resultMap = resultMap;
 	}
 
-	
+	public ISupervisorService getSupervisorService() {
+		return supervisorService;
+	}
+
+	public void setSupervisorService(ISupervisorService supervisorService) {
+		this.supervisorService = supervisorService;
+	}
+
 }

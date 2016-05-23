@@ -7,7 +7,7 @@
         <ul class="sidebar-menu">
             <li data-tag="index">
                 <a href="index.action">
-                    <i class="fa fa-dashboard"></i><span>首页</span>
+                    <i class="fa fa-dashboard"></i><span>index</span>
                 </a>
             </li>
             <li data-tag="user">
@@ -24,6 +24,7 @@
                 <a href="account/withdraw.action">
                     <i class="fa fa-user"></i><span>withdrawal</span>
                 </a>
+                
             </li>
             <li data-tag="user">
                 <a href="admin/deposit.action">

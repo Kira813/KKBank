@@ -35,9 +35,9 @@ public class SupervisorDao extends HibernateDaoSupport implements ISupervisorDao
 	}
 	
 	public boolean isValid(String auth_code){
-		List au_list = this.getHibernateTemplate().find("from Supervisor s where s.auth_code = ?", auth_code);
-		if(au_list.size() == 1)
-		{
+		
+		List<String> au_list = this.getHibernateTemplate().find("from Supervisor s where s.auth_code = ?", auth_code);
+		if(au_list.size() == 1) {
 			return true;
 		}
 		return false;
