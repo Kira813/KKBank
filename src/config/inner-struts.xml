@@ -14,8 +14,8 @@
 	<!-- account -->
 	<package name="account" extends="default" namespace="/account">
 		<default-interceptor-ref name="adiStack" />
+		
 		<!-- jump to opencard.jsp -->
-	
 		<action name="openCard" class="com.kkbank.business.web.AccountManageAction"
 			method="openCard">
 			<result name="success">/jsp/openCard.jsp</result>
@@ -24,7 +24,7 @@
 		<action name="delAccount" class="com.kkbank.business.web.AccountManageAction"
 			method="delAccount">
 			<result name="success">/jsp/SUCCESS.jsp</result>
-		</action>		
+		</action>
 		
 		<action name="addAccount" class="com.kkbank.business.web.AccountManageAction"
 			method="addAccount">

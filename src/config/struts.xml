@@ -47,5 +47,6 @@
 		
 	</package>
 	<include file="inner-struts.xml" />
+	<include file="outer-struts.xml" />
 </struts>
 
