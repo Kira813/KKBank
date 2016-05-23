@@ -2,8 +2,6 @@
           "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
           "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-
-
 	<!-- navigation-->
 	<package name="navigation" extends="default" namespace="/">
 		<default-interceptor-ref name="adiStack" />
@@ -20,38 +18,41 @@
 
 		<action name="openCard" class="com.kkbank.business.web.AccountManageAction"
 			method="openCard">
-			<result name="SUCCESS">/jsp/openCard.jsp</result>
+			<result name="success">/jsp/openCard.jsp</result>
 		</action>
 
 		<action name="addAccount" class="com.kkbank.business.web.AccountManageAction"
 			method="addAccount">
 			<result name="opencard">/jsp/openCard.jsp</result>
-			<result name="SUCCESS">/jsp/successOpen.jsp</result>
+			<result name="success">/jsp/successOpen.jsp</result>
 		</action>
 		
 		<action name="returnMain" class="com.kkbank.business.web.AccountManageAction"
 			method="returnMain">
-			<result name="SUCCESS">/jsp/index.jsp</result>
+			<result name="success">/jsp/index.jsp</result>
 		</action>
 		
 		<action name="withdraw" class="com.kkbank.business.web.withdrawAction"
 			method="withdraw">
-			<result name="SUCCESS">/jsp/withdrawal.jsp</result>
+			<result name="success">/jsp/withdrawal.jsp</result>
 		</action>
 	</package>
 
 	<!-- Administrator -->
 	<package name="admin" extends="default" namespace="/admin" >
 	<default-interceptor-ref name="adiStack" />
-	    <action name="login" class="com.kkbank.business.web.AdminLoginAction" method="execute">
+	    <action name="login" class="com.kkbank.business.web.AdminLoginAction" 
+	    	method="login">
 	    	<result name ="success">/jsp/index.jsp</result>
 	    	<result name ="error">/jsp/ad_login.jsp</result>
 		</action>
-		<action name="inquiry" class="com.kkbank.business.web.AdminInquiryAction" method="execute">
+		<action name="inquiry" class="com.kkbank.business.web.AdminInquiryAction" 
+			method="inquiry">
 	    	<result name ="success">/jsp/status.jsp</result>
 	    	<result name ="error">/jsp/inquiry.jsp</result>
 		</action>
-		<action name="deposit" class="com.kkbank.business.web.AdminDepositAction" method="execute">
+		<action name="deposit" class="com.kkbank.business.web.AdminDepositAction" 
+			method="deposit">
 	    	<result name ="success">/jsp/deposit.jsp</result>
 	    	<result name ="error">/jsp/deposit.jsp</result>
 		</action>

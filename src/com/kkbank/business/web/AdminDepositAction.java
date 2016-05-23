@@ -23,7 +23,7 @@ public class AdminDepositAction extends ActionSupport{
 	private String msg;
 	
 	//默认处理的 execute方法
-	public String execute(){
+	public String deposit() throws Exception{
 		if(ac_No == null||amount == 0)
 		{
 			msg = "Please input account number or valid amount";

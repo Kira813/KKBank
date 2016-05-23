@@ -4,7 +4,8 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.kkbank.domain">
 	<class name="Account" table="account">
-		<id name="ac_No" ></id> <!-- 不用 uuid 是因为可能存在字母 -->
+		<id name="ac_No" column="ac_No" ></id>
+		 <!-- 不用 uuid 是因为可能存在字母 -->
 		<!-- 
 		     1) uuid.hex 
 				由Hibernate基于128 位唯一值产生算法生成16 进制数值（编码后以长度32 的字符串表示）作为主键。

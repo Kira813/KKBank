@@ -24,9 +24,8 @@ public class AccountService implements IAccountService {
 		account.setCustomer(customer);
 		
 		String timestamp = new Date().getTime() + "";
-		String random = (int)Math.floor(Math.random() * 1000000) + ""; //对一个数进行下取整
-		String ac_No = timestamp.substring(0, 10) + random;
-		
+		String random = (int)Math.floor(Math.random() * 10000) + ""; //对一个数进行下取整
+		String ac_No = "621785700000"+timestamp.substring(7,10)+random;
 		account.setAc_No(ac_No);
 		return accountDao.save(account);
 	}

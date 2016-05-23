@@ -9,8 +9,9 @@ import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class AccountManageAction {
+public class AccountManageAction extends ActionSupport{
 	// private static final long serialVersionUID = 1L;
 	/*
 	 * serialVersionUID用来作为Java对象序列化中的版本标示之用； 如果一个序列化类没有声明这样一个static
@@ -46,7 +47,7 @@ public class AccountManageAction {
 			ActionContext.getContext().getSession().put("customer", customer);
 			ActionContext.getContext().getSession().put("account", account);
 
-			return "SUCCESS";
+			return SUCCESS;
 		}
 		//ActionContext都是用来存放数据的。Struts2本身会在其中放入不少数据，而使用者也可以放入自己想要的数据
 		ActionContext.getContext().put("tips", "身份证或姓名错误");
@@ -54,11 +55,11 @@ public class AccountManageAction {
 	}
 
 	public String openCard() throws Exception {
-		return "SUCCESS";
+		return SUCCESS;
 	}
 	
 	public String returnMain() throws Exception {
-		return "SUCCESS";
+		return SUCCESS;
 	}
 
 	public String getID() {

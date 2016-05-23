@@ -16,7 +16,7 @@
                 </a>
             </li>
             <li data-tag="user">
-                <a href="jsp/inquiry.jsp">
+                <a href="admin/inquiry.action">
                     <i class="fa fa-user"></i><span>inquiry</span>
                 </a>
             </li>
@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li data-tag="user">
-                <a href="jsp/deposit.jsp">
+                <a href="admin/deposit.action">
                     <i class="fa fa-user"></i><span>deposit</span>
                 </a>
             </li>

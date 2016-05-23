@@ -35,11 +35,11 @@
 										type="text" name="amount" class="form-control">
 								</div>
 								<div class="form-group" style="display: none">
-									<label for="inputUsername">Auth Code</label> <input type="text"
+									<label for="inputUsername">Auth Code</label> <input type="password"
 										name="auth_code" class="form-control">
 								</div>
 								<p>${tips2 }</p>
-								<p>${tip3 }</p>
+								<p>${tips3 }</p>
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Confirm</button>
@@ -66,7 +66,7 @@
 				<form role="form">
 					<div class="box-body">
 						<div class="form-group">
-							<input type="text" name="tmp_auth_code" class="form-control">
+							<input type="password" name="tmp_auth_code" class="form-control">
 						</div>
 					</div>
 				</form>
@@ -74,6 +74,30 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default dialog-close" data-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-primary dialog-confirm">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" id="dialog1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<div class="box-body">
+						<div class="form-group" >
+							<h3 class="modal-title">Balance reduced successfully!</h3>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a class="btn btn-primary" href="index.action">Return</a>
 			</div>
 		</div>
 	</div>
@@ -95,7 +119,6 @@
 				var confirm = this.box.querySelector('.dialog-confirm');
 				var close = this.box.querySelector('.dialog-close');
 				var self = this;
-
 				confirm.addEventListener('click', function() {
 						// get auth_code and send it to server
 						var tmp_auth_code = self.box.querySelector('input[name=tmp_auth_code]');
@@ -103,28 +126,46 @@
 	
 						// set auth_code(form hidden input) value as tmp_auth_code
 						auth_code.value = tmp_auth_code.value;
-	
+												
 						// submit the form
 						form.submit();
-						alert('balance reduce success');
-						//return "index";
+						//return "index"
+
 					});
 				close.addEventListener('click', function() {
 					self.hide();
 				});
 			}
 		};
-
+		var dialog1 = {
+				box : document.getElementById('dialog1'),
+				show : function(msg) {
+					this.box.style.display = 'block';
+				},
+				hide : function() {
+					this.box.style.display = 'none';
+				},
+				init : function() {
+					var close = this.box.querySelector('.dialog-close');
+					var self = this;
+				}
+			};
 		dialog.init();
-
+		dialog1.init();
 		form.addEventListener('submit', function(e) {
 			var amount = form.querySelector('input[name=amount]');
-
+			if(amount.value<=50000){
+				dialog1.show('some code');
+				e.preventDefault();
+				return false;
+			}
 			if (amount.value > 50000) {
 				dialog.show('some code');
 				e.preventDefault();
 				return false;
 			}
+
+	
 		})
 	})();
 </script>

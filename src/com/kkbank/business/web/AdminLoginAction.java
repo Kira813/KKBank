@@ -14,7 +14,7 @@ public class AdminLoginAction extends ActionSupport{
     private String psd;
     private String msg;
  
-    public String execute()  
+    public String login()  
     {  
     	if(ad_id == null||psd == null)
     	{

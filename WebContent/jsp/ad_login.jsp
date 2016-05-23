@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 		<section id="content">
-			<form action="login" method="post">
+			<form action="admin/login.action" method="post">
 				<h1>KK Bank</h1>
 				<div>
 					<input type="text" name="ad_id" placeholder="Admin ID"/>

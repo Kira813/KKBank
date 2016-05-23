@@ -25,7 +25,7 @@ public class AdminInquiryAction extends ActionSupport{
 	private String msg;
 
 
-	public String execute()
+	public String inquiry()
 	{
 		if(ID == null)
 		{
