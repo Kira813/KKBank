@@ -19,4 +19,8 @@ public class NavigationManageAction extends ActionSupport{
 	public String toRegister() throws Exception{
 		return SUCCESS;
 	}
+	
+	public String toStatus() throws Exception{
+		return SUCCESS;
+	}
 }
