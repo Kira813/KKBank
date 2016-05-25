@@ -6,19 +6,21 @@ public class User {
 	private String pwd;
 	private String email;
 	private Customer customer;
+	private int status; //online banking account status , not the card account status
 	
 	public User() {
 		super();
 	}
 
 	public User(String iD, String username, String pwd, String email,
-			Customer customer) {
+			Customer customer,int status) {
 		super();
 		ID = iD;
 		this.username = username;
 		this.pwd = pwd;
 		this.email = email;
 		this.customer = customer;
+		this.status = status;
 	}
 
 	public String getID() {
@@ -61,6 +63,14 @@ public class User {
 		this.customer = customer;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,6 +80,7 @@ public class User {
 				+ ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((pwd == null) ? 0 : pwd.hashCode());
+		result = prime * result + status;
 		result = prime * result
 				+ ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -104,6 +115,8 @@ public class User {
 				return false;
 		} else if (!pwd.equals(other.pwd))
 			return false;
+		if (status != other.status)
+			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -111,5 +124,4 @@ public class User {
 			return false;
 		return true;
 	}
-	
 }

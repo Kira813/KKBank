@@ -17,7 +17,9 @@ public class UserManageAction extends ActionSupport{
 	private String ID;
 	private String username;
 	private String pwd;
+	private String pwd1;
 	private String email;
+	private int status;
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 	
 	public String manageUser() throws Exception{
@@ -37,15 +39,15 @@ public class UserManageAction extends ActionSupport{
 	
 	public String addUser() throws Exception{
 		resultMap = new HashMap<String, Object>();
-		userService.addUser(ID,username, pwd, email);
-		return "SUCCESS";
+		userService.addUser(ID,username, pwd1, email,status);
+		return SUCCESS;
 	}
 	
 	public String modifyUser(){
 		resultMap = new HashMap<String, Object>();
 		User user = userService.getUser(ID);
 		user.setUsername(username);
-		user.setPwd(pwd);
+		user.setPwd(pwd1);
 		user.setEmail(email);
 		userService.updateUser(user);
 		return SUCCESS;
@@ -86,6 +88,14 @@ public class UserManageAction extends ActionSupport{
 		this.username = username;
 	}
 
+	public String getPwd1() {
+		return pwd1;
+	}
+
+	public void setPwd1(String pwd1) {
+		this.pwd1 = pwd1;
+	}
+
 	public String getPwd() {
 		return pwd;
 	}
@@ -94,6 +104,14 @@ public class UserManageAction extends ActionSupport{
 		this.pwd = pwd;
 	}
 
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public HashMap<String, Object> getResultMap() {
 		return resultMap;

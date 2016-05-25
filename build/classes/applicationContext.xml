@@ -92,6 +92,7 @@
             <tx:method name="start" propagation="REQUIRED"/>
             <tx:method name="deal*" propagation="REQUIRED"/>
             <tx:method name="open*" propagation="REQUIRED"/>
+            <tx:method name="is*" propagation="REQUIRED"/>
             <tx:method name="*" read-only="true" />
         </tx:attributes>
     </tx:advice>

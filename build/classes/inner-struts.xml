@@ -9,13 +9,22 @@
 			method="toIndex">
 			<result name="SUCCESS">/jsp/index.jsp</result>
 		</action>
+		<action name="userIndex" class="com.kkbank.business.web.NavigationManageAction"
+			method="toUserIndex">
+			<result name="success">/jsp/userIndex.jsp</result>
+		</action>
+		<action name="register" class="com.kkbank.business.web.NavigationManageAction"
+			method="toRegister">
+			<result name="success">/jsp/register.jsp</result>
+		</action>
 	</package>
+
 	
 	<!-- account -->
 	<package name="account" extends="default" namespace="/account">
 		<default-interceptor-ref name="adiStack" />
+		
 		<!-- jump to opencard.jsp -->
-	
 		<action name="openCard" class="com.kkbank.business.web.AccountManageAction"
 			method="openCard">
 			<result name="success">/jsp/openCard.jsp</result>
@@ -24,7 +33,7 @@
 		<action name="delAccount" class="com.kkbank.business.web.AccountManageAction"
 			method="delAccount">
 			<result name="success">/jsp/SUCCESS.jsp</result>
-		</action>		
+		</action>
 		
 		<action name="addAccount" class="com.kkbank.business.web.AccountManageAction"
 			method="addAccount">
@@ -63,9 +72,9 @@
 		</action>
 	</package>
 	
-	<!-- 用户 -->
+	<!-- User-->
 	<package name="user" extends="default" namespace="/user">
-		<default-interceptor-ref name="loginStack" />               <!-- 这里不懂 --><!-- 这个是登陆拦截器，判断登陆权限 -->
+		<default-interceptor-ref name="loginStack" /> <!-- 这里不懂 --><!-- 这个是登陆拦截器，判断登陆权限 -->
 		<action name="*User" class="com.kkbank.business.web.UserManageAction"
 			method="{1}User">
 			<result name="manageUser">/jsp/modifyUser.jsp</result>
@@ -79,15 +88,25 @@
 		</action>
 		<action name="delUser" class="com.kkbank.business.web.UserManageAction"
 			method="delUser">
+			<!-- jump to action -->
 			<result type="redirectAction">
 				<param name="actionName">listUser</param>
 			</result>
 		</action>
-		<action name="addUser" class="com.kkbank.business.web.UserManageAction"
+		<action name="addUser" class="com.kkbank.business.web.UserManageAction" 
 			method="addUser">
-			<result name="SUCCESS">/jsp/SUCCESS.jsp</result>
-			<result type="redirectAction">
-				<param name="actionName">listUser</param>
+			<result name="success">/jsp/userIndex.jsp</result>
+		</action>
+	</package>
+	
+	<!-- Ajax 接口 -->
+	<package name="ajax" extends="default" namespace="/ajax">
+		<default-interceptor-ref name="adiStack" />
+		<action name="validAuthCodeAjax" class="com.kkbank.business.web.withdrawAction"
+			method="validAuthCodeAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
 			</result>
 		</action>
 	</package>

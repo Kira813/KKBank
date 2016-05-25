@@ -90,7 +90,7 @@
 			<div class="modal-body">
 			</div>
 			<div class="modal-footer">
-				<a class="btn btn-primary" href="index.action">Return</a>
+				<a class="btn btn-primary" href="account/withdraw.action">Return</a>
 			</div>
 		</div>
 	</div>

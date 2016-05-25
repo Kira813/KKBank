@@ -8,6 +8,7 @@
 		<property name="username" not-null="true"/>
 		<property name="pwd" not-null="true"/>
 		<property name="email" not-null="true"/>
+		<property name="status" not-null="true"/>
 		<one-to-one name="customer" cascade="all" /> 
 	</class>
 </hibernate-mapping>

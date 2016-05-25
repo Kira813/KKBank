@@ -10,13 +10,13 @@ import com.kkbank.domain.User;
 public class UserService implements IUserService{
 	IUserDao userDao = new UserDao();
 	@Override
-	public String addUser(String ID,String username, String pwd, String email) {
+	public String addUser(String ID,String username, String pwd, String email,int status) {
 		User user = new User();
 		user.setID(ID);
 		user.setUsername(username);
 		user.setPwd(pwd);
-		user.setPwd(pwd);
 		user.setEmail(email);
+		user.setStatus(status);
 		return userDao.save(user);
 	}
 

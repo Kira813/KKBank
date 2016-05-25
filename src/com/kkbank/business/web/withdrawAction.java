@@ -24,7 +24,6 @@ public class withdrawAction extends ActionSupport {
 	private String ac_No;
 	private double balance;
 	private double amount;
-	private String tips3;
 
 	// 用于返回 JSON
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();

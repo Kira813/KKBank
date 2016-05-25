@@ -9,7 +9,16 @@
 			method="toIndex">
 			<result name="SUCCESS">/jsp/index.jsp</result>
 		</action>
+		<action name="userIndex" class="com.kkbank.business.web.NavigationManageAction"
+			method="toUserIndex">
+			<result name="success">/jsp/userIndex.jsp</result>
+		</action>
+		<action name="register" class="com.kkbank.business.web.NavigationManageAction"
+			method="toRegister">
+			<result name="success">/jsp/register.jsp</result>
+		</action>
 	</package>
+
 	
 	<!-- account -->
 	<package name="account" extends="default" namespace="/account">
@@ -63,9 +72,9 @@
 		</action>
 	</package>
 	
-	<!-- 用户 -->
+	<!-- User-->
 	<package name="user" extends="default" namespace="/user">
-		<default-interceptor-ref name="loginStack" />               <!-- 这里不懂 --><!-- 这个是登陆拦截器，判断登陆权限 -->
+		<default-interceptor-ref name="loginStack" /> <!-- 这里不懂 --><!-- 这个是登陆拦截器，判断登陆权限 -->
 		<action name="*User" class="com.kkbank.business.web.UserManageAction"
 			method="{1}User">
 			<result name="manageUser">/jsp/modifyUser.jsp</result>
@@ -79,16 +88,14 @@
 		</action>
 		<action name="delUser" class="com.kkbank.business.web.UserManageAction"
 			method="delUser">
+			<!-- jump to action -->
 			<result type="redirectAction">
 				<param name="actionName">listUser</param>
 			</result>
 		</action>
-		<action name="addUser" class="com.kkbank.business.web.UserManageAction"
+		<action name="addUser" class="com.kkbank.business.web.UserManageAction" 
 			method="addUser">
-			<result name="SUCCESS">/jsp/SUCCESS.jsp</result>
-			<result type="redirectAction">
-				<param name="actionName">listUser</param>
-			</result>
+			<result name="success">/jsp/userIndex.jsp</result>
 		</action>
 	</package>
 	
