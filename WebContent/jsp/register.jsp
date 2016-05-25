@@ -74,7 +74,7 @@
 			<div class="modal-body">
 			</div>
 			<div class="modal-footer">
-				<a class="btn btn-primary" href="account/withdraw.action">Return</a>
+				<a class="btn btn-primary" data-dismiss="modal" aria-label="Close">Return</a>
 			</div>
 		</div>
 	</div>
@@ -101,8 +101,18 @@ var dialog = {
 		
 		// 提交表单前触发事件
 		form.addEventListener('submit', function(e) {
+			var val = pwd[0].value;
+			// 通过正则表达式判断是否同时包含数字，大小写字母
+			var type = (/\d/).test(val) && (/[a-z]/).test(val) && (/[A-Z]/).test(val);
+			
+			if(!type) {
+				dialog.show('password not safe');
+				// 阻止提交表单
+				e.preventDefault();
+				return false;
+			}
 			if(pwd[0].value && pwd[0].value !== pwd[1].value) {
-				alert('The two password do not match!');
+				dialog.show('The two password do not match!');
 				// 阻止提交表单
 				e.preventDefault();
 				form.pwd1.value="";

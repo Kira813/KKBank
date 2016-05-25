@@ -64,6 +64,31 @@ public class AccountManageAction extends ActionSupport{
 		ActionContext.getContext().put("tips", "身份证或姓名错误");
 		return "opencard";
 	}
+	
+	public String getBalanceAjax() throws Exception {
+		resultMap = new HashMap<String, Object>();
+		Account account = accountService.getAccount(ac_No);
+		
+		if(account != null) {
+			Double balance = account.getBalance();
+			
+			if(balance == 0) {
+				resultMap.put("tips", "success");
+				resultMap.put("balance", 0);
+				resultMap.put("status", true);
+			} else {
+				resultMap.put("tips", "balance not zero, the account has " + balance + " right now");
+				resultMap.put("balance", balance);
+				resultMap.put("status", true);
+			}
+			
+		} else {
+			resultMap.put("tips", "bad ac_No");
+			resultMap.put("status", false);
+		}
+		
+		return SUCCESS;
+	}
 
 	public String openCard() throws Exception {
 		return SUCCESS;

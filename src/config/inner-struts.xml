@@ -110,6 +110,13 @@
 				<param name="root">resultMap</param>
 			</result>
 		</action>
+		<action name="getBalanceAjax" class="com.kkbank.business.web.AccountManageAction"
+			method="getBalanceAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
 	</package>
 	
 </struts>
