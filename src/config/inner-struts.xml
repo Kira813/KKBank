@@ -17,6 +17,10 @@
 			method="toRegister">
 			<result name="success">/jsp/register.jsp</result>
 		</action>
+		<action name="toStatus" class="com.kkbank.business.web.NavigationManageAction"
+			method="toStatus">
+			<result name="success">/jsp/status.jsp</result>
+		</action>
 	</package>
 
 	

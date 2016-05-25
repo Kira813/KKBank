@@ -33,11 +33,16 @@ public class AccountManageAction extends ActionSupport{
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
 	
-	public String delAccount() throws Exception{		
+	public String delAccount() throws Exception{
+		String sTips = null;
 		List<Account> acList = accountService.listAccount(ID);
 		if(acList.size() != 0){
 			Account account = acList.get(0);
 			accountService.delAccount(account);
+			double balance = account.getBalance();
+			if(balance>0){
+				sTips="Balance:"+balance+" This account can't be closed now.";
+			}
 			return SUCCESS;
 		}
 		return SUCCESS;

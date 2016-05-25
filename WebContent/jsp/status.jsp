@@ -11,6 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <base href="<%=basePath%>">
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./headMeta.jsp" %></head>
 <title>KK Bank</title>
 </head>
@@ -75,7 +76,7 @@
 			<div class="modal-body">
 			</div>
 			<div class="modal-footer">
-				<a class="btn btn-primary" data-dismiss="modal">Return</a>
+				<a class="btn btn-primary" href="toStatus.action">Return</a>
 			</div>
 		</div>
 	</div>
@@ -142,5 +143,9 @@
 		});
 		
 	});
+	var sTtips = '${sTips}';
+	if(sTips) {
+		dialog.show(sTips);
+	}
 </script>
 </html>
