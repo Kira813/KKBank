@@ -102,8 +102,8 @@ var dialog = {
 		// 提交表单前触发事件
 		form.addEventListener('submit', function(e) {
 			var val = pwd[0].value;
-			// 通过正则表达式判断是否同时包含数字，大小写字母
-			var type = (/\d/).test(val) && (/[a-z]/).test(val) && (/[A-Z]/).test(val);
+			// 通过正则表达式判断是否同时包含数字，大小写字母，同时判断长度大于6
+			var type = (/\d/).test(val) && (/[a-z]/).test(val) && (/[A-Z]/).test(val) && type.length >= 6;
 			
 			if(!type) {
 				dialog.show('password not safe');
