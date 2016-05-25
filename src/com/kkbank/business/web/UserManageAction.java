@@ -3,8 +3,11 @@ package com.kkbank.business.web;
 import java.util.HashMap;
 import java.util.List;
 
+import com.kkbank.business.service.ICustomerService;
 import com.kkbank.business.service.IUserService;
+import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.business.service.impl.UserService;
+import com.kkbank.domain.Customer;
 import com.kkbank.domain.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -13,13 +16,15 @@ public class UserManageAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 
 	protected IUserService userService = new UserService();
+	protected ICustomerService customerService = new CustomerService();
 	
 	private String ID;
-	private String username;
+	private String name;
 	private String pwd;
 	private String pwd1;
 	private String email;
 	private int status;
+	private String uStatus;
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 	
 	public String manageUser() throws Exception{
@@ -30,6 +35,7 @@ public class UserManageAction extends ActionSupport{
 	}
 	
 	public String listUser() throws Exception{
+		
 		List<User> list = userService.listUser();
 		ActionContext ctx = ActionContext.getContext();
 		ctx.put("listuser", list);
@@ -38,15 +44,40 @@ public class UserManageAction extends ActionSupport{
 	}
 	
 	public String addUser() throws Exception{
+		String rTips = null;
 		resultMap = new HashMap<String, Object>();
-		userService.addUser(ID,username, pwd1, email,status);
-		return SUCCESS;
+		Customer customer = new Customer();
+		customer.setID(ID);
+		customer.setName(name);
+		switch(status){
+		case(1): uStatus="Normal";
+				 break;
+		case(2): uStatus="Locked";
+				 break;
+		case(3): uStatus="Not activated";
+		 		 break;
+		case(4): uStatus="Not Available";
+ 		 		 break;
+		}
+		if (customerService.checkCustomer(customer) == true) {
+			customer = customerService.getCustomer(customer);
+			userService.addUser(ID,name, pwd1, email,3);
+			User user = userService.getUser(ID);
+			ActionContext.getContext().getSession().put("customer", customer);
+			ActionContext.getContext().getSession().put("user", user);
+			rTips="Create a user successfully!";
+			ActionContext.getContext().put("rTips", rTips);
+			return SUCCESS;
+		}
+		rTips = "Wrong ID or name！";
+		ActionContext.getContext().put("rTips",rTips );
+		return ERROR;
 	}
-	
+
 	public String modifyUser(){
 		resultMap = new HashMap<String, Object>();
 		User user = userService.getUser(ID);
-		user.setUsername(username);
+		user.setName(name);
 		user.setPwd(pwd1);
 		user.setEmail(email);
 		userService.updateUser(user);
@@ -76,16 +107,6 @@ public class UserManageAction extends ActionSupport{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPwd1() {
@@ -128,5 +149,22 @@ public class UserManageAction extends ActionSupport{
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
+
+	public ICustomerService getCustomerService() {
+		return customerService;
+	}
+
+	public void setCustomerService(ICustomerService customerService) {
+		this.customerService = customerService;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 
 }

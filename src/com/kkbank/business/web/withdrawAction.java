@@ -39,7 +39,7 @@ public class withdrawAction extends ActionSupport {
 		// 判断 Account
 		if(accountService.checkAccount(account) == true){
 			// 再次判断 auth_code, 其中 ac_No 用来判断是否为用户提交表单的动作，不是提交表单的话不显示 tips
-			if(!validAuthCode(auth_code) && ac_No != null) {
+			if(amount > 50000 && !validAuthCode(auth_code) && ac_No != null) {
 				tips = "Auth code incorrect!";
 				
 			} else {

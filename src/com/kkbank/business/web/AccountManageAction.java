@@ -47,7 +47,6 @@ public class AccountManageAction extends ActionSupport{
 		Customer customer = new Customer();
 		customer.setID(ID);
 		customer.setName(name);
-
 		if (customerService.checkCustomer(customer) == true) {
 			customer = customerService.getCustomer(customer);
 

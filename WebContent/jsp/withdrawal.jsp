@@ -28,11 +28,11 @@
 							<div class="box-body">
 								<div class="form-group">
 									<label for="inputUsername">Account Number</label> <input
-										type="text" name="ac_No" class="form-control">
+										type="text" name="ac_No" class="form-control"  required="required">
 								</div>
 								<div class="form-group">
 									<label for="inputUsername">Withdrawal Amount</label> <input
-										type="text" name="amount" class="form-control">
+										type="text" name="amount" class="form-control"  required="required">
 								</div>
 								<div class="form-group" style="display: none">
 									<label for="inputUsername">Auth Code</label> <input type="password"
@@ -116,23 +116,8 @@
 	
 	// 提交表单
 	$('form').on('submit', function(e) {
-		var ac_No = $('input[name=ac_No]');
-		var amount = $('input[name=amount]');
 		var auth_code = $('input[name=auth_code]');
-		
-		if(!ac_No.val()) {
-			// 校验 ac_No 是否存在
-			dialog.show('ac_No can\'t be blank');
-			e.preventDefault();
-			return false;
-			
-		} else if(!amount.val()) {
-			// 校验 amount 是否存在
-			dialog.show('amount can\'t be blank');
-			e.preventDefault();
-			return false;
-		}
-		
+		var amount = $('input[name=amount]');
 		// 校验 amount 是否大于 50000
 		if(amount.val() > 50000 && !auth_code.val()) {
 			$('#authCode_dialog').modal('show');
@@ -146,7 +131,6 @@
 	// 点击 Auth Code 的提交按钮
 	$('#authCode_dialog .dialog-confirm').on('click', function() {
 		var auth_code_tmp = $('#authCode_dialog input[name=tmp_auth_code]').val();
-
 		if(auth_code_tmp) {
 			// 通过请求校验 Auth Code 是否正确
 			validAuthCode(auth_code_tmp, 

@@ -2,7 +2,7 @@ package com.kkbank.domain;
 
 public class User {
 	private String ID;
-	private String username;
+	private String name;
 	private String pwd;
 	private String email;
 	private Customer customer;
@@ -12,11 +12,11 @@ public class User {
 		super();
 	}
 
-	public User(String iD, String username, String pwd, String email,
+	public User(String iD, String name, String pwd, String email,
 			Customer customer,int status) {
 		super();
 		ID = iD;
-		this.username = username;
+		this.name = name;
 		this.pwd = pwd;
 		this.email = email;
 		this.customer = customer;
@@ -31,12 +31,13 @@ public class User {
 		ID = iD;
 	}
 
-	public String getUsername() {
-		return username;
+
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPwd() {
@@ -82,7 +83,7 @@ public class User {
 		result = prime * result + ((pwd == null) ? 0 : pwd.hashCode());
 		result = prime * result + status;
 		result = prime * result
-				+ ((username == null) ? 0 : username.hashCode());
+				+ ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -117,10 +118,10 @@ public class User {
 			return false;
 		if (status != other.status)
 			return false;
-		if (username == null) {
-			if (other.username != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!username.equals(other.username))
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}

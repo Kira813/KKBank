@@ -33,7 +33,7 @@
 			<td>${sta_msg}</td>
 		</tr>
 	</table>
-	<a class="btn btn-primary" href="account/delAccount.action">Close Account</a>
+	<a class="btn btn-primary" href="account/delAccount.action?ID=${ID}">Close Account</a>
 </body>
 <%@include file="./javascript.jsp"%>
 </html>

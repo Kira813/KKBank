@@ -96,6 +96,7 @@
 		<action name="addUser" class="com.kkbank.business.web.UserManageAction" 
 			method="addUser">
 			<result name="success">/jsp/userIndex.jsp</result>
+			<result name="error">/jsp/register.jsp</result>
 		</action>
 	</package>
 	

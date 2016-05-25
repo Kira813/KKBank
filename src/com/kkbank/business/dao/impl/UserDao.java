@@ -16,8 +16,8 @@ public class UserDao extends HibernateDaoSupport implements IUserDao{
 	
 	public List<User> get(User user) {
 		return this.getSession()
-				.createQuery("from User u where u.username=? and u.pwd=?")
-				.setParameter(0, user.getUsername())
+				.createQuery("from User u where u.name=? and u.pwd=?")
+				.setParameter(0, user.getName())
 				.setParameter(1, user.getPwd())
 				.list();
 	}

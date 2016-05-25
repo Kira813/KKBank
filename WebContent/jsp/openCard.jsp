@@ -28,11 +28,11 @@
 							<div class="box-body">
 								<div class="form-group">
 									<label>Name</label>
-									<input type="text" name="name" class="form-control">
+									<input type="text" name="name" class="form-control" required="required">
 								</div>
 								<div class="form-group">
 									<label>ID</label>
-									<input type="text" name="ID" class="form-control">
+									<input type="text" name="ID" class="form-control" required="required">
 								</div>
 								<div class="form-group">
 									<label>PIN</label>
@@ -63,9 +63,13 @@
 		//拿到页面上的form标签
 		var form = document.querySelector('form'); //定义变量，  querySelector() 方法仅仅返回匹配指定选择器的第一个元素
 		var pwd = document.querySelectorAll('input[type=password]');
-		
 		// 提交表单前触发事件
 		form.addEventListener('submit', function(e) {
+
+			var name = $('input[name=name]'); 
+			var ID = $('input[name=ID]');
+			var email = $('input[name=email]');
+			
 			if(pwd[0].value && pwd[0].value !== pwd[1].value) {
 				alert('Difference Card PIN');
 				// 阻止提交表单
