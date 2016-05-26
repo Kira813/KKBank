@@ -134,7 +134,7 @@
 			}		
 		});
 	});
-	// 提交表单
+	// 提交表单   原来有一个不是ajax的 withdrawform submit方法
 
 	
 	// 点击 Auth Code 的提交按钮

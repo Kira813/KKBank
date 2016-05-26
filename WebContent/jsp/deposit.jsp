@@ -52,11 +52,11 @@
 							<div class="box-body">
 								<div class="form-group">
 									<label for="inputUsername">Account Number</label> <input
-										type="text" name="ac_No" class="form-control">
+										type="text" name="ac_No" class="form-control" required="required">
 								</div>
 								<div class="form-group">
 									<label for="inputUsername">Deposit Amount</label> <input
-										type="text" name="amount" class="form-control">
+										type="text" name="amount" class="form-control" required="required">
 								</div>
 								<p>${msg}</p>
 							</div>
