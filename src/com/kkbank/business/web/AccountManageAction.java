@@ -99,8 +99,11 @@ public class AccountManageAction extends ActionSupport{
 	public String getAcnoAjax() throws Exception {
 		resultMap = new HashMap<String, Object>();
 		Account account = accountService.getAccount(ac_No);
-		if(account.getAc_No() == null) {
+		if(account == null) {
 			resultMap.put("tips", "Wrong ac_No");
+			resultMap.put("status", false);
+		} else {
+			resultMap.put("status", true);
 		}
 		return SUCCESS;
 	}

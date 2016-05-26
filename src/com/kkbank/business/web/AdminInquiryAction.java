@@ -84,8 +84,8 @@ public class AdminInquiryAction extends ActionSupport{
 	public String getID() {
 		return ID;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 	public String getAc_No() {
 		return ac_No;

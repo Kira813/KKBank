@@ -24,6 +24,10 @@ public class AdminDepositAction extends ActionSupport{
 	
 	//默认处理的 execute方法
 	public String deposit() throws Exception{
+		if(ac_No == null && amount == 0.0) {
+			// 访问页面，直接返回视图，不做任何操作
+			return SUCCESS;
+		}
 		if(ac_No == null||amount == 0)
 		{
 			msg = "Please input account number or valid amount";

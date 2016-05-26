@@ -115,23 +115,35 @@
 	};
 	
 	$(function() {
-		var getAcnoAction = 'ajax/getAcnoAjax.action?ac_No=${ac_No}';
+		var getAcnoAction = 'ajax/getAcnoAjax.action';
+		var lock = true;
+		
 		$('#withdrawform').on('submit', function(e) {
-			$.get(getAcnoAction, function(data) {
-				// data => { "tips":"Wrong ac_no"}
-				if(data.tips) {
+			if(!lock) {
+				return true;
+			}
+		
+			$.get(getAcnoAction, {
+				ac_No: $('input[name=ac_No]').val()
+			}, function(data) {
+				if(data.status) {
+					var auth_code = $('input[name=auth_code]');
+					var amount = $('input[name=amount]');
+					// 校验 amount 是否大于 50000
+					if(amount.val() > 50000 && !auth_code.val()) {//没有判断wrong ac   ajax
+						$('#authCode_dialog').modal('show');
+						$('#authCode_dialog input').val('').focus();
+					} else {
+						lock = false;
+						$('#withdrawform').submit();
+					}
+				} else {
 					dialog.show(data.tips);
 				}
 			});
-			var auth_code = $('input[name=auth_code]');
-			var amount = $('input[name=amount]');
-			// 校验 amount 是否大于 50000
-			if(amount.val() > 50000 && !auth_code.val()) {//没有判断wrong ac   ajax
-				$('#authCode_dialog').modal('show');
-				$('#authCode_dialog input').val('').focus();
-				e.preventDefault();
-				return false;
-			}		
+			
+			e.preventDefault();
+			return false;
 		});
 	});
 	// 提交表单
@@ -151,6 +163,7 @@
 					//$('#authCode_dialog').modal('hide');
 					//dialog.show('Balance reduced successfully.');
 					// 提交表单
+					lock = false;
 					$('#withdrawform').submit();
 
 					

@@ -68,9 +68,10 @@ public class UserManageAction extends ActionSupport{
 			rTips="Create a user successfully!"; 	//这里无效 为啥
 			ActionContext.getContext().put("rTips", rTips);
 			return SUCCESS;
+		} else if (ID != null || name != null){
+			rTips = "Wrong ID or name！";
+			ActionContext.getContext().put("rTips",rTips );
 		}
-		rTips = "Wrong ID or name！";
-		ActionContext.getContext().put("rTips",rTips );
 		return ERROR;
 	}
 

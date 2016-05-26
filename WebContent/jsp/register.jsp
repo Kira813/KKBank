@@ -15,51 +15,35 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./headMeta.jsp"%></head>
 </head>
-<body class="skin-blue">
+<body style="background:#666">
 <div class="wrapper row-offcanvas row-offcanvas-left">
-	<!-- Left side column. contains the logo and sidebar -->
-	<aside class="right-side">
-		<section class="content">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="box box-primary">
-						<div class="box-header">
-							<h3 class="box-title">Register</h3>
-						</div>
-						<form role="form" action="user/addUser.action" method="post">
-							<div class="box-body">
-								<div class="form-group">
-									<label>User name</label>
-									<input type="text" name="name" class="form-control" required="required">
-								</div>
-								<div class="form-group">
-									<label>ID</label>
-									<input type="text" name="ID" class="form-control" required="required">
-								</div>
-								<div class="form-group">
-									<label>Email</label>
-									<input type="email" name="email" class="form-control" id="email" required="required">
-								</div>
-								<div class="form-group">
-									<label>Password</label>
-									<input type="password" name="pwd1" class="form-control" id="pwd1" required="required">
-								</div>
-								<div class="form-group">
-									<label>Password Again</label>
-									<input type="password" name="pwd2" class="form-control" id="pwd2" required="required">
-								</div>
-								
-							</div>
-							<div class="box-footer">
-								<button type="submit" class="btn btn-primary">Submit</button>
-								<a class="btn btn-primary" href="userIndex.action">Return</a>
-							</div>
-						</form>
-					</div>
+	<div class="form-box" id="login-box">
+        <div class="header">Register</div>
+        <form action="login.action" method="post" id="loginForm">
+            <p style="background:#eaeaec;text-align:center;margin:0;padding-top:10px;color:#333;line-height:14px;margin-bottom:-20px;"></p>
+            <div class="body bg-gray">
+                <div class="form-group">
+					<input type="text" name="name" class="form-control" required="required" placeholder="User Name">
 				</div>
-			</div>
-		</section>
-	</aside>
+				<div class="form-group">
+					<input type="text" name="ID" class="form-control" required="required" placeholder="ID">
+				</div>
+				<div class="form-group">
+					<input type="email" name="email" class="form-control" id="email" required="required" placeholder="Email">
+				</div>
+				<div class="form-group">
+					<input type="password" name="pwd1" class="form-control" id="pwd1" required="required" placeholder="Password">
+				</div>
+				<div class="form-group">
+					<input type="password" name="pwd2" class="form-control" id="pwd2" required="required" placeholder="Password Again">
+				</div>
+            </div>
+            <div class="footer" style="text-align:center">
+                <button type="submit" class="btn btn-primary">Register</button>
+                <a class="btn btn-primary" href="userIndex.action">Return</a>
+            </div>
+        </form>
+    </div>
 </div>
 <div class="modal fade" id="rDialog">
 	<div class="modal-dialog">
