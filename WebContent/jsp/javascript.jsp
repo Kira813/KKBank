@@ -26,3 +26,6 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="resource/js/AdminLTE/dashboard.js" type="text/javascript"></script> -->
 
+<!-- Bootbox -->
+<script src="resource/js/bootbox.min.js" type="text/javascript"></script>
+

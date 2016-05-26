@@ -48,7 +48,7 @@
 									<label>Password Again</label>
 									<input type="password" name="pwd2" class="form-control" id="pwd2" required="required">
 								</div>
-								<p>${rTips}</p>
+								
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Submit</button>
@@ -103,7 +103,7 @@ var dialog = {
 		form.addEventListener('submit', function(e) {
 			var val = pwd[0].value;
 			// 通过正则表达式判断是否同时包含数字，大小写字母，同时判断长度大于6
-			var type = (/\d/).test(val) && (/[a-z]/).test(val) && (/[A-Z]/).test(val) && type.length >= 6;
+			var type = (/\d/).test(val) && (/[a-z]/).test(val) && (/[A-Z]/).test(val) && val.length >= 6;
 			
 			if(!type) {
 				dialog.show('password not safe');
@@ -123,7 +123,7 @@ var dialog = {
 		});
 	})();
 	
-	var rTtips = '${rTips}';
+	var rTips = '${rTips}';
 	if(rTips) {
 		dialog.show(rTips);
 	}

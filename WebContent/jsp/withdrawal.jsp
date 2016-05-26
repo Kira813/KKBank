@@ -24,7 +24,7 @@
 						<div class="box-header">
 							<h3 class="box-title">Winthdrawal</h3>
 						</div>
-						<form role="form" action="account/withdraw.action" method="post">
+						<form role="form" id="withdrawform" action="account/withdraw.action" method="post">
 							<div class="box-body">
 								<div class="form-group">
 									<label for="inputUsername">Account Number</label> <input
@@ -61,7 +61,7 @@
 				<h4 class="modal-title">Auth Code</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
+				<form role="form" id="authform" >
 					<div class="box-body">
 						<div class="form-group">
 							<label>Please input Auth Code to continue</label>
@@ -114,19 +114,28 @@
 		}
 	};
 	
-	// 提交表单
-	$('form').on('submit', function(e) {
-		var auth_code = $('input[name=auth_code]');
-		var amount = $('input[name=amount]');
-		// 校验 amount 是否大于 50000
-		if(amount.val() > 50000 && !auth_code.val()) {
-			$('#authCode_dialog').modal('show');
-			$('#authCode_dialog input').val('').focus();
-			
-			e.preventDefault();
-			return false;
-		}
+	$(function() {
+		var getAcnoAction = 'ajax/getAcnoAjax.action?ac_No=${ac_No}';
+		$('#withdrawform').on('submit', function(e) {
+			$.get(getAcnoAction, function(data) {
+				// data => { "tips":"Wrong ac_no"}
+				if(data.tips) {
+					dialog.show(data.tips);
+				}
+			});
+			var auth_code = $('input[name=auth_code]');
+			var amount = $('input[name=amount]');
+			// 校验 amount 是否大于 50000
+			if(amount.val() > 50000 && !auth_code.val()) {//没有判断wrong ac   ajax
+				$('#authCode_dialog').modal('show');
+				$('#authCode_dialog input').val('').focus();
+				e.preventDefault();
+				return false;
+			}		
+		});
 	});
+	// 提交表单
+
 	
 	// 点击 Auth Code 的提交按钮
 	$('#authCode_dialog .dialog-confirm').on('click', function() {
@@ -138,15 +147,21 @@
 				function() {
 					// 把这个填写到取款的 form 里面
 					$('input[name=auth_code]').val(auth_code_tmp);
+					//  ?? why不显示
+					//$('#authCode_dialog').modal('hide');
+					//dialog.show('Balance reduced successfully.');
 					// 提交表单
-					$('form').submit();
+					$('#withdrawform').submit();
+
+					
 				},
 				// Auth Code 是错误的
 				function() {
 					// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
 					$('#authCode_dialog').modal('hide');
 					// 弹出提示弹窗，说 auth_code 不正确
-					dialog.show('auth_code is not right');
+					//dialog.show('auth_code is not right');
+					bootbox.alert('auth_code is not right');
 				}
 			);
 		}

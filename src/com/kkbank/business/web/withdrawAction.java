@@ -39,19 +39,21 @@ public class withdrawAction extends ActionSupport {
 		// 判断 Account
 		if(accountService.checkAccount(account) == true){
 			// 再次判断 auth_code, 其中 ac_No 用来判断是否为用户提交表单的动作，不是提交表单的话不显示 tips
-			if(amount > 50000 && !validAuthCode(auth_code) && ac_No != null) {
-				tips = "Auth code incorrect!";
-				
+//			if(amount > 50000 && !validAuthCode(auth_code) && ac_No != null) {
+//				tips = "Auth code incorrect!";
+//				
+//			} else {
+//				tips = reduceBalance();
+//			}
+			if(amount <= 50000) {
+				tips = reduceBalance();
+			} else if (amount > 50000 && validAuthCode(auth_code)) {
+				System.out.println("log:---------------->> 50000");
+				tips = reduceBalance();
 			} else {
-				// 减少余额
-				account = accountService.getAccount(ac_No);//get数据库实例 
-				balance = account.getBalance();
-				balance = balance - amount;
-				account.setBalance(balance);
-				accountService.updateAccount(account);
-				
-				tips = "Reduce balance success";
+				tips = "Auth code incorrect!";
 			}
+			
 			
 		} else if(ac_No != null) {
 			tips = "wrong account!";
@@ -60,6 +62,20 @@ public class withdrawAction extends ActionSupport {
 		ActionContext.getContext().put("tips", tips);
 		
 		return SUCCESS;
+	}
+
+	private String reduceBalance() {
+		Account account;
+		String tips;
+		// 减少余额
+		account = accountService.getAccount(ac_No);//get数据库实例 
+		balance = account.getBalance();
+		balance = balance - amount;
+		account.setBalance(balance);
+		accountService.updateAccount(account);
+		System.out.println();
+		tips = "Reduce balance success";
+		return tips;
 	}
 	
 	/**

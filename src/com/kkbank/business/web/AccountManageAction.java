@@ -41,7 +41,8 @@ public class AccountManageAction extends ActionSupport{
 			accountService.delAccount(account);
 			double balance = account.getBalance();
 			if(balance>0){
-				sTips="Balance:"+balance+" This account can't be closed now.";
+				sTips="Balance:"+balance+" This account can't be closed now."; //useless
+				ActionContext.getContext().put("sTips", sTips);
 			}
 			return SUCCESS;
 		}
@@ -66,7 +67,7 @@ public class AccountManageAction extends ActionSupport{
 			return SUCCESS;
 		}
 		//ActionContext都是用来存放数据的。Struts2本身会在其中放入不少数据，而使用者也可以放入自己想要的数据
-		ActionContext.getContext().put("tips", "身份证或姓名错误");
+		ActionContext.getContext().put("tips", "Wrong ID or Name");
 		return "opencard";
 	}
 	
@@ -92,6 +93,15 @@ public class AccountManageAction extends ActionSupport{
 			resultMap.put("status", false);
 		}
 		
+		return SUCCESS;
+	}
+	
+	public String getAcnoAjax() throws Exception {
+		resultMap = new HashMap<String, Object>();
+		Account account = accountService.getAccount(ac_No);
+		if(account.getAc_No() == null) {
+			resultMap.put("tips", "Wrong ac_No");
+		}
 		return SUCCESS;
 	}
 

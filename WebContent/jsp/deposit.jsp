@@ -48,7 +48,7 @@
 						<div class="box-header">
 							<h3 class="box-title">Deposit</h3>
 						</div>
-						<form role="form" action="deposit" method="post">
+						<form role="form" action="admin/deposit.action" method="post">
 							<div class="box-body">
 								<div class="form-group">
 									<label for="inputUsername">Account Number</label> <input

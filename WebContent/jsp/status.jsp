@@ -35,6 +35,7 @@
 		</tr>
 	</table>
 	<a class="btn btn-primary" id="close_account">Close Account</a>
+	<a href="admin/inquiry.action">Return</a>
 
 <div class="modal fade" id="authCode_dialog">
 	<div class="modal-dialog">
@@ -86,66 +87,73 @@
 <script type="text/javascript" src="js/authCode.js"></script>
 <script type="text/javascript">
 	var dialog = {
-		el: $('#simpleDialog'),
-		show: function(msg) {
-			this.el.find('.modal-body').text(msg);
-			this.el.modal('show');
-		},
-		hide: function() {
-			this.el.modal('hide');
-		}
-	};
-	
-	$(function() {
-		var getBalanceAction = 'ajax/getBalanceAjax.action?ac_No=${ac_No}';
-		var delAccountAction = 'account/delAccount.action?ID=${ID}';
+			el: $('#simpleDialog'),
+			show: function(msg) {
+				this.el.find('.modal-body').text(msg);
+				this.el.modal('show');
+			},
+			hide: function() {
+				this.el.modal('hide');
+			}
+		};
+
 		
-		// 点击删除按钮，开始查询余额
-		$('#close_account').on('click', function() {
-			$.get(getBalanceAction, function(data) {
-				// data => {"balance":10.0, "status":true, "tips":"balance not zero"}
-				if(data.status) {
-					if(data.balance === 0) {
-						// 显示 auth code 确认弹窗
-						$('#authCode_dialog').modal('show');
-						$('#authCode_dialog input').val('').focus();
+		$(function() {
+			var getBalanceAction = 'ajax/getBalanceAjax.action?ac_No=${ac_No}';
+			var delAccountAction = 'account/delAccount.action?ID=${ID}';
+			// 点击删除按钮，开始查询余额
+			$('#close_account').on('click', function() {
+				$.get(getBalanceAction, function(data) {
+					// data => {"balance":10.0, "status":true, "tips":"balance not zero"}
+					if(data.status) {
+						if(data.balance === 0) {
+							// 显示 auth code 确认弹窗
+							$('#authCode_dialog').modal('show');
+							$('#authCode_dialog input').val('').focus();
+						} else {
+							//dialog.show(data.tips);
+							bootbox.alert(data.tips);
+						}
 					} else {
-						dialog.show(data.tips);
+						//dialog.show(data.tips);
+						bootbox.alert(data.tips);
 					}
-				} else {
-					dialog.show(data.tips);
+				});
+			});
+			
+			// 点击 Auth Code 的提交按钮
+			$('#authCode_dialog .dialog-confirm').on('click', function() {
+				var auth_code_tmp = $('#authCode_dialog input[name=tmp_auth_code]').val();
+				if(auth_code_tmp) {
+					// 通过请求校验 Auth Code 是否正确
+					validAuthCode(auth_code_tmp, 
+						// Auth Code 是正确的
+						function() {
+							$.get(delAccountAction, function() {
+								$('#authCode_dialog').modal('hide');
+								dialog.show('delete success');
+								
+							});
+						},
+						// Auth Code 是错误的
+						function() {
+							// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
+							$('#authCode_dialog').modal('hide');
+							// 弹出提示弹窗，说 auth_code 不正确
+							//dialog.show('auth_code is not right');
+							bootbox.alert('auth_code is not right');
+							
+						}
+					);
 				}
 			});
+			
 		});
-		
-		// 点击 Auth Code 的提交按钮
-		$('#authCode_dialog .dialog-confirm').on('click', function() {
-			var auth_code_tmp = $('#authCode_dialog input[name=tmp_auth_code]').val();
-			if(auth_code_tmp) {
-				// 通过请求校验 Auth Code 是否正确
-				validAuthCode(auth_code_tmp, 
-					// Auth Code 是正确的
-					function() {
-						$.get(delAccountAction, function() {
-							$('#authCode_dialog').modal('hide');
-							dialog.show('delete success');
-						});
-					},
-					// Auth Code 是错误的
-					function() {
-						// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
-						$('#authCode_dialog').modal('hide');
-						// 弹出提示弹窗，说 auth_code 不正确
-						dialog.show('auth_code is not right');
-					}
-				);
-			}
-		});
-		
-	});
-	var sTtips = '${sTips}';
-	if(sTips) {
-		dialog.show(sTips);
-	}
+		var sTips = '${sTips}';
+		if(sTips) {
+		//	dialog.show(sTips);
+		}
+
+	
 </script>
 </html>

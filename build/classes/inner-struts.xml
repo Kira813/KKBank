@@ -13,10 +13,6 @@
 			method="toUserIndex">
 			<result name="success">/jsp/userIndex.jsp</result>
 		</action>
-		<action name="register" class="com.kkbank.business.web.NavigationManageAction"
-			method="toRegister">
-			<result name="success">/jsp/register.jsp</result>
-		</action>
 		<action name="toStatus" class="com.kkbank.business.web.NavigationManageAction"
 			method="toStatus">
 			<result name="success">/jsp/status.jsp</result>
@@ -99,8 +95,12 @@
 		</action>
 		<action name="addUser" class="com.kkbank.business.web.UserManageAction" 
 			method="addUser">
-			<result name="success">/jsp/userIndex.jsp</result>
+			<result name="success">/jsp/registerSuccess.jsp</result> <!--registerSuccess-->
 			<result name="error">/jsp/register.jsp</result>
+		</action>
+		<action name="register" class="com.kkbank.business.web.NavigationManageAction"
+			method="toRegister">
+			<result name="success">/jsp/register.jsp</result>
 		</action>
 	</package>
 	
@@ -109,6 +109,20 @@
 		<default-interceptor-ref name="adiStack" />
 		<action name="validAuthCodeAjax" class="com.kkbank.business.web.withdrawAction"
 			method="validAuthCodeAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="getBalanceAjax" class="com.kkbank.business.web.AccountManageAction"
+			method="getBalanceAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="getAcnoAjax" class="com.kkbank.business.web.AccountManageAction"
+			method="getAcnoAjax">
 			<!-- 配置返回 json 类型的数据 -->
 			<result type="json">
 				<param name="root">resultMap</param>

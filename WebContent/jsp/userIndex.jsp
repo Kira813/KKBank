@@ -8,6 +8,6 @@
 </head>
 <body>
 <a href = "#userLogin">Log in</a>
-<a href = "register.action">Register</a>
+<a href = "user/register.action">Register</a> 
 </body>
 </html>

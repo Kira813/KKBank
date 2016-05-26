@@ -65,7 +65,7 @@ public class UserManageAction extends ActionSupport{
 			User user = userService.getUser(ID);
 			ActionContext.getContext().getSession().put("customer", customer);
 			ActionContext.getContext().getSession().put("user", user);
-			rTips="Create a user successfully!";
+			rTips="Create a user successfully!"; 	//这里无效 为啥
 			ActionContext.getContext().put("rTips", rTips);
 			return SUCCESS;
 		}
