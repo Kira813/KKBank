@@ -25,10 +25,7 @@ public class AdminInquiryAction extends ActionSupport{
 
 	public String inquiry()
 	{
-		if(ID == null) {
-			msg = "Please input ID!";
-			return ERROR;
-		} else if(accountService.listAccount(ID).size() == 0) {
+		if(accountService.listAccount(ID).size() == 0) {
 			msg = "Not Exisiting!";
 			return ERROR;
 		} else {

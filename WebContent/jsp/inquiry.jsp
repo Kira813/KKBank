@@ -29,7 +29,7 @@
 							<div class="box-body">
 								<div class="form-group">
 									<label>ID</label>
-									<input type="text" name="ID" class="form-control">
+									<input type="text" name="ID" class="form-control" required="required">
 								</div>
 								<p>${msg}<p>
 							</div>
