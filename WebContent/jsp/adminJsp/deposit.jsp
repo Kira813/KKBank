@@ -146,8 +146,6 @@
 			return false;
 		});
 	});
-	// 提交表单   原来有一个不是ajax的 withdrawform submit方法
-
 	
 	// 点击 Auth Code 的提交按钮
 	$('#authCode_dialog .dialog-confirm').on('click', function() {
@@ -159,9 +157,7 @@
 				function() {
 					// 把这个填写到取款的 form 里面
 					$('input[name=auth_code]').val(auth_code_tmp);
-					//  ?? why不显示
-					//$('#authCode_dialog').modal('hide');
-					//dialog.show('Balance reduced successfully.');
+
 					// 提交表单
 					lock = false;
 					$('#depositform').submit();

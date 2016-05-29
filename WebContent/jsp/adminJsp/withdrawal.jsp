@@ -99,10 +99,6 @@
 <%@include file="./javascript.jsp"%>
 <script type="text/javascript" src="js/authCode.js"></script>
 <script type="text/javascript">
-	// 文本提示弹窗
-	// 可以是 dialog.show('我要跟你说什么');
-	// 也可以 dialog.hide() 隐藏
-	// 页面上必须存在 simpleDialog 才行
 	var dialog = {
 		el: $('#simpleDialog'),
 		show: function(msg) {
@@ -113,50 +109,87 @@
 			this.el.modal('hide');
 		}
 	};
-	
-	$(function() {
-		var getAcnoAction = 'ajax/getAcnoAjax.action';
-		var getBalanceAjax = 'ajax/getBalanceAjax.action?ac_No=${ac_No}';
-		var lock = true;
+
+	var lock = true;
 		
+	$(function() {
+		// 拦截提交表单事件
 		$('#withdrawform').on('submit', function(e) {
 			if(!lock) {
 				return true;
 			}
-			//wrong 要改
-			$.get(getBalanceAction,function(data){
-				if(data.status){
-					var amount = $('input[name=amount]');
-					if(data.balance < amount){
-						bootbox.alert('Balance is not enough.');
-					}
-				}
-			});
-			$.get(getAcnoAction, {
-				ac_No: $('input[name=ac_No]').val()
-			}, function(data) {
-				if(data.status) {
-					var auth_code = $('input[name=auth_code]');
-					var amount = $('input[name=amount]');
-					// 校验 amount 是否大于 50000
-					if(amount.val() > 50000 && !auth_code.val()) {//没有判断wrong ac   ajax
-						$('#authCode_dialog').modal('show');
-						$('#authCode_dialog input').val('').focus();
-					} else {
-						lock = false;
-						$('#withdrawform').submit();
-					}
-				} else {
-					dialog.show(data.tips);
-				}
-			});
-			
+			// 先判断账号是否正确
+			isValidAccount();
 			e.preventDefault();
 			return false;
 		});
 	});
-	// 提交表单   原来有一个不是ajax的 withdrawform submit方法
-
+	
+	/**
+	 * 判断账号是否正确
+	 */
+	function isValidAccount() {
+		var getAcnoAction = 'ajax/getAcnoAjax.action';
+		
+		$.get(getAcnoAction, {
+			ac_No: $('input[name=ac_No]').val()
+		}, function(data) {
+			if(data.status) {
+				// 账号正确，判断余额是否足够
+				isEnoughBalance();
+			} else {
+				// 账号错误的情况
+				dialog.show(data.tips);
+			}
+		});
+	}
+	
+	/**
+	 * 判断余额是够足够
+	 */
+	function isEnoughBalance() {
+		var getBalanceAjax = 'ajax/getBalanceAjax.action';
+		
+		$.get(getBalanceAjax, {
+			ac_No: $('input[name=ac_No]').val()
+		}, function(data){
+			if(data.status){
+				// 这里之前漏了 .val()
+				var amount = $('input[name=amount]').val();
+				if(data.balance < amount){
+					bootbox.alert('Balance is not enough.');
+				} else {
+					// 余额足够，准备提交表单
+					beforeSubmit();
+				}
+			} else {
+				bootbox.alert('Bad ac_No');
+			}
+		});
+	}
+	
+	/**
+	 * 账号和余额都正确，准备提交表单，验证 amount 是否大于 50000
+	 */
+	function beforeSubmit() {
+		var auth_code = $('input[name=auth_code]');
+		var amount = $('input[name=amount]');
+		// 校验 amount 是否大于 50000
+		if(amount.val() > 50000 && !auth_code.val()) {
+			$('#authCode_dialog').modal('show');
+			$('#authCode_dialog input').val('').focus();
+		} else {
+			submit();
+		}
+	}
+	
+	/**
+	 * 提交表单
+	 */
+	function submit() {
+		lock = false;
+		$('#withdrawform').submit();
+	}
 	
 	// 点击 Auth Code 的提交按钮
 	$('#authCode_dialog .dialog-confirm').on('click', function() {
@@ -168,13 +201,9 @@
 				function() {
 					// 把这个填写到取款的 form 里面
 					$('input[name=auth_code]').val(auth_code_tmp);
-					//  ?? why不显示
-					//$('#authCode_dialog').modal('hide');
-					//dialog.show('Balance reduced successfully.');
+					
 					// 提交表单
-					lock = false;
-					$('#withdrawform').submit();
-
+					submit();
 					
 				},
 				// Auth Code 是错误的
@@ -182,7 +211,6 @@
 					// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
 					$('#authCode_dialog').modal('hide');
 					// 弹出提示弹窗，说 auth_code 不正确
-					//dialog.show('auth_code is not right');
 					bootbox.alert('auth_code is not right');
 				}
 			);

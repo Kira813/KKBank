@@ -79,17 +79,14 @@ public class AccountManageAction extends ActionSupport{
 			Double balance = account.getBalance();
 			
 			if(balance == 0) {
-				resultMap.put("tips", "success");
-				resultMap.put("balance", 0);
+				resultMap.put("balance", balance);
 				resultMap.put("status", true);
 			} else {
-				resultMap.put("tips", "Balance not zero, the account has " + balance + " right now");
 				resultMap.put("balance", balance);
 				resultMap.put("status", true);
 			}
 			
 		} else {
-			resultMap.put("tips", "bad ac_No");
 			resultMap.put("status", false);
 		}
 		

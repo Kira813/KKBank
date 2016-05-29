@@ -28,10 +28,8 @@ public class WithdrawAndDepositAction extends ActionSupport {
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
 	public String withdraw() throws Exception {
-		Account account = new Account();
-		Supervisor supervisor = new Supervisor();
 		String tips = null;
-		supervisor.setAuth_code(auth_code);
+		Account account = new Account();
 		account.setAc_No(ac_No);
 
 //		if(ac_No == null && amount == 0.0 ){
@@ -39,26 +37,24 @@ public class WithdrawAndDepositAction extends ActionSupport {
 //		}
 		// 判断 Account
 		 if(accountService.checkAccount(account) == true){
-			System.out.println(ac_No);	
-			// 再次判断 auth_code, 其中 ac_No 用来判断是否为用户提交表单的动作，不是提交表单的话不显示 tips
 			account = accountService.getAccount(ac_No);
 			balance = account.getBalance();
 			
 			if(amount <= 50000) {
 				tips = reduceBalance();
-			} 
-			else if (amount > 50000 && validAuthCode(auth_code)) {
+			} else if (amount > 50000 && validAuthCode(auth_code)) {
 				System.out.println("log:---------------->> 50000");
 				tips = reduceBalance();
 			} else {
 				tips = "Auth code incorrect.";
 			} 	
-		}else if(ac_No != null) {
+		} else if(ac_No != null) {
 			tips = "Wrong account.";
-		 } 
+		} 
 		ActionContext.getContext().put("tips", tips);
 		return SUCCESS;
 	}
+	
 	public String deposit() throws Exception {
 		Account account = new Account();
 		Supervisor supervisor = new Supervisor();
@@ -86,23 +82,26 @@ public class WithdrawAndDepositAction extends ActionSupport {
 		
 		return SUCCESS;
 	}
+	
 	private String reduceBalance() {
 		Account account;
 		String tips;
 		// 减少余额
 		account = accountService.getAccount(ac_No);//get数据库实例 
 		balance = account.getBalance();
-		//这个判断不能写在这里，不然>5000会先authcode再提示
-//		if(balance >=  amount){	
+		
+		//这个判断也要写在这里，不然只靠前端拦截很不安全，需要后台二次判断
+		if(balance >=  amount){	
 			balance = balance - amount;
 			account.setBalance(balance);
 			accountService.updateAccount(account);
 			System.out.println();
 			tips = "Reduce balance success";
-			return tips;
-//		}
-//		tips = "Balance is not enough.";
-//		return tips;
+			
+		} else {
+			tips = "Balance is not enough.";
+		}
+		return tips;
 	}
 	
 	private String addBalance() {

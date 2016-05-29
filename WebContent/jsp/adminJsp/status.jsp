@@ -98,19 +98,17 @@
 			// 点击删除按钮，开始查询余额
 			$('#close_account').on('click', function() {
 				$.get(getBalanceAction, function(data) {
-					// data => {"balance":10.0, "status":true, "tips":"balance not zero"}
+					// data => {"balance":10.0, "status":true}
 					if(data.status) {
 						if(data.balance === 0) {
 							// 显示 auth code 确认弹窗
 							$('#authCode_dialog').modal('show');
 							$('#authCode_dialog input').val('').focus();
 						} else {
-							//dialog.show(data.tips);
-							bootbox.alert(data.tips);
+							bootbox.alert('Balance not zero, the account has ' + balance + ' right now.');
 						}
 					} else {
-						//dialog.show(data.tips);
-						bootbox.alert(data.tips);
+						bootbox.alert('Bad ac_No');
 					}
 				});
 			});
@@ -134,7 +132,6 @@
 							// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
 							$('#authCode_dialog').modal('hide');
 							// 弹出提示弹窗，说 auth_code 不正确
-							//dialog.show('auth_code is not right');
 							bootbox.alert('Auth_code is not right');
 							
 						}
