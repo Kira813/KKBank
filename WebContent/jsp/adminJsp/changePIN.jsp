@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>KK Bank</title>
+<base href="<%=basePath%>">
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@include file="./headMeta.jsp"%>
+</head>
+<body class="skin-blue">
+<%@include file="./header.jsp"%>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+	<!-- Left side column. contains the logo and sidebar -->
+	<%@include file="./sidebar.jsp"%>
+	<aside class="right-side" style="font-family:Microsoft YaHei">
+		<section class="content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-primary">
+						<div class="box-header">
+							<h3 class="box-title">Change Card PIN</h3>
+						</div>						   
+						<form role="form" action="admin/changePIN" method="post">
+							<div class="box-body">
+									<div class="form-group">
+										<label>Card Number</label>
+										<input type="text" name="ac_No" class="form-control"/>
+									</div>
+									<div class="form-group">
+										<label>ID</label>
+										<input type="text" name="ID" class="form-control"/>
+									</div>
+									<div class="form-group">
+										<label>PIN</label>
+										<input type="password" name="PIN" class="form-control"/>
+									</div>
+									<div class="form-group">
+										<label>PIN Again</label>
+                                        <input type="password" name="PIN2" class="form-control"/>
+                                    </div>
+									<p>${msg}</p>
+							</div>
+							<div class="box-footer">
+								<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Submit</button>
+								<a class="btn btn-default" href="index.action">Return</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</aside>
+</div>
+</body>
+</html>

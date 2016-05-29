@@ -15,28 +15,22 @@
 <%@include file="./headMeta.jsp" %></head>
 <title>KK Bank</title>
 </head>
-<body>
-	<table>
-		<tr>
-			<td>Card Number:</td>
-			<td>${ac_No}</td>
-		</tr>
-		<tr>
-			<td>Customer Name:</td>
-			<td>${name}</td>
-		</tr>
-		<tr>
-			<td>Balance:</td>
-			<td>${balance}</td>
-		</tr>
-		<tr>
-			<td>Account Status:</td>
-			<td>${sta_msg}</td>
-		</tr>
-	</table>
-	<a class="btn btn-primary" id="close_account">Close Account</a>
-	<a href="admin/inquiry.action">Return</a>
-
+<body style="background:#666">
+<div class="wrapper row-offcanvas row-offcanvas-left">
+	<div class="form-box" id="login-box" style="font-family:Microsoft YaHei">
+        <div class="header">Tips</div>
+        	<div class="body bg-gray" style="text-align:center;font-size: 120%; margin-top: -5px">
+				<p>Hello, ${name}.</p> <!-- 从ActionContext中取出 -->
+				<p>Card Number: ${ac_No}</p>
+				<p>Balance: ${balance}</p>
+				<p>Account Status: ${sta_msg}</p>
+			</div>
+            <div class="footer" style="text-align:center">             
+          		<a class="btn btn-primary btn-block" id="close_account">Close Account</a>			
+          		<a class="btn btn-default btn-block" href="admin/inquiry.action">Return</a>
+            </div>
+    </div>
+</div>
 <div class="modal fade" id="authCode_dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -57,7 +51,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer" style="font-family:Microsoft YaHei">
 				<button type="button" class="btn btn-default dialog-close" data-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-primary dialog-confirm">Submit</button>
 			</div>
@@ -76,7 +70,7 @@
 			</div>
 			<div class="modal-body">
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer" style="font-family:Microsoft YaHei">
 				<a class="btn btn-primary" href="toStatus.action">Return</a>
 			</div>
 		</div>
@@ -131,7 +125,7 @@
 						function() {
 							$.get(delAccountAction, function() {
 								$('#authCode_dialog').modal('hide');
-								dialog.show('delete success');
+								dialog.show('Delete success');
 								
 							});
 						},
@@ -141,7 +135,7 @@
 							$('#authCode_dialog').modal('hide');
 							// 弹出提示弹窗，说 auth_code 不正确
 							//dialog.show('auth_code is not right');
-							bootbox.alert('auth_code is not right');
+							bootbox.alert('Auth_code is not right');
 							
 						}
 					);

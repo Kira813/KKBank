@@ -22,4 +22,12 @@ public interface IUserService {
 	User getUser(User user);
 
 	boolean checkUser(User user);
+	//new
+	List<User> listUser(String ID);
+	
+	List<User> listUser(String name, String ID);
+	
+	boolean login(String ID, String pwd);
+	
+	boolean isMail(User user);
 }

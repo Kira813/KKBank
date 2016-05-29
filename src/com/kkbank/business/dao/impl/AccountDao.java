@@ -44,5 +44,18 @@ public class AccountDao extends HibernateDaoSupport implements IAccountDao {
 		return (List<Account>)getHibernateTemplate()
 				.find("from Account ac where ac.ID = ?", ID);
 	}
+	//new
+	public Account findAccountByID(String ID){
+		List ac = getHibernateTemplate().find("from Account ac where ac.ID = ?",ID);
+		if (ac.size() >= 1)
+		{
+			Account account = (Account)ac.get(0);
+			return account;
+	    }
+		else
+		{
+			return null;
+		}
+	}
 
 }

@@ -21,4 +21,7 @@ public interface IAccountDao {
 	List<Account> findAllAccount();
 	
 	List<Account> findAllAccount(String ID);
+	
+	//new
+	Account findAccountByID(String ID);
 }

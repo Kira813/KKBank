@@ -43,5 +43,38 @@ public class UserDao extends HibernateDaoSupport implements IUserDao{
 		return (List<User>)getHibernateTemplate()
 				.find("from User");
 	}
-
-}
+	//new
+		public List<User> findAll(String ID){
+			return (List<User>)getHibernateTemplate()
+					.find("from User u where u.ID=?", ID);
+		}
+		
+		public List<User> findAll(String name, String ID){
+			return (List<User>)getHibernateTemplate()
+					.find("from User u where u.name=? and u.ID=?", name, ID);
+		}
+		
+		public boolean login(String ID, String pwd){
+			String[] userlist = new String[2];
+			userlist[0] = ID;
+			userlist[1] = pwd;
+			
+			List uList = this.getHibernateTemplate().find("from User u where u.ID = ? and u.pwd = ?", userlist);
+			if(uList.size() == 1){
+				return true;
+			}
+			return false;
+		}
+		
+		public boolean isMail(User user){
+			String[] userli = new String[2];
+			userli[0] = user.getID();
+			userli[1] = user.getEmail();
+			
+			List emailList = this.getHibernateTemplate().find("from User u where u.ID = ? and u.email = ?", userli);
+			if(emailList.size() == 1){
+				return true;
+			}
+			return false;
+		}
+	}

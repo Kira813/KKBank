@@ -24,6 +24,7 @@ public interface IAccountService {
 	boolean checkAccount(Account account);
 	
 	List<Account> listAccount(String ID);
-
+	//new
+	Account findAccount(String ID);
 
 }

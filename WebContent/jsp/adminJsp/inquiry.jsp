@@ -11,14 +11,14 @@
 <head>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@include file="/jsp/headMeta.jsp"%></head>
+<%@include file="./headMeta.jsp"%></head>
 <body class="skin-blue">
-<%@include file="/jsp/header.jsp"%>
+<%@include file="./header.jsp"%>
 <div class="wrapper row-offcanvas row-offcanvas-left">
 	<!-- Left side column. contains the logo and sidebar -->
-	<%@include file="/jsp/sidebar.jsp"%>
-	<aside class="right-side">
-		<section class="content">
+	<%@include file="./sidebar.jsp"%>
+	<aside class="right-side" style="font-family:Microsoft YaHei">
+		<section class="content" >
 			<div class="row">
 				<div class="col-md-12">
 					<div class="box box-primary">
@@ -35,7 +35,7 @@
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Submit</button>
-								<a class="btn btn-primary" href="index.action">Return</a>
+								<a class="btn btn-default" href="index.action">Return</a>
 							</div>
 						</form>
 					</div>
@@ -44,6 +44,5 @@
 		</section>
 	</aside>
 </div>
-
 </body>
 </html>

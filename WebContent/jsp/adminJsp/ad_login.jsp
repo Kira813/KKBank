@@ -27,12 +27,5 @@
 			</form><!-- form -->
 		</section><!-- content -->
 	</div><!-- container -->
-	
-   <!-- <form action="login" method="post">
-      Admin ID: <input type="text" name="ad_id"/><br/>
-      Password: <input type="password" name="psd"/><br/>
-      ${msg}<br/>
-      <input type="submit" value="Login"/>
-   </form> -->
 </body>
 </html>

@@ -68,5 +68,22 @@ public class UserService implements IUserService{
 	public void setUserDao(IUserDao userDao) {
 		this.userDao = userDao;
 	}
+	//new
+	public List<User> listUser(String ID){
+		return userDao.findAll(ID);
+	}
+	
+	public List<User> listUser(String name, String ID){
+		return userDao.findAll(name, ID);
+	}
+	
+	public boolean login(String ID, String pwd) {
+		return userDao.login(ID, pwd);
+	}	
+	
+	public boolean isMail(User user){
+		return userDao.isMail(user);
+	}
+
 
 }

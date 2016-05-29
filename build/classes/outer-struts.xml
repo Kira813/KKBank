@@ -1,0 +1,13 @@
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- navigation-->
+	<package name="ad" extends="default" namespace="/ad">
+		<default-interceptor-ref name="adiStack" />
+		<action name="toAdLogin" class="com.kkbank.business.web.NavigationManageAction"
+			method="toAdLogin">
+			<result name="SUCCESS">/jsp/ad_login.jsp</result>
+		</action>
+	</package>
+</struts>

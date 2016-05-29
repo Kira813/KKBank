@@ -18,5 +18,13 @@ public interface IUserDao {
 	void delete(String id);
 	
 	List<User> findAll();
+	//new
+	List<User> findAll(String ID);
+	
+	List<User> findAll(String name, String ID);
+	
+	boolean login(String ID, String pwd);
+	
+	boolean isMail(User user);
 	
 }

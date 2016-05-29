@@ -13,13 +13,13 @@
 <title>Insert title here</title>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@include file="./headMeta.jsp"%></head>
+<%@include file="./adminJsp/headMeta.jsp"%></head>
 </head>
 <body style="background:#666">
 <div class="wrapper row-offcanvas row-offcanvas-left">
-	<div class="form-box" id="login-box">
+	<div class="form-box" id="login-box" style="font-family:Microsoft YaHei">
         <div class="header">Register</div>
-        <form action="login.action" method="post" id="loginForm">
+        <form action="user/addUser.action" method="post" id="loginForm">
             <p style="background:#eaeaec;text-align:center;margin:0;padding-top:10px;color:#333;line-height:14px;margin-bottom:-20px;"></p>
             <div class="body bg-gray">
                 <div class="form-group">
@@ -39,8 +39,14 @@
 				</div>
             </div>
             <div class="footer" style="text-align:center">
-                <button type="submit" class="btn btn-primary">Register</button>
-                <a class="btn btn-primary" href="userIndex.action">Return</a>
+            	 <div class="row">
+          			<div class="col-xs-6">
+            			<button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+          			</div>
+          			<div class="col-xs-6">
+						<a class="btn btn-lg btn-default btn-block" href="userIndex.action">Return</a>
+          			</div>
+        		</div>
             </div>
         </form>
     </div>
@@ -57,14 +63,14 @@
 			</div>
 			<div class="modal-body">
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer" style="font-family:Microsoft YaHei">
 				<a class="btn btn-primary" data-dismiss="modal" aria-label="Close">Return</a>
 			</div>
 		</div>
 	</div>
 </div>
 </body>
-<%@include file="./javascript.jsp"%>
+<%@include file="./adminJsp/javascript.jsp"%>
 <script type="text/javascript">
 var dialog = {
 		el: $('#rDialog'),

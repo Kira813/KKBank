@@ -7,7 +7,7 @@
 		<default-interceptor-ref name="adiStack" />
 		<action name="index" class="com.kkbank.business.web.NavigationManageAction"
 			method="toIndex">
-			<result name="SUCCESS">/jsp/index.jsp</result>
+			<result name="SUCCESS">/jsp/adminJsp/index.jsp</result>
 		</action>
 		<action name="userIndex" class="com.kkbank.business.web.NavigationManageAction"
 			method="toUserIndex">
@@ -15,7 +15,7 @@
 		</action>
 		<action name="toStatus" class="com.kkbank.business.web.NavigationManageAction"
 			method="toStatus">
-			<result name="success">/jsp/status.jsp</result>
+			<result name="success">/jsp/adminJsp/status.jsp</result>
 		</action>
 	</package>
 
@@ -27,48 +27,52 @@
 		<!-- jump to opencard.jsp -->
 		<action name="openCard" class="com.kkbank.business.web.AccountManageAction"
 			method="openCard">
-			<result name="success">/jsp/openCard.jsp</result>
+			<result name="success">/jsp/adminJsp/openCard.jsp</result>
 		</action>
 		
 		<action name="delAccount" class="com.kkbank.business.web.AccountManageAction"
 			method="delAccount">
-			<result name="success">/jsp/SUCCESS.jsp</result>
+			<result name="success">/jsp/adminJsp/status.jsp</result> 
 		</action>
 		
 		<action name="addAccount" class="com.kkbank.business.web.AccountManageAction"
 			method="addAccount">
-			<result name="opencard">/jsp/openCard.jsp</result>
-			<result name="success">/jsp/successOpen.jsp</result>
+			<result name="opencard">/jsp/adminJsp/openCard.jsp</result>
+			<result name="success">/jsp/adminJsp/successOpen.jsp</result>
 		</action>
 		
 		<action name="returnMain" class="com.kkbank.business.web.AccountManageAction"
 			method="returnMain">
-			<result name="success">/jsp/index.jsp</result>
+			<result name="success">/jsp/adminJsp/index.jsp</result>
 		</action>
 		
-		<action name="withdraw" class="com.kkbank.business.web.withdrawAction"
+		<action name="withdraw" class="com.kkbank.business.web.WithdrawAndDepositAction"
 			method="withdraw">
-			<result name="success">/jsp/withdrawal.jsp</result>
+			<result name="success">/jsp/adminJsp/withdrawal.jsp</result>
 		</action>
 	</package>
 
 	<!-- Administrator -->
 	<package name="admin" extends="default" namespace="/admin" >
 	<default-interceptor-ref name="adiStack" />
-	    <action name="login" class="com.kkbank.business.web.AdminLoginAction" 
+	    <action name="login" class="com.kkbank.business.web.AdminManageAction" 
 	    	method="login">
-	    	<result name ="success">/jsp/index.jsp</result>
-	    	<result name ="error">/jsp/ad_login.jsp</result>
+	    	<result name ="success">/jsp/adminJsp/index.jsp</result>
+	    	<result name ="error">/jsp/adminJsp/ad_login.jsp</result>
 		</action>
-		<action name="inquiry" class="com.kkbank.business.web.AdminInquiryAction" 
+		<action name="inquiry" class="com.kkbank.business.web.AdminManageAction" 
 			method="inquiry">
-	    	<result name ="success">/jsp/status.jsp</result>
-	    	<result name ="error">/jsp/inquiry.jsp</result>
+	    	<result name ="success">/jsp/adminJsp/status.jsp</result>
+	    	<result name ="error">/jsp/adminJsp/inquiry.jsp</result>
 		</action>
-		<action name="deposit" class="com.kkbank.business.web.AdminDepositAction" 
+		<action name="deposit" class="com.kkbank.business.web.WithdrawAndDepositAction" 
 			method="deposit">
-	    	<result name ="success">/jsp/deposit.jsp</result>
-	    	<result name ="error">/jsp/deposit.jsp</result>
+	    	<result name ="success">/jsp/adminJsp/deposit.jsp</result>
+		</action>
+		<action name="changePIN" class="com.kkbank.business.web.AdminManageAction"
+		 method="changePIN">
+		    <result name ="success">/jsp/adminJsp/changePIN.jsp</result>
+		    <result name ="error">/jsp/adminJsp/changePIN.jsp</result>
 		</action>
 	</package>
 	
@@ -102,12 +106,32 @@
 			method="toRegister">
 			<result name="success">/jsp/register.jsp</result>
 		</action>
+		<action name="userLogin" class="com.kkbank.business.web.UserManageAction" 
+			method="userLogin">
+			<result name="success">/jsp/SUCCESS.jsp</result> 
+			<result name="error">/jsp/userLogin.jsp</result> <!-- user login page -->
+		</action>
+		<action name="activation" class="com.kkbank.business.web.UserManageAction" 
+			method="userActivation">
+			<result name="success">/jsp/activation.jsp</result> 
+			<result name="error">/jsp/errorPage.jsp</result> <!-- user login page -->
+		</action>
+		<!-- forget pwd -->
+		<action name="verify" class="com.kkbank.business.web.UserManageAction"
+			method="userForgetPwd">
+			<result name="success">/jsp/userLogin.jsp</result> 
+			<result name="error">/jsp/ForgetPwd.jsp</result>
+		</action>
+		<action name="changePwd" class="com.kkbank.business.web.UserManageAction"
+			method="userChangePwd">
+			<result name="success">/jsp/userLogin.jsp</result> 
+			<result name="error">/jsp/resetPwd.jsp</result>
+		</action>
 	</package>
-	
 	<!-- Ajax 接口 -->
 	<package name="ajax" extends="default" namespace="/ajax">
 		<default-interceptor-ref name="adiStack" />
-		<action name="validAuthCodeAjax" class="com.kkbank.business.web.withdrawAction"
+		<action name="validAuthCodeAjax" class="com.kkbank.business.web.WithdrawAndDepositAction"
 			method="validAuthCodeAjax">
 			<!-- 配置返回 json 类型的数据 -->
 			<result type="json">

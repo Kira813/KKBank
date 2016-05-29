@@ -1,8 +1,1 @@
-/applicationContext.xml
 /com/
-/daoContext.xml
-/db.properties
-/inner-struts.xml
-/serviceContext.xml
-/struts.xml
-/outer-struts.xml

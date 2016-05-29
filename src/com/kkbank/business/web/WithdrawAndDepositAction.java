@@ -2,21 +2,20 @@ package com.kkbank.business.web;
 
 import java.util.HashMap;
 
-import net.sf.json.JSONObject;
+
 
 import com.kkbank.business.service.IAccountService;
-import com.kkbank.business.service.ICustomerService;
+
 import com.kkbank.business.service.ISupervisorService;
 import com.kkbank.business.service.impl.AccountService;
-import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.business.service.impl.SupervisorService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Supervisor;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class withdrawAction extends ActionSupport {
-
+public class WithdrawAndDepositAction extends ActionSupport {
+	private static final long serialVersionUID = 1L;
 	protected IAccountService accountService = new AccountService();
 	protected ISupervisorService supervisorService = new SupervisorService();
 	private String auth_code;
@@ -32,6 +31,41 @@ public class withdrawAction extends ActionSupport {
 		Account account = new Account();
 		Supervisor supervisor = new Supervisor();
 		String tips = null;
+		supervisor.setAuth_code(auth_code);
+		account.setAc_No(ac_No);
+
+		if(ac_No == null && amount == 0.0 ){
+			return SUCCESS;
+		}
+		// 判断 Account
+		else if(accountService.checkAccount(account) == true){
+			System.out.println(ac_No);	
+			// 再次判断 auth_code, 其中 ac_No 用来判断是否为用户提交表单的动作，不是提交表单的话不显示 tips
+			account = accountService.getAccount(ac_No);
+			balance = account.getBalance();
+		if(balance >=  amount){	
+			if(amount <= 50000) {
+				tips = reduceBalance();
+			} 
+			else if (amount > 50000 && validAuthCode(auth_code)) {
+				System.out.println("log:---------------->> 50000");
+				tips = reduceBalance();
+			} else {
+				tips = "Auth code incorrect.";
+			}			
+		}
+			else tips = "Balance is not enough.";
+		
+		}else if(ac_No != null) {
+			tips = "Wrong account.";
+		 } 
+		ActionContext.getContext().put("tips", tips);
+		return SUCCESS;
+	}
+	public String deposit() throws Exception {
+		Account account = new Account();
+		Supervisor supervisor = new Supervisor();
+		String tips = null;
 		
 		supervisor.setAuth_code(auth_code);
 		account.setAc_No(ac_No);
@@ -39,42 +73,52 @@ public class withdrawAction extends ActionSupport {
 		// 判断 Account
 		if(accountService.checkAccount(account) == true){
 			// 再次判断 auth_code, 其中 ac_No 用来判断是否为用户提交表单的动作，不是提交表单的话不显示 tips
-//			if(amount > 50000 && !validAuthCode(auth_code) && ac_No != null) {
-//				tips = "Auth code incorrect!";
-//				
-//			} else {
-//				tips = reduceBalance();
-//			}
 			if(amount <= 50000) {
-				tips = reduceBalance();
+				tips = addBalance();
 			} else if (amount > 50000 && validAuthCode(auth_code)) {
 				System.out.println("log:---------------->> 50000");
-				tips = reduceBalance();
+				tips = addBalance();
 			} else {
-				tips = "Auth code incorrect!";
-			}
-			
-			
+				tips = "Auth code incorrect.";
+			}	
 		} else if(ac_No != null) {
-			tips = "wrong account!";
+			tips = "Wrong account.";
 		}
 		
 		ActionContext.getContext().put("tips", tips);
 		
 		return SUCCESS;
 	}
-
 	private String reduceBalance() {
 		Account account;
 		String tips;
 		// 减少余额
 		account = accountService.getAccount(ac_No);//get数据库实例 
 		balance = account.getBalance();
-		balance = balance - amount;
+		//这个判断不能写在这里，不然>5000会先authcode再提示
+//		if(balance >=  amount){	
+			balance = balance - amount;
+			account.setBalance(balance);
+			accountService.updateAccount(account);
+			System.out.println();
+			tips = "Reduce balance success";
+			return tips;
+//		}
+//		tips = "Balance is not enough.";
+//		return tips;
+	}
+	
+	private String addBalance() {
+		Account account;
+		String tips;
+		// add余额
+		account = accountService.getAccount(ac_No);//get数据库实例 
+		balance = account.getBalance();
+		balance = balance + amount;
 		account.setBalance(balance);
 		accountService.updateAccount(account);
 		System.out.println();
-		tips = "Reduce balance success";
+		tips = "Add balance success";
 		return tips;
 	}
 	

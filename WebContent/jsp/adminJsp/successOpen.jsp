@@ -17,16 +17,15 @@
 </head>
 <body style="background:#666">
 <div class="wrapper row-offcanvas row-offcanvas-left">
-	<div class="form-box" id="login-box">
+	<div class="form-box" style="font-family:Microsoft YaHei">
         <div class="header">Tips</div>
         	<div class="body bg-gray" style="text-align:center;font-size: 120%; margin-top: -5px">
 				<p>Hello, ${customer.name }.</p> <!-- 从ActionContext中取出 -->
 				<p>Your account is: ${account.ac_No}</p>
 			</div>
             <div class="footer" style="text-align:center">
-                <a class="btn btn-primary btn-block" href="returnMain.action">Return the Main Page</a>
+                <a class="btn btn-primary btn-block" href="index.action">Return the Main Page</a>
             </div>
-        </form>
     </div>
 </div>
 <div class="modal fade" id="rDialog">

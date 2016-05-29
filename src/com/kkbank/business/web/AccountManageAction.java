@@ -44,7 +44,7 @@ public class AccountManageAction extends ActionSupport{
 				sTips="Balance:"+balance+" This account can't be closed now."; //useless
 				ActionContext.getContext().put("sTips", sTips);
 			}
-			return SUCCESS;
+			return SUCCESS; //这里并不会执行到吗？？
 		}
 		return SUCCESS;
 	}
@@ -83,7 +83,7 @@ public class AccountManageAction extends ActionSupport{
 				resultMap.put("balance", 0);
 				resultMap.put("status", true);
 			} else {
-				resultMap.put("tips", "balance not zero, the account has " + balance + " right now");
+				resultMap.put("tips", "Balance not zero, the account has " + balance + " right now");
 				resultMap.put("balance", balance);
 				resultMap.put("status", true);
 			}
