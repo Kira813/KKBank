@@ -29,5 +29,5 @@ public interface IUserService {
 	
 	boolean login(String ID, String pwd);
 	
-	boolean isMail(User user);
+	boolean isMail(String ID, String email);
 }

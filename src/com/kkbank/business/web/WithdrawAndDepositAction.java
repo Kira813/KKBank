@@ -34,16 +34,16 @@ public class WithdrawAndDepositAction extends ActionSupport {
 		supervisor.setAuth_code(auth_code);
 		account.setAc_No(ac_No);
 
-		if(ac_No == null && amount == 0.0 ){
-			return SUCCESS;
-		}
+//		if(ac_No == null && amount == 0.0 ){
+//			return SUCCESS;
+//		}
 		// 判断 Account
-		else if(accountService.checkAccount(account) == true){
+		 if(accountService.checkAccount(account) == true){
 			System.out.println(ac_No);	
 			// 再次判断 auth_code, 其中 ac_No 用来判断是否为用户提交表单的动作，不是提交表单的话不显示 tips
 			account = accountService.getAccount(ac_No);
 			balance = account.getBalance();
-		if(balance >=  amount){	
+			
 			if(amount <= 50000) {
 				tips = reduceBalance();
 			} 
@@ -52,10 +52,7 @@ public class WithdrawAndDepositAction extends ActionSupport {
 				tips = reduceBalance();
 			} else {
 				tips = "Auth code incorrect.";
-			}			
-		}
-			else tips = "Balance is not enough.";
-		
+			} 	
 		}else if(ac_No != null) {
 			tips = "Wrong account.";
 		 } 

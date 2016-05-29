@@ -116,13 +116,22 @@
 	
 	$(function() {
 		var getAcnoAction = 'ajax/getAcnoAjax.action';
+		var getBalanceAjax = 'ajax/getBalanceAjax.action?ac_No=${ac_No}';
 		var lock = true;
 		
 		$('#withdrawform').on('submit', function(e) {
 			if(!lock) {
 				return true;
 			}
-		
+			//wrong 要改
+			$.get(getBalanceAction,function(data){
+				if(data.status){
+					var amount = $('input[name=amount]');
+					if(data.balance < amount){
+						bootbox.alert('Balance is not enough.');
+					}
+				}
+			});
 			$.get(getAcnoAction, {
 				ac_No: $('input[name=ac_No]').val()
 			}, function(data) {

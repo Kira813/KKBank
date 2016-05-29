@@ -81,8 +81,8 @@ public class UserService implements IUserService{
 		return userDao.login(ID, pwd);
 	}	
 	
-	public boolean isMail(User user){
-		return userDao.isMail(user);
+	public boolean isMail(String ID, String email){
+		return userDao.isMail(ID, email);
 	}
 
 

@@ -133,7 +133,7 @@ public class UserManageAction extends ActionSupport{
 		System.out.println("name"+name + "ID" +ID);
 		
 		if(userService.listUser(name, ID).size() == 1){
-			if(userService.isMail(user)){
+			if(userService.isMail(ID, email)){
 				//send e-mail
 				if(EmailUtils.sendResetPasswordEmail(user)){
 					JOptionPane.showOptionDialog(null, "There will be an verification mail send to your security email.", 

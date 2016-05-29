@@ -66,10 +66,10 @@ public class UserDao extends HibernateDaoSupport implements IUserDao{
 			return false;
 		}
 		
-		public boolean isMail(User user){
+		public boolean isMail(String ID, String email){
 			String[] userli = new String[2];
-			userli[0] = user.getID();
-			userli[1] = user.getEmail();
+			userli[0] = ID;
+			userli[1] = email;
 			
 			List emailList = this.getHibernateTemplate().find("from User u where u.ID = ? and u.email = ?", userli);
 			if(emailList.size() == 1){
