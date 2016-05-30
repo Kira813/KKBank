@@ -6,15 +6,19 @@ import java.util.Locale;
 
 import javax.swing.JOptionPane;
 
+import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ICustomerService;
 import com.kkbank.business.service.IUserService;
+import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.business.service.impl.UserService;
+import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
 import com.kkbank.domain.User;
 import com.kkbank.util.mail.EmailUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.kkbank.util.encryption.DES;
 
 public class UserManageAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
@@ -36,6 +40,9 @@ public class UserManageAction extends ActionSupport{
 	//changePwd+
 	private String conPwd;
 	String pwd_regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{6,}$";
+	//activation+
+	IAccountService accountService = new AccountService();
+	Account account = new Account();
 
 	
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -69,17 +76,23 @@ public class UserManageAction extends ActionSupport{
 	}
 	
 	public String userActivation() throws Exception{
-		if(userService.listUser(ID).size() == 1){
+		System.out.println("encryted ID:" + ID);
+		ID = DES.decrypt(ID);
+		System.out.println("decryted ID:" + ID);
+		
+		if(accountService.listAccount(ID).size() == 1){
 			status = 1;
-			//User.setID(ID);
-			user = userService.getUser(ID);
-			user.setStatus(status);			
-			userService.updateUser(user);
+			
+			//account.setID(ID);
+			account = accountService.findAccount(ID);
+			
+			account.setStatus(status);			
+			accountService.updateAccount(account);
 			return SUCCESS;
 		}
 		else
 		{
-			msg = "The user does not exist, Please contact with our Bank";
+			msg = "The user does not exist! Please contact with our Bank";
 			return ERROR;
 		}
 	}
@@ -87,8 +100,13 @@ public class UserManageAction extends ActionSupport{
 		JOptionPane.setDefaultLocale(Locale.ENGLISH); 
 		Object[] option = {"Return"};
 		
+		System.out.println("ID:" + ID);
+		
+		ID = DES.decrypt(ID);
+		System.out.println("deID:" + ID);
+		
 		if(pwd.trim()==""||conPwd.trim()==""){
-			msg = "Password can not be empty.";
+			msg = "Password can not be empty!";
 			System.out.println(msg);
 			return ERROR;
 		}
@@ -100,7 +118,7 @@ public class UserManageAction extends ActionSupport{
 
 					userService.updateUser(user);
 					
-					JOptionPane.showOptionDialog(null, "The password has already changed.", 
+					JOptionPane.showOptionDialog(null, "The password has already changed!", 
 							"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
 					return SUCCESS;
 				}
@@ -119,7 +137,7 @@ public class UserManageAction extends ActionSupport{
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null, "Your password must be at least 6 characters.", 
+			JOptionPane.showMessageDialog(null, "Your password must be at least 6 characters!", 
 					"Warning", JOptionPane.WARNING_MESSAGE);
 			return ERROR;
 		}
@@ -161,6 +179,7 @@ public class UserManageAction extends ActionSupport{
 		String rTips = null;
 		resultMap = new HashMap<String, Object>();
 		Customer customer = new Customer();
+		
 		customer.setID(ID);
 		customer.setName(name);
 		switch(status){
@@ -175,20 +194,25 @@ public class UserManageAction extends ActionSupport{
 		}
 		if (customerService.checkCustomer(customer) == true) {
 			customer = customerService.getCustomer(customer);
+			if(userService.getUser(ID) != null){
+				rTips = "This ID had been registered.";
+				ActionContext.getContext().put("rTips",rTips );
+				return ERROR;
+			}else{
 			userService.addUser(ID,name, pwd1, email,3);
 			User user = userService.getUser(ID);
 			ActionContext.getContext().getSession().put("customer", customer);
 			ActionContext.getContext().getSession().put("user", user);
-			rTips="Create a user successfully!"; 	//这里无效 为啥
-			ActionContext.getContext().put("rTips", rTips);
-				if(EmailUtils.sendAccountActivateEmail(user)){
-					JOptionPane.showOptionDialog(null, "There will be an verification mail send to your security email.", 
-							"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
-				}
+//				if(EmailUtils.sendAccountActivateEmail(user)){
+//					rTips="Create a user successfully.There will be an verification mail send to your security email.";
+//					ActionContext.getContext().put("rTips", rTips);		
+//				}
 			return SUCCESS;
+			}
 		} else if (ID != null || name != null){
 			rTips = "Wrong ID or name.";
 			ActionContext.getContext().put("rTips",rTips );
+			return ERROR;
 		}
 		return ERROR;
 	}
@@ -323,6 +347,12 @@ public class UserManageAction extends ActionSupport{
 
 	public void setCustomerService(ICustomerService customerService) {
 		this.customerService = customerService;
+	}
+	public IAccountService getAccountService() {
+		return accountService;
+	}
+	public void setAccountService(IAccountService accountService) {
+		this.accountService = accountService;
 	}
 
 	public String getName() {

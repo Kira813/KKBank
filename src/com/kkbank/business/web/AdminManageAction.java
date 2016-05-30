@@ -15,6 +15,7 @@ import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.business.service.impl.SupervisorService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminManageAction extends ActionSupport{
@@ -125,29 +126,27 @@ public class AdminManageAction extends ActionSupport{
 			return ERROR;
 		} else {
 			List<Account> acList = accountService.listAccount(ID);
-			
+//			Account account = acList.get(0);
+//			status = account.getStatus();
+//			switch(status){
+//			case(1): sta_msg="Normal";
+//					 break;
+//			case(2): sta_msg="Locked";
+//					 break;
+//			case(3): sta_msg="Not activated";
+//			 		 break;
+//			case(4): sta_msg="Not Available";
+//	 		 		 break;
+//			}
 			if(acList.size() > 0) {
-				Account account = acList.get(0);
-				ac_No = account.getAc_No();
-				balance = account.getBalance();
-				status = account.getStatus();
-				
+				ActionContext ctx = ActionContext.getContext();
+				ctx.put("listaccount", acList);
 				List<Customer> cList = customerService.find(ID);
 				if(cList.size() > 0) {
 					Customer customer = cList.get(0);
 					name = customer.getName();
 				}
 				
-				switch(status){
-				case(1): sta_msg="Normal";
-						 break;
-				case(2): sta_msg="Locked";
-						 break;
-				case(3): sta_msg="Not activated";
-				 		 break;
-				case(4): sta_msg="Not Available";
-		 		 		 break;
-				}
 				return SUCCESS;
 			} else {
 				return ERROR;

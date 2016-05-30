@@ -15,21 +15,35 @@
 <%@include file="./headMeta.jsp" %></head>
 <title>KK Bank</title>
 </head>
-<body style="background:#666">
-<div class="wrapper row-offcanvas row-offcanvas-left">
-	<div class="form-box" id="login-box" style="font-family:Microsoft YaHei">
-        <div class="header">Tips</div>
-        	<div class="body bg-gray" style="text-align:center;font-size: 120%; margin-top: -5px">
-				<p>Hello, ${name}.</p> <!-- 从ActionContext中取出 -->
-				<p>Card Number: ${ac_No}</p>
-				<p>Balance: ${balance}</p>
-				<p>Account Status: ${sta_msg}</p>
-			</div>
-            <div class="footer" style="text-align:center">             
-          		<a class="btn btn-primary btn-block" id="close_account">Close Account</a>			
-          		<a class="btn btn-default btn-block" href="admin/inquiry.action">Return</a>
-            </div>
-    </div>
+<body >
+<div style="font-family:Microsoft YaHei">
+	
+       	<p>Hello, ${name}.</p> <!-- 从ActionContext中取出 -->
+		<table>
+		<s:iterator value="#listaccount" status="st">
+	            <tr>
+	              <td>Card Number: ${ac_No}</td>
+	              <td>Balance: ${balance}</td>
+	              <td>Account Status: <s:if test="status == 1">  
+  											 Normal  
+ 									  </s:if>  
+										<s:elseif test="status == 2">  
+				 							 Locked  
+										</s:elseif>  
+										<s:elseif test="status == 3">  
+				 							  Not activated  
+										</s:elseif>  
+										<s:else>  
+										  	 Not Available
+										</s:else>  
+				</td>
+	              <td><a class="btn btn-primary " id="close_account">Close Account</a></td>
+	            </tr>
+          </s:iterator>
+          </table>
+<a class="btn btn-default " href="admin/inquiry.action">Return</a>
+
+    
 </div>
 <div class="modal fade" id="authCode_dialog">
 	<div class="modal-dialog">
@@ -100,12 +114,12 @@
 				$.get(getBalanceAction, function(data) {
 					// data => {"balance":10.0, "status":true}
 					if(data.status) {
-						if(data.balance === 0) {
+						if(data.balance == 0) {
 							// 显示 auth code 确认弹窗
 							$('#authCode_dialog').modal('show');
 							$('#authCode_dialog input').val('').focus();
 						} else {
-							bootbox.alert('Balance not zero, the account has ' + balance + ' right now.');
+							bootbox.alert(data.tips);
 						}
 					} else {
 						bootbox.alert('Bad ac_No');

@@ -5,25 +5,34 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletRequest;
 
 import com.kkbank.domain.User;
+import com.kkbank.util.encryption.DESBackup;
+import com.kkbank.util.encryption.DES;
+import com.kkbank.util.encryption.MD5;
 
 public class GenerateLinkUtils {
 	private static final String CHECK_CODE = "checkCode";  
     
     /** 
      * Generate Link to activate account
+     * @throws Exception 
      */  
-    public static String generateActivateLink(User user) {  
-        return "http://localhost:8080//KKBank/user/activation?ID="   
-                + user.getID(); //+ "&" + CHECK_CODE + "=" + generateCheckcode(user);  
+    public static String generateActivateLink(User user) throws Exception {  
+    	String id = DES.encrypt(user.getID());
+    	System.out.println("encryId:" + id);
+        return "http://localhost:8080/KKBank/user/activation?ID=" + id;
+                //+ user.getID(); //+ "&" + CHECK_CODE + "=" + generateCheckcode(user);  
     }  
       
     /** 
      * Generate link to reset password
+     * @throws Exception 
      */  
-    public static String generateResetPwdLink(User user) {  
+    public static String generateResetPwdLink(User user) throws Exception {  
         //return "http://localhost:8080/KKBank/user/verify?ID="
-    	return "http://localhost:8080/KKBank/resetPwd.jsp?ID="
-                + user.getID();   
+    	String id = DES.encrypt(user.getID());
+    	System.out.println("encryId:" + id);
+    	return "http://localhost:8080/KKBank/jsp/resetPwd.jsp?ID=" + id;
+                //+ user.getID();   
     }   /* + "&" + CHECK_CODE + "=" + generateCheckcode(user); */
                      /*�����url��Ҫ�ĳ�"http://localhost:8080/OnlineClass/auth/resetpassword" ��*/
       
@@ -32,13 +41,13 @@ public class GenerateLinkUtils {
      * @param user  Ҫ������ʻ� 
      * @return ���û����������Ϻ�ͨ��md5���ܺ��16���Ƹ�ʽ���ַ� 
      */  
-    /*
+    
     public static String generateCheckcode(User user) {  
-        String user_id = user.getUser_id();  
-        String randomCode = user.getRandomCode();  
-        return md5(user_id + ":" + randomCode);  
+        String user_id = user.getID();  
+        String user_pwd = user.getPwd();  
+        return md5(user_id + ":" + user_pwd);  
     }  
-     */ 
+     
     /** 
      * ��֤У�����Ƿ��ע��ʱ���͵���֤��һ�� 
      * @param user Ҫ������ʻ� 
@@ -50,7 +59,7 @@ public class GenerateLinkUtils {
     //    return generateCheckcode(user).equals(checkCode);  
    // }  
   
-    /*private static String md5(String string) {  
+    private static String md5(String string) {  
         MessageDigest md = null;  
         try {  
             md = MessageDigest.getInstance("md5");  
@@ -76,6 +85,6 @@ public class GenerateLinkUtils {
             strBuf.append(Integer.toHexString(byteArray[i] & 0xFF));  
         }  
         return strBuf.toString();  
-    }  */
+    }  
 
 }

@@ -48,7 +48,7 @@
 		}
 	};	
 
-		dialog.show("Online banking account register sucessfully!");
+		dialog.show("Online banking account register sucessfully!There will be an verification mail send to your security email.");
 
 </script>
 </html>

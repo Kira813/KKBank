@@ -84,6 +84,7 @@ public class AccountManageAction extends ActionSupport{
 			} else {
 				resultMap.put("balance", balance);
 				resultMap.put("status", true);
+				resultMap.put("tips", "Balance not zero, the account has " + balance + " right now.");
 			}
 			
 		} else {
