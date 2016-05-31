@@ -22,4 +22,6 @@ public interface ICustomerService {
 	boolean checkCustomer(Customer customer);
 	
 	List<Customer> find(String ID);
+	
+	boolean isValidAccount(String ID, String name);
 }

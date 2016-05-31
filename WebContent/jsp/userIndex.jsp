@@ -16,15 +16,18 @@
 <%@include file="./adminJsp/headMeta.jsp"%></head>
 </head>
 <body>
-<body style="background:#666">
+<body>
 <div class="wrapper row-offcanvas row-offcanvas-left">
-	<div class="form-box">
-        <div class="header" style="font-family:Microsoft YaHei">User Index</div>
-        	<div class="body bg-gray" style="padding:20px;text-align:center;font-size: 120%; margin-top: -5px;font-family:Microsoft YaHei">
-				<a class="btn btn-lg btn-default btn-block" href="user/userLogin">Log in</a>
-				<a class="btn btn-lg btn-primary btn-block" href="user/register.action">Register</a>
-			</div>
-            <div class="footer"> </div>
+
+        <div style="font-family:Microsoft YaHei">User Index</div>
+
+		<a class="btn btn-lg btn-default" href="user/userLogin">Log in</a>
+		<a class="btn btn-lg btn-default" href="user/logout">Log out</a>
+		<a class="btn btn-lg btn-primary" href="user/register.action">Register</a>
+		<a class="btn btn-lg btn-default" href="toAccountEnquiry.action">Account Enquiry</a>
+		<a class="btn btn-lg btn-default" href="user/toTransfer.action">Transfer</a>
+
+
     </div>
 </div>
 </body>

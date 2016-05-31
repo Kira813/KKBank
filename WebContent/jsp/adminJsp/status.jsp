@@ -24,24 +24,18 @@
 	            <tr>
 	              <td>Card Number: ${ac_No}</td>
 	              <td>Balance: ${balance}</td>
-	              <td>Account Status: <s:if test="status == 1">  
-  											 Normal  
- 									  </s:if>  
-										<s:elseif test="status == 2">  
-				 							 Locked  
-										</s:elseif>  
-										<s:elseif test="status == 3">  
-				 							  Not activated  
-										</s:elseif>  
-										<s:else>  
-										  	 Not Available
-										</s:else>  
-				</td>
-	              <td><a class="btn btn-primary " id="close_account">Close Account</a></td>
+	              <td>Account Status: 
+	              	<s:if test="status == 1">Normal</s:if>  
+					<s:elseif test="status == 2">Locked</s:elseif>  
+					<s:elseif test="status == 3">Not activated  </s:elseif>  
+					<s:else>Not Available</s:else>  
+				  </td>
+	              <td><a class="btn btn-primary close_account" data-acno="${ac_No }" data-id="${ID }">Close Account</a></td>
 	            </tr>
           </s:iterator>
           </table>
 <a class="btn btn-default " href="admin/inquiry.action">Return</a>
+<a class="btn btn-default " onclick="location.reload();">Refresh</a>
 
     
 </div>
@@ -80,12 +74,12 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warn</h4>
+				<h4 class="modal-title">Tips</h4>
 			</div>
 			<div class="modal-body">
 			</div>
 			<div class="modal-footer" style="font-family:Microsoft YaHei">
-				<a class="btn btn-primary" href="toStatus.action">Return</a>
+				<a class="btn btn-primary" onclick="location.reload();">OK</a>
 			</div>
 		</div>
 	</div>
@@ -105,14 +99,22 @@
 			}
 		};
 
-		
 		$(function() {
-			var getBalanceAction = 'ajax/getBalanceAjax.action?ac_No=${ac_No}';
-			var delAccountAction = 'account/delAccount.action?ID=${ID}';
+			var getBalanceAction = 'ajax/getBalanceAjax.action';
+			var delAccountAction = 'account/delAccount.action';
+			var storage = {};
+			
+			
 			// 点击删除按钮，开始查询余额
-			$('#close_account').on('click', function() {
-				$.get(getBalanceAction, function(data) {
-					// data => {"balance":10.0, "status":true}
+			$('.close_account').on('click', function() {
+				var ac_No = $(this).attr('data-acno');
+				
+				storage.ac_No = ac_No;
+				storage.ID = $(this).attr('data-id');
+				
+				$.get(getBalanceAction, {
+					'ac_No': ac_No
+				}, function(data) {
 					if(data.status) {
 						if(data.balance == 0) {
 							// 显示 auth code 确认弹窗
@@ -130,16 +132,23 @@
 			// 点击 Auth Code 的提交按钮
 			$('#authCode_dialog .dialog-confirm').on('click', function() {
 				var auth_code_tmp = $('#authCode_dialog input[name=tmp_auth_code]').val();
+				var ID = storage.ID;
+				var ac_No = storage.ac_No;
+				
 				if(auth_code_tmp) {
 					// 通过请求校验 Auth Code 是否正确
 					validAuthCode(auth_code_tmp, 
 						// Auth Code 是正确的
 						function() {
-							$.get(delAccountAction, function() {
+							$.get(delAccountAction, {
+								ID: ID,
+								'ac_No': ac_No
+							}, function() {
 								$('#authCode_dialog').modal('hide');
-								dialog.show('Delete success');
-								
+								dialog.show('Delete success');	
+								//location.reload();
 							});
+							
 						},
 						// Auth Code 是错误的
 						function() {

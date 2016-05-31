@@ -17,6 +17,22 @@
 			method="toStatus">
 			<result name="success">/jsp/adminJsp/status.jsp</result>
 		</action>
+		<action name="toAccountEnquiry" class="com.kkbank.business.web.NavigationManageAction"
+			method="toAccountEnquiry">
+			<result name="success">/jsp/accountEnquiry.jsp</result>
+		</action>
+		<action name="toAccountSelection" class="com.kkbank.business.web.NavigationManageAction"
+			method="toAccountSelection">
+			<result name="success">/jsp/accountSelection.jsp</result>
+		</action>
+		<action name="toBalanceStatus" class="com.kkbank.business.web.NavigationManageAction"
+			method="toBalanceStatus">
+			<result name="success">/jsp/balanceStatus.jsp</result>
+		</action>
+		<action name="toTransctionDetail" class="com.kkbank.business.web.NavigationManageAction"
+			method="toTransctionDetail">
+			<result name="success">/jsp/transctionDetail.jsp</result>
+		</action>
 	</package>
 
 	
@@ -108,7 +124,7 @@
 		</action>
 		<action name="userLogin" class="com.kkbank.business.web.UserManageAction" 
 			method="userLogin">
-			<result name="success">/jsp/SUCCESS.jsp</result> 
+			<result name="success">/jsp/userIndex.jsp</result> 
 			<result name="error">/jsp/userLogin.jsp</result> <!-- user login page -->
 		</action>
 		<action name="activation" class="com.kkbank.business.web.UserManageAction" 
@@ -127,7 +143,25 @@
 			<result name="success">/jsp/userLogin.jsp</result> 
 			<result name="error">/jsp/resetPwd.jsp</result>
 		</action>
+		<!-- 5.31 new -->
+		<action name="toTransfer" class="com.kkbank.business.web.UserManageAction"
+			method="toTransfer">
+			<result name="success">/jsp/transferring.jsp</result> 
+			<result name="login">/jsp/userLogin.jsp</result>
+		</action>
+		<action name="transfer" class="com.kkbank.business.web.UserManageAction"
+			method="transfer">
+			<result name="success">/jsp/transferring.jsp</result> 
+			<result name="login">/jsp/userLogin.jsp</result>
+			<result name="error">/jsp/transferring.jsp</result>
+		</action>
+		<action name="logout" class="com.kkbank.business.web.UserManageAction" 
+			method="logout">
+			<result name="success">/jsp/userIndex.jsp</result> 
+			<result name="error">/jsp/SUCCESS.jsp</result>
+		</action>
 	</package>
+	
 	<!-- Ajax 接口 -->
 	<package name="ajax" extends="default" namespace="/ajax">
 		<default-interceptor-ref name="adiStack" />

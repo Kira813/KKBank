@@ -44,6 +44,14 @@ public class UserManageAction extends ActionSupport{
 	IAccountService accountService = new AccountService();
 	Account account = new Account();
 
+	//transfer+
+	private List<Account> acList;
+	private Account toAccount;
+	private double amount;
+	private String toAc_No;
+	private String toName;
+	private String PIN;
+	private String ac_No;
 	
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 	
@@ -65,6 +73,9 @@ public class UserManageAction extends ActionSupport{
 		}
 		else if(userService.login(ID, pwd)){
 			//this.result="true";
+			ActionContext ctx = ActionContext.getContext();
+			ctx.getSession().put("loginID", ID);
+			ctx.getSession().put("name", userService.getUser(ID).getName());
 			System.out.println("success");
 			return SUCCESS;
 		}
@@ -74,6 +85,81 @@ public class UserManageAction extends ActionSupport{
 			return ERROR;
 		}		
 	}
+	public String logout() throws Exception{
+		Object[] option = {"Confirm", "Return"};
+		int choice = JOptionPane.showOptionDialog(null, "Do you want to log out?", 
+				"Tips", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+		
+		if(choice == 0){
+			ActionContext.getContext().getSession().remove("loginID");
+			ActionContext.getContext().getSession().remove("name");
+			return SUCCESS;
+		}
+		return ERROR;
+	}
+	
+	public String toTransfer() throws Exception{
+		if(ActionContext.getContext().getSession().get("loginID") == null){
+			msg = "You have not logged in. Please login .";
+			return LOGIN;
+		}
+		else
+		{
+			ID = (String) ActionContext.getContext().getSession().get("loginID");
+			acList = accountService.listAccount(ID);			
+			return SUCCESS;
+		}
+	}
+	
+	public String transfer(){
+		String tips = null;
+		if(ActionContext.getContext().getSession().get("loginID") == null){
+			msg = "You have not logged in. Please login again.";
+			return LOGIN;
+		}
+		account = accountService.getAccount(ac_No);
+		toAccount = accountService.getAccount(toAc_No);
+		
+		if(toAccount == null){
+			msg = "The account you want to transfer to does not exist.";
+			return ERROR;
+		}
+		else
+		{
+			if(customerService.isValidAccount(toAccount.getID(), toName))
+			{
+				System.out.println(account.getPassword());
+				if(account.getPassword().equals(PIN)){
+					if(account.getBalance() > amount){
+						account.setBalance(account.getBalance() - amount);
+						toAccount.setBalance(toAccount.getBalance() + amount);
+						
+						accountService.updateAccount(account);
+						accountService.updateAccount(toAccount);
+						tips = "Successfully transfer";
+						ActionContext.getContext().put("tips", tips);
+						return SUCCESS;
+					}
+					else
+					{
+						msg="Your balance is insufficient.";
+						return ERROR;
+					}
+				}
+				else
+				{
+					msg="The card PIN is wrong.";
+					return ERROR;
+				}
+			}
+			else
+			{
+				msg="The account you want to transfer to is not in conformity with the name.";
+				return ERROR;
+			}
+		}
+	}
+	
 	
 	public String userActivation() throws Exception{
 		System.out.println("encryted ID:" + ID);
@@ -175,7 +261,6 @@ public class UserManageAction extends ActionSupport{
 	}
 	
 	public String addUser() throws Exception{
-		Object[] option = {"Return"};
 		String rTips = null;
 		resultMap = new HashMap<String, Object>();
 		Customer customer = new Customer();
@@ -369,6 +454,48 @@ public class UserManageAction extends ActionSupport{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	public List<Account> getAcList() {
+		return acList;
+	}
+	public void setAcList(List<Account> acList) {
+		this.acList = acList;
+	}
+	public Account getToAccount() {
+		return toAccount;
+	}
+	public void setToAccount(Account toAccount) {
+		this.toAccount = toAccount;
+	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	public String getToAc_No() {
+		return toAc_No;
+	}
+	public void setToAc_No(String toAc_No) {
+		this.toAc_No = toAc_No;
+	}
+	public String getToName() {
+		return toName;
+	}
+	public void setToName(String toName) {
+		this.toName = toName;
+	}
+	public String getPIN() {
+		return PIN;
+	}
+	public void setPIN(String pIN) {
+		PIN = pIN;
 	}
 	
 }

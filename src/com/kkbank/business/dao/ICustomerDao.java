@@ -20,4 +20,6 @@ public interface ICustomerDao {
 	List<Customer> findAllCustomer();
 	
 	List<Customer> find(String ID);
+	
+	boolean isValidAccount(String ID, String name);
 }

@@ -47,5 +47,17 @@ public class CustomerDao extends HibernateDaoSupport implements ICustomerDao{
 				.setParameter(1, Customer.getName())
 				.list();
 	}
+	//new 
+	public boolean isValidAccount(String ID, String name){
+		String[] aclist = new String[2];
+		aclist[0] = ID;
+		aclist[1] = name;
+			
+		List list = this.getHibernateTemplate().find("from Customer c where c.ID=? and c.name=?", aclist);
+		if(list.size() == 1){
+			return true;
+		}
+		return false;
+	}
 
 }

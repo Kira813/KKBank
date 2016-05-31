@@ -71,6 +71,10 @@ public class CustomerService implements ICustomerService{
 	public List<Customer> find(String ID){
 		return customerDao.find(ID);
 	}
+	//new
+	public boolean isValidAccount(String ID, String name){
+			return customerDao.isValidAccount(ID, name);
+		}
 
 
 	

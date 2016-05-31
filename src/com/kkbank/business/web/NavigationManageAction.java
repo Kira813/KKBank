@@ -24,4 +24,18 @@ public class NavigationManageAction extends ActionSupport{
 	public String toStatus() throws Exception{
 		return SUCCESS;
 	}
+	public String toAccountEnquiry() throws Exception{
+		return SUCCESS;
+	}
+	public String toAccountSelection() throws Exception{
+		return SUCCESS;
+	}
+	public String toBalanceStatus() throws Exception{
+		return SUCCESS;
+	}
+	public String toTransctionDetail() throws Exception{
+		return SUCCESS;
+	}
+	
+	
 }
