@@ -71,6 +71,7 @@
 				if(!lock) {
 					return true;
 				}
+				
 				// 先判断账号是否正确
 				isValidTargetAccount();
 				e.preventDefault();
@@ -82,7 +83,7 @@
 		 */
 		function isValidTargetAccount() {
 			var getAccountAction = 'ajax/getAccountAjax.action';
-			var ac_No2 = $('#ac_No_select'); 
+			var ac_No2 = $('select[name=ac_No]').val();
 			
 			$.get(getAccountAction, {
 				'ac_No': $('input[name=toAc_No]').val(),
@@ -103,7 +104,7 @@
 		}
 		function isEnoughBalance() {
 			var getBalanceAjax = 'ajax/getBalanceAjax.action';
-			var ac_No =  $('#ac_No_select'); 
+			var ac_No =  $('select[name=ac_No]').val();
 
 			$.get(getBalanceAjax, {
 				'ac_No':ac_No 
@@ -115,7 +116,6 @@
 						bootbox.alert('Balance is not enough.');
 					} else {
 						// 余额足够，准备提交表单
-						dialog.shpw('Successfully transfer.');
 						submit();
 					}
 				} else {
@@ -129,14 +129,10 @@
 			$('form').submit();
 		}
 	
-		
-	var msg = '${msg}';
-	if(msg) {
-		//bootbox.alert(msg);//输错的时候数据清空了 
-	}	
-	var tips = '${tips}';
-	if(tips) {
-		//dialog.show(tips); //返回的时候box里面的账户不见了    拦截器没用了
-	}
+			
+		var tips = '${tips}';
+		if(tips) {
+			dialog.show(tips);
+		}
 </script>
 </html>

@@ -128,9 +128,9 @@ public class UserManageAction extends ActionSupport{
 						date = new Date();
 					    t_id = transactionService.addTransaction(t_id, date, type, amount, account.getBalance(), account);
 					    t_id = transactionService.addTransaction(t_id, date, type2, amount, toAccount.getBalance(), toAccount);
-					    
-						tips = "Successfully transfer";
-						ActionContext.getContext().put("tips", tips);
+						
+					    tips = "Successfully transfer";
+					    ActionContext.getContext().put("tips", tips);
 						return SUCCESS;
 					}
 					else
@@ -157,6 +157,7 @@ public class UserManageAction extends ActionSupport{
 				return ERROR;
 			}
 		}
+		
 	}
 	
 	
