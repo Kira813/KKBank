@@ -41,8 +41,11 @@ public class TransactionDao extends HibernateDaoSupport implements ITransactionD
 				.setParameter(0, transaction.getT_id())
 				.list();
 	}
+
 	public List<Transaction> findAllTransaction(Account account){
-		return (List<Transaction>)getHibernateTemplate()
-				.find("from transaction t where t.account = ?", account);
+		return this.getSession()
+				.createQuery("from Transaction a where a.account=?")
+				.setParameter(0, account)
+				.list();
 	}
 }

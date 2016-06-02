@@ -15,8 +15,9 @@
 <%@include file="./adminJsp/headMeta.jsp"%></head>
 </head>
 <body>
-balance details
-<a class="btn btn-lg btn-default" href="toTransctionDetail.action">the last 10 transactions button</a>
+account: ${ac_No }
+balance: ${balance }
+<a class="btn btn-lg btn-default" href="toTransctionDetail.action?ac_No=${ac_No }">the last 10 transactions button</a>
 
 </body>
 </html>
