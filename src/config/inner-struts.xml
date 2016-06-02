@@ -34,6 +34,10 @@
 			method="toTransctionDetail">
 			<result name="success">/jsp/transctionDetail.jsp</result>
 		</action>
+		<action name="toTransctionHistory" class="com.kkbank.business.web.NavigationManageAction"
+			method="toTransctionHistory">
+			<result name="success">/jsp/transctionHistory.jsp</result>
+		</action>
 		<action name="toTransfer" class="com.kkbank.business.web.NavigationManageAction"
 			method="toTransfer">
 			<interceptor-ref name="loginStack"></interceptor-ref>

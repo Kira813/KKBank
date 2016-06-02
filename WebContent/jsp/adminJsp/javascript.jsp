@@ -29,3 +29,20 @@
 <!-- Bootbox -->
 <script src="resource/js/bootbox.min.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+	/**
+	 * 格式化金额
+	 */
+	$(function() {
+		$('[format-balance]').each(function(idx, item) {
+			var el = $(item);
+			var val = el.text();
+			
+			val = $.trim(val);
+			
+			var reg = /(\d)(?=(\d\d\d)+(?!\d))/g;
+    		val = val.replace(reg, '$1.');
+    		el.text(val);
+		});
+	});
+</script>
