@@ -12,21 +12,16 @@ public class LoginFilter extends AbstractInterceptor{
 	{
 		ActionContext ctx = invocation.getInvocationContext();
 		Map<String, Object> session = ctx.getSession();
-		Integer power = (Integer) session.get("power");
+		String ID = (String)session.get("loginID");
+
+		if(ID == null){
+			ctx.put("tip" , "You have not logged in. Please login.");
+			return "userLogin"; 
+		} else{
+			ctx.put("ID",ID);
+		}
 		
-		return invocation.invoke();
-		
-//		if(power == null){
-//			ctx.put("tip" , "error password");
-//			return "toLogin"; 
-//		} else{
-//			ctx.put("power", power);
-//			String name = (String) session.get("name");
-//			Integer id = (Integer) session.get("id");
-//			ctx.put("id", id);
-//			ctx.put("name",name);
-//		}
 		// 返回视图
-//		return invocation.invoke();
+		return invocation.invoke();
 	}
 }

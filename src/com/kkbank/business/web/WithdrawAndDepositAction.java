@@ -1,16 +1,24 @@
 package com.kkbank.business.web;
 
+import java.util.Date;
 import java.util.HashMap;
 
 
 
-import com.kkbank.business.service.IAccountService;
 
+
+
+
+
+import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ISupervisorService;
+import com.kkbank.business.service.ITransactionService;
 import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.SupervisorService;
+import com.kkbank.business.service.impl.TransactionService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Supervisor;
+import com.kkbank.domain.Transaction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -18,11 +26,18 @@ public class WithdrawAndDepositAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	protected IAccountService accountService = new AccountService();
 	protected ISupervisorService supervisorService = new SupervisorService();
+	protected ITransactionService transactionService = new TransactionService();
 	private String auth_code;
 	private String sp_id;
 	private String ac_No;
 	private double balance;
 	private double amount;
+	
+	private int t_id;
+	private Date date;
+	private String type;
+	private double tBalance;
+	private Account account;
 
 	// 用于返回 JSON
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -74,6 +89,7 @@ public class WithdrawAndDepositAction extends ActionSupport {
 			} else {
 				tips = "Auth code incorrect.";
 			}	
+
 		} else if(ac_No != null) {
 			tips = "Wrong account.";
 		}
@@ -96,6 +112,10 @@ public class WithdrawAndDepositAction extends ActionSupport {
 			account.setBalance(balance);
 			accountService.updateAccount(account);
 			System.out.println();
+			tBalance = balance;
+			type="Withdraw";
+			date = new Date();
+		    t_id = transactionService.addTransaction(t_id, date, type, amount, tBalance, account);
 			tips = "Reduce balance success";
 			
 		} else {
@@ -113,6 +133,10 @@ public class WithdrawAndDepositAction extends ActionSupport {
 		balance = balance + amount;
 		account.setBalance(balance);
 		accountService.updateAccount(account);
+		tBalance = balance;
+		type="Deposit";
+		date = new Date();
+	    t_id = transactionService.addTransaction(t_id, date, type, amount, tBalance, account);
 		System.out.println();
 		tips = "Add balance success";
 		return tips;
@@ -173,6 +197,47 @@ public class WithdrawAndDepositAction extends ActionSupport {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+	
+	public int getT_id() {
+		return t_id;
+	}
+
+	public void setT_id(int t_id) {
+		this.t_id = t_id;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public double gettBalance() {
+		return tBalance;
+	}
+
+	public void settBalance(double tBalance) {
+		this.tBalance = tBalance;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	public HashMap<String, Object> getResultMap() {
 		return resultMap;
 	}
@@ -186,6 +251,14 @@ public class WithdrawAndDepositAction extends ActionSupport {
 
 	public void setSupervisorService(ISupervisorService supervisorService) {
 		this.supervisorService = supervisorService;
+	}
+
+	public ITransactionService getTransactionService() {
+		return transactionService;
+	}
+
+	public void setTransactionService(ITransactionService transactionService) {
+		this.transactionService = transactionService;
 	}
 
 }

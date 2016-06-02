@@ -43,4 +43,11 @@
 		class="com.kkbank.business.service.impl.AccountService"
 		parent="accountServiceTmpl" />
 		
+	<bean id="transactionServiceTmpl" abstract="true" lazy-init="true"
+		p:transactionDao-ref="TransactionDao"
+		/>
+	<bean id="transactionService"
+		class="com.kkbank.business.service.impl.TransactionService"
+		parent="transactionServiceTmpl" />
+		
 </beans>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.kkbank.domain">
+	<class name="Transaction" table="transaction">
+		<id name="t_id" column="t_id" >
+			<generator class="identity" />
+		</id>
+		<property name="date" not-null="true"/>
+		<property name="type" not-null="true"/>
+		<property name="amount" not-null="true"/>
+		<property name="tBalance" not-null="true"/>
+		
+		<many-to-one name="account" column="account_id"
+			class="Account" lazy="false" />
+	</class>
+</hibernate-mapping>

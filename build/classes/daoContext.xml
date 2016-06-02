@@ -25,4 +25,7 @@
 	<bean id="CustomerDao"
 		class="com.kkbank.business.dao.impl.CustomerDao"
 		parent="daoTemplate" />
+	<bean id="TransactionDao"
+		class="com.kkbank.business.dao.impl.TransactionDao"
+		parent="daoTemplate" />
 </beans>

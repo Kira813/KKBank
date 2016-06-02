@@ -1,29 +1,36 @@
 package com.kkbank.domain;
 
+import java.util.Set;
+
 public class Account {
 	
-	private String ID;
 	private String ac_No;
+	private String ID;
 	private String password;
 	private double balance;
 	private int status;
 	private Customer customer;
+	private Set<Transaction> transactions;
 	
 	public Account() {
 		super();
 	}
 
-	
-	public Account(String iD, String ac_No, String password, double balance,
-			int status, Customer customer) {
+
+	public Account(String ac_No, String iD, String password, double balance,
+			int status, Customer customer, Set<Transaction> transactions) {
 		super();
-		ID = iD;
 		this.ac_No = ac_No;
+		ID = iD;
 		this.password = password;
 		this.balance = balance;
 		this.status = status;
 		this.customer = customer;
+		this.transactions = transactions;
 	}
+
+
+
 
 	public String getID() {
 		return ID;
@@ -76,6 +83,16 @@ public class Account {
 	}
 
 
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+
+
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,6 +107,8 @@ public class Account {
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + status;
+		result = prime * result
+				+ ((transactions == null) ? 0 : transactions.hashCode());
 		return result;
 	}
 
@@ -128,7 +147,13 @@ public class Account {
 			return false;
 		if (status != other.status)
 			return false;
+		if (transactions == null) {
+			if (other.transactions != null)
+				return false;
+		} else if (!transactions.equals(other.transactions))
+			return false;
 		return true;
 	}
+
 
 }

@@ -2,12 +2,14 @@ package com.kkbank.business.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.kkbank.business.dao.IAccountDao;
 import com.kkbank.business.dao.impl.AccountDao;
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
+import com.kkbank.domain.Transaction;
 
 public class AccountService implements IAccountService {
 
@@ -15,7 +17,7 @@ public class AccountService implements IAccountService {
 
 	// ac_No是主键，在这里通过时间戳和随机数生成
 	public String addAccount(String ID, String password,
-			double balance, int status, Customer customer) {
+			double balance, int status, Customer customer,Set<Transaction> transactions) {
 		Account account = new Account();
 		account.setID(ID);
 		account.setPassword(password);

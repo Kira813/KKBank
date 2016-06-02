@@ -2,6 +2,7 @@ package com.kkbank.business.web;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ICustomerService;
@@ -9,6 +10,7 @@ import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
+import com.kkbank.domain.Transaction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,12 +25,15 @@ public class AccountManageAction extends ActionSupport{
 
 	private String ID;
 	private String ac_No;
+	private String ac_No2;
 	private String password;
 	private String password1;
 	private double balance;
 	private int status;
 	private Customer customer;
+	private Set<Transaction> transactions;
 	private String name;
+	private String PIN;
 
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
@@ -59,7 +64,8 @@ public class AccountManageAction extends ActionSupport{
 
 			// 创建一个 account, 并通过返回的 ac_no 获取到刚创建的 account
 			String ac_no = accountService.addAccount(ID, password1, 0.0, 1,
-					customer);
+					customer,null);
+			
 			Account account = accountService.getAccount(ac_no);
 
 			ActionContext.getContext().getSession().put("customer", customer);
@@ -106,6 +112,27 @@ public class AccountManageAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
+	
+	public String getAccountAjax() throws Exception{
+		resultMap = new HashMap<String, Object>();
+		Account account = accountService.getAccount(ac_No);
+		Account account2 = accountService.getAccount(ac_No2);//the transfer out account
+		resultMap.put("status", true);
+		if(account == null){
+			resultMap.put("tips", "Wrong ac_No");
+			resultMap.put("status", false);
+		}else if(customerService.isValidAccount(account.getID(), name)){
+			resultMap.put("acStatus", true);
+			if(account2.getPassword().equals(PIN)){
+				resultMap.put("PINStatus", true);
+			}else{
+				resultMap.put("PINStatus", false);
+			}
+		}else{
+			resultMap.put("acStatus", false);
+		}
+		return SUCCESS;
+	}
 
 	public String openCard() throws Exception {
 		return SUCCESS;
@@ -129,6 +156,16 @@ public class AccountManageAction extends ActionSupport{
 
 	public void setAc_No(String ac_No) {
 		this.ac_No = ac_No;
+	}
+	
+	
+
+	public String getAc_No2() {
+		return ac_No2;
+	}
+
+	public void setAc_No2(String ac_No2) {
+		this.ac_No2 = ac_No2;
 	}
 
 	public String getPassword() {
@@ -169,6 +206,22 @@ public class AccountManageAction extends ActionSupport{
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+
+	public String getPIN() {
+		return PIN;
+	}
+
+	public void setPIN(String pIN) {
+		PIN = pIN;
 	}
 
 	public Customer getCustomer() {

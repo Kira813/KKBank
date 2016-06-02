@@ -18,19 +18,18 @@
 <title>KK Bank</title>
 </head>
 <body>
-	<form action="user/transfer" method="post">
+	<form role="form" action="user/transfer" method="post">
 		Please select your card account number:
-		<select name="ac_No">
+		<select name="ac_No" id="ac_No_select">
 			<c:forEach items="${acList}" var="list">
 				<option value="${list.ac_No}">${list.ac_No}</option>
 			</c:forEach>			
 		</select><br/>
-		Transfer Amount: <input type="text" name="amount"/><br/>
-		Receiver's Account No.: <input type="text" name="toAc_No"/><br/>
-		Receiver's name: <input type="text" name="toName"/><br/>
-		Card PIN: <input type="password" name="PIN" /><br/>
-		${msg}<br/>
-		<input type="submit" value="Submit"/>		
+		Transfer Amount: <input type="text" name="amount" required="required"/><br/>
+		Receiver's Account No.: <input type="text" name="toAc_No" required="required"/><br/>
+		Receiver's name: <input type="text" name="toName" required="required"/><br/>
+		Card PIN: <input type="password" name="PIN" required="required"/><br/>
+		<input type="submit" value="Submit"  />		
 	</form>
 <div class="modal fade" id="simpleDialog">
 	<div class="modal-dialog">
@@ -45,7 +44,7 @@
 			<div class="modal-body">
 			</div>
 			<div class="modal-footer">
-				<a class="btn btn-primary" href="user/toTransfer.action">Return</a>
+				<a class="btn btn-primary" href="toTransfer.action">Return</a>
 			</div>
 		</div>
 	</div>
@@ -64,9 +63,80 @@
 		}
 	};
 	
+		var lock = true;
+		
+		$(function() {
+			// 拦截提交表单事件
+			$('form').on('submit', function(e) {
+				if(!lock) {
+					return true;
+				}
+				// 先判断账号是否正确
+				isValidTargetAccount();
+				e.preventDefault();
+				return false;
+			});
+		});
+		/**
+		 * 判断账号是否正确
+		 */
+		function isValidTargetAccount() {
+			var getAccountAction = 'ajax/getAccountAjax.action';
+			var ac_No2 = $('#ac_No_select'); 
+			
+			$.get(getAccountAction, {
+				'ac_No': $('input[name=toAc_No]').val(),
+				'ac_No2': ac_No2,
+				'name':  $('input[name=toName]').val(),
+				'PIN':   $('input[name=PIN]').val()
+			}, function(data) {
+				if(!data.status){
+					bootbox.alert('Wrong account.');
+				}else if(!data.acStatus) {
+					bootbox.alert("Wrong target account number or name.");
+				}else if (!data.PINStatus) {
+					bootbox.alert('Wrong PIN.');
+				}else{
+					isEnoughBalance();
+					}
+			});
+		}
+		function isEnoughBalance() {
+			var getBalanceAjax = 'ajax/getBalanceAjax.action';
+			var ac_No =  $('#ac_No_select'); 
+
+			$.get(getBalanceAjax, {
+				'ac_No':ac_No 
+			}, function(data){
+				if(data.status){
+					// 这里之前漏了 .val()
+					var amount = $('input[name=amount]').val();
+					if(data.balance < amount){
+						bootbox.alert('Balance is not enough.');
+					} else {
+						// 余额足够，准备提交表单
+						dialog.shpw('Successfully transfer.');
+						submit();
+					}
+				} else {
+					bootbox.alert('Bad ac_No');
+				}
+			});
+		}
+		
+		function submit() {
+			lock = false;
+			$('form').submit();
+		}
+	
+		
+	var msg = '${msg}';
+	if(msg) {
+		//bootbox.alert(msg);//输错的时候数据清空了 
+	}	
 	var tips = '${tips}';
 	if(tips) {
-		dialog.show(tips);
+		//dialog.show(tips); //返回的时候box里面的账户不见了    拦截器没用了
 	}
 </script>
 </html>

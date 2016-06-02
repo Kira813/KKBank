@@ -68,6 +68,7 @@
 	        	<value>com/kkbank/domain/Account.hbm.xml</value>
 	        	<value>com/kkbank/domain/Customer.hbm.xml</value>
 	        	<value>com/kkbank/domain/Supervisor.hbm.xml</value>
+	        	<value>com/kkbank/domain/Transaction.hbm.xml</value>
 	        </list>
         </property>
 		

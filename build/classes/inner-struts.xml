@@ -19,6 +19,7 @@
 		</action>
 		<action name="toAccountEnquiry" class="com.kkbank.business.web.NavigationManageAction"
 			method="toAccountEnquiry">
+			<interceptor-ref name="loginStack"></interceptor-ref>
 			<result name="success">/jsp/accountEnquiry.jsp</result>
 		</action>
 		<action name="toAccountSelection" class="com.kkbank.business.web.NavigationManageAction"
@@ -32,6 +33,11 @@
 		<action name="toTransctionDetail" class="com.kkbank.business.web.NavigationManageAction"
 			method="toTransctionDetail">
 			<result name="success">/jsp/transctionDetail.jsp</result>
+		</action>
+		<action name="toTransfer" class="com.kkbank.business.web.NavigationManageAction"
+			method="toTransfer">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+			<result name="success">/jsp/transferring.jsp</result> 
 		</action>
 	</package>
 
@@ -120,10 +126,12 @@
 		</action>
 		<action name="register" class="com.kkbank.business.web.NavigationManageAction"
 			method="toRegister">
+			<interceptor-ref name="adiStack"></interceptor-ref>
 			<result name="success">/jsp/register.jsp</result>
 		</action>
 		<action name="userLogin" class="com.kkbank.business.web.UserManageAction" 
 			method="userLogin">
+			<interceptor-ref name="adiStack"></interceptor-ref>
 			<result name="success">/jsp/userIndex.jsp</result> 
 			<result name="error">/jsp/userLogin.jsp</result> <!-- user login page -->
 		</action>
@@ -144,21 +152,16 @@
 			<result name="error">/jsp/resetPwd.jsp</result>
 		</action>
 		<!-- 5.31 new -->
-		<action name="toTransfer" class="com.kkbank.business.web.UserManageAction"
-			method="toTransfer">
-			<result name="success">/jsp/transferring.jsp</result> 
-			<result name="login">/jsp/userLogin.jsp</result>
-		</action>
+
 		<action name="transfer" class="com.kkbank.business.web.UserManageAction"
 			method="transfer">
+			<interceptor-ref name="adiStack"></interceptor-ref>
 			<result name="success">/jsp/transferring.jsp</result> 
-			<result name="login">/jsp/userLogin.jsp</result>
 			<result name="error">/jsp/transferring.jsp</result>
 		</action>
 		<action name="logout" class="com.kkbank.business.web.UserManageAction" 
 			method="logout">
 			<result name="success">/jsp/userIndex.jsp</result> 
-			<result name="error">/jsp/SUCCESS.jsp</result>
 		</action>
 	</package>
 	
@@ -181,6 +184,13 @@
 		</action>
 		<action name="getAcnoAjax" class="com.kkbank.business.web.AccountManageAction"
 			method="getAcnoAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="getAccountAjax" class="com.kkbank.business.web.AccountManageAction"
+			method="getAccountAjax">
 			<!-- 配置返回 json 类型的数据 -->
 			<result type="json">
 				<param name="root">resultMap</param>

@@ -40,8 +40,8 @@
 		</interceptors>
 		
 		<global-results>
-			<result name="index">/index.jsp</result>
-			<result name="toLogin">/jsp/login.jsp</result>
+			<result name="userIndex">/jsp/userIndex.jsp</result>
+			<result name="userLogin">/jsp/userLogin.jsp</result>
 			<result name="toMessage">/jsp/message.jsp</result>
 		</global-results>
 		

@@ -1,5 +1,6 @@
 package com.kkbank.business.web;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -8,9 +9,11 @@ import javax.swing.JOptionPane;
 
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ICustomerService;
+import com.kkbank.business.service.ITransactionService;
 import com.kkbank.business.service.IUserService;
 import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.CustomerService;
+import com.kkbank.business.service.impl.TransactionService;
 import com.kkbank.business.service.impl.UserService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
@@ -25,6 +28,7 @@ public class UserManageAction extends ActionSupport{
 
 	protected IUserService userService = new UserService();
 	protected ICustomerService customerService = new CustomerService();
+	protected ITransactionService transactionService = new TransactionService();
 	//user activation
 	User user = new User();
 	
@@ -52,6 +56,12 @@ public class UserManageAction extends ActionSupport{
 	private String toName;
 	private String PIN;
 	private String ac_No;
+	
+	private int t_id;
+	private Date date;
+	private String type;
+	private String type2;
+	private double tBalance;
 	
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 	
@@ -86,40 +96,16 @@ public class UserManageAction extends ActionSupport{
 		}		
 	}
 	public String logout() throws Exception{
-		Object[] option = {"Confirm", "Return"};
-		int choice = JOptionPane.showOptionDialog(null, "Do you want to log out?", 
-				"Tips", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
-		
-		if(choice == 0){
-			ActionContext.getContext().getSession().remove("loginID");
-			ActionContext.getContext().getSession().remove("name");
-			return SUCCESS;
-		}
-		return ERROR;
+		ActionContext.getContext().getSession().clear();
+		return SUCCESS;
 	}
 	
-	public String toTransfer() throws Exception{
-		if(ActionContext.getContext().getSession().get("loginID") == null){
-			msg = "You have not logged in. Please login .";
-			return LOGIN;
-		}
-		else
-		{
-			ID = (String) ActionContext.getContext().getSession().get("loginID");
-			acList = accountService.listAccount(ID);			
-			return SUCCESS;
-		}
-	}
+
 	
 	public String transfer(){
 		String tips = null;
-		if(ActionContext.getContext().getSession().get("loginID") == null){
-			msg = "You have not logged in. Please login again.";
-			return LOGIN;
-		}
 		account = accountService.getAccount(ac_No);
-		toAccount = accountService.getAccount(toAc_No);
-		
+		toAccount = accountService.getAccount(toAc_No);	
 		if(toAccount == null){
 			msg = "The account you want to transfer to does not exist.";
 			return ERROR;
@@ -136,6 +122,13 @@ public class UserManageAction extends ActionSupport{
 						
 						accountService.updateAccount(account);
 						accountService.updateAccount(toAccount);
+
+						type="Transfer out";
+						type2="Transfer in";
+						date = new Date();
+					    t_id = transactionService.addTransaction(t_id, date, type, amount, account.getBalance(), account);
+					    t_id = transactionService.addTransaction(t_id, date, type2, amount, toAccount.getBalance(), toAccount);
+					    
 						tips = "Successfully transfer";
 						ActionContext.getContext().put("tips", tips);
 						return SUCCESS;
@@ -143,18 +136,24 @@ public class UserManageAction extends ActionSupport{
 					else
 					{
 						msg="Your balance is insufficient.";
+						ID = (String) ActionContext.getContext().getSession().get("loginID");
+						acList = accountService.listAccount(ID);	
 						return ERROR;
 					}
 				}
 				else
 				{
 					msg="The card PIN is wrong.";
+					ID = (String) ActionContext.getContext().getSession().get("loginID");
+					acList = accountService.listAccount(ID);	
 					return ERROR;
 				}
 			}
 			else
 			{
 				msg="The account you want to transfer to is not in conformity with the name.";
+				ID = (String) ActionContext.getContext().getSession().get("loginID");
+				acList = accountService.listAccount(ID);	
 				return ERROR;
 			}
 		}
@@ -410,6 +409,24 @@ public class UserManageAction extends ActionSupport{
 		this.pwd_regex = pwd_regex;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public double gettBalance() {
+		return tBalance;
+	}
+	public void settBalance(double tBalance) {
+		this.tBalance = tBalance;
+	}
 	public HashMap<String, Object> getResultMap() {
 		return resultMap;
 	}
@@ -439,7 +456,20 @@ public class UserManageAction extends ActionSupport{
 	public void setAccountService(IAccountService accountService) {
 		this.accountService = accountService;
 	}
+	
 
+	public ITransactionService getTransactionService() {
+		return transactionService;
+	}
+	public void setTransactionService(ITransactionService transactionService) {
+		this.transactionService = transactionService;
+	}
+	public int getT_id() {
+		return t_id;
+	}
+	public void setT_id(int t_id) {
+		this.t_id = t_id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -496,6 +526,18 @@ public class UserManageAction extends ActionSupport{
 	}
 	public void setPIN(String pIN) {
 		PIN = pIN;
+	}
+	public String getAc_No() {
+		return ac_No;
+	}
+	public void setAc_No(String ac_No) {
+		this.ac_No = ac_No;
+	}
+	public String getType2() {
+		return type2;
+	}
+	public void setType2(String type2) {
+		this.type2 = type2;
 	}
 	
 }
