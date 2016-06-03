@@ -1,38 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-    <%
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	%>
+%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<title>Insert title here</title>
 <%@include file="./adminJsp/headMeta.jsp"%></head>
-</head>
-<body>
-	the last 10 transactions
-	<table>
-		<s:iterator value="#list" status="st">
-			<tr>
-			<td>20 ${list.get(0).getAmount() }</td><!-- 不知道怎么输出一整条数据 -->
-			</tr>
-		</s:iterator>
-	</table>
-	<a class="btn btn-lg btn-default" href="#">history transactions button</a>
-	1.这个button点一下 出现一个two date selection boxes【这个是在当前页出现的】
-	input start date and end date and also a “Confirm”button
-	2.if valid -》the transaction records displayed by page, each page shows maximum 10 records,
-	 there are “Next” and “Previous” button to navigate.
-	 “Return” button can be seen, when click it will turn to enquiry page
-	 
-
-	
-
+<body class="skin-blue">
+<%@include file="./adminJsp/header.jsp"%>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+	<!-- Left side column. contains the logo and sidebar -->
+	<aside class="right-side" style="font-family:Microsoft YaHei">
+		<section class="content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-primary">
+						<div class="box-header">
+							<h3 class="box-title">The last 10 transfer</h3>
+						</div>
+                        <div class="box-body no-padding">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>id</th>
+                                    <th>date</th>
+                                    <th>type</th>
+                                    <th>amount</th>
+                                </tr>
+                                <s:iterator value="#list" status="st">
+                                	<s:if test="#st.index<10">
+	                                    <tr>
+	                                    	<td>${st.index + 1 }</td>
+											<td><s:date name="date" format="yyyy-MM-dd"/></td>
+											<td>${type }</td>
+											<td>${amount }</td>
+	                                  	</tr>
+                                  	</s:if>
+                                </s:iterator>
+                            </table>
+                        </div>
+					</div>
+					<a class="btn btn-primary" href="toTransctionHistory.action?ac_No=${ac_No }">History Transction</a>
+				</div>
+			</div>
+		</section>
+	</aside>
+</div>
+<%@include file="./adminJsp/javascript.jsp"%>
 </body>
 </html>

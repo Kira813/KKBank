@@ -64,8 +64,14 @@ public class NavigationManageAction extends ActionSupport{
 	public String toTransctionDetail() throws Exception{
 		String ac_No = ServletActionContext.getRequest().getParameter("ac_No");
 		Account account = accountService.getAccount(ac_No);
-		//Set<Transaction> transactions = account.getTransactions();
-		//ActionContext.getContext().put("list", transactions);
+		List<Transaction> list = transactionService.listTransaction(account);
+		ActionContext.getContext().put("list", list);
+		ActionContext.getContext().put("ac_No", ac_No);
+		return SUCCESS;
+	}
+	public String toTransctionHistory() throws Exception{
+		String ac_No = ServletActionContext.getRequest().getParameter("ac_No");
+		Account account = accountService.getAccount(ac_No);
 		List<Transaction> list = transactionService.listTransaction(account);
 		ActionContext.getContext().put("list", list);
 		return SUCCESS;
