@@ -94,7 +94,7 @@
 				if(!data.status){
 					bootbox.alert('Wrong account.');
 				}else if(!data.acStatus) {
-					bootbox.alert("Wrong target account number or name.");
+					bootbox.alert('Wrong target account number or name.');
 				}else if (!data.PINStatus) {
 					bootbox.alert('Wrong PIN.');
 				}else{
@@ -132,7 +132,7 @@
 			
 		var tips = '${tips}';
 		if(tips) {
-			dialog.show(tips);
+			//dialog.show(tips);
 		}
 </script>
 </html>

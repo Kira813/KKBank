@@ -24,7 +24,7 @@
 				<p>Your account is: ${account.ac_No}</p>
 			</div>
             <div class="footer" style="text-align:center">
-                <a class="btn btn-primary btn-block" href="index.action">Return the Main Page</a>
+                <a class="btn btn-primary btn-block" href="index.action">Return to the Main Page</a>
             </div>
     </div>
 </div>
@@ -36,7 +36,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warn</h4>
+				<h4 class="modal-title">Warning</h4>
 			</div>
 			<div class="modal-body">
 			</div>

@@ -36,7 +36,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warn</h4>
+				<h4 class="modal-title">Warning</h4>
 			</div>
 			<div class="modal-body">
 			</div>

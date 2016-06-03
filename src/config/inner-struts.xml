@@ -160,10 +160,7 @@
 		<action name="transfer" class="com.kkbank.business.web.UserManageAction"
 			method="transfer">
 			<interceptor-ref name="adiStack"></interceptor-ref>
-			<result type="redirectAction">
-				<param name="actionName">toTransfer</param>
-				<param name="namespace">/</param>
-			</result>
+			<result name="success">/jsp/successTransfer.jsp</result>
 			<result name="error">/jsp/transferring.jsp</result>
 		</action>
 		<action name="logout" class="com.kkbank.business.web.UserManageAction" 

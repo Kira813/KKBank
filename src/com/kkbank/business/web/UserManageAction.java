@@ -90,7 +90,7 @@ public class UserManageAction extends ActionSupport{
 			return SUCCESS;
 		}
 		else{
-			msg="Please check your password right or not.";
+			msg="Please check your password.";
 			//this.result = "false";
 			return ERROR;
 		}		
@@ -178,7 +178,7 @@ public class UserManageAction extends ActionSupport{
 		}
 		else
 		{
-			msg = "The user does not exist! Please contact with our Bank";
+			msg = "The user does not exist, Please contact with our Bank: 0754-12345678";
 			return ERROR;
 		}
 	}

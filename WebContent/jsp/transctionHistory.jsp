@@ -21,7 +21,7 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">The last 10 transfer</h3>
+							<h3 class="box-title">History Transaction Records</h3>
 						</div>
 						<div class="row">
                         		<div class="col-md-10">
@@ -43,10 +43,10 @@
                             <table class="table table-striped"  style="text-align:center">
                             	<thead>
                             		<tr>
-	                                    <th style="text-align:center">id</th>
-	                                    <th style="text-align:center">date</th>
-	                                    <th style="text-align:center">type</th>
-	                                    <th style="text-align:center">amount</th>
+	                                    <th style="text-align:center">ID</th>
+	                                    <th style="text-align:center">Transaction Date</th>
+	                                    <th style="text-align:center">Transaction Type</th>
+	                                    <th style="text-align:center">Transaction Amount</th>
 	                                </tr>
                             	</thead>
                             	<tbody>
@@ -56,7 +56,7 @@
 					</div>
 					<a class="btn btn-primary" href="javascript:void(0)" id="prev_btn">Prev</a>
 					<a class="btn btn-primary" href="javascript:void(0)" id="next_btn">Next</a>
-					<a class="btn btn-primary" href="userIndex.action">Return</a>
+					<a class="btn btn-primary" href="toAccountEnquiry.action">Return</a>
 				</div>
 			</div>
 		</section>
@@ -70,7 +70,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warn</h4>
+				<h4 class="modal-title">Warning</h4>
 			</div>
 			<div class="modal-body">
 			</div>
@@ -196,7 +196,6 @@
 			});
 		}
 	}
-
 	$(function() {
 	    $('#reservation').daterangepicker();
 	    tableCtl.init();

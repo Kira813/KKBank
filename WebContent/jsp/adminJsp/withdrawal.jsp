@@ -64,7 +64,7 @@
 				<form role="form" id="authform" >
 					<div class="box-body">
 						<div class="form-group">
-							<label>Please input Auth Code to continue</label>
+							<label>Please input authentication code to continue</label>
 							<input type="password" name="tmp_auth_code" class="form-control">
 						</div>
 					</div>
@@ -85,7 +85,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warn</h4>
+				<h4 class="modal-title">Warning</h4>
 			</div>
 			<div class="modal-body">
 			</div>
@@ -163,7 +163,7 @@
 					beforeSubmit();
 				}
 			} else {
-				bootbox.alert('Bad ac_No');
+				bootbox.alert('Wrong ac_No');
 			}
 		});
 	}
@@ -211,7 +211,7 @@
 					// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
 					$('#authCode_dialog').modal('hide');
 					// 弹出提示弹窗，说 auth_code 不正确
-					bootbox.alert('auth_code is not right');
+					bootbox.alert('Authentication code is incorrect');
 				}
 			);
 		}

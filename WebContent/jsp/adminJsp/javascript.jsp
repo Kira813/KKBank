@@ -39,9 +39,10 @@
 			var val = el.text();
 			
 			val = $.trim(val);
-			
+			val = +val;
+			val = val.toFixed(2) + '';
 			var reg = /(\d)(?=(\d\d\d)+(?!\d))/g;
-    		val = val.replace(reg, '$1.');
+    		val = val.replace(reg, '$1,');
     		el.text(val);
 		});
 	});

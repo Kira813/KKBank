@@ -15,29 +15,44 @@
 <%@include file="./headMeta.jsp" %></head>
 <title>KK Bank</title>
 </head>
-<body >
-<div style="font-family:Microsoft YaHei">
-	
-       	<p>Hello, ${name}.</p> <!-- 从ActionContext中取出 -->
-		<table>
-		<s:iterator value="#listaccount" status="st">
-	            <tr>
-	              <td>Card Number: ${ac_No}</td>
-	              <td>Balance: ${balance}</td>
-	              <td>Account Status: 
-	              	<s:if test="status == 1">Normal</s:if>  
-					<s:elseif test="status == 2">Locked</s:elseif>  
-					<s:elseif test="status == 3">Not activated  </s:elseif>  
-					<s:else>Not Available</s:else>  
-				  </td>
-	              <td><a class="btn btn-primary close_account" data-acno="${ac_No }" data-id="${ID }">Close Account</a></td>
-	            </tr>
-          </s:iterator>
-          </table>
-<a class="btn btn-default " href="admin/inquiry.action">Return</a>
-<a class="btn btn-default " onclick="location.reload();">Refresh</a>
-
-    
+<body class="skin-blue" >
+<%@include file="./header.jsp"%>
+<div class="wrapper row-offcanvas row-offcanvas-left" style="font-family:Microsoft YaHei">
+	<%@include file="./sidebar.jsp"%>
+	<aside class="right-side" style="font-family:Microsoft YaHei">
+		<section class="content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-primary">
+						<div class="box-header">
+							<h3 class="box-title">Hello, ${name}.</h3>
+						</div>
+							<div class="box-body">
+								<table>
+								<s:iterator value="#listaccount" status="st">
+							            <tr>
+							              <td>Card Number: ${ac_No}</td>
+							              <td>Balance: <span format-balance>${balance }</span></td>
+							              <td>Account Status: 
+							              	<s:if test="status == 1">Normal</s:if>  
+											<s:elseif test="status == 2">Locked</s:elseif>  
+											<s:elseif test="status == 3">Not activated  </s:elseif>  
+											<s:else>Not Available</s:else>  
+										  </td>
+							              <td><a class="btn btn-primary close_account" data-acno="${ac_No }" data-id="${ID }">Close Account</a></td>
+							            </tr>
+						          </s:iterator>
+						          </table>
+							</div>
+							<div class="box-footer">
+								<a class="btn btn-default " href="admin/inquiry.action">Return</a>
+								<a class="btn btn-default " onclick="location.reload();">Refresh</a>
+							</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</aside>
 </div>
 <div class="modal fade" id="authCode_dialog">
 	<div class="modal-dialog">
@@ -53,7 +68,7 @@
 				<form role="form">
 					<div class="box-body">
 						<div class="form-group">
-							<label>Please input Auth Code to continue</label>
+							<label>Please input authentication code to continue</label>
 							<input type="password" name="tmp_auth_code" class="form-control">
 						</div>
 					</div>
@@ -124,7 +139,7 @@
 							bootbox.alert(data.tips);
 						}
 					} else {
-						bootbox.alert('Bad ac_No');
+						bootbox.alert('Wrong ac_No');
 					}
 				});
 			});
@@ -145,7 +160,7 @@
 								'ac_No': ac_No
 							}, function() {
 								$('#authCode_dialog').modal('hide');
-								dialog.show('Delete success');	
+								dialog.show('Delete successfully');	
 								//location.reload();
 							});
 							
@@ -155,7 +170,7 @@
 							// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
 							$('#authCode_dialog').modal('hide');
 							// 弹出提示弹窗，说 auth_code 不正确
-							bootbox.alert('Auth_code is not right');
+							bootbox.alert('Authentication code is incorrect');
 							
 						}
 					);

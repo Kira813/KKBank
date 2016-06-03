@@ -34,6 +34,10 @@
 			method="toTransctionDetail">
 			<result name="success">/jsp/transctionDetail.jsp</result>
 		</action>
+		<action name="toTransctionHistory" class="com.kkbank.business.web.NavigationManageAction"
+			method="toTransctionHistory">
+			<result name="success">/jsp/transctionHistory.jsp</result>
+		</action>
 		<action name="toTransfer" class="com.kkbank.business.web.NavigationManageAction"
 			method="toTransfer">
 			<interceptor-ref name="loginStack"></interceptor-ref>
@@ -156,10 +160,7 @@
 		<action name="transfer" class="com.kkbank.business.web.UserManageAction"
 			method="transfer">
 			<interceptor-ref name="adiStack"></interceptor-ref>
-			<result type="redirectAction">
-				<param name="actionName">toTransfer</param>
-				<param name="namespace">/</param>
-			</result>
+			<result name="success">/jsp/successTransfer.jsp</result>
 			<result name="error">/jsp/transferring.jsp</result>
 		</action>
 		<action name="logout" class="com.kkbank.business.web.UserManageAction" 

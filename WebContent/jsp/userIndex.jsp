@@ -15,18 +15,19 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./adminJsp/headMeta.jsp"%></head>
 </head>
-<body>
-<body>
+<body class="skin-blue">
+<%@include file="./adminJsp/header.jsp"%>
 <div class="wrapper row-offcanvas row-offcanvas-left">
-
-        <div style="font-family:Microsoft YaHei">User Index</div>
-
-		<s:if test="#session.loginID==null"><a class="btn btn-lg btn-default" href="user/userLogin">Log in</a></s:if>
-		<s:else><a class="btn btn-lg btn-default" id="logout">Log out</a></s:else>
-		<a class="btn btn-lg btn-primary" href="user/register.action">Register</a>
-		<a class="btn btn-lg btn-default" href="toAccountEnquiry.action">Account Enquiry</a>
-		<a class="btn btn-lg btn-default" href="toTransfer.action">Transfer</a>
-		
+<%@include file="./userSidebar.jsp"%>
+	<aside class="right-side" style="font-family:Microsoft YaHei">
+		<section class="content">
+	        <div style="font-family:Microsoft YaHei">User Index</div>
+			<s:if test="#session.loginID==null"><a class="btn btn-lg btn-default" href="user/userLogin">Log in</a></s:if>
+			<s:else><a class="btn btn-lg btn-default" id="logout">Log out</a></s:else>
+			<a class="btn btn-lg btn-primary" href="user/register.action">Register</a>	
+		</section>
+	</aside>
+</div>
 <div class="modal fade" id="simpleDialog">
 	<div class="modal-dialog">
 		<div class="modal-content">

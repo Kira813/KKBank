@@ -71,7 +71,7 @@
 			var email = $('input[name=email]');
 			
 			if(pwd[0].value && pwd[0].value !== pwd[1].value) {
-				alert('Difference Card PIN');
+				alert('Differenct Card PIN');
 				// 阻止提交表单
 				e.preventDefault();
 				form.password1.value="";

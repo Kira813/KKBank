@@ -59,7 +59,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warn</h4>
+				<h4 class="modal-title">Warning</h4>
 			</div>
 			<div class="modal-body">
 			</div>
@@ -96,7 +96,7 @@ var dialog = {
 			var type = (/\d/).test(val) && (/[a-z]/).test(val) && (/[A-Z]/).test(val) && val.length >= 6;
 			
 			if(!type) {
-				dialog.show('password not safe');
+				dialog.show('Password is not safe,your password must contain a mixture of lower and upper case letter and digit,and at least include 6 characters.');
 				// 阻止提交表单
 				e.preventDefault();
 				return false;

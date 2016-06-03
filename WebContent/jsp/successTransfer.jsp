@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
     <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-%>
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -24,12 +24,12 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warning</h4>
+				<h4 class="modal-title">Tips</h4>
 			</div>
 			<div class="modal-body">
 			</div>
 			<div class="modal-footer">
-				<a class="btn btn-primary" href="userIndex.action">Return</a>
+				<a class="btn btn-primary" href="toTransfer.action">Return</a>
 			</div>
 		</div>
 	</div>
@@ -37,18 +37,16 @@
 </body>
 <%@include file="./adminJsp/javascript.jsp"%>
 <script type="text/javascript">
-	var dialog = {
-		el: $('#simpleDialog'),
-		show: function(msg) {
-			this.el.find('.modal-body').text(msg);
-			this.el.modal('show');
-		},
-		hide: function() {
-			this.el.modal('hide');
-		}
-	};	
-
-		dialog.show("Online banking account register sucessfully!There will be an verification mail send to your security email.");
-
+		var dialog = {
+			el: $('#simpleDialog'),
+			show: function(msg) {
+				this.el.find('.modal-body').text(msg);
+				this.el.modal('show');
+			},
+			hide: function() {
+				this.el.modal('hide');
+			}
+		};
+		dialog.show('Transfer Successfully.');
 </script>
 </html>

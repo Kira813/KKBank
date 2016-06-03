@@ -21,21 +21,21 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">The last 10 transfer</h3>
+							<h3 class="box-title">The last 10 transaction records</h3>
 						</div>
                         <div class="box-body no-padding">
                             <table class="table table-striped">
                                 <tr>
-                                    <th>id</th>
-                                    <th>date</th>
-                                    <th>type</th>
-                                    <th>amount</th>
+                                    <th>ID</th>
+                                    <th>Transaction Date</th>
+                                    <th>Transaction Type</th>
+                                    <th>Transaction Amount</th>
                                 </tr>
                                 <s:iterator value="#list" status="st">
                                 	<s:if test="#st.index<10">
 	                                    <tr>
 	                                    	<td>${st.index + 1 }</td>
-											<td><s:date name="date" format="yyyy-MM-dd"/></td>
+											<td><s:date name="date" format="yyyy-MM-dd hh：mm：ss"/></td>
 											<td>${type }</td>
 											<td>${amount }</td>
 	                                  	</tr>
@@ -44,7 +44,7 @@
                             </table>
                         </div>
 					</div>
-					<a class="btn btn-primary" href="toTransctionHistory.action?ac_No=${ac_No }">History Transction</a>
+					<a class="btn btn-primary" href="toTransctionHistory.action?ac_No=${ac_No }">History Transaction Records</a>
 				</div>
 			</div>
 		</section>

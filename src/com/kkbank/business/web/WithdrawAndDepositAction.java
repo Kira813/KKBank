@@ -61,7 +61,7 @@ public class WithdrawAndDepositAction extends ActionSupport {
 				System.out.println("log:---------------->> 50000");
 				tips = reduceBalance();
 			} else {
-				tips = "Auth code incorrect.";
+				tips = "Invalid Authentication code.";
 			} 	
 		} else if(ac_No != null) {
 			tips = "Wrong account.";
@@ -87,7 +87,7 @@ public class WithdrawAndDepositAction extends ActionSupport {
 				System.out.println("log:---------------->> 50000");
 				tips = addBalance();
 			} else {
-				tips = "Auth code incorrect.";
+				tips = "Invalid Authentication code.";
 			}	
 
 		} else if(ac_No != null) {
@@ -116,7 +116,7 @@ public class WithdrawAndDepositAction extends ActionSupport {
 			type="Withdraw";
 			date = new Date();
 		    t_id = transactionService.addTransaction(t_id, date, type, amount, tBalance, account);
-			tips = "Reduce balance success";
+			tips = "Withdraw successfully";
 			
 		} else {
 			tips = "Balance is not enough.";
@@ -138,7 +138,7 @@ public class WithdrawAndDepositAction extends ActionSupport {
 		date = new Date();
 	    t_id = transactionService.addTransaction(t_id, date, type, amount, tBalance, account);
 		System.out.println();
-		tips = "Add balance success";
+		tips = "Deposit successfully";
 		return tips;
 	}
 	

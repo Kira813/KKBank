@@ -67,7 +67,7 @@ public class AdminManageAction extends ActionSupport{
 		else if(accountService.getAccount(ac_No)!= null){
 			if(accountService.getAccount(ac_No).getID().equals(ID)){
 				if(PIN.equals("") || PIN2.equals("")){
-					msg = "please input your new PIN twice!";
+					msg = "Please input your new PIN twice.";
 					return ERROR;
 				}
 				else if(PIN.equals(PIN2)){
