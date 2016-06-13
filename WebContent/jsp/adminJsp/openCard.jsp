@@ -8,9 +8,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>KK Bank | Open Card</title>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@include file="./headMeta.jsp"%></head>
+<%@include file="./headMeta.jsp"%>
+</head>
 <body class="skin-blue">
 <%@include file="./header.jsp"%>
 <div class="wrapper row-offcanvas row-offcanvas-left">
@@ -42,7 +44,10 @@
 									<label>PIN Again</label>
 									<input type="password" name="password2" class="form-control" id="password2" required="required">
 								</div>
-								<p>${tips }</p>
+					     	    <div class="alert-custom" style="display:none">
+								  <a class="close" data-dismiss="alert">×</a>
+								  <span class="glyphicon glyphicon-exclamation-sign"></span><strong> Error! </strong><span id="showtip">${tips}</span>
+								</div>
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Submit</button>
@@ -71,7 +76,10 @@
 			var email = $('input[name=email]');
 			
 			if(pwd[0].value && pwd[0].value !== pwd[1].value) {
-				alert('Differenct Card PIN');
+				var tips="Differenct Card PIN.";
+				$('#showtip').text(tips);
+				$('.alert-custom').show();
+				//bootbox.alert('');
 				// 阻止提交表单
 				e.preventDefault();
 				form.password1.value="";

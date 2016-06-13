@@ -25,6 +25,15 @@ public class NavigationManageAction extends ActionSupport{
 	IAccountService accountService = new AccountService();
 	ITransactionService transactionService = new TransactionService();
 	
+	public String toTimeDepositConfirm() throws Exception{
+		return SUCCESS;
+	}
+	public String toTimeDeposit() throws Exception{
+		ID = (String) ActionContext.getContext().getSession().get("loginID");
+		acList = accountService.listAccount(ID);
+		ActionContext.getContext().put("acList", acList);
+		return SUCCESS;
+	}
 	public String toIndex() throws Exception {
 		return "SUCCESS";
 	}
@@ -78,7 +87,7 @@ public class NavigationManageAction extends ActionSupport{
 	}
 	public String toTransfer() throws Exception{
 		ID = (String) ActionContext.getContext().getSession().get("loginID");
-		acList = accountService.listAccount(ID);	
+		acList = accountService.listAccount(ID);
 		return SUCCESS;
 }
 
@@ -112,7 +121,5 @@ public class NavigationManageAction extends ActionSupport{
 
 	public void setTransactionService(ITransactionService transactionService) {
 		this.transactionService = transactionService;
-	}
-	
-	
+	}	
 }

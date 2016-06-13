@@ -50,4 +50,11 @@
 		class="com.kkbank.business.service.impl.TransactionService"
 		parent="transactionServiceTmpl" />
 		
+	<bean id="timeDepositServiceTmpl" abstract="true" lazy-init="true"
+		p:timeDepositDao-ref="TimeDepositDao"
+		/>
+	<bean id="timeDepositService"
+		class="com.kkbank.business.service.impl.TimeDepositService"
+		parent="timeDepositServiceTmpl" />
+		
 </beans>

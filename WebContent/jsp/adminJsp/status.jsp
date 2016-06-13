@@ -25,24 +25,31 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">Hello, ${name}.</h3>
+							<h3 class="box-title">User: ${name}</h3>
 						</div>
 							<div class="box-body">
-								<table>
-								<s:iterator value="#listaccount" status="st">
-							            <tr>
-							              <td>Card Number: ${ac_No}</td>
-							              <td>Balance: <span format-balance>${balance }</span></td>
-							              <td>Account Status: 
-							              	<s:if test="status == 1">Normal</s:if>  
-											<s:elseif test="status == 2">Locked</s:elseif>  
-											<s:elseif test="status == 3">Not activated  </s:elseif>  
-											<s:else>Not Available</s:else>  
-										  </td>
-							              <td><a class="btn btn-primary close_account" data-acno="${ac_No }" data-id="${ID }">Close Account</a></td>
-							            </tr>
-						          </s:iterator>
-						          </table>
+								<table class="table table-striped">		
+						            <tr>
+						              <th>Card Number</th>
+						              <th>Balance </th>
+						              <th>Account Status</th>
+						              <th colspan="2">Operation</th>
+						            </tr>
+						            <s:iterator value="#listaccount" status="st">
+						            	<tr>
+							            	<td>${ac_No}</td>
+							            	<td><span format-balance>${balance }</span></td>
+							            	<td>
+												<s:if test="status == 1">Normal</s:if>  
+												<s:elseif test="status == 2">Locked</s:elseif>  
+												<s:elseif test="status == 3">Not activated  </s:elseif>  
+												<s:else>Not Available</s:else>
+											</td>
+											<td><a class="btn btn-primary unlock_account" data-acno="${ac_No }" data-id="${ID }">Unlock Account</a></td>
+							            	<td><a class="btn btn-primary close_account" data-acno="${ac_No }" data-id="${ID }">Close Account</a></td>
+						            	</tr>
+					          			</s:iterator>
+					          </table>
 							</div>
 							<div class="box-footer">
 								<a class="btn btn-default " href="admin/inquiry.action">Return</a>
@@ -136,7 +143,11 @@
 							$('#authCode_dialog').modal('show');
 							$('#authCode_dialog input').val('').focus();
 						} else {
-							bootbox.alert(data.tips);
+							var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 
+				    		var tips = data.tips.replace(/(\d+\.\d*)/, function($1) {
+				    			return (+$1).toFixed(2);
+				    		}).replace(reg, '$1,');
+							dialog.show(tips);
 						}
 					} else {
 						bootbox.alert('Wrong ac_No');
@@ -178,6 +189,69 @@
 			});
 			
 		});
+		
+		$(function() {
+			var unlockAction = 'ajax/unlockAjax.action';
+			var unlock = 'admin/unlock.action';
+			var storage = {};
+			
+			// Unlock Account.
+			$('.unlock_account').on('click', function() {
+				var ac_No = $(this).attr('data-acno');
+				
+				storage.ac_No = ac_No;
+				storage.ID = $(this).attr('data-id');
+				
+				$.get(unlockAction, {
+					'ac_No': ac_No
+				}, function(data) {
+					if(data.result) {
+						// 显示 auth code 确认弹窗
+						$('#authCode_dialog').modal('show');
+						$('#authCode_dialog input').val('').focus();
+					} else {
+						bootbox.alert('This account is not locked.');					
+					}
+					
+				});
+			});
+			
+			
+			// 点击 Auth Code 的提交按钮
+			$('#authCode_dialog .dialog-confirm').on('click', function() {
+				var auth_code_tmp = $('#authCode_dialog input[name=tmp_auth_code]').val();
+				var ID = storage.ID;
+				var ac_No = storage.ac_No;
+				
+				if(auth_code_tmp) {
+					// 通过请求校验 Auth Code 是否正确
+					validAuthCode(auth_code_tmp, 
+						// Auth Code 是正确的
+						function() {
+							$.get(unlock, {
+								ID: ID,
+								'ac_No': ac_No
+							}, function() {
+								$('#authCode_dialog').modal('hide');
+								dialog.show('Successfully unlock');	
+								//location.reload();
+							});
+							
+						}/*,
+											
+						// Auth Code 是错误的
+						function() {
+							// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
+							$('#authCode_dialog').modal('hide');
+							// 弹出提示弹窗，说 auth_code 不正确
+							bootbox.alert('Authentication code is wrong');						
+						}*/
+					);
+				}
+			});
+			
+		});
+		
 		var sTips = '${sTips}';
 		if(sTips) {
 		//	dialog.show(sTips);

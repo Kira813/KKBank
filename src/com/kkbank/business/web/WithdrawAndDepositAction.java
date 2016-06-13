@@ -38,12 +38,12 @@ public class WithdrawAndDepositAction extends ActionSupport {
 	private String type;
 	private double tBalance;
 	private Account account;
+	private String tips;
 
 	// 用于返回 JSON
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
 	public String withdraw() throws Exception {
-		String tips = null;
 		Account account = new Account();
 		account.setAc_No(ac_No);
 
@@ -63,9 +63,8 @@ public class WithdrawAndDepositAction extends ActionSupport {
 			} else {
 				tips = "Invalid Authentication code.";
 			} 	
-		} else if(ac_No != null) {
-			tips = "Wrong account.";
-		} 
+		}
+		
 		ActionContext.getContext().put("tips", tips);
 		return SUCCESS;
 	}
@@ -220,6 +219,14 @@ public class WithdrawAndDepositAction extends ActionSupport {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getTip() {
+		return tips;
+	}
+
+	public void setTip(String tips) {
+		this.tips = tips;
 	}
 
 	public double gettBalance() {

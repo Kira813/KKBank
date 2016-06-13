@@ -43,6 +43,16 @@
 			<interceptor-ref name="loginStack"></interceptor-ref>
 			<result name="success">/jsp/transferring.jsp</result> 
 		</action>
+		<action name="toTimeDeposit" class="com.kkbank.business.web.NavigationManageAction"
+			method="toTimeDeposit">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+			<result name="success">/jsp/timeDeposit.jsp</result> 
+		</action>
+		<action name="toTimeDepositConfirm" class="com.kkbank.business.web.NavigationManageAction"
+			method="toTimeDepositConfirm">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+			<result name="success">/jsp/timeDepositConfirm.jsp</result> 
+		</action>
 	</package>
 
 	
@@ -99,6 +109,11 @@
 		 method="changePIN">
 		    <result name ="success">/jsp/adminJsp/changePIN.jsp</result>
 		    <result name ="error">/jsp/adminJsp/changePIN.jsp</result>
+		</action>
+		<action name="unlock" class="com.kkbank.business.web.AccountManageAction"
+		 method="unlock">
+		    <result name ="success">/jsp/adminJsp/status.jsp</result>
+		    <result name ="error">/jsp/adminJsp/status.jsp</result>
 		</action>
 	</package>
 	
@@ -195,6 +210,13 @@
 		</action>
 		<action name="getAccountAjax" class="com.kkbank.business.web.AccountManageAction"
 			method="getAccountAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="unlockAjax" class="com.kkbank.business.web.AccountManageAction"
+			method="unlockAjax">
 			<!-- 配置返回 json 类型的数据 -->
 			<result type="json">
 				<param name="root">resultMap</param>

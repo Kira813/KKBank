@@ -21,6 +21,10 @@
 			<key column="account_id"></key>
 			<one-to-many class="Transaction" />
 		</set>
+		<set name="timeDeposits" inverse="true">
+			<key column="account_id"></key>
+			<one-to-many class="TimeDeposit" />
+		</set>
 		<many-to-one name="customer" column="customer_id"
 			class="Customer" lazy="false" />
 	</class>

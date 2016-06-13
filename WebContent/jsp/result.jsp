@@ -12,7 +12,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>Insert title here</title>
 </head>
 <body>
-Hi!
+<div class="bs-example bs-example-bg-classes" data-example-id="contextual-backgrounds-helpers">
+    <p class="bg-primary">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+    <p class="bg-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+    <p class="bg-info">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+    <p class="bg-warning">Etiam porta sem malesuada magna mollis euismod.</p>
+    <p class="bg-danger">Donec ullamcorper nulla non metus auctor fringilla.</p>
+  </div>
+    <div class="alert alert-error bg-warning">
+  <a class="close" data-dismiss="alert">×</a>
+  <strong>Error!</strong>This is a fatal error.
+  </div>
 </body>
 <%@include file="./adminJsp/javascript.jsp" %>
 </html>

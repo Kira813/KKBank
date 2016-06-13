@@ -23,15 +23,15 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.kkbank.util.encryption.DES;
 
-public class UserManageAction extends ActionSupport{
+public class UserManageAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	protected IUserService userService = new UserService();
 	protected ICustomerService customerService = new CustomerService();
 	protected ITransactionService transactionService = new TransactionService();
-	//user activation
+	// user activation
 	User user = new User();
-	
+
 	private String ID;
 	private String name;
 	private String pwd;
@@ -39,16 +39,16 @@ public class UserManageAction extends ActionSupport{
 	private String email;
 	private int status;
 	private String uStatus;
-	//login +
+	// login +
 	private String msg;
-	//changePwd+
+	// changePwd+
 	private String conPwd;
 	String pwd_regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{6,}$";
-	//activation+
+	// activation+
 	IAccountService accountService = new AccountService();
 	Account account = new Account();
 
-	//transfer+
+	// transfer+
 	private List<Account> acList;
 	private Account toAccount;
 	private double amount;
@@ -56,269 +56,377 @@ public class UserManageAction extends ActionSupport{
 	private String toName;
 	private String PIN;
 	private String ac_No;
-	
+
 	private int t_id;
 	private Date date;
 	private String type;
 	private String type2;
 	private double tBalance;
-	
+	private int count;
+
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
-	
-	public String userLogin() throws Exception{	
-		/*user.setname(name);
-		user.setPwd(pwd);*/
-		if(ID==null&&pwd==null){
+
+	public String userLogin() throws Exception {
+		/*
+		 * user.setname(name); user.setPwd(pwd);
+		 */
+		if (ID == null && pwd == null) {
 			return ERROR;
-		}	
-		else if(ID.trim()==""||pwd.trim()==""){
-			msg="Please input name or password.";
-			//this.result = "false";
+		} else if (ID.trim() == "" || pwd.trim() == "") {
+			msg = "Please input name or password.";
+			// this.result = "false";
 			return ERROR;
-		}
-		else if(userService.listUser(ID).size() == 0){
-			msg="The user does not exist.";
-			//this.result = "false";
+		} else if (userService.listUser(ID).size() == 0) {
+			msg = "The user does not exist.";
+			// this.result = "false";
 			return ERROR;
-		}
-		else if(userService.login(ID, pwd)){
-			//this.result="true";
+		} else if (userService.login(ID, pwd)) {
+			// this.result="true";
 			ActionContext ctx = ActionContext.getContext();
 			ctx.getSession().put("loginID", ID);
 			ctx.getSession().put("name", userService.getUser(ID).getName());
 			System.out.println("success");
 			return SUCCESS;
-		}
-		else{
-			msg="Please check your password.";
-			//this.result = "false";
+		} else {
+			msg = "Please check your password.";
+			// this.result = "false";
 			return ERROR;
-		}		
+		}
 	}
-	public String logout() throws Exception{
+
+	public String logout() throws Exception {
 		ActionContext.getContext().getSession().clear();
 		return SUCCESS;
 	}
-	
 
-	
-	public String transfer(){
+	public String transfer() {
 		String tips = null;
 		account = accountService.getAccount(ac_No);
-		toAccount = accountService.getAccount(toAc_No);	
-		if(toAccount == null){
-			msg = "The account you want to transfer to does not exist.";
+		toAccount = accountService.getAccount(toAc_No);
+		ID = (String) ActionContext.getContext().getSession().get("loginID");
+		acList = accountService.listAccount(ID);
+		Object[] option = { "Return" };
+
+		// status is locked or not
+		if (account.getStatus() == 2) {
+			JOptionPane
+					.showOptionDialog(
+							null,
+							"Your account is locked. Please contact the system administrator.",
+							"Warning", JOptionPane.DEFAULT_OPTION,
+							JOptionPane.WARNING_MESSAGE, null, option,
+							option[0]);
 			return ERROR;
 		}
-		else
-		{
-			if(customerService.isValidAccount(toAccount.getID(), toName))
-			{
+
+		if (toAccount == null) {
+			msg = "The account you want to transfer to does not exist.";
+			return ERROR;
+		} else {
+			if (customerService.isValidAccount(toAccount.getID(), toName)) {
 				System.out.println(account.getPassword());
-				if(account.getPassword().equals(PIN)){
-					if(account.getBalance() > amount){
+				if (account.getPassword().equals(PIN)) {
+					if (account.getBalance() > amount) {
 						account.setBalance(account.getBalance() - amount);
 						toAccount.setBalance(toAccount.getBalance() + amount);
-						
+
 						accountService.updateAccount(account);
 						accountService.updateAccount(toAccount);
 
-						type="Transfer out";
-						type2="Transfer in";
+						type = "Transfer out";
+						type2 = "Transfer in";
 						date = new Date();
-					    t_id = transactionService.addTransaction(t_id, date, type, amount, account.getBalance(), account);
-					    t_id = transactionService.addTransaction(t_id, date, type2, amount, toAccount.getBalance(), toAccount);
-						
-					    tips = "Successfully transfer";
-					    ActionContext.getContext().put("tips", tips);
+						t_id = transactionService.addTransaction(t_id, date,
+								type, amount, account.getBalance(), account);
+						t_id = transactionService.addTransaction(t_id, date,
+								type2, amount, toAccount.getBalance(),
+								toAccount);
+
+						tips = "Successfully transfer";
+						ActionContext.getContext().put("tips", tips);
+
+						count = 0;
+						ActionContext.getContext().getApplication().remove("counter");
+						ActionContext.getContext().getApplication().remove("time");
+						System.out.println("clean, not locked");
 						return SUCCESS;
-					}
-					else
-					{
-						msg="Your balance is insufficient.";
-						ID = (String) ActionContext.getContext().getSession().get("loginID");
-						acList = accountService.listAccount(ID);	
+					} else {
+						msg = "Your balance is insufficient.";
 						return ERROR;
 					}
-				}
-				else
-				{
-					msg="The card PIN is wrong.";
-					ID = (String) ActionContext.getContext().getSession().get("loginID");
-					acList = accountService.listAccount(ID);	
+				} else {
+					System.out.println("000");
+					lock(account);
+					// msg="The card PIN is wrong.";
 					return ERROR;
 				}
-			}
-			else
-			{
-				msg="The account you want to transfer to is not in conformity with the name.";
-				ID = (String) ActionContext.getContext().getSession().get("loginID");
-				acList = accountService.listAccount(ID);	
+			} else {
+				msg = "The account you want to transfer to is not in conformity with the name.";
+				ID = (String) ActionContext.getContext().getSession()
+						.get("loginID");
+				acList = accountService.listAccount(ID);
 				return ERROR;
 			}
 		}
-		
 	}
-	
-	
-	public String userActivation() throws Exception{
+
+	public void lock(Account account) {
+		// resultMap = new HashMap<String, Object>();
+
+		Object[] option = { "Return" };
+
+		// when the first time, create Application object
+		if (ActionContext.getContext().getApplication().get("counter") == null) {
+			count = 1;
+			ActionContext.getContext().getApplication().put("counter", count);
+			ActionContext.getContext().getApplication().put("time", new Date());
+			System.out.println("create:" + new Date() + "-----" + count);
+			JOptionPane.showOptionDialog(null, "The card PIN is not correct.",
+					"Warning", JOptionPane.DEFAULT_OPTION,
+					JOptionPane.WARNING_MESSAGE, null, option, option[0]);
+			// resultMap.put("result", false);
+			// resultMap.put("msg", "The card PIN is not correct.");
+		}
+
+		// if Application object is exist
+		else {
+			Date time = (Date) ActionContext.getContext().getApplication()
+					.get("time");
+			Date now = new Date();
+			long interval = (now.getTime() - time.getTime()) / 1000;
+
+			// if the more than 1 hour
+			if (interval > 3600) {
+				count = 1;
+				ActionContext.getContext().getApplication()
+						.put("counter", count);
+				ActionContext.getContext().getApplication().put("time", now);
+				System.out.println("more than 1 hour:" + interval + "--------"
+						+ count);
+				JOptionPane.showOptionDialog(null,
+						"The card PIN is not correct.", "Warning",
+						JOptionPane.DEFAULT_OPTION,
+						JOptionPane.WARNING_MESSAGE, null, option, option[0]);
+				// resultMap.put("result", false);
+				// resultMap.put("msg", "The card PIN is not correct.");
+			}
+
+			// if within 1 hour
+			else {
+				// if the count is less than 2
+				if ((int) (ActionContext.getContext().getApplication()
+						.get("counter")) < 2) {
+					count = (int) (ActionContext.getContext().getApplication()
+							.get("counter")) + 1;
+					ActionContext.getContext().getApplication()
+							.put("counter", count);
+					ActionContext.getContext().getApplication()
+							.put("time", now);
+					System.out.println("within 1 hour:" + interval + "--------"
+							+ count);
+					JOptionPane.showOptionDialog(null,
+							"The card PIN is not correct.", "Warning",
+							JOptionPane.DEFAULT_OPTION,
+							JOptionPane.WARNING_MESSAGE, null, option,
+							option[0]);
+					// resultMap.put("result", false);
+					// resultMap.put("msg", "The card PIN is not correct.");
+				}
+
+				// when the count is 2, but it is still wrong, the count will be
+				// 3 and the system will lock the account
+				else if ((int) (ActionContext.getContext().getApplication()
+						.get("counter")) == 2) {
+					count = 0;
+					account.setStatus(2);
+					accountService.updateAccount(account);
+					ActionContext.getContext().getApplication()
+							.remove("counter");
+					ActionContext.getContext().getApplication().remove("time");
+					System.out.println("should be locked " + interval);
+					JOptionPane
+							.showOptionDialog(
+									null,
+									"Your account is locked. Please contact with the system administrator.",
+									"Warning", JOptionPane.DEFAULT_OPTION,
+									JOptionPane.WARNING_MESSAGE, null, option,
+									option[0]);
+					// resultMap.put("result", true);
+					// resultMap.put("msg", "Your account is locked. ");
+				}
+
+			}
+		}
+	}
+
+	public String userActivation() throws Exception {
 		System.out.println("encryted ID:" + ID);
 		ID = DES.decrypt(ID);
 		System.out.println("decryted ID:" + ID);
-		
-		if(accountService.listAccount(ID).size() == 1){
+
+		if (accountService.listAccount(ID).size() == 1) {
 			status = 1;
-			
-			//account.setID(ID);
+
+			// account.setID(ID);
 			account = accountService.findAccount(ID);
-			
-			account.setStatus(status);			
+
+			account.setStatus(status);
 			accountService.updateAccount(account);
 			return SUCCESS;
-		}
-		else
-		{
+		} else {
 			msg = "The user does not exist, Please contact with our Bank: 0754-12345678";
 			return ERROR;
 		}
 	}
-	public String userChangePwd() throws Exception{	
-		JOptionPane.setDefaultLocale(Locale.ENGLISH); 
-		Object[] option = {"Return"};
-		
+
+	public String userChangePwd() throws Exception {
+		JOptionPane.setDefaultLocale(Locale.ENGLISH);
+		Object[] option = { "Return" };
+
 		System.out.println("ID:" + ID);
-		
+
 		ID = DES.decrypt(ID);
 		System.out.println("deID:" + ID);
-		
-		if(pwd.trim()==""||conPwd.trim()==""){
+
+		if (pwd.trim() == "" || conPwd.trim() == "") {
 			msg = "Password can not be empty!";
 			System.out.println(msg);
 			return ERROR;
-		}
-		else if(pwd.length() >= 6){
-			if(pwd.matches(pwd_regex)){
-				if(pwd.equals(conPwd)){
+		} else if (pwd.length() >= 6) {
+			if (pwd.matches(pwd_regex)) {
+				if (pwd.equals(conPwd)) {
 					user = userService.getUser(ID);
 					user.setPwd(pwd);
 
 					userService.updateUser(user);
-					
-					JOptionPane.showOptionDialog(null, "The password has already changed!", 
-							"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+
+					JOptionPane.showOptionDialog(null,
+							"The password has already changed!", "Tips",
+							JOptionPane.DEFAULT_OPTION,
+							JOptionPane.INFORMATION_MESSAGE, null, option,
+							option[0]);
 					return SUCCESS;
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "The two password do not match.", 
-							"Warning", JOptionPane.WARNING_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"The two password do not match.", "Warning",
+							JOptionPane.WARNING_MESSAGE);
 					return ERROR;
-				}			
-			}
-			else{
-				JOptionPane.showMessageDialog(null, "Your password must contain a mixture of lower and upper case letter and digit", 
-						"Warning", JOptionPane.WARNING_MESSAGE);
+				}
+			} else {
+				JOptionPane
+						.showMessageDialog(
+								null,
+								"Your password must contain a mixture of lower and upper case letter and digit",
+								"Warning", JOptionPane.WARNING_MESSAGE);
 				return ERROR;
 			}
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Your password must be at least 6 characters!", 
-					"Warning", JOptionPane.WARNING_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"Your password must be at least 6 characters!", "Warning",
+					JOptionPane.WARNING_MESSAGE);
 			return ERROR;
 		}
 	}
-	public String userForgetPwd() throws Exception{		
+
+	public String userForgetPwd() throws Exception {
 		user.setID(ID);
 		user.setEmail(email);
-		User user= userService.getUser(ID);
-		JOptionPane.setDefaultLocale(Locale.ENGLISH); 
-		Object[] option = {"Return"};
-		System.out.println("name"+name + "ID" +ID);
-		
-		if(userService.listUser(name, ID).size() == 1){
-			if(userService.isMail(ID, email)){
-				//send e-mail
-				if(EmailUtils.sendResetPasswordEmail(user)){
-					JOptionPane.showOptionDialog(null, "There will be an verification mail send to your security email.", 
-							"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+		User user = userService.getUser(ID);
+		JOptionPane.setDefaultLocale(Locale.ENGLISH);
+		Object[] option = { "Return" };
+		System.out.println("name" + name + "ID" + ID);
+
+		if (userService.listUser(name, ID).size() == 1) {
+			if (userService.isMail(ID, email)) {
+				// send e-mail
+				if (EmailUtils.sendResetPasswordEmail(user)) {
+					JOptionPane
+							.showOptionDialog(
+									null,
+									"There will be an verification mail send to your security email.",
+									"Tips", JOptionPane.DEFAULT_OPTION,
+									JOptionPane.INFORMATION_MESSAGE, null,
+									option, option[0]);
 				}
 				return SUCCESS;
-			}
-			else
-			{
-				msg="The security mail is incorrect.";
-				JOptionPane.showMessageDialog(null, msg, "Warning", JOptionPane.WARNING_MESSAGE);
+			} else {
+				msg = "The security mail is incorrect.";
+				JOptionPane.showMessageDialog(null, msg, "Warning",
+						JOptionPane.WARNING_MESSAGE);
 				return ERROR;
 			}
-		}
-		else
-		{
-			msg="Please check your user account or ID.";
-			JOptionPane.showMessageDialog(null, msg, "Warning", JOptionPane.WARNING_MESSAGE);
+		} else {
+			msg = "Please check your user account or ID.";
+			JOptionPane.showMessageDialog(null, msg, "Warning",
+					JOptionPane.WARNING_MESSAGE);
 			return ERROR;
 		}
 	}
-	
-	public String addUser() throws Exception{
+
+	public String addUser() throws Exception {
 		String rTips = null;
 		resultMap = new HashMap<String, Object>();
 		Customer customer = new Customer();
-		
+
 		customer.setID(ID);
 		customer.setName(name);
-		switch(status){
-		case(1): uStatus="Normal";
-				 break;
-		case(2): uStatus="Locked";
-				 break;
-		case(3): uStatus="Not activated";
-		 		 break;
-		case(4): uStatus="Not Available";
- 		 		 break;
+		switch (status) {
+		case (1):
+			uStatus = "Normal";
+			break;
+		case (2):
+			uStatus = "Locked";
+			break;
+		case (3):
+			uStatus = "Not activated";
+			break;
+		case (4):
+			uStatus = "Not Available";
+			break;
 		}
 		if (customerService.checkCustomer(customer) == true) {
 			customer = customerService.getCustomer(customer);
-			if(userService.getUser(ID) != null){
+			if (userService.getUser(ID) != null) {
 				rTips = "This ID had been registered.";
-				ActionContext.getContext().put("rTips",rTips );
+				ActionContext.getContext().put("rTips", rTips);
 				return ERROR;
-			}else{
-			userService.addUser(ID,name, pwd1, email,3);
-			User user = userService.getUser(ID);
-			ActionContext.getContext().getSession().put("customer", customer);
-			ActionContext.getContext().getSession().put("user", user);
-//				if(EmailUtils.sendAccountActivateEmail(user)){
-//					rTips="Create a user successfully.There will be an verification mail send to your security email.";
-//					ActionContext.getContext().put("rTips", rTips);		
-//				}
-			return SUCCESS;
+			} else {
+				userService.addUser(ID, name, pwd1, email, 3);
+				User user = userService.getUser(ID);
+				ActionContext.getContext().getSession()
+						.put("customer", customer);
+				ActionContext.getContext().getSession().put("user", user);
+				// if(EmailUtils.sendAccountActivateEmail(user)){
+				// rTips="Create a user successfully.There will be an verification mail send to your security email.";
+				// ActionContext.getContext().put("rTips", rTips);
+				// }
+				return SUCCESS;
 			}
-		} else if (ID != null || name != null){
+		} else if (ID != null || name != null) {
 			rTips = "Wrong ID or name.";
-			ActionContext.getContext().put("rTips",rTips );
+			ActionContext.getContext().put("rTips", rTips);
 			return ERROR;
 		}
 		return ERROR;
 	}
-	
-	public String manageUser() throws Exception{
+
+	public String manageUser() throws Exception {
 		User user = userService.getUser(ID);
 		ActionContext ctx = ActionContext.getContext();
 		ctx.put("user", user);
 		return "manageUser";
 	}
-	
-	public String listUser() throws Exception{
-		
+
+	public String listUser() throws Exception {
+
 		List<User> list = userService.listUser();
 		ActionContext ctx = ActionContext.getContext();
 		ctx.put("listuser", list);
-	
+
 		return "listUser";
 	}
 
-	public String modifyUser(){
+	public String modifyUser() {
 		resultMap = new HashMap<String, Object>();
 		User user = userService.getUser(ID);
 		user.setName(name);
@@ -327,19 +435,16 @@ public class UserManageAction extends ActionSupport{
 		userService.updateUser(user);
 		return SUCCESS;
 	}
-	
-	public String delUser() throws Exception{
+
+	public String delUser() throws Exception {
 		resultMap = new HashMap<String, Object>();
 		userService.delUser(ID);
 		return SUCCESS;
 	}
-	
-
 
 	public String getID() {
 		return ID;
 	}
-
 
 	public void setID(String iD) {
 		ID = iD;
@@ -369,7 +474,6 @@ public class UserManageAction extends ActionSupport{
 		this.pwd = pwd;
 	}
 
-
 	public String getuStatus() {
 		return uStatus;
 	}
@@ -380,6 +484,14 @@ public class UserManageAction extends ActionSupport{
 
 	public String getMsg() {
 		return msg;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public void setMsg(String msg) {
@@ -413,21 +525,27 @@ public class UserManageAction extends ActionSupport{
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public double gettBalance() {
 		return tBalance;
 	}
+
 	public void settBalance(double tBalance) {
 		this.tBalance = tBalance;
 	}
+
 	public HashMap<String, Object> getResultMap() {
 		return resultMap;
 	}
@@ -451,26 +569,31 @@ public class UserManageAction extends ActionSupport{
 	public void setCustomerService(ICustomerService customerService) {
 		this.customerService = customerService;
 	}
+
 	public IAccountService getAccountService() {
 		return accountService;
 	}
+
 	public void setAccountService(IAccountService accountService) {
 		this.accountService = accountService;
 	}
-	
 
 	public ITransactionService getTransactionService() {
 		return transactionService;
 	}
+
 	public void setTransactionService(ITransactionService transactionService) {
 		this.transactionService = transactionService;
 	}
+
 	public int getT_id() {
 		return t_id;
 	}
+
 	public void setT_id(int t_id) {
 		this.t_id = t_id;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -486,59 +609,77 @@ public class UserManageAction extends ActionSupport{
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public Account getAccount() {
 		return account;
 	}
+
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+
 	public List<Account> getAcList() {
 		return acList;
 	}
+
 	public void setAcList(List<Account> acList) {
 		this.acList = acList;
 	}
+
 	public Account getToAccount() {
 		return toAccount;
 	}
+
 	public void setToAccount(Account toAccount) {
 		this.toAccount = toAccount;
 	}
+
 	public double getAmount() {
 		return amount;
 	}
+
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+
 	public String getToAc_No() {
 		return toAc_No;
 	}
+
 	public void setToAc_No(String toAc_No) {
 		this.toAc_No = toAc_No;
 	}
+
 	public String getToName() {
 		return toName;
 	}
+
 	public void setToName(String toName) {
 		this.toName = toName;
 	}
+
 	public String getPIN() {
 		return PIN;
 	}
+
 	public void setPIN(String pIN) {
 		PIN = pIN;
 	}
+
 	public String getAc_No() {
 		return ac_No;
 	}
+
 	public void setAc_No(String ac_No) {
 		this.ac_No = ac_No;
 	}
+
 	public String getType2() {
 		return type2;
 	}
+
 	public void setType2(String type2) {
 		this.type2 = type2;
 	}
-	
+
 }

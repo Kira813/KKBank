@@ -8,7 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
     <base href="<%=basePath%>">
     <%@ taglib uri="/struts-tags" prefix="s"%>
-    <%@include file="./headMeta.jsp" %></head>
+    <%@include file="./headMeta.jsp" %>
+</head>
 <body class="skin-blue">
 	<%@include file="./header.jsp" %></head>
     <div class="wrapper row-offcanvas row-offcanvas-left">

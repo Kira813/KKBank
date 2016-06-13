@@ -10,40 +10,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>KKBank | Account Selection</title>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./adminJsp/headMeta.jsp"%></head>
 </head>
-<body class="skin-blue">
-<%@include file="./adminJsp/header.jsp"%>
+<body>
+<%@include file="./userHeader.jsp"%>
 <div class="wrapper row-offcanvas row-offcanvas-left">
-	<aside class="left-side sidebar-offcanvas">
-	    <!-- sidebar: style can be found in sidebar.less -->
-	    <section class="sidebar" style="font-family:Microsoft YaHei">
-	        <ul class="sidebar-menu">
-	            <li data-tag="index">
-	                <a href="userIndex.action">
-	                    <i class="fa fa-dashboard"></i><span>Index</span>
-	                </a>
-	            </li>
-	        </ul>
-	    </section>
-	    <!-- /.sidebar -->
-	</aside>
 	<aside class="right-side" style="font-family:Microsoft YaHei">
 		<section class="content">
 			<div class="box-body">
-		        <div style="font-family:Microsoft YaHei">
-		       			<s:iterator value="#acList" status="st">
-							<input type="radio" name="ac_no" value="${ac_No}"> ${ac_No}<br>
-						</s:iterator>
+			    <div class="form-group">
+		        <div class="radio" style="font-family:Microsoft YaHei">
+		       		<s:iterator value="#acList" status="st">
+						<p><input type="radio" name="ac_no" value="${ac_No}"> ${ac_No}</p>
+					</s:iterator>
 				</div>
-				<p>
+			    </div>
 			</div>
-
 			<div class="box-footer">
-				<a class="btn btn-lg btn-default" href="javascript:void(0)" id="next_btn">Next</a>
+				<a class="btn  btn-default" href="javascript:void(0)" id="next_btn">Next</a>
 			</div>
 		</section>
 	</aside>
@@ -60,7 +47,7 @@
 			if(!ac_no) {
 				alert('Please select an account.');
 			}else{
-			window.location.href = action + '?ac_No=' + ac_no;
+				window.location.href = action + '?ac_No=' + ac_no;
 			}
 		});
 		

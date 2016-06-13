@@ -31,7 +31,12 @@
 									<label>ID</label>
 									<input type="text" name="ID" class="form-control" required="required">
 								</div>
-								<p>${msg}<p>
+								<s:if test="msg!=null">
+						     	   <div class=" alert-custom ">
+									<a class="close" data-dismiss="alert">×</a>
+									<span class="glyphicon glyphicon-exclamation-sign"></span><strong> Error! </strong>${msg}
+									</div>
+			     				</s:if>
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Submit</button>
@@ -44,5 +49,6 @@
 		</section>
 	</aside>
 </div>
+<%@include file="./javascript.jsp"%>
 </body>
 </html>

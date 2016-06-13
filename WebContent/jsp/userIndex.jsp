@@ -10,25 +10,63 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>KKBank</title>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./adminJsp/headMeta.jsp"%></head>
 </head>
-<body class="skin-blue">
-<%@include file="./adminJsp/header.jsp"%>
-<div class="wrapper row-offcanvas row-offcanvas-left">
-<%@include file="./userSidebar.jsp"%>
-	<aside class="right-side" style="font-family:Microsoft YaHei">
-		<section class="content">
-	        <div style="font-family:Microsoft YaHei">User Index</div>
-			<s:if test="#session.loginID==null"><a class="btn btn-lg btn-default" href="user/userLogin">Log in</a></s:if>
-			<s:else><a class="btn btn-lg btn-default" id="logout">Log out</a></s:else>
-			<a class="btn btn-lg btn-primary" href="user/register.action">Register</a>	
-		</section>
-	</aside>
+<body>
+<s:if test="#session.loginID==null">
+	<%@include file="./userHeaderBefore.jsp"%>
+</s:if>
+<s:else>
+	<%@include file="./userHeader.jsp"%>
+</s:else>
+<div class="custom-bg">
+	<div>
+		<h1>KKBank</h1>
+		<h3>Hello,${name}</h3>
+	</div>
 </div>
-<div class="modal fade" id="simpleDialog">
+<div class="intro-wrap">
+	<ul>
+		<li>
+			<img src="/KKBank/images/uIndex1.jpg">
+			<div>
+				<p>Banking</p>
+				<hr/>
+			</div>
+		</li>
+		<li>
+			<img src="/KKBank/images/uIndex2.jpg">
+			<div>
+				<p>Borrowing</p>
+			</div>
+		</li>
+		<li>
+			<img src="/KKBank/images/uIndex3.jpg">
+			<div>
+				<p>Investing</p>
+			</div>
+		</li>
+	</ul>
+</div>
+<!-- downside intro -->
+<div class="intro-container">
+	<div class="row">
+		<div class="col-md-8">
+				<div class="row">33
+				</div>
+				<div class="row">
+					<div class="col-md-8">11</div>
+					<div class="col-md-4">22</div>
+				</div>
+		</div>
+		<div class="col-md-4">11
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="simpleDialog" style="font-family:Microsoft YaHei">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -36,13 +74,13 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warn</h4>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Warning</h4>
 			</div>
 			<div class="modal-body">
 			Do you really want to log out?
 			</div>
 			<div class="modal-footer">
-				<a class="btn btn-primary" href="userIndex.action">Return</a>
+				<a class="btn btn-default" href="userIndex.action">Return</a>
 				<a class="btn btn-primary" href="user/logout.action">Confirm</a>
 			</div>
 		</div>
@@ -65,5 +103,4 @@
 		$('#simpleDialog').modal('show');
 	});
 </script>
-
 </html>

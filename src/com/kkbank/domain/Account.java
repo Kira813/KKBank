@@ -11,14 +11,15 @@ public class Account {
 	private int status;
 	private Customer customer;
 	private Set<Transaction> transactions;
+	private Set<TimeDeposit> timeDeposits;
 	
 	public Account() {
 		super();
 	}
 
-
 	public Account(String ac_No, String iD, String password, double balance,
-			int status, Customer customer, Set<Transaction> transactions) {
+			int status, Customer customer, Set<Transaction> transactions,
+			Set<TimeDeposit> timeDeposits) {
 		super();
 		this.ac_No = ac_No;
 		ID = iD;
@@ -27,10 +28,8 @@ public class Account {
 		this.status = status;
 		this.customer = customer;
 		this.transactions = transactions;
+		this.timeDeposits = timeDeposits;
 	}
-
-
-
 
 	public String getID() {
 		return ID;
@@ -93,6 +92,16 @@ public class Account {
 	}
 
 
+	public Set<TimeDeposit> getTimeDeposits() {
+		return timeDeposits;
+	}
+
+
+	public void setTimeDeposits(Set<TimeDeposit> timeDeposits) {
+		this.timeDeposits = timeDeposits;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -107,6 +116,8 @@ public class Account {
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + status;
+		result = prime * result
+				+ ((timeDeposits == null) ? 0 : timeDeposits.hashCode());
 		result = prime * result
 				+ ((transactions == null) ? 0 : transactions.hashCode());
 		return result;
@@ -147,6 +158,11 @@ public class Account {
 			return false;
 		if (status != other.status)
 			return false;
+		if (timeDeposits == null) {
+			if (other.timeDeposits != null)
+				return false;
+		} else if (!timeDeposits.equals(other.timeDeposits))
+			return false;
 		if (transactions == null) {
 			if (other.transactions != null)
 				return false;
@@ -154,6 +170,4 @@ public class Account {
 			return false;
 		return true;
 	}
-
-
 }

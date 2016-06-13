@@ -14,23 +14,78 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <base href="<%=basePath%>">
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./adminJsp/headMeta.jsp"%></head>
-<title>KK Bank</title>
+<title>KKBank | Transfer</title>
 </head>
 <body>
-	<form role="form" action="user/transfer" method="post">
-		Please select your card account number:
-		<select name="ac_No" id="ac_No_select">
-			<c:forEach items="${acList}" var="list">
-				<option value="${list.ac_No}">${list.ac_No}</option>
-			</c:forEach>			
-		</select><br/>
-		Transfer Amount: <input type="text" name="amount" required="required"/><br/>
-		Receiver's Account No.: <input type="text" name="toAc_No" required="required"/><br/>
-		Receiver's name: <input type="text" name="toName" required="required"/><br/>
-		Card PIN: <input type="password" name="PIN" required="required"/><br/>
-		<input type="submit" value="Submit"  />		
-	</form>
+<%@include file="./userHeader.jsp"%>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+	<aside class="center-side" style="font-family:Microsoft YaHei">
+		<section class="content">
+				<div class="row">
+				<div class="col-md-12">
+					<div class="box box-primary">
+						<div class="box-header">
+							<h3 class="box-title">Transfer</h3>
+						</div>
+						<form role="form" action="user/transfer" method="post">
+							<div class="box-body">
+								    <div class="form-group">
+					                  <label>Please select a card account:</label>
+					                  <select name="ac_No" id="ac_No_select" class="form-control">
+										<c:forEach items="${acList}" var="list">
+										<option value="${list.ac_No}">${list.ac_No}</option>
+										</c:forEach>			
+									  </select>
+									  <p>  
+					                </div>
+									<div class="input-group">
+										<span class="input-group-addon">￥</span>
+						                <input type="text" class="form-control" name="amount" placeholder="Transferring Amount" required="required"
+											oninvalid="setCustomValidity('Please input valid amount')" oninput="setCustomValidity('')">
+						                <span class="input-group-addon">.00</span>
+						            </div>
+						            <p>
+						            <div class="input-group">
+										<span class="input-group-addon"><span class=" glyphicon glyphicon-edit"></span></span>
+						                <input type="text" class="form-control" name="toAc_No" placeholder="Receiver's Account" required="required"
+											oninvalid="setCustomValidity('Please input valid account')" oninput="setCustomValidity('')">
+						            </div>
+						            <p>
+						            <div class="input-group">
+										<span class="input-group-addon"><span class=" glyphicon glyphicon-edit"></span></span>
+						                <input type="text" class="form-control" name="toName" placeholder="Receiver's Name" required="required"
+											oninvalid="setCustomValidity('Please input receiver's name')" oninput="setCustomValidity('')">   
+						            </div>
+						            <p>
+						            <div class="input-group">
+										<span class="input-group-addon"><span class=" glyphicon glyphicon-lock"></span></span>
+						                <input type="password" class="form-control" name="PIN" placeholder="PIN" required="required"
+											oninvalid="setCustomValidity('Please input your card PIN')" oninput="setCustomValidity('')">   
+						            </div>   
+						        <p>
+						        <s:if test="msg!=null">						     	 
+								   <div class=" alert-custom ">																								
+									  <a class="close" data-dismiss="alert">×</a>																								
+									  <span class="glyphicon glyphicon-exclamation-sign"></span><strong> Error! </strong>${msg}																								
+									</div>
+			     			   </s:if>  
+							</div>
+							<div class="box-footer">
+								<input class="btn btn-default" type="submit" value="Submit"  />	
+							</div>
+						</form>
+						</div>
+					</div>
+				</div>
+		</section>
+	</aside>
+</div>	
+<div class="alert alert-error">
+  <a class="close" data-dismiss="alert">×</a>
+  <strong>Error!</strong>This is a fatal error.
+</div>
 <div class="modal fade" id="simpleDialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -52,7 +107,8 @@
 </body>
 <%@include file="./adminJsp/javascript.jsp"%>
 <script type="text/javascript">
-	var dialog = {
+
+	/*var dialog = {
 		el: $('#simpleDialog'),
 		show: function(msg) {
 			this.el.find('.modal-body').text(msg);
@@ -77,11 +133,11 @@
 				e.preventDefault();
 				return false;
 			});
-		});
+		});*/
 		/**
 		 * 判断账号是否正确
 		 */
-		function isValidTargetAccount() {
+		/*function isValidTargetAccount() {
 			var getAccountAction = 'ajax/getAccountAjax.action';
 			var ac_No2 = $('select[name=ac_No]').val();
 			
@@ -133,6 +189,6 @@
 		var tips = '${tips}';
 		if(tips) {
 			//dialog.show(tips);
-		}
+		}*/
 </script>
-</html>
+</html>	

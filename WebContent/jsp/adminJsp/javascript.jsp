@@ -35,13 +35,13 @@
 	 */
 	$(function() {
 		$('[format-balance]').each(function(idx, item) {
-			var el = $(item);
-			var val = el.text();
+			var el = $(item); //拿到jquery对象
+			var val = el.text(); //把jquery对象的字符串拿出来
 			
-			val = $.trim(val);
-			val = +val;
-			val = val.toFixed(2) + '';
-			var reg = /(\d)(?=(\d\d\d)+(?!\d))/g;
+			val = $.trim(val); //去除字符串两边空格
+			val = +val; //转数字
+			val = val.toFixed(2) + ''; //加小数点
+			var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 
     		val = val.replace(reg, '$1,');
     		el.text(val);
 		});

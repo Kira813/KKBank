@@ -46,7 +46,12 @@
 										<label>PIN Again</label>
                                         <input type="password" name="PIN2" class="form-control"/>
                                     </div>
-									<p>${msg}</p>
+									<s:if test="msg!=null">
+							     	    <div class=" alert-custom ">
+										  <a class="close" data-dismiss="alert">×</a>
+										  <span class="glyphicon glyphicon-exclamation-sign"></span><strong> Error! </strong>${msg}
+										</div>
+			     					</s:if>
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Submit</button>

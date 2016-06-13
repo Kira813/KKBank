@@ -34,6 +34,7 @@ public class AccountManageAction extends ActionSupport{
 	private Set<Transaction> transactions;
 	private String name;
 	private String PIN;
+	private String tips;
 
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
@@ -74,7 +75,8 @@ public class AccountManageAction extends ActionSupport{
 			return SUCCESS;
 		}
 		//ActionContext都是用来存放数据的。Struts2本身会在其中放入不少数据，而使用者也可以放入自己想要的数据
-		ActionContext.getContext().put("tips", "Wrong ID or Name");
+		//ActionContext.getContext().put("tips", "Wrong ID or Name");
+		tips= "Wrong ID or Name";
 		return "opencard";
 	}
 	
@@ -121,17 +123,50 @@ public class AccountManageAction extends ActionSupport{
 		if(account == null){
 			resultMap.put("tips", "Wrong ac_No");
 			resultMap.put("status", false);
-		}else if(customerService.isValidAccount(account.getID(), name)){
+		} else if(account.getStatus() == 2) {
+			resultMap.put("tips", "Account is locked.");
+			resultMap.put("status", false);
+		} else if(customerService.isValidAccount(account.getID(), name)){
 			resultMap.put("acStatus", true);
 			if(account2.getPassword().equals(PIN)){
 				resultMap.put("PINStatus", true);
-			}else{
+			} else{
 				resultMap.put("PINStatus", false);
 			}
 		}else{
 			resultMap.put("acStatus", false);
 		}
 		return SUCCESS;
+	}
+
+	public String unlockAjax() throws Exception{
+		resultMap = new HashMap<String, Object>();
+		Account account = accountService.getAccount(ac_No);
+		if(account.getStatus() == 2)
+		{
+			resultMap.put("result", true);	
+		}
+		else
+		{
+			resultMap.put("result", false);
+			resultMap.put("tips", "The operation is invalid. This account is not locked.");
+		}
+		return SUCCESS;
+		
+	}
+	
+	public String unlock() throws Exception{
+		String sTips = null;
+		Account account = accountService.getAccount(ac_No);
+		
+		if(account != null){
+			status = 1;
+			account.setStatus(status);
+			accountService.updateAccount(account);
+			return SUCCESS;
+		}
+		
+		return ERROR;
 	}
 
 	public String openCard() throws Exception {
@@ -222,6 +257,14 @@ public class AccountManageAction extends ActionSupport{
 
 	public void setPIN(String pIN) {
 		PIN = pIN;
+	}
+
+	public String getTips() {
+		return tips;
+	}
+
+	public void setTips(String tips) {
+		this.tips = tips;
 	}
 
 	public Customer getCustomer() {

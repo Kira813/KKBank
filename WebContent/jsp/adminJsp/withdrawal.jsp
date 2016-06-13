@@ -38,6 +38,10 @@
 									<label for="inputUsername">Auth Code</label> <input type="password"
 										name="auth_code" class="form-control">
 								</div>
+						   	    <div class="alert-custom" style="display:none">
+								    <a class="close" data-dismiss="alert">×</a>
+								    <span class="glyphicon glyphicon-exclamation-sign"></span><strong> Error! </strong><span id="showtip">${tips}</span>
+								</div>
 							</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Confirm</button>
@@ -138,8 +142,11 @@
 				// 账号正确，判断余额是否足够
 				isEnoughBalance();
 			} else {
+				var tips = "Wrong account.";
 				// 账号错误的情况
-				dialog.show(data.tips);
+				//dialog.show(data.tips);
+				$('#showtip').text(tips);
+				$('.alert-custom').show();
 			}
 		});
 	}
@@ -163,7 +170,10 @@
 					beforeSubmit();
 				}
 			} else {
-				bootbox.alert('Wrong ac_No');
+				var tips="Wrong ac_No.";
+				$('#showtip').text(tips);
+				$('.alert-custom').show();
+				//dialog.shpw('Wrong ac_No.');
 			}
 		});
 	}
