@@ -34,11 +34,21 @@ public class NavigationManageAction extends ActionSupport{
 	private String PIN;
 	private String pin;
 	private boolean confirm;
+	private double rate;
+	private String currency;
+	private double amt;
 	
 	IAccountService accountService = new AccountService();
 	ITransactionService transactionService = new TransactionService();
 	
 	public String toForeignConfirm() throws Exception{
+		ActionContext.getContext().put("ac_No", ac_No);
+		double rmb = amt*rate; 
+		ActionContext.getContext().put("amt", rmb );
+        double bal = accountService.getAccount(ac_No).getBalance();
+        ActionContext.getContext().put("balance", bal);
+		ActionContext.getContext().put("rate", rate);
+		ActionContext.getContext().put("currency", currency);
 		return SUCCESS;
 	}
 	public String toForeign() throws Exception{
@@ -215,7 +225,25 @@ public class NavigationManageAction extends ActionSupport{
 	public void setAc_No(String ac_No) {
 		this.ac_No = ac_No;
 	}
-	
+
+	public double getRate() {
+		return rate;
+	}
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+	public String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+	public double getAmt() {
+		return amt;
+	}
+	public void setAmt(double amt) {
+		this.amt = amt;
+	}
 	public String getPIN() {
 		return PIN;
 	}

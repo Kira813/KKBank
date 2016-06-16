@@ -11,8 +11,5 @@
 		<property name="GBP" not-null="true"/>
 		<property name="AUD" not-null="true"/>
 		
-		<many-to-one name="account" class="Account" unique="true">
-			<column name="account_id"></column>
-		</many-to-one>
 	</class>
 </hibernate-mapping>
