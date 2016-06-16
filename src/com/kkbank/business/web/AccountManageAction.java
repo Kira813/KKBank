@@ -1,13 +1,17 @@
 package com.kkbank.business.web;
 
+import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ICustomerService;
+import com.kkbank.business.service.ITimeDepositService;
 import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.CustomerService;
+import com.kkbank.business.service.impl.TimeDepositService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
 import com.kkbank.domain.Transaction;
@@ -22,6 +26,7 @@ public class AccountManageAction extends ActionSupport{
 	 */
 	protected IAccountService accountService = new AccountService();
 	protected ICustomerService customerService = new CustomerService();
+	protected ITimeDepositService timeDepositService = new TimeDepositService();
 
 	private String ID;
 	private String ac_No;
@@ -35,9 +40,25 @@ public class AccountManageAction extends ActionSupport{
 	private String name;
 	private String PIN;
 	private String tips;
+	private double amount;
+	private int term;
+	private double intRate;
+	private boolean confirm;
 
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
+	public String timeDepositConfirm() throws Exception{
+		Date depositDate = new Date();
+		Account account = accountService.getAccount(ac_No);
+		timeDepositService.addTimeDeposit("Lump Fixed Deposit", term, amount, intRate, depositDate, account);
+		
+		double bal = account.getBalance() - amount;
+		System.out.println(bal);
+		account.setBalance(bal);
+		accountService.updateAccount(account);
+		
+		return SUCCESS;
+	}
 	
 	public String delAccount() throws Exception{
 		String sTips = null;
@@ -86,11 +107,15 @@ public class AccountManageAction extends ActionSupport{
 		
 		if(account != null) {
 			Double balance = account.getBalance();
+			DecimalFormat df = new DecimalFormat("#,##0.00");
+			String bal = df.format(balance);
 			
 			if(balance == 0) {
+				resultMap.put("txt", bal);
 				resultMap.put("balance", balance);
 				resultMap.put("status", true);
 			} else {
+				resultMap.put("txt", bal);
 				resultMap.put("balance", balance);
 				resultMap.put("status", true);
 				resultMap.put("tips", "You can't close this account,since this account still has " + balance + " right now.");
@@ -259,12 +284,44 @@ public class AccountManageAction extends ActionSupport{
 		PIN = pIN;
 	}
 
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public int getTerm() {
+		return term;
+	}
+
+	public void setTerm(int term) {
+		this.term = term;
+	}
+
+	public double getIntRate() {
+		return intRate;
+	}
+
+	public void setIntRate(double intRate) {
+		this.intRate = intRate;
+	}
+
 	public String getTips() {
 		return tips;
 	}
 
 	public void setTips(String tips) {
 		this.tips = tips;
+	}
+
+	public boolean isConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(boolean confirm) {
+		this.confirm = confirm;
 	}
 
 	public Customer getCustomer() {
@@ -297,6 +354,14 @@ public class AccountManageAction extends ActionSupport{
 
 	public void setCustomerService(ICustomerService customerService) {
 		this.customerService = customerService;
+	}
+
+	public ITimeDepositService getTimeDepositService() {
+		return timeDepositService;
+	}
+
+	public void setTimeDepositService(ITimeDepositService timeDepositService) {
+		this.timeDepositService = timeDepositService;
 	}
 
 }

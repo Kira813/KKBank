@@ -20,7 +20,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Banking<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="toTransfer">Transfer</a></li>
-                  <li><a href="#">Time deposit</a></li>
+                  <li><a href="toTimeDeposit">Time deposit</a></li>
+                  <li><a href="toForeignExchange">Foreign exchange</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Account Enquiry</li>
                   <li><a href="#">Balance Enquiry</a></li>

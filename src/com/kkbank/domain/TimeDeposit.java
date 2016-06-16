@@ -7,7 +7,7 @@ public class TimeDeposit {
 	private String type;
 	private int term;
 	private double amount;
-	private String interestRate;
+	private double interestRate;
 	private Date depositDate;
 	private Account account;
 	
@@ -16,7 +16,7 @@ public class TimeDeposit {
 	}
 
 	public TimeDeposit(int id, String type, int term, double amount,
-			String interestRate, Date depositDate, Account account) {
+			double interestRate, Date depositDate, Account account) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -53,10 +53,10 @@ public class TimeDeposit {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public String getInterestRate() {
+	public double getInterestRate() {
 		return interestRate;
 	}
-	public void setInterestRate(String interestRate) {
+	public void setInterestRate(double interestRate) {
 		this.interestRate = interestRate;
 	}
 	public Date getDepositDate() {
@@ -83,8 +83,8 @@ public class TimeDeposit {
 		result = prime * result
 				+ ((depositDate == null) ? 0 : depositDate.hashCode());
 		result = prime * result + id;
-		result = prime * result
-				+ ((interestRate == null) ? 0 : interestRate.hashCode());
+		temp = Double.doubleToLongBits(interestRate);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + term;
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -114,10 +114,8 @@ public class TimeDeposit {
 			return false;
 		if (id != other.id)
 			return false;
-		if (interestRate == null) {
-			if (other.interestRate != null)
-				return false;
-		} else if (!interestRate.equals(other.interestRate))
+		if (Double.doubleToLongBits(interestRate) != Double
+				.doubleToLongBits(other.interestRate))
 			return false;
 		if (term != other.term)
 			return false;
@@ -128,5 +126,4 @@ public class TimeDeposit {
 			return false;
 		return true;
 	}
-
 }

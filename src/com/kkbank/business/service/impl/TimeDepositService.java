@@ -11,10 +11,9 @@ import com.kkbank.domain.TimeDeposit;
 
 public class TimeDepositService implements ITimeDepositService{
 	ITimeDepositDao timeDepositDao = new TimeDepositDao();
-	public int addTimeDeposit(int id, String type, int term, double amount,
-			String interestRate, Date depositDate, Account account){
+	public int addTimeDeposit(String type, int term, double amount,
+			double interestRate, Date depositDate, Account account){
 		TimeDeposit timeDeposit = new TimeDeposit();
-		timeDeposit.setId(id);
 		timeDeposit.setType(type);
 		timeDeposit.setTerm(term);
 		timeDeposit.setAmount(amount);

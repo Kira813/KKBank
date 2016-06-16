@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>KKBank | Account Enquiry</title>
+<title>KKBank | Foreign Exchange</title>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./adminJsp/headMeta.jsp"%></head>
@@ -20,10 +20,18 @@
 <div class="wrapper row-offcanvas row-offcanvas-left">
 	<aside class="center-side" style="font-family:Microsoft YaHei">
 		<section class="content">
-	         <a href="toAccountSelection.action">Balance Enquiry</a>
-	     </section>
+			<div class="box box-success">
+				<div class="box-header">
+					<h3 class="box-title">Foreign Exchange</h3>
+				</div>
+		        <a href="toExchange">Exchange Settlement</a>
+		        <p>
+		        <a href="toExchangeForeign">Foreign Settlement</a>
+		    </div>
+	    </section>
 	</aside>
 </div>
 </body>
 <%@include file="./adminJsp/javascript.jsp"%>
 </html>
+

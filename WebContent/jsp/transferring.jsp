@@ -82,10 +82,6 @@
 		</section>
 	</aside>
 </div>	
-<div class="alert alert-error">
-  <a class="close" data-dismiss="alert">×</a>
-  <strong>Error!</strong>This is a fatal error.
-</div>
 <div class="modal fade" id="simpleDialog">
 	<div class="modal-dialog">
 		<div class="modal-content">

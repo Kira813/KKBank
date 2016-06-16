@@ -32,11 +32,11 @@ public class TimeDepositDao extends HibernateDaoSupport implements ITimeDepositD
 	}
 
 	public List<TimeDeposit> findAllTimeDeposit() {
-		return (List<TimeDeposit>) getHibernateTemplate().find("from timedeposit");
+		return (List<TimeDeposit>) getHibernateTemplate().find("from TimeDeposit");
 	}
 	public List<TimeDeposit> get(TimeDeposit timeDeposit) {
 		return this.getSession()
-				.createQuery("from timedeposit t where t.id=?")
+				.createQuery("from TimeDeposit t where t.id=?")
 				.setParameter(0, timeDeposit.getId())
 				.list();
 	}

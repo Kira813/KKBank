@@ -8,7 +8,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
-            </button>
+            </button><i class="fa fa-bank"></i> 
             <a class="navbar-brand">KK Bank</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
@@ -18,6 +18,7 @@
               <li><a href="javascript:void(0)">Fund</a></li>
               <li><a href="toTimeDeposit">Time Deposit</a></li>
               <li><a href="toTransfer">Transfer</a></li>
+              <li><a href="toForeignExchange">Foreign Exchange</a></li>
               <li class="dropdown">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                 	Help<span class="caret"></span></a>
