@@ -12,7 +12,12 @@ public class Account {
 	private Customer customer;
 	private Set<Transaction> transactions;
 	private Set<TimeDeposit> timeDeposits;
-	private Currency currency;
+	private double USD;
+	private double JPY;
+	private double HKD;
+	private double GBP;
+	private double AUD;
+	
 	
 	public Account() {
 		super();
@@ -20,7 +25,8 @@ public class Account {
 
 	public Account(String ac_No, String iD, String password, double balance,
 			int status, Customer customer, Set<Transaction> transactions,
-			Set<TimeDeposit> timeDeposits, Currency currency) {
+			Set<TimeDeposit> timeDeposits, double uSD, double jPY, double hKD,
+			double gBP, double aUD) {
 		super();
 		this.ac_No = ac_No;
 		ID = iD;
@@ -30,10 +36,12 @@ public class Account {
 		this.customer = customer;
 		this.transactions = transactions;
 		this.timeDeposits = timeDeposits;
-		this.currency = currency;
+		USD = uSD;
+		JPY = jPY;
+		HKD = hKD;
+		GBP = gBP;
+		AUD = aUD;
 	}
-
-
 
 	public String getID() {
 		return ID;
@@ -49,6 +57,46 @@ public class Account {
 
 	public void setAc_No(String ac_No) {
 		this.ac_No = ac_No;
+	}
+
+	public double getUSD() {
+		return USD;
+	}
+
+	public void setUSD(double uSD) {
+		USD = uSD;
+	}
+
+	public double getJPY() {
+		return JPY;
+	}
+
+	public void setJPY(double jPY) {
+		JPY = jPY;
+	}
+
+	public double getHKD() {
+		return HKD;
+	}
+
+	public void setHKD(double hKD) {
+		HKD = hKD;
+	}
+
+	public double getGBP() {
+		return GBP;
+	}
+
+	public void setGBP(double gBP) {
+		GBP = gBP;
+	}
+
+	public double getAUD() {
+		return AUD;
+	}
+
+	public void setAUD(double aUD) {
+		AUD = aUD;
 	}
 
 	public String getPassword() {
@@ -105,26 +153,25 @@ public class Account {
 		this.timeDeposits = timeDeposits;
 	}
 
-
-	public Currency getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
-		result = prime * result + ((ac_No == null) ? 0 : ac_No.hashCode());
 		long temp;
+		temp = Double.doubleToLongBits(AUD);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(GBP);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(HKD);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		temp = Double.doubleToLongBits(JPY);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(USD);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((ac_No == null) ? 0 : ac_No.hashCode());
 		temp = Double.doubleToLongBits(balance);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result
-				+ ((currency == null) ? 0 : currency.hashCode());
 		result = prime * result
 				+ ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result
@@ -146,10 +193,20 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
+		if (Double.doubleToLongBits(AUD) != Double.doubleToLongBits(other.AUD))
+			return false;
+		if (Double.doubleToLongBits(GBP) != Double.doubleToLongBits(other.GBP))
+			return false;
+		if (Double.doubleToLongBits(HKD) != Double.doubleToLongBits(other.HKD))
+			return false;
 		if (ID == null) {
 			if (other.ID != null)
 				return false;
 		} else if (!ID.equals(other.ID))
+			return false;
+		if (Double.doubleToLongBits(JPY) != Double.doubleToLongBits(other.JPY))
+			return false;
+		if (Double.doubleToLongBits(USD) != Double.doubleToLongBits(other.USD))
 			return false;
 		if (ac_No == null) {
 			if (other.ac_No != null)
@@ -158,11 +215,6 @@ public class Account {
 			return false;
 		if (Double.doubleToLongBits(balance) != Double
 				.doubleToLongBits(other.balance))
-			return false;
-		if (currency == null) {
-			if (other.currency != null)
-				return false;
-		} else if (!currency.equals(other.currency))
 			return false;
 		if (customer == null) {
 			if (other.customer != null)

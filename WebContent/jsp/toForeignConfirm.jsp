@@ -46,48 +46,45 @@
 							<div class="box-header">
 								<h3 class="box-title">Confirmation</h3>
 							</div>	
-							<div class="box-body">		
-								 <div class="input-group">
-								 	<span class="input-group-addon">RMB</span>
-									<span class="input-group-addon"><i class="fa fa-exchange"></i></span>	
-									<select class="form-control" id="rate_list">
-										<option value="" selected>Please select the target currency</option>
-									</select>
-								 </div>
-								<p>
-								<div class="input-group">
-									<span class="input-group-addon" >
-										<span class="fa fa-bar-chart-o" ></span> Exchange Rate
-									</span>
-									<div class="form-control">
-										<span id="rate_count"></span>
-									</div>
-								</div>
-								<p>
-								<div class="input-group">
-									<span class="input-group-addon">
-										<i class="glyphicon glyphicon-arrow-up"></i> Maximum Exchange Amount
-									</span>
-									<div class="form-control">
-										<span id="rate_maxchange"></span>
-									</div>
-								</div>
-								<p>
+							<div class="box-body">	
+							<table class="table table-striped" >
+					                <tbody>
+					                <tr>
+					                  <td style="width: 30%; padding-left:20px">Card Number</td>
+					                  <td>${ac_No}</td>
+					                </tr>
+					                <tr>
+					                  <td style="padding-left:20px">RMB Balance</td>
+					                  <td><span format-balance>${balance}</span></td>
+					                </tr>
+					                <tr>
+					                  <td style="padding-left:20px">Exchange Currency</td>
+					                  <td>${currency}</td>
+					                </tr>
+					                <tr>
+					                  <td style="padding-left:20px">Exchange Offer Rate</td>
+					                  <td>${rate}</td>
+					                </tr>
+					                <tr>
+					                  <td style="padding-left:20px">Required RMB amount</td>
+					                  <td><span format-balance>${amt}</span></td>
+					                </tr>    
+					             	 </tbody>
+					              </table>	
+					        </div>			
 								<form role="form" action="" method="post">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-money"></i></span>
-										<input type="text" name="amount" id="amount" class="form-control"
-											placeholder="Exchange Amount" required="required"> 
-									<span class="input-group-addon">.00</span>
-								</div>
-								</form>
+								<div class="input-group" style="margin-top:10px">
+									<span class="input-group-addon"><span class="fa fa-key"></span></span> 
+									<input type="password" name="pin" id="pin" class="form-control"
+										placeholder="Please input card PIN" required="required">
+								</div>					
 								<p>
-								</div>
 								<div class="box-footer">
 									<a class="btn btn-success" id="next_btn" href="javascript:void(0)">Next</a>	
 									<a class="btn btn-default" href="toForeignExchange">Return</a>	
 								</div>
-							</div>
+								</form>
+						 </div>
 				    </section>
 				</aside>
 			</div>
