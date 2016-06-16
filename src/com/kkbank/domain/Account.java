@@ -12,6 +12,7 @@ public class Account {
 	private Customer customer;
 	private Set<Transaction> transactions;
 	private Set<TimeDeposit> timeDeposits;
+	private Currency currency;
 	
 	public Account() {
 		super();
@@ -19,7 +20,7 @@ public class Account {
 
 	public Account(String ac_No, String iD, String password, double balance,
 			int status, Customer customer, Set<Transaction> transactions,
-			Set<TimeDeposit> timeDeposits) {
+			Set<TimeDeposit> timeDeposits, Currency currency) {
 		super();
 		this.ac_No = ac_No;
 		ID = iD;
@@ -29,7 +30,10 @@ public class Account {
 		this.customer = customer;
 		this.transactions = transactions;
 		this.timeDeposits = timeDeposits;
+		this.currency = currency;
 	}
+
+
 
 	public String getID() {
 		return ID;
@@ -102,6 +106,14 @@ public class Account {
 	}
 
 
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -111,6 +123,8 @@ public class Account {
 		long temp;
 		temp = Double.doubleToLongBits(balance);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result
+				+ ((currency == null) ? 0 : currency.hashCode());
 		result = prime * result
 				+ ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result
@@ -122,7 +136,6 @@ public class Account {
 				+ ((transactions == null) ? 0 : transactions.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -145,6 +158,11 @@ public class Account {
 			return false;
 		if (Double.doubleToLongBits(balance) != Double
 				.doubleToLongBits(other.balance))
+			return false;
+		if (currency == null) {
+			if (other.currency != null)
+				return false;
+		} else if (!currency.equals(other.currency))
 			return false;
 		if (customer == null) {
 			if (other.customer != null)

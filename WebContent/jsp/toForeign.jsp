@@ -24,12 +24,13 @@
 				<div class="box-header">
 					<h3 class="box-title">Exchange to Foreign Currency</h3>
 				</div>	
+				<form role="form" action="toForeignConfirm" method="post">
 				<div class="box-body">		
 					 <div class="input-group">
 					 	<span class="input-group-addon">RMB</span>
 						<span class="input-group-addon"><i class="fa fa-exchange"></i></span>	
 						<select class="form-control" id="rate_list">
-							<option value="" selected>Please select the target currency</option>
+							<option value="" selected>Please select a target currency</option>
 						</select>
 					 </div>
 					<p>
@@ -52,21 +53,26 @@
 						<span class="input-group-addon">.00</span>
 					</div>
 					<p>
-					<form role="form" action="toForeignConfirm" method="post">
+					
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-money"></i></span>
 							<input type="text" name="amount" id="amount" class="form-control"
 								placeholder="Exchange Amount" required="required"> 
 						<span class="input-group-addon">.00</span>
 					</div>
-					</form>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-money"></i></span>
+					    Required RMB
+						<span class="input-group-addon">.00</span>
+					</div>
 					<p>
 					</div>
 					<div class="box-footer">
 						<a class="btn btn-success" id="next_btn" href="javascript:void(0)">Next</a>	
 						<a class="btn btn-default" href="toForeignExchange">Return</a>	
 					</div>
-				</div>
+					</form>
+			</div>
 	    </section>
 	</aside>
 </div>
@@ -109,6 +115,10 @@ $(function() {
 	
 	function updateRate() {
 		var country = dom.select.val();
+		if(!country) {
+			return false;
+		}
+		
 		var obj = getRate(country);
 		//银行现汇卖出价 bid rate
 		var rate = (+obj['hui_out']) / 100;
@@ -117,15 +127,18 @@ $(function() {
 		dom.rate.text(rate);
 		
 		
-		//var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 
-		//var max1 = max.replace(/(\d+\.\d*)/, function($1) {
-		//	return (+$1).toFixed(2);
-		//}).replace(reg, '$1,');
+		var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 
 		
-		var city = (balance/rate).toFixed(0);
+		var amt = (balance/rate).toFixed(0);
 		//看分子分母 ， 这里的情况人民币全为分子， 所以： 人民币/外币=利率  能换外币数=人民币/利率
-		dom.maxChange.text(city);
+		
+		var max1 = amt.replace(/(\d+\.\d*)/, function($1) {
+			return (+$1).toFixed(2);
+		}).replace(reg, '$1,');
+		
+		dom.maxChange.text(max1);
 		//如果是外币换人民币 即offer rate 银行买入价    能换的人民币=外币*利率   利率越高，能换的人民币越多，所以银行的offer rate比较低，赚
+		dom.maxChange.attr("maxamt", amt);
 		
 	}
 	
@@ -137,28 +150,26 @@ $(function() {
 		return map[0]
 	}
 	console.log(list);
-})
-$(function() {
-		var form = document.querySelector('form');
-		$('#next_btn').click(function() {
-				var amount = $('input[name=amount]').val();
-				var balance = ${balance};
-				if(amount < 50){
-					$('.info-custom').show();
-				}
-				else if(balance < amount){
-					form.amount.value="";
-					form.amount.focus();
-					alert('Balance is not enough.');
-					
-				} else {
-					$('input[name="ac_No"]').val(ac_no);
-					$('input[name="term"]').val(period);
-					$('form').submit();
-				}
+	
+	var form = document.querySelector('form');
+	$('#next_btn').click(function() {
+			var amount = $('input[name=amount]').val();
+			var maxAmt = $('#rate_maxchange').attr('maxamt');
+			
+			amount = +amount;
+			
+			if(maxAmt < 1){
+				alert('Please select a currency.');
+			}else if(amount < 1){
+				alert('Please input exchange amount.');
+			}else if(amount > maxAmt){
+				form.amount.value="";
+				form.amount.focus();
+				alert('Balance is not enough.');		
+			} else {
+				$('form').submit();
 			}
-		});
 	});
-
+});
 </script>
 </html>

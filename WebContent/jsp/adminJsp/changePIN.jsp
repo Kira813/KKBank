@@ -26,7 +26,7 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">Change Card PIN</h3>
+							<h3 class="box-title" style="font-family:Microsoft YaHei">Change Card PIN</h3>
 						</div>						   
 						<form role="form" action="admin/changePIN" method="post">
 							<div class="box-body">

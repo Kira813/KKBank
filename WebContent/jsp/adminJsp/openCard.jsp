@@ -24,7 +24,7 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">Opening a Debit Card</h3>
+							<h3 class="box-title" style="font-family:Microsoft YaHei">Opening a Debit Card</h3>
 						</div>
 						<form role="form" action="account/addAccount.action" method="post">
 							<div class="box-body">

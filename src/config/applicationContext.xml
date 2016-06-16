@@ -70,6 +70,7 @@
 	        	<value>com/kkbank/domain/Supervisor.hbm.xml</value>
 	        	<value>com/kkbank/domain/Transaction.hbm.xml</value>
 	        	<value>com/kkbank/domain/TimeDeposit.hbm.xml</value>
+	        	<value>com/kkbank/domain/Currency.hbm.xml</value>
 	        </list>
         </property>
     </bean>

@@ -23,7 +23,7 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">Inquiry the card status</h3>
+							<h3 class="box-title" style="font-family:Microsoft YaHei">Inquiry the card status</h3>
 						</div>
 						<form role="form" action="admin/inquiry" method="post">
 							<div class="box-body">

@@ -22,7 +22,7 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">Deposit</h3>
+							<h3 class="box-title" style="font-family:Microsoft YaHei">Deposit</h3>
 						</div>
 						<form role="form" id="depositform" action="admin/deposit.action" method="post">
 							<div class="box-body">

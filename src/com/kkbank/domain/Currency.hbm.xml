@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.kkbank.domain">
+	<class name="Currency" table="currency">
+		<id name="ac_No"></id>
+		<property name="USD" not-null="true"/>
+		<property name="JPY" not-null="true"/>
+		<property name="HKD" not-null="true"/>
+		<property name="GBP" not-null="true"/>
+		<property name="AUD" not-null="true"/>
+		
+		<many-to-one name="account" class="Account" unique="true">
+			<column name="account_id"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

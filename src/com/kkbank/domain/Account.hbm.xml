@@ -27,5 +27,6 @@
 		</set>
 		<many-to-one name="customer" column="customer_id"
 			class="Customer" lazy="false" />
+		<one-to-one name="currency" cascade="all" /> 
 	</class>
 </hibernate-mapping>
