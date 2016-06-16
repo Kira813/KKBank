@@ -18,51 +18,76 @@
 <body>
 <%@include file="./userHeader.jsp"%>
 <div class="wrapper row-offcanvas row-offcanvas-left">
-	<aside class="center-side" style="font-family:Microsoft YaHei">
-		<section class="content">
-			<div class="box box-success">
-				<div class="box-header" >
-					<h3 class="box-title" style="font-family:Microsoft YaHei">Exchange Settlement</h3>
-				</div>
-				<div class="box-body">
-				 		<div class="input-group">
-				 		<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-							<select class="form-control" onchange="displayBalance();">
-								<option name="ac_no" value="" selected>Please select a card account</option>
-								<s:iterator value="#acList" status="st">
-									<option name="ac_no" value="${ac_No}">${ac_No}</option>
-								</s:iterator>
-							</select>
-						</div>
-						<p>
-						<form role="form" action="toForeign" method="post">
-						<input name="ac_No" style="display:none">
-						<h4 style="font-family:Microsoft YaHei">Balance details:</h4>
-						<div class="input-group">
-							<span class="input-group-addon">
-								<i class="fa fa-yen " style="color:"></i> RMB
-							</span>
-							<div class="form-control">
-								<span id="showbalance">${balance}</span>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				    <li role="presentation">
+				        <a href="toAccountEnquiry">Account Enquiry</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="javascript:void(0)">Fund</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toTimeDeposit">Time Deposit</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toTransfer">Transfer</a>
+				    </li>
+				    <li role="presentation" class="active">
+				        <a href="toForeignExchange">Foreign Exchange</a>
+				    </li>
+				</ul>
+			</div>
+			<div class="col-md-9">
+				<aside class="right-content-custom" style="font-family:Microsoft YaHei">
+					<section>
+						<div class="box box-success">
+							<div class="box-header" >
+								<h3 class="box-title" style="font-family:Microsoft YaHei">Exchange Settlement</h3>
 							</div>
-							<span class="input-group-btn">
-								<a class="btn btn-success btn-flat" id="exchange_btn" href="javascript:void(0)">Exchange to foreign currency</a>
-							</span>
-						</div>
-						</form>
-						<p>
-						<div class="input-group" style="display:">
-							<span class="input-group-addon">
-								<i class="fa fa-dollar"></i> USD
-							</span>
-							<div class="form-control">
-								<span id=""></span>
+							<div class="box-body">
+							 		<div class="input-group">
+							 		<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+										<select class="form-control" onchange="displayBalance();">
+											<option name="ac_no" value="" selected>Please select a card account</option>
+											<s:iterator value="#acList" status="st">
+												<option name="ac_no" value="${ac_No}">${ac_No}</option>
+											</s:iterator>
+										</select>
+									</div>
+									<p>
+									<form role="form" action="toForeign" method="post">
+									<input name="ac_No" style="display:none">
+									<h4 style="font-family:Microsoft YaHei">Balance details:</h4>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-yen " style="color:"></i> RMB
+										</span>
+										<div class="form-control">
+											<span id="showbalance">${balance}</span>
+										</div>
+										<span class="input-group-btn">
+											<a class="btn btn-success btn-flat" id="exchange_btn" href="javascript:void(0)">Exchange to foreign currency</a>
+										</span>
+									</div>
+									</form>
+									<p>
+									<div class="input-group" style="display:">
+										<span class="input-group-addon">
+											<i class="fa fa-dollar"></i> USD
+										</span>
+										<div class="form-control">
+											<span id=""></span>
+										</div>
+									</div>
 							</div>
-						</div>
-				</div>
-		    </div>
-	    </section>
-	</aside>
+					    </div>
+				    </section>
+				</aside>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 <%@include file="./adminJsp/javascript.jsp"%>

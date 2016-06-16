@@ -18,63 +18,87 @@
 <body>
 <%@include file="./userHeader.jsp"%>
 <div class="wrapper row-offcanvas row-offcanvas-left">
-	<aside class="center-side" style="font-family:Microsoft YaHei">
-		<section class="content">
-			<div class="box box-success">
-				<div class="box-header">
-					<h3 class="box-title">Exchange to Foreign Currency</h3>
-				</div>	
-				<form role="form" action="toForeignConfirm" method="post">
-				<div class="box-body">		
-					 <div class="input-group">
-					 	<span class="input-group-addon">RMB</span>
-						<span class="input-group-addon"><i class="fa fa-exchange"></i></span>	
-						<select class="form-control" id="rate_list">
-							<option value="" selected>Please select a target currency</option>
-						</select>
-					 </div>
-					<p>
-					<div class="input-group">
-						<span class="input-group-addon" >
-							<span class="fa fa-bar-chart-o" ></span> Exchange Rate
-						</span>
-						<div class="form-control">
-							<span id="rate_count"></span>
-						</div>
-					</div>
-					<p>
-					<div class="input-group">
-						<span class="input-group-addon">
-							<i class="glyphicon glyphicon-arrow-up"></i> Maximum Exchange Amount
-						</span>
-						<div class="form-control">
-							<span id="rate_maxchange"></span>
-						</div>
-						<span class="input-group-addon">.00</span>
-					</div>
-					<p>
-					
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-money"></i></span>
-							<input type="text" name="amount" id="amount" class="form-control"
-								placeholder="Exchange Amount" required="required"> 
-						<span class="input-group-addon">.00</span>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-money"></i></span>
-					    Required RMB
-						<span class="input-group-addon">.00</span>
-					</div>
-					<p>
-					</div>
-					<div class="box-footer">
-						<a class="btn btn-success" id="next_btn" href="javascript:void(0)">Next</a>	
-						<a class="btn btn-default" href="toForeignExchange">Return</a>	
-					</div>
-					</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				    <li role="presentation">
+				        <a href="toAccountEnquiry">Account Enquiry</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="javascript:void(0)">Fund</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toTimeDeposit">Time Deposit</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toTransfer">Transfer</a>
+				    </li>
+				    <li role="presentation" class="active">
+				        <a href="toForeignExchange">Foreign Exchange</a>
+				    </li>
+				</ul>
 			</div>
-	    </section>
-	</aside>
+			<div class="col-md-9">
+				<aside class="right-content-custom" style="font-family:Microsoft YaHei">
+					<section>
+						<div class="box box-success">
+							<div class="box-header">
+								<h3 class="box-title">Exchange to Foreign Currency</h3>
+							</div>	
+							<form role="form" action="toForeignConfirm" method="post">
+							<div class="box-body">		
+								<div class="input-group">
+								 	<span class="input-group-addon">RMB</span>
+									<span class="input-group-addon"><i class="fa fa-exchange"></i></span>	
+									<select class="form-control" id="rate_list">
+										<option value="" selected>Please select a target currency</option>
+									</select>
+								</div>
+								<p></p>
+								<div class="input-group">
+									<span class="input-group-addon" >
+										<span class="fa fa-bar-chart-o" ></span> Exchange Rate
+									</span>
+									<div class="form-control">
+										<span id="rate_count"></span>
+									</div>
+								</div>
+								<p></p>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="glyphicon glyphicon-arrow-up"></i> Maximum Exchange Amount
+									</span>
+									<div class="form-control">
+										<span id="rate_maxchange"></span>
+									</div>
+									<span class="input-group-addon">.00</span>
+								</div>
+								<p></p>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-money"></i></span>
+										<input type="text" name="amount" id="amount" class="form-control"
+											placeholder="Exchange Amount" required="required"> 
+									<span class="input-group-addon">.00</span>
+								</div>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-money"></i></span>
+								    Required RMB
+									<span class="input-group-addon">.00</span>
+								</div>
+								<p></p>
+								</div>
+								<div class="box-footer">
+									<a class="btn btn-success" id="next_btn" href="javascript:void(0)">Next</a>	
+									<a class="btn btn-default" href="toForeignExchange">Return</a>	
+								</div>
+							</form>
+						</div>
+				    </section>
+				</aside>
+			</div>
+		</div>
+	</div>
 </div>
  (USD, JPY, HKD, GBP and AUD)
   after selecting,show the exchange offer rate and the maximum amount the user can buy base
