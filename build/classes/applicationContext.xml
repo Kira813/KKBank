@@ -71,6 +71,9 @@
 	        	<value>com/kkbank/domain/Transaction.hbm.xml</value>
 	        	<value>com/kkbank/domain/TimeDeposit.hbm.xml</value>
 	        	<value>com/kkbank/domain/Currency.hbm.xml</value>
+	        	<value>com/kkbank/domain/Fund.hbm.xml</value>
+	        	<value>com/kkbank/domain/MyFund.hbm.xml</value>
+	        	<value>com/kkbank/domain/Payment.hbm.xml</value>
 	        </list>
         </property>
     </bean>

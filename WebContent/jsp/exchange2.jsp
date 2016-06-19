@@ -37,7 +37,7 @@
 				        <a href="toTransfer">Transfer</a>
 				    </li>
 				    <li role="presentation" class="active">
-				        <a href="toForeignExchange">Foreign Exchange</a>
+				        <a href="toForeignExchange" style="font-family:Microsoft YaHei">Foreign Exchange</a>
 				    </li>
 				</ul>
 			</div>
@@ -59,8 +59,9 @@
 										</select>
 									</div>
 									<p>
-									<form role="form" action="toForeign" method="post">
+									<form role="form" action="toRmb" method="post">
 									<input name="ac_No" style="display:none">
+									<input name="currency" style="display:none">
 									<h4 style="font-family:Microsoft YaHei">Balance details:</h4>
 									<div class="input-group">
 										<span class="input-group-addon">
@@ -69,9 +70,6 @@
 										<div class="form-control">
 											<span id="showbalance">${balance}</span>
 										</div>
-										<span class="input-group-btn">
-											<a class="btn btn-success btn-flat" id="exchange_btn" href="javascript:void(0)">Exchange to foreign currency</a>
-										</span>
 									</div>
 									</form>
 									<p></p>
@@ -82,6 +80,9 @@
 										<div class="form-control">
 											<span id="showusd"></span>
 										</div>
+										<span class="input-group-btn">
+											<a class="btn btn-success btn-flat" id="exchange_btn1" href="javascript:void(0)">Exchange to RMB</a>
+										</span>										
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
@@ -91,6 +92,9 @@
 										<div class="form-control">
 											<span id="showjpy"></span>
 										</div>
+										<span class="input-group-btn">
+											<a class="btn btn-success btn-flat" id="exchange_btn2" href="javascript:void(0)">Exchange to RMB</a>
+										</span>										
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
@@ -100,6 +104,9 @@
 										<div class="form-control">
 											<span id="showhkd"></span>
 										</div>
+										<span class="input-group-btn">
+											<a class="btn btn-success btn-flat" id="exchange_btn3" href="javascript:void(0)">Exchange to RMB</a>
+										</span>										
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
@@ -109,6 +116,9 @@
 										<div class="form-control">
 											<span id="showgbp"></span>
 										</div>
+										<span class="input-group-btn">
+											<a class="btn btn-success btn-flat" id="exchange_btn4" href="javascript:void(0)">Exchange to RMB</a>
+										</span>										
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
@@ -118,6 +128,9 @@
 										<div class="form-control">
 											<span id="showaud"></span>
 										</div>
+										<span class="input-group-btn">
+											<a class="btn btn-success btn-flat" id="exchange_btn5" href="javascript:void(0)">Exchange to RMB</a>
+										</span>										
 									</div>
 							</div>
 					    </div>
@@ -164,12 +177,53 @@
 	}
 	$(function(){
 		var form = document.querySelector('form');
-		$('#exchange_btn').click(function() {
+		$('#exchange_btn1').click(function() {
 			var ac_no = $('option[name=ac_no]:checked').val();
 			if (!ac_no) {
 				alert('Please select an account.');
 			} else {
 					$('input[name="ac_No"]').val(ac_no);
+					$('input[name="currency"]').val('USD');
+					$('form').submit();
+				}
+			});
+		$('#exchange_btn2').click(function() {
+			var ac_no = $('option[name=ac_no]:checked').val();
+			if (!ac_no) {
+				alert('Please select an account.');
+			} else {
+					$('input[name="ac_No"]').val(ac_no);
+					$('input[name="currency"]').val('JPY');
+					$('form').submit();
+				}
+			});
+		$('#exchange_btn3').click(function() {
+			var ac_no = $('option[name=ac_no]:checked').val();
+			if (!ac_no) {
+				alert('Please select an account.');
+			} else {
+					$('input[name="ac_No"]').val(ac_no);
+					$('input[name="currency"]').val('HKD');
+					$('form').submit();
+				}
+			});
+		$('#exchange_btn4').click(function() {
+			var ac_no = $('option[name=ac_no]:checked').val();
+			if (!ac_no) {
+				alert('Please select an account.');
+			} else {
+					$('input[name="ac_No"]').val(ac_no);
+					$('input[name="currency"]').val('GBP');
+					$('form').submit();
+				}
+			});
+		$('#exchange_btn5').click(function() {
+			var ac_no = $('option[name=ac_no]:checked').val();
+			if (!ac_no) {
+				alert('Please select an account.');
+			} else {
+					$('input[name="ac_No"]').val(ac_no);
+				$('input[name="currency"]').val('AUD');
 					$('form').submit();
 				}
 			});

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.kkbank.domain">
+	<class name="MyFund" table="myFund">
+		<id name="fund_id" column="fund_id" >
+			<generator class="native"></generator>
+		</id>
+		<!-- <property name="fCode" not-null="true" insert="false" update="false"/> -->
+		<property name="ID" not-null="true"/>
+		<property name="ac_No" not-null="true"/>
+		<property name="amount" not-null="true"/>
+		<property name="dealDate" not-null="true"/>
+		<property name="nav" not-null="false"/>	
+		<property name="status" not-null="true"/>	
+		
+		<many-to-one name="fund" column="fCode"
+			class="Fund" lazy="false" />
+	</class>
+</hibernate-mapping>

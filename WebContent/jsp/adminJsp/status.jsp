@@ -25,28 +25,53 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">User: ${name}</h3>
+							<h3 class="box-title" style="font-family:Microsoft YaHei">User: ${name}</h3>
 						</div>
 							<div class="box-body">
-								<table class="table table-striped">		
-						            <tr>
+						        <table cellpadding="6" height="90" class="table table-striped">		
+						            <tr bgcolor="#E6E6F7">
 						              <th>Card Number</th>
 						              <th>Balance </th>
+						              <th>USD</th>
+						              <th>JPY</th>
+						              <th>HKD</th>
+						              <th>GBP</th>
+						              <th>AUD</th>					              
 						              <th>Account Status</th>
-						              <th colspan="2">Operation</th>
 						            </tr>
+						            
 						            <s:iterator value="#listaccount" status="st">
-						            	<tr>
+						            	<tr align="center">
 							            	<td>${ac_No}</td>
-							            	<td><span format-balance>${balance }</span></td>
+							            	<td><s:if test="Balance == 0">--</s:if>
+							            		<s:else><span format-balance>${balance }</span></s:else>
+							            	</td>
+							            	<s:if test="status == 1">
+							            	<td><s:if test="USD == 0">--</s:if>
+							            		<s:else><span format-balance>${USD }</span></s:else>
+							            	</td>
+							            	<td><s:if test="JPY == 0">--</s:if>
+							            		<s:else><span format-balance>${JPY }</span></s:else>
+							            	</td>
+							            	<td><s:if test="HKD == 0">--</s:if>
+							            		<s:else><span format-balance>${HKD }</span></s:else>
+							            	</td>
+							            	<td><s:if test="GBP == 0">--</s:if>
+							            		<s:else><span format-balance>${GBP }</span></s:else></td>
+							            	<td><s:if test="AUD == 0">--</s:if>
+							            		<s:else><span format-balance>${AUD }</span></s:else></td>
+							            	</s:if>
 							            	<td>
 												<s:if test="status == 1">Normal</s:if>  
 												<s:elseif test="status == 2">Locked</s:elseif>  
 												<s:elseif test="status == 3">Not activated  </s:elseif>  
-												<s:else>Not Available</s:else>
+												<s:elseif test="status == 4">Not Available </s:elseif>
+												<s:elseif test= "status == 5">Frozen </s:elseif>
 											</td>
-											<td><a class="btn btn-primary unlock_account" data-acno="${ac_No }" data-id="${ID }">Unlock Account</a></td>
-							            	<td><a class="btn btn-primary close_account" data-acno="${ac_No }" data-id="${ID }">Close Account</a></td>
+											<td><a class="btn btn-primary close_account" data-acno="${ac_No }" data-id="${ID }">Close</a></td>
+							            	<td><a class="btn btn-primary unlock_account" data-acno="${ac_No }" data-id="${ID }">Unlock</a></td>
+							            	<td><a class="btn btn-primary frozen_account" data-acno="${ac_No }" data-id="${ID }">Frozen</a></td>
+											<td><a class="btn btn-primary unfreeze_account" data-acno="${ac_No }" data-id="${ID }">Unfreeze</a></td>
 						            	</tr>
 					          			</s:iterator>
 					          </table>
@@ -61,7 +86,7 @@
 		</section>
 	</aside>
 </div>
-<div class="modal fade" id="authCode_dialog">
+<div class="modal fade" id="authCode_dialog" style="font-family:Microsoft YaHei">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -69,13 +94,13 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Auth Code</h4>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Authorization Code</h4>
 			</div>
 			<div class="modal-body">
 				<form role="form">
 					<div class="box-body">
 						<div class="form-group">
-							<label>Please input authentication code to continue</label>
+							<label>Please input Authorization Code to continue</label>
 							<input type="password" name="tmp_auth_code" class="form-control">
 						</div>
 					</div>
@@ -88,7 +113,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="simpleDialog">
+<div class="modal fade" id="simpleDialog" style="font-family:Microsoft YaHei">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -96,7 +121,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Tips</h4>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Tips</h4>
 			</div>
 			<div class="modal-body">
 			</div>
@@ -122,8 +147,9 @@
 		};
 
 		$(function() {
-			var getBalanceAction = 'ajax/getBalanceAjax.action';
+			//var getBalanceAction = 'ajax/getBalanceAjax.action';
 			var delAccountAction = 'account/delAccount.action';
+			var getCurrencyAction = 'ajax/getCurrencyAjax.action';
 			var storage = {};
 			
 			
@@ -134,25 +160,22 @@
 				storage.ac_No = ac_No;
 				storage.ID = $(this).attr('data-id');
 				
-				$.get(getBalanceAction, {
+				$.get(getCurrencyAction, {
 					'ac_No': ac_No
 				}, function(data) {
 					if(data.status) {
-						if(data.balance == 0) {
-							// 显示 auth code 确认弹窗
-							$('#authCode_dialog').modal('show');
-							$('#authCode_dialog input').val('').focus();
+							if(data.allnull) {
+								// 显示 auth code 确认弹窗
+								$('#authCode_dialog').modal('show');
+								$('#authCode_dialog input').val('').focus();
+							} else {							
+								dialog.show(data.tips);
+							}
 						} else {
-							var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 
-				    		var tips = data.tips.replace(/(\d+\.\d*)/, function($1) {
-				    			return (+$1).toFixed(2);
-				    		}).replace(reg, '$1,');
-							dialog.show(tips);
+							bootbox.alert('Wrong ac_No');
 						}
-					} else {
-						bootbox.alert('Wrong ac_No');
-					}
-				});
+					});
+
 			});
 			
 			// 点击 Auth Code 的提交按钮
@@ -181,7 +204,7 @@
 							// 隐藏填写 Auth Code 的弹窗，BootStrap 的写法
 							$('#authCode_dialog').modal('hide');
 							// 弹出提示弹窗，说 auth_code 不正确
-							bootbox.alert('Authentication code is incorrect');
+							bootbox.alert('Authentization code is incorrect');
 							
 						}
 					);
@@ -250,6 +273,79 @@
 				}
 			});
 			
+		});
+		
+		//frozen
+		$(function() {
+			var frozenAction = 'ajax/frozenAjax.action';
+			var frozen = 'admin/frozen.action';
+			var storage = {};
+			
+			// Frozen Account.
+			$('.frozen_account').on('click', function() {
+				var ac_No = $(this).attr('data-acno');
+				
+				storage.ac_No = ac_No;
+				storage.ID = $(this).attr('data-id');
+				
+				$.get(frozenAction, {
+					'ac_No': ac_No
+				}, function(data) {
+					if(data.result == 0) {
+						// 显示 auth code 确认弹窗
+						
+							$.get(frozen, {
+								'ac_No': ac_No
+							}, function() {
+								//$('#authCode_dialog').modal('hide');
+								dialog.show('Successfully frozen');	
+								//location.reload();
+							});
+						
+					} 
+					else if(data.result == 1){
+						bootbox.alert('This account has been already locked. Can not be frozen.');					
+					}
+					else{
+						bootbox.alert('This account has been already frozen.');
+					}				
+				});
+			});			
+		});
+		
+		
+		//unfreeze
+		$(function() {
+			var unfreezeAjax = 'ajax/unfreezeAjax';
+			var unfreeze = 'admin/unfreeze';
+			var storage = {};
+			
+			// unfreeze Account.
+			$('.unfreeze_account').on('click', function() {
+				var ac_No = $(this).attr('data-acno');
+				
+				storage.ac_No = ac_No;
+				storage.ID = $(this).attr('data-id');
+				
+				$.get(unfreezeAjax, {
+					'ac_No': ac_No
+				}, function(data) {
+					if(data.result == 0) {
+						// 显示 auth code 确认弹窗				
+							$.get(unfreeze, {
+								'ac_No': ac_No
+							}, function() {
+								//$('#authCode_dialog').modal('hide');
+								dialog.show('Successfully unfreeze');	
+								//location.reload();
+							});
+						
+					} 
+					else{
+						bootbox.alert('This account has not been frozen.');
+					}				
+				});
+			});			
 		});
 		
 		var sTips = '${sTips}';

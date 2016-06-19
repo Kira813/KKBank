@@ -7,16 +7,21 @@ import java.util.Locale;
 
 import javax.swing.JOptionPane;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ICustomerService;
+import com.kkbank.business.service.IPayService;
 import com.kkbank.business.service.ITransactionService;
 import com.kkbank.business.service.IUserService;
 import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.CustomerService;
+import com.kkbank.business.service.impl.PayService;
 import com.kkbank.business.service.impl.TransactionService;
 import com.kkbank.business.service.impl.UserService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
+import com.kkbank.domain.Payment;
 import com.kkbank.domain.User;
 import com.kkbank.util.mail.EmailUtils;
 import com.opensymphony.xwork2.ActionContext;
@@ -64,6 +69,18 @@ public class UserManageAction extends ActionSupport {
 	private double tBalance;
 	private int count;
 
+	//payment+
+	protected IPayService payService = new PayService();
+	Payment pp = new Payment();
+	List paylist;
+	private String bNo;
+	private int bStatus;
+	private String item;
+	private Date start_date;
+	private Date end_date;
+	private double bAmount;
+	private String bDetail;
+		
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
 	public String userLogin() throws Exception {
@@ -442,6 +459,118 @@ public class UserManageAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String toPayment(){	
+		return SUCCESS;
+	}
+	
+	public String toPersonalBill(){
+		return SUCCESS;
+	}
+	
+	public String showPersonalBill(){
+		ID = (String) ActionContext.getContext().getSession().get("loginID");
+		paylist = payService.findMyBill(ID, 0);
+		return SUCCESS;
+	}
+
+	public String toPay(){
+		Payment pp1 = new Payment();
+		ID = (String) ActionContext.getContext().getSession().get("loginID");
+		bNo = ServletActionContext.getRequest().getParameter("bNo");
+		ActionContext.getContext().put("bNo", bNo);
+		pp1 = payService.get(bNo);
+		
+		item = pp1.getbItem();
+		start_date = pp1.getStart_date();
+		end_date = pp1.getEnd_date();
+		bAmount = pp1.getAmount();
+		bDetail = pp1.getDetail();
+		name = customerService.getCustomer(ID).getName();
+		
+		acList = accountService.listAccount(ID);
+		ActionContext.getContext().put("acList", acList);
+		return SUCCESS;
+	}
+	
+	public String toOtherBill(){
+		return SUCCESS;
+	}
+	
+	public String toPayOthers(){
+		ID = (String) ActionContext.getContext().getSession().get("loginID");
+		pp = payService.get(bNo);
+		if(customerService.isValidAccount(pp.getID(), name)){
+			item = pp.getbItem();
+			start_date = pp.getStart_date();
+			end_date = pp.getEnd_date();
+			bAmount = pp.getAmount();
+			bDetail = pp.getDetail();
+			
+			acList = accountService.listAccount(ID);
+			return SUCCESS;
+		}
+		else{
+			msg = "Please check the bill information.";
+			return ERROR;
+		}
+	}
+	
+	public String pay(){
+		Object[] option = {"Return"};
+		pp = payService.get(bNo);
+		account = accountService.getAccount(ac_No);
+		if(ac_No == null){
+			msg = "Please select an account";
+			return ERROR;
+		}
+		
+		if(account.getStatus() == 2){
+			msg = "Your account is locked.";
+			return ERROR;
+		}
+		
+		if(account.getStatus()==5){
+			msg = "Your account is frozen. Please contact system administrator.";
+			return ERROR;
+		}
+		
+		if(pp.getStatus() == 1){
+			msg = "This bill has been paid. Don't repeat the operation.";
+			return ERROR;
+		}
+		//PIN is right or not
+		if(account.getPassword().equals(PIN)){
+			//balance is enough or not
+			if(pp.getAmount() <= account.getBalance()){
+				//status = 1, have paid; status = 0; not paid yet;
+				pp.setStatus(1);
+				payService.update(pp);
+				
+				//change the balance
+				account.setBalance(account.getBalance() - pp.getAmount());
+				accountService.updateAccount(account);
+				
+				//add transaction record
+				type= "Pay out";
+				date = new Date();
+			    t_id = transactionService.addTransaction(t_id, date, type, pp.getAmount(), account.getBalance(), account);
+			    
+				JOptionPane.showOptionDialog(null, "Pay successfully.", 
+						"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+				return SUCCESS;
+			}
+			else{
+				msg = "Your balance is insufficient.";
+				return ERROR;
+			}
+		}
+		else{
+			lock(account);
+			//msg = "Wrong PIN. Please try again.";
+			return ERROR;
+		}
+	}
+	
 	public String getID() {
 		return ID;
 	}
@@ -682,4 +811,64 @@ public class UserManageAction extends ActionSupport {
 		this.type2 = type2;
 	}
 
+	public String getBNo() {
+		return bNo;
+	}
+	public void setBNo(String bNo) {
+		this.bNo = bNo;
+	}
+	public int getbStatus() {
+		return bStatus;
+	}
+	public void setbStatus(int bStatus) {
+		this.bStatus = bStatus;
+	}
+	public IPayService getPayService() {
+		return payService;
+	}
+	public void setPayService(IPayService payService) {
+		this.payService = payService;
+	}
+	
+	public List getPaylist() {
+		return paylist;
+	}
+	public void setPaylist(List paylist) {
+		this.paylist = paylist;
+	}
+
+	public Date getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+	public Date getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+	
+	public double getBAmount() {
+		return bAmount;
+	}
+	
+	public void setBAmount(double bAmount) {
+		this.bAmount = bAmount;
+	}
+	public String getItem() {
+		return item;
+	}
+	public void setItem(String item) {
+		this.item = item;
+	}
+	public String getBDetail() {
+		return bDetail;
+	}
+	public void setBDetail(String bDetail) {
+		this.bDetail = bDetail;
+	}
+	
+	
 }

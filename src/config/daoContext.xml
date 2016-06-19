@@ -31,4 +31,13 @@
 	<bean id="TimeDepositDao"
 		class="com.kkbank.business.dao.impl.TimeDepositDao"
 		parent="daoTemplate" />
+	<bean id="FundDao"
+		class="com.kkbank.business.dao.impl.FundDao"
+		parent="daoTemplate" />
+	<bean id="MyFundDao"
+		class="com.kkbank.business.dao.impl.MyFundDao"
+		parent="daoTemplate" />
+	<bean id="PayDao"
+		class="com.kkbank.business.dao.impl.PayDao"
+		parent="daoTemplate" />
 </beans>

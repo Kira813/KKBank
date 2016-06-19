@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.kkbank.domain">
+	<class name="Payment" table="payment">
+		<id name="bNo" column="bNo" ></id>
+		<property name="bItem" not-null="true"/>
+		<property name="detail" not-null="true"/>
+		<property name="start_date" not-null="true"/>
+		<property name="end_date" not-null="true"/>
+		<property name="amount" not-null="true"/>
+		<property name="ID" not-null="true"/>
+		<property name="status" not-null="true"/>
+	</class>
+</hibernate-mapping>

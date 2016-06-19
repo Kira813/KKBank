@@ -73,6 +73,36 @@
 			<interceptor-ref name="loginStack"></interceptor-ref>
 			<result name="success">/jsp/toForeignConfirm.jsp</result> 
 		</action>
+		<action name="confirm1" class="com.kkbank.business.web.NavigationManageAction"
+			method="confirm1">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+			<result name="success">/jsp/exchangeSuccess.jsp</result> 
+		</action>
+		<action name="confirm2" class="com.kkbank.business.web.NavigationManageAction"
+			method="confirm2">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+			<result name="success">/jsp/exchangeSuccess.jsp</result> 
+		</action>
+		<action name="toExchange2" class="com.kkbank.business.web.NavigationManageAction"
+			method="toExchange2">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+			<result name="success">/jsp/exchange2.jsp</result> 
+		</action>
+		<action name="toRmb" class="com.kkbank.business.web.NavigationManageAction"
+			method="toRmb">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+			<result name="success">/jsp/toRmb.jsp</result> 
+		</action>
+		<action name="toRmbConfirm" class="com.kkbank.business.web.NavigationManageAction"
+			method="toForeignConfirm">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+			<result name="success">/jsp/toRmbConfirm.jsp</result> 
+		</action>
+		<action name="toChoiceInquiry" class="com.kkbank.business.web.NavigationManageAction"
+			method="toChoiceInquiry">
+			<result name="namespace">/</result> 
+			<result name="success">/jsp/adminJsp/choiceInquiry.jsp</result> 
+		</action>
 		
 	</package>
 
@@ -144,6 +174,16 @@
 		    <result name ="success">/jsp/adminJsp/status.jsp</result>
 		    <result name ="error">/jsp/adminJsp/status.jsp</result>
 		</action>
+		<action name="frozen" class="com.kkbank.business.web.AccountManageAction"
+		 method="frozen">
+		    <result name ="success">/jsp/adminJsp/status.jsp</result>
+		    <result name ="error">/jsp/adminJsp/status.jsp</result>
+		</action>
+		<action name="unfreeze" class="com.kkbank.business.web.AccountManageAction"
+		 method="unfreeze">
+		    <result name ="success">/jsp/adminJsp/status.jsp</result>
+		    <result name ="error">/jsp/adminJsp/status.jsp</result>
+		</action>
 	</package>
 	
 	<!-- User-->
@@ -211,11 +251,48 @@
 			method="logout">
 			<result name="success">/jsp/userIndex.jsp</result> 
 		</action>
+		<action name="toPayment" class="com.kkbank.business.web.UserManageAction" 
+			method="toPayment">
+			<result name="success">/jsp/payment.jsp</result>
+		</action>
+		<action name="toPersonalBill" class="com.kkbank.business.web.UserManageAction" 
+			method="toPersonalBill">
+			<result name="success">/jsp/payMine.jsp</result>
+		</action>
+		<action name="showPersonalBill" class="com.kkbank.business.web.UserManageAction" 
+			method="showPersonalBill">
+			<result name="success">/jsp/billStatus.jsp</result>
+		</action>
+		<action name="toPay" class="com.kkbank.business.web.UserManageAction" 
+			method="toPay">
+			<result name="success">/jsp/payConfirm.jsp</result>
+		</action>
+		<action name="pay" class="com.kkbank.business.web.UserManageAction" 
+			method="pay">
+			<result name="success">/jsp/payment.jsp</result>
+			<result name="error" type="redirectAction">toPay</result>
+		</action>
+		<action name="toOtherBill" class="com.kkbank.business.web.UserManageAction" 
+			method="toOtherBill">
+			<result name="success">/jsp/payOthers.jsp</result>
+		</action>
+		<action name="toPayOthers" class="com.kkbank.business.web.UserManageAction" 
+			method="toPayOthers">
+			<result name="success">/jsp/payConfirm.jsp</result>
+			<result name="error">/jsp/payOthers.jsp</result>
+		</action>
 	</package>
 	
 	<!-- Ajax 接口 -->
 	<package name="ajax" extends="default" namespace="/ajax">
 		<default-interceptor-ref name="adiStack" />
+		<action name="getCurrencyAjax" class="com.kkbank.business.web.NavigationManageAction"
+			method="getCurrencyAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
 		<action name="validAuthCodeAjax" class="com.kkbank.business.web.WithdrawAndDepositAction"
 			method="validAuthCodeAjax">
 			<!-- 配置返回 json 类型的数据 -->
@@ -250,6 +327,54 @@
 			<result type="json">
 				<param name="root">resultMap</param>
 			</result>
+		</action>
+		<action name="frozenAjax" class="com.kkbank.business.web.AccountManageAction"
+			method="frozenAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="unfreezeAjax" class="com.kkbank.business.web.AccountManageAction"
+			method="unfreezeAjax">
+			<!-- 配置返回 json 类型的数据 -->
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="fund" extends="default" namespace="/fund">
+		<default-interceptor-ref name="adiStack" />
+		<action name="listFund" class="com.kkbank.business.web.FundManageAction"
+			method="listFund">
+			<result name="success">/jsp/fundTrading.jsp</result>
+		</action>
+		<action name="toFundDetail" class="com.kkbank.business.web.FundManageAction"
+			method="toFundDetail">
+			<result name="success">/jsp/fundDetail.jsp</result>
+		</action>
+		<action name="toFundTradingConfirm" class="com.kkbank.business.web.FundManageAction"
+			method="toFundTradingConfirm">
+			<result name="success">/jsp/fundPurchase.jsp</result>
+		</action>
+		<action name="fundPurchase" class="com.kkbank.business.web.FundManageAction"
+			method="fundPurchase">
+			<result name="success" type="redirectAction">listFund</result>
+			<result name="error">/jsp/fundPurchase.jsp</result>
+		</action>
+		<action name="listMyFund" class="com.kkbank.business.web.FundManageAction"
+			method="listMyFund">
+			<result name="success">/jsp/myfund.jsp</result>
+		</action>
+		<action name="toFundRedeemConfirm" class="com.kkbank.business.web.FundManageAction"
+			method="toFundRedeemConfirm">
+			<result name="success">/jsp/fundRedeem.jsp</result>
+		</action>
+		<action name="fundRedeem" class="com.kkbank.business.web.FundManageAction"
+			method="fundRedeem">
+			<result name="success" type="redirectAction">listFund</result>
+			<result name="error" type="redirect">/jsp/fundRedeem.jsp</result>
 		</action>
 	</package>
 	

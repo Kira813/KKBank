@@ -68,16 +68,16 @@
 					                  <td>${rate}</td>
 					                </tr>
 					                <tr>
-					                  <td style="padding-left:20px">Required RMB amount</td>
-					                  <td><span format-balance>${r}</span></td>
+					                  <td style="padding-left:20px">Income RMB amount</td>
+					                  <td><span format-balance>${income}</span></td>
 					                </tr>    
 					             	 </tbody>
 					              </table>	
 					        </div>			
-								<form role="form" action="confirm1" method="post">
+								<form role="form" action="confirm2" method="post">
 									<input name="ac_No" style="display:none">
 									<input name="amt" style="display:none">
-									<input name="rmb" style="display:none">
+									<input name="income" style="display:none">
 									<input name="currency" style="display:none">
 								<div class="input-group" style="margin-top:10px">
 									<span class="input-group-addon"><span class="fa fa-key"></span></span> 
@@ -108,12 +108,12 @@ $(function() {
 		var amount = '${amt}';
 		var ac_No = '${ac_No}';
 		var currency = '${currency}';
-		var rmb = '${r}';
+		var income = '${income}';
 		if(pin==PIN){
 			$('input[name=amt]').val(amount);
 			$('input[name=ac_No]').val(ac_No);
 			$('input[name=currency]').val(currency);
-			$('input[name=rmb]').val(rmb);
+			$('input[name=income]').val(income);
 			$('form').submit();
 		}else{
 			alert('Wrong PIN.');
@@ -122,4 +122,3 @@ $(function() {
 });
 </script>
 </html>
-

@@ -57,4 +57,25 @@
 		class="com.kkbank.business.service.impl.TimeDepositService"
 		parent="timeDepositServiceTmpl" />
 		
+	<bean id="payServiceTmpl" abstract="true" lazy-init="true"
+		p:payDao-ref="PayDao"
+		/>
+	<bean id="payService"
+		class="com.kkbank.business.service.impl.PayService"
+		parent="payServiceTmpl" />
+		
+	<bean id="fundServiceTmpl" abstract="true" lazy-init="true"
+		p:fundDao-ref="FundDao"
+		/>
+	<bean id="fundService"
+		class="com.kkbank.business.service.impl.FundService"
+		parent="fundServiceTmpl" />
+		
+	<bean id="myFundServiceTmpl" abstract="true" lazy-init="true"
+		p:myFundDao-ref="MyFundDao"
+		/>
+	<bean id="myFundService"
+		class="com.kkbank.business.service.impl.MyFundService"
+		parent="myFundServiceTmpl" />
+		
 </beans>

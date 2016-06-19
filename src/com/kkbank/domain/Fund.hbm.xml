@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.kkbank.domain">
+	<class name="Fund" table="fund">
+		<id name="fCode" column="fCode" ></id>
+		<property name="fName" not-null="true"/>
+		<property name="fType" not-null="true"/>
+		<property name="fAnnualized_rate" not-null="false"/>
+		<property name="fBackground" not-null="false"/>
+		<property name="fManage" not-null="false"/>
+		<property name="fInvest_portfolio" not-null="false"/>
+		<property name="fPur_rate" not-null="false"/>
+		<property name="nav" not-null="false"/>
+		
+		<set name="myfund" inverse="true">
+			<key column="fCode"></key>
+			<one-to-many class="MyFund" />
+		</set>
+	</class>
+</hibernate-mapping>

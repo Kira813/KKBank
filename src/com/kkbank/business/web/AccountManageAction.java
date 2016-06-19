@@ -194,6 +194,68 @@ public class AccountManageAction extends ActionSupport{
 		return ERROR;
 	}
 
+	public String frozenAjax() throws Exception{
+		resultMap = new HashMap<String, Object>();
+		Account account = accountService.getAccount(ac_No);
+		if(account.getStatus() == 2)
+		{
+			resultMap.put("result", 1);	
+		}
+		else if(account.getStatus() == 5)
+		{
+			resultMap.put("result", 2);	
+		}
+		else
+		{
+			resultMap.put("result", 0);
+			resultMap.put("tips", "Successfully frozen this account.");
+		}
+		return SUCCESS;	
+	}
+	
+	public String frozen() throws Exception{
+		String sTips = null;
+		Account account = accountService.getAccount(ac_No);
+		
+		if(account != null){
+			status = 5;
+			account.setStatus(status);
+			accountService.updateAccount(account);
+			return SUCCESS;
+		}
+		
+		return ERROR;
+	}
+	
+	public String unfreezeAjax() throws Exception{
+		resultMap = new HashMap<String, Object>();
+		Account account = accountService.getAccount(ac_No);
+		if(account.getStatus() == 5)
+		{
+			resultMap.put("result", 0);	
+			resultMap.put("tips", "This account is frozen.");
+		}
+		else
+		{
+			resultMap.put("result", 1);
+		}
+		return SUCCESS;	
+	}
+	
+	public String unfreeze() throws Exception{
+		String sTips = null;
+		Account account = accountService.getAccount(ac_No);
+		
+		if(account != null){
+			status = 1;
+			account.setStatus(status);
+			accountService.updateAccount(account);
+			return SUCCESS;
+		}
+		
+		return ERROR;
+	}
+	
 	public String openCard() throws Exception {
 		return SUCCESS;
 	}
