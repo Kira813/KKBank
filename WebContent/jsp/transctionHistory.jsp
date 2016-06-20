@@ -107,8 +107,9 @@
 	
 	var timer = {
 		el: $('#reservation'),
-		format: function(d) {
-			return new Date(d);
+		format: function(d, idx) {
+			var ret = new Date(d);
+			return idx === 0 ? ret : new Date(ret.setDate(ret.getDate() + 1));
 		},
 		render: function(d) {
 			return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -177,7 +178,7 @@
 			var d = timer.getTime();
 			if(d) {
 				this.list = list.filter(function(item) {
-					return item.date > d[0] && item.date < d[1];
+					return item.date >= d[0] && item.date <= d[1];
 				});
 			} else {
 				this.list = list;
