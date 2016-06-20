@@ -101,11 +101,9 @@
 		<action name="toChoiceInquiry" class="com.kkbank.business.web.NavigationManageAction"
 			method="toChoiceInquiry">
 			<result name="namespace">/</result> 
-			<result name="success">/jsp/adminJsp/choiceInquiry.jsp</result> 
+			<result name="success">/jsp/adminJsp/choiceInquiry.jsp</result>
 		</action>
-		
 	</package>
-
 
 	<!-- account -->
 	<package name="account" extends="default" namespace="/account">

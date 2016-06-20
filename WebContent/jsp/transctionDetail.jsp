@@ -21,7 +21,7 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">The last 10 transaction records</h3>
+							<h3 class="box-title" style="font-family:Microsoft YaHei">The last 10 transaction records</h3>
 						</div>
                         <div class="box-body no-padding">
                             <table class="table table-striped">

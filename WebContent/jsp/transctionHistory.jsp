@@ -21,7 +21,7 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header">
-							<h3 class="box-title">History Transaction Records</h3>
+							<h3 class="box-title" style="font-family:Microsoft YaHei">History Transaction Records</h3>
 						</div>
 						<div class="row">
                         		<div class="col-md-10">
@@ -62,7 +62,7 @@
 		</section>
 	</aside>
 </div>
-<div class="modal fade" id="simpleDialog">
+<div class="modal fade" id="simpleDialog" style="font-family:Microsoft YaHei">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -70,7 +70,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warning</h4>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Warning</h4>
 			</div>
 			<div class="modal-body">
 			</div>

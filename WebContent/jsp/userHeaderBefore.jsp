@@ -24,7 +24,7 @@
                   <li><a href="toForeignExchange">Foreign exchange</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Account Enquiry</li>
-                  <li><a href="#">Balance Enquiry</a></li>
+                  <li><a href="toAccountEnquiry">Balance Enquiry</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Fund</li>
                   <li><a href="#">Purchase</a></li>

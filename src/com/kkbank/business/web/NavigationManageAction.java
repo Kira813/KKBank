@@ -419,6 +419,7 @@ public class NavigationManageAction extends ActionSupport{
 	public String toTransfer() throws Exception{
 		ID = (String) ActionContext.getContext().getSession().get("loginID");
 		acList = accountService.listAccount(ID);
+		ActionContext.getContext().put("acList", acList);
 		return SUCCESS;
 }
 	public double getIncome() {

@@ -61,6 +61,7 @@ public class UserManageAction extends ActionSupport {
 	private String toName;
 	private String PIN;
 	private String ac_No;
+	private String ac_No1;
 
 	private int t_id;
 	private Date date;
@@ -115,7 +116,75 @@ public class UserManageAction extends ActionSupport {
 		ActionContext.getContext().getSession().clear();
 		return SUCCESS;
 	}
+	public String transfer(){
+		ID = (String) ActionContext.getContext().getSession().get("loginID");
+		acList = accountService.listAccount(ID);
+		ActionContext.getContext().put("acList", acList);
+		String tips = null;
+		account = accountService.getAccount(ac_No1);
+		toAccount = accountService.getAccount(toAc_No);	
+		//Object[] option = {"Return"};
+		
+		//status is locked or not
+		if(account.getStatus() == 2){
+			msg="Your account is locked, please contact the system administrator.";
+			ActionContext.getContext().put("msg", msg);
+			return ERROR;
+		}else if(toAccount == null){
+			msg = "The account you want to transfer to does not exist.";
+			ActionContext.getContext().put("msg", msg);
+			return ERROR;
+		}else
+		{
+			if(customerService.isValidAccount(toAccount.getID(), toName))
+			{
+				System.out.println(account.getPassword());
+				if(account.getPassword().equals(PIN)){
+					if(account.getBalance() > amount){
+						account.setBalance(account.getBalance() - amount);
+						toAccount.setBalance(toAccount.getBalance() + amount);
+						
+						accountService.updateAccount(account);
+						accountService.updateAccount(toAccount);
 
+						type="Transfer out";
+						type2="Transfer in";
+						date = new Date();
+					    t_id = transactionService.addTransaction(t_id, date, type, amount, account.getBalance(), account);
+					    t_id = transactionService.addTransaction(t_id, date, type2, amount, toAccount.getBalance(), toAccount);
+						
+					    tips = "Successfully transfer";
+					    ActionContext.getContext().put("tips", tips);
+					    
+						count = 0;
+						ActionContext.getContext().getApplication().remove("counter");
+						ActionContext.getContext().getApplication().remove("time");
+						System.out.println("clean, not locked");
+						return SUCCESS;
+					}
+					else
+					{
+						msg="Your balance is insufficient.";
+						ActionContext.getContext().put("msg", msg);
+						return ERROR;
+					}
+				}
+				else
+				{
+					System.out.println("000");
+					lock(account);
+					//msg="The card PIN is wrong.";
+					return ERROR;
+				}
+			}
+			else
+			{
+				msg="The account you want to transfer to is not in conformity with the name.";
+				ActionContext.getContext().put("msg", msg);
+				return ERROR;
+			}
+		}
+	}/*
 	public String transfer() {
 		String tips = null;
 		account = accountService.getAccount(ac_No);
@@ -186,10 +255,10 @@ public class UserManageAction extends ActionSupport {
 			}
 		}
 	}
-
+*/
 	public void lock(Account account) {
 		// resultMap = new HashMap<String, Object>();
-
+		String msg2;
 		Object[] option = { "Return" };
 
 		// when the first time, create Application object
@@ -198,11 +267,13 @@ public class UserManageAction extends ActionSupport {
 			ActionContext.getContext().getApplication().put("counter", count);
 			ActionContext.getContext().getApplication().put("time", new Date());
 			System.out.println("create:" + new Date() + "-----" + count);
-			JOptionPane.showOptionDialog(null, "The card PIN is not correct.",
-					"Warning", JOptionPane.DEFAULT_OPTION,
-					JOptionPane.WARNING_MESSAGE, null, option, option[0]);
+			//JOptionPane.showOptionDialog(null, "The card PIN is not correct.",
+			//		"Warning", JOptionPane.DEFAULT_OPTION,
+			//		JOptionPane.WARNING_MESSAGE, null, option, option[0]);
 			// resultMap.put("result", false);
 			// resultMap.put("msg", "The card PIN is not correct.");
+			msg2 = "The card PIN is not correct.";
+			ActionContext.getContext().put("msg2", msg2);
 		}
 
 		// if Application object is exist
@@ -220,10 +291,12 @@ public class UserManageAction extends ActionSupport {
 				ActionContext.getContext().getApplication().put("time", now);
 				System.out.println("more than 1 hour:" + interval + "--------"
 						+ count);
-				JOptionPane.showOptionDialog(null,
-						"The card PIN is not correct.", "Warning",
-						JOptionPane.DEFAULT_OPTION,
-						JOptionPane.WARNING_MESSAGE, null, option, option[0]);
+				msg2 = "The card PIN is not correct.";
+				ActionContext.getContext().put("msg2", msg2);
+				//JOptionPane.showOptionDialog(null,
+				//		"The card PIN is not correct.", "Warning",
+				//		JOptionPane.DEFAULT_OPTION,
+				//		JOptionPane.WARNING_MESSAGE, null, option, option[0]);
 				// resultMap.put("result", false);
 				// resultMap.put("msg", "The card PIN is not correct.");
 			}
@@ -241,11 +314,13 @@ public class UserManageAction extends ActionSupport {
 							.put("time", now);
 					System.out.println("within 1 hour:" + interval + "--------"
 							+ count);
-					JOptionPane.showOptionDialog(null,
+					msg2 = "The card PIN is not correct,if you input a wrong PIN again,this account will be locked.";
+					ActionContext.getContext().put("msg2", msg2);
+					/*JOptionPane.showOptionDialog(null,
 							"The card PIN is not correct.", "Warning",
 							JOptionPane.DEFAULT_OPTION,
 							JOptionPane.WARNING_MESSAGE, null, option,
-							option[0]);
+							option[0]);*/
 					// resultMap.put("result", false);
 					// resultMap.put("msg", "The card PIN is not correct.");
 				}
@@ -261,13 +336,15 @@ public class UserManageAction extends ActionSupport {
 							.remove("counter");
 					ActionContext.getContext().getApplication().remove("time");
 					System.out.println("should be locked " + interval);
-					JOptionPane
+					msg = "Your account is locked,please contact the system administrator.";
+					ActionContext.getContext().put("msg", msg);
+					/*JOptionPane
 							.showOptionDialog(
 									null,
 									"Your account is locked. Please contact with the system administrator.",
 									"Warning", JOptionPane.DEFAULT_OPTION,
 									JOptionPane.WARNING_MESSAGE, null, option,
-									option[0]);
+									option[0]);*/
 					// resultMap.put("result", true);
 					// resultMap.put("msg", "Your account is locked. ");
 				}
@@ -823,6 +900,38 @@ public class UserManageAction extends ActionSupport {
 	public void setbStatus(int bStatus) {
 		this.bStatus = bStatus;
 	}
+	public Payment getPp() {
+		return pp;
+	}
+
+	public void setPp(Payment pp) {
+		this.pp = pp;
+	}
+
+	public String getbNo() {
+		return bNo;
+	}
+
+	public void setbNo(String bNo) {
+		this.bNo = bNo;
+	}
+
+	public double getbAmount() {
+		return bAmount;
+	}
+
+	public void setbAmount(double bAmount) {
+		this.bAmount = bAmount;
+	}
+
+	public String getbDetail() {
+		return bDetail;
+	}
+
+	public void setbDetail(String bDetail) {
+		this.bDetail = bDetail;
+	}
+
 	public IPayService getPayService() {
 		return payService;
 	}
@@ -857,6 +966,14 @@ public class UserManageAction extends ActionSupport {
 	public void setBAmount(double bAmount) {
 		this.bAmount = bAmount;
 	}
+	public String getAc_No1() {
+		return ac_No1;
+	}
+
+	public void setAc_No1(String ac_No1) {
+		this.ac_No1 = ac_No1;
+	}
+
 	public String getItem() {
 		return item;
 	}

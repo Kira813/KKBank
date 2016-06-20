@@ -110,7 +110,7 @@
 				<div class="modal-body"></div>
 				<div class="modal-footer">
 					<a class="btn btn-primary" class="close" data-dismiss="modal"
-				aria-label="Close">Return</a>
+				aria-label="Close" href="javascript:void(0)">Return</a>
 				</div>
 			</div>
 		</div>

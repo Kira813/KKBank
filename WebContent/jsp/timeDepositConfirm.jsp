@@ -45,7 +45,7 @@
 						<section>
 							<div class="box box-warning">
 								<div class="box-header">
-									<h3 class="box-title">Time Deposit</h3>
+									<h3 class="box-title" style="font-family:Microsoft YaHei">Time Deposit</h3>
 								</div>
 								<div class="box-body no-padding" >
 									<table class="table table-striped" >
