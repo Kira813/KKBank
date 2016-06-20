@@ -97,6 +97,11 @@
 											</div>
 										</div>
 										<p></p>
+										<div class="bg-info info-custom" style="display:none">
+										<a class="close" data-dismiss="alert">×</a>
+										<span class="glyphicon glyphicon-exclamation-sign"></span> <strong>Tips!</strong>
+										<span id="info1"></span>
+										</div>
 									</div>
 									<input name="ac_No" style="display:none">
 									<input name="amt" style="display:none">
@@ -109,6 +114,7 @@
 									</div>
 								</form>
 							</div>
+
 						</section>
 					</aside>
 				</div>
@@ -120,7 +126,12 @@
 <script type="text/javascript">
 var res = ${res};
 var countries = ['USD', 'JPY', 'HKD', 'GBP' ,'AUD'];
-
+$('select').on('change', function() { 
+	$('.info-custom').hide(); 
+});
+$('input').on('change', function() { 
+	$('.info-custom').hide(); 
+});
 $(function() {
 	var dom = {
 		select: $('#rate_list'),
@@ -153,7 +164,7 @@ $(function() {
 		
 		var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 
 		
-		var amt = (balance/rate).toFixed(0);
+		var amt = (balance/rate/100).toFixed(0);
 		//看分子分母 ， 这里的情况人民币全为分子， 所以： 人民币/外币=利率  能换外币数=人民币/利率
 		
 		var max1 = amt.replace(/(\d+\.\d*)/, function($1) {
@@ -170,14 +181,16 @@ $(function() {
 	function getRate() {
 		var country = dom.select.val();
 		if(!country) {
+			$('#rate_count').text(" ");
+			$('#rate_maxchange').text(" ");
 			return false;
 		}
 		
 		var obj = getData(country);
 		//银行现汇卖出价 bid rate
-		var rate = (+obj['hui_out']) / 100;
+		var rate = (+obj['hui_out']);
 		
-		rate = rate.toFixed(4);
+		//rate = rate.toFixed(4);
 		
 		return rate;
 	}
@@ -193,7 +206,7 @@ $(function() {
 	$('input[name=amount]').on('input', function() {
 		var rate = getRate();
 		var amount = $('input[name=amount]').val();
-		var rmb = ((+amount) * rate).toFixed(2);
+		var rmb = ((+amount) * rate/100).toFixed(2);
 		$('#rmb').text(rmb);
 		$('input[name=amt]').val(amount);
 		$('input[name=rate]').val(rate);
@@ -207,17 +220,20 @@ $(function() {
 			var cou = dom.select.val();
 			$('input[name=currency]').val(cou);
 			amount = +amount;
-			
-			if(maxAmt < 1){
-				alert('Please select a currency.');
+			if(!cou){
+				$('#info1').text("Please select a currency.");
+				$('.info-custom').show();
 			}else if(amount < 1){
-				alert('Please input exchange amount.');
+				$('#info1').text("Please input exchange amount.");
+				$('.info-custom').show();
 			}else if(amount > maxAmt){
 				form.amount.value="";
 				form.amount.focus();
 				
 				$('#rmb').text('');
-				alert('Balance is not enough.');		
+				$('#info1').text("Balance is not enough.");
+				$('.info-custom').show();
+				//dialog.show('Balance is not enough.');		
 			} else {
 				$('form').submit();
 			}

@@ -20,7 +20,7 @@
 <div class="container">
 	<%@include file="./userHeader.jsp"%>
 </div>
-<div class="wrapper row-offcanvas row-offcanvas-left">
+<div class="wrapper row-offcanvas row-offcanvas-left" style="font-family:Microsoft YaHei">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
@@ -47,7 +47,7 @@
 					<section>
 						<div class="box box-warning">
 							<div class="box-header">
-								<h3 class="box-title">Time Deposit</h3>
+								<h3 class="box-title" style="font-family:Microsoft YaHei">Time Deposit</h3>
 							</div>
 							<div class="box-body">
 								<form role="form" action="toTimeDepositConfirm.action" method="post">
@@ -96,8 +96,8 @@
 										<p></p>
 										<div class="bg-info info-custom" style="display:none">
 											<a class="close" data-dismiss="alert">×</a>
-											<span class="glyphicon glyphicon-exclamation-sign"></span> <strong>Tip!</strong>
-											The deposit amount should be more than 50 yuan.
+											<span class="glyphicon glyphicon-exclamation-sign"></span> <strong>Tips!</strong>
+											<span id="info1"></span>
 										</div>
 									</div>
 								</form>
@@ -121,7 +121,7 @@
 aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Tips</h4>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Tips</h4>
 			</div>
 			<div class="modal-body"></div>
 			<div class="modal-footer">
@@ -160,6 +160,9 @@ var dialog = {
 			}
 		});
 	}
+	$('select').on('change', function() { 
+		$('.info-custom').hide(); 
+	});
 	//setInterval(.., 200); 200ms
 	$(function() {
 		var form = document.querySelector('form');
@@ -168,19 +171,22 @@ var dialog = {
 			var ac_no = $('option[name=ac_no]:checked').val();
 			var period =  $('option[name=period]:checked').val();
 			if (!ac_no) {
-				alert('Please select an account.');
+				$('#info1').text("Please select an account.");
+				$('.info-custom').show();
+				//dialog.show('Please select an account.');
 			} else {
 				var amount = $('input[name=amount]').val();
 				var balance = $('#showbalance').attr('data-balance');
 				
 				balance = +balance;
 				if(amount < 50){
+					$('#info1').text("The deposit amount should be more than 50 yuan.");
 					$('.info-custom').show();
 				}
 				else if(balance < amount){
 					form.amount.value="";
 					form.amount.focus();
-					alert('Balance is not enough.');
+					dialog.show('Balance is not enough.');
 					
 				} else {
 					$('input[name="ac_No"]').val(ac_no);

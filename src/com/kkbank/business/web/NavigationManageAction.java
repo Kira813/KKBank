@@ -40,22 +40,8 @@ public class NavigationManageAction extends ActionSupport{
 	private double amt;
 	private double rmb;
 	private double income;
-	
-	public double getIncome() {
-		return income;
-	}
-	public void setIncome(double income) {
-		this.income = income;
-	}
+	private int t_id;
 
-	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
-	
-	public HashMap<String, Object> getResultMap() {
-		return resultMap;
-	}
-	public void setResultMap(HashMap<String, Object> resultMap) {
-		this.resultMap = resultMap;
-	}
 
 	IAccountService accountService = new AccountService();
 	ITransactionService transactionService = new TransactionService();
@@ -91,8 +77,8 @@ public class NavigationManageAction extends ActionSupport{
 	}
 	public String toRmbConfirm() throws Exception{
 		ActionContext.getContext().put("ac_No", ac_No);
-		double in = amt*rate; 
-		ActionContext.getContext().put("in", in);
+		//double in = amt*rate/100; 
+		//ActionContext.getContext().put("in", in);
         double bal = accountService.getAccount(ac_No).getBalance();
         ActionContext.getContext().put("balance", bal);
 		ActionContext.getContext().put("rate", rate);
@@ -191,7 +177,8 @@ public class NavigationManageAction extends ActionSupport{
 	}
 	public String toForeignConfirm() throws Exception{
 		ActionContext.getContext().put("ac_No", ac_No);
-		double rmb = amt*rate; 
+		double rmb = amt*rate/100; 
+		System.out.println("rmb:"+rmb);
 		ActionContext.getContext().put("r", rmb);
         double bal = accountService.getAccount(ac_No).getBalance();
         ActionContext.getContext().put("balance", bal);
@@ -434,6 +421,27 @@ public class NavigationManageAction extends ActionSupport{
 		acList = accountService.listAccount(ID);
 		return SUCCESS;
 }
+	public double getIncome() {
+		return income;
+	}
+	public void setIncome(double income) {
+		this.income = income;
+	}
+
+	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
+	
+	public HashMap<String, Object> getResultMap() {
+		return resultMap;
+	}
+	public void setResultMap(HashMap<String, Object> resultMap) {
+		this.resultMap = resultMap;
+	}
+	public int getT_id() {
+		return t_id;
+	}
+	public void setT_id(int t_id) {
+		this.t_id = t_id;
+	}
 
 	public List<Account> getAcList() {
 		return acList;

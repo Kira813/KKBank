@@ -58,15 +58,19 @@
 											</s:iterator>
 										</select>
 									</div>
-									<p>
+									<p></p>
+									<div class="bg-info info-custom" style="display:none">
+										<a class="close" data-dismiss="alert">×</a>
+										<span class="glyphicon glyphicon-exclamation-sign"></span> <strong>Tips!</strong>
+										<span id="info1"></span>
+									</div>
+									<p></p>
 									<form role="form" action="toRmb" method="post">
 									<input name="ac_No" style="display:none">
 									<input name="currency" style="display:none">
 									<h4 style="font-family:Microsoft YaHei">Balance details:</h4>
 									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="fa fa-yen " style="color:"></i> RMB
-										</span>
+										<span class="input-group-addon">RMB</span>
 										<div class="form-control">
 											<span id="showbalance">${balance}</span>
 										</div>
@@ -74,9 +78,7 @@
 									</form>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">
-											<i class="fa fa-dollar"></i> USD
-										</span>
+										<span class="input-group-addon">USD</span>
 										<div class="form-control">
 											<span id="showusd"></span>
 										</div>
@@ -86,9 +88,7 @@
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">
-											<i class="fa fa-jpy"></i> JPY
-										</span>
+										<span class="input-group-addon">JPY</span>
 										<div class="form-control">
 											<span id="showjpy"></span>
 										</div>
@@ -98,9 +98,7 @@
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">
-											<i class="fa fa-dollar"></i> HKD
-										</span>
+										<span class="input-group-addon">HKD</span>
 										<div class="form-control">
 											<span id="showhkd"></span>
 										</div>
@@ -110,9 +108,7 @@
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">
-											<i class="fa fa-gbp"></i> GBP
-										</span>
+										<span class="input-group-addon">GBP</span>
 										<div class="form-control">
 											<span id="showgbp"></span>
 										</div>
@@ -122,9 +118,7 @@
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">
-											<i class="fa fa-dollar"></i> AUD
-										</span>
+										<span class="input-group-addon">AUD</span>
 										<div class="form-control">
 											<span id="showaud"></span>
 										</div>
@@ -156,6 +150,11 @@
 				$('#showbalance').attr("data-balance", data.balance);
 			} else {
 				$('#showbalance').text(" ");
+				$('#showusd').text(" ");
+				$('#showjpy').text(" ");
+				$('#showhkd').text(" ");
+				$('#showgbp').text(" ");
+				$('#showaud').text(" ");
 			}
 		});
 		$.get(getCurrencyAjax, {
@@ -175,12 +174,16 @@
 			}
 		});
 	}
+	$('select').on('change', function() { 
+		$('.info-custom').hide(); 
+	});
 	$(function(){
 		var form = document.querySelector('form');
 		$('#exchange_btn1').click(function() {
 			var ac_no = $('option[name=ac_no]:checked').val();
 			if (!ac_no) {
-				alert('Please select an account.');
+				$('#info1').text("Please select an account.");
+				$('.info-custom').show();
 			} else {
 					$('input[name="ac_No"]').val(ac_no);
 					$('input[name="currency"]').val('USD');
@@ -190,7 +193,8 @@
 		$('#exchange_btn2').click(function() {
 			var ac_no = $('option[name=ac_no]:checked').val();
 			if (!ac_no) {
-				alert('Please select an account.');
+				$('#info1').text("Please select an account.");
+				$('.info-custom').show();
 			} else {
 					$('input[name="ac_No"]').val(ac_no);
 					$('input[name="currency"]').val('JPY');
@@ -200,7 +204,8 @@
 		$('#exchange_btn3').click(function() {
 			var ac_no = $('option[name=ac_no]:checked').val();
 			if (!ac_no) {
-				alert('Please select an account.');
+				$('#info1').text("Please select an account.");
+				$('.info-custom').show();
 			} else {
 					$('input[name="ac_No"]').val(ac_no);
 					$('input[name="currency"]').val('HKD');
@@ -210,7 +215,8 @@
 		$('#exchange_btn4').click(function() {
 			var ac_no = $('option[name=ac_no]:checked').val();
 			if (!ac_no) {
-				alert('Please select an account.');
+				$('#info1').text("Please select an account.");
+				$('.info-custom').show();
 			} else {
 					$('input[name="ac_No"]').val(ac_no);
 					$('input[name="currency"]').val('GBP');
@@ -220,7 +226,8 @@
 		$('#exchange_btn5').click(function() {
 			var ac_no = $('option[name=ac_no]:checked').val();
 			if (!ac_no) {
-				alert('Please select an account.');
+				$('#info1').text("Please select an account.");
+				$('.info-custom').show();
 			} else {
 					$('input[name="ac_No"]').val(ac_no);
 				$('input[name="currency"]').val('AUD');

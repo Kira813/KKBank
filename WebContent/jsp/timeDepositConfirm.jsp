@@ -18,7 +18,7 @@
 </head>
 <body>
 	<%@include file="./userHeader.jsp"%>
-	<div class="wrapper row-offcanvas row-offcanvas-left">
+	<div class="wrapper row-offcanvas row-offcanvas-left" style="font-family:Microsoft YaHei">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
@@ -117,18 +117,19 @@
 				aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">Tips</h4>
+					<h4 class="modal-title" style="font-family:Microsoft YaHei">Tips</h4>
 				</div>
 				<div class="modal-body"></div>
 				<div class="modal-footer">
-					<a class="btn btn-primary" href="toTimeDeposit">Return</a>
+					<a class="btn btn-primary" class="close" data-dismiss="modal"
+				aria-label="Close">Return</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
-		<%@include file="./adminJsp/javascript.jsp"%>
-		<script type="text/javascript">
+<%@include file="./adminJsp/javascript.jsp"%>
+<script type="text/javascript">
 var dialog = {
 		el: $('#simpleDialog'),
 		show: function(msg) {
@@ -155,7 +156,9 @@ var dialog = {
 				$('input[name=ac_No]').val(ac_No);
 				$('form').submit();
 			}else{
-				alert('Wrong PIN.');
+				$('input[name=pin]').val("");
+				dialog.show('Wrong PIN.');
+				//form.pin.focus();
 			}
 		});
 	});

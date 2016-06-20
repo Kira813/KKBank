@@ -9,9 +9,11 @@ import java.util.Set;
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.ICustomerService;
 import com.kkbank.business.service.ITimeDepositService;
+import com.kkbank.business.service.ITransactionService;
 import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.business.service.impl.TimeDepositService;
+import com.kkbank.business.service.impl.TransactionService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
 import com.kkbank.domain.Transaction;
@@ -27,6 +29,7 @@ public class AccountManageAction extends ActionSupport{
 	protected IAccountService accountService = new AccountService();
 	protected ICustomerService customerService = new CustomerService();
 	protected ITimeDepositService timeDepositService = new TimeDepositService();
+	protected ITransactionService transactionService = new TransactionService();
 
 	private String ID;
 	private String ac_No;
@@ -44,6 +47,7 @@ public class AccountManageAction extends ActionSupport{
 	private int term;
 	private double intRate;
 	private boolean confirm;
+	private int t_id;
 
 	private HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
@@ -57,6 +61,10 @@ public class AccountManageAction extends ActionSupport{
 		account.setBalance(bal);
 		accountService.updateAccount(account);
 		
+		String type="Time Deposit";
+	    Date date = new Date();
+		t_id = transactionService.addTransaction(t_id, date, type, amount, bal, account);
+
 		return SUCCESS;
 	}
 	
@@ -270,6 +278,22 @@ public class AccountManageAction extends ActionSupport{
 
 	public void setID(String id) {
 		ID = id;
+	}
+
+	public ITransactionService getTransactionService() {
+		return transactionService;
+	}
+
+	public void setTransactionService(ITransactionService transactionService) {
+		this.transactionService = transactionService;
+	}
+
+	public int getT_id() {
+		return t_id;
+	}
+
+	public void setT_id(int t_id) {
+		this.t_id = t_id;
 	}
 
 	public String getAc_No() {

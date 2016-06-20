@@ -93,6 +93,11 @@
 											</div>
 										</div>
 										<p></p>
+										<div class="bg-info info-custom" style="display:none">
+											<a class="close" data-dismiss="alert">×</a>
+											<span class="glyphicon glyphicon-exclamation-sign"></span> <strong>Tips!</strong>
+											<span id="info1"></span>
+										</div>
 									</div>
 									<input name="ac_No" style="display:none">
 									<input name="amt" style="display:none">
@@ -117,7 +122,9 @@
 <script type="text/javascript">
 var res = ${res};
 var countries = ['${currency}'];
-
+$('input').on('change', function() { 
+	$('.info-custom').hide(); 
+});
 $(function() {
 	var dom = {
 		select: $('#rate_list'),
@@ -144,7 +151,7 @@ $(function() {
 			return false;
 		}
 		
-		var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 
+		//var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 
 		
 		//var amt = (balance/rate).toFixed(0);
 		//看分子分母 ， 这里的情况人民币全为分子， 所以： 人民币/外币=利率  能换外币数=人民币/利率
@@ -168,9 +175,9 @@ $(function() {
 		
 		var obj = getData(country);
 		//银行现汇卖出价 bid rate
-		var rate = (+obj['hui_in']) / 100; //gai
+		var rate = (+obj['hui_in']); //gai
 		
-		rate = rate.toFixed(4);
+		//rate = rate.toFixed(4);
 		
 		return rate;
 	}
@@ -187,7 +194,7 @@ $(function() {
 		var rate = getRate();
 		var amount = $('input[name=amount]').val();
 		//var rmb = ((+amount) * rate).toFixed(2);
-		var income = ((+amount) * rate).toFixed(2);
+		var income = ((+amount) * rate/100).toFixed(2);
 		$('#income').text(income);
 		
 		$('input[name=amt]').val(amount);
@@ -206,13 +213,16 @@ $(function() {
 			bal = + bal;
 			
 			if(amount < 1){
-				alert('Please input exchange amount.');
+				$('#info1').text("Please input exchange amount.");
+				$('.info-custom').show();
 			}else if(amount > bal){
 				form.amount.value="";
 				form.amount.focus();
 				
 				$('#income').text('');
-				alert('Balance is not enough.');		
+				$('#info1').text("Balance is not enough.");
+				$('.info-custom').show();
+				//alert('Balance is not enough.');		
 			} else {
 				$('form').submit();
 			}

@@ -107,7 +107,7 @@
 				</form>
 			</div>
 			<div class="modal-footer" style="font-family:Microsoft YaHei">
-				<button type="button" class="btn btn-default dialog-close" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default dialog-close" data-dismiss="modal">Return</button>
 				<button type="button" class="btn btn-primary dialog-confirm">Submit</button>
 			</div>
 		</div>
