@@ -13,7 +13,12 @@
 <title>KKBank</title>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@include file="./adminJsp/headMeta.jsp"%></head>
+<%@include file="./adminJsp/headMeta.jsp"%>
+<style>
+body {
+	background: #e7e7e7;
+}
+</style>
 </head>
 <body>
 <s:if test="#session.loginID==null">
@@ -28,42 +33,43 @@
 		<h3>Hello,${name}</h3>
 	</div>
 </div>
-<div class="intro-wrap">
-	<ul>
-		<li>
-			<img src="/KKBank/images/uIndex1.jpg">
-			<div>
-				<p>Banking</p>
-				<hr/>
-			</div>
-		</li>
-		<li>
-			<img src="/KKBank/images/uIndex2.jpg">
-			<div>
-				<p>Borrowing</p>
-			</div>
-		</li>
-		<li>
-			<img src="/KKBank/images/uIndex3.jpg">
-			<div>
-				<p>Investing</p>
-			</div>
-		</li>
-	</ul>
+<div class="container">
+	<div class="intro-wrap">
+		<ul class="row">
+			<li class="col-sm-4">
+				<img src="/KKBank/images/uIndex1.jpg">
+				<div>
+					<p>Banking</p>
+				</div>
+			</li>
+			<li class="col-sm-4">
+				<img src="/KKBank/images/uIndex2.jpg">
+				<div>
+					<p>Borrowing</p>
+				</div>
+			</li>
+			<li class="col-sm-4">
+				<img src="/KKBank/images/uIndex3.jpg">
+				<div>
+					<p>Investing</p>
+				</div>
+			</li>
+		</ul>
+	</div>
 </div>
 <!-- downside intro -->
-<div class="intro-container">
+<div class="container intro-container">
 	<div class="row">
-		<div class="col-md-8">
-				<div class="row">33
-				</div>
-				<div class="row">
-					<div class="col-md-8">11</div>
-					<div class="col-md-4">22</div>
-				</div>
+		<div class="col-sm-8">
+			<div class="row">
+				<div class="col-sm-12 custom-tag custom-tag1">11</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-8 custom-tag custom-tag2">22</div>
+				<div class="col-sm-4 custom-tag custom-tag3">33</div>
+			</div>
 		</div>
-		<div class="col-md-4">11
-		</div>
+		<div class="col-sm-4 custom-tag custom-tag4">44</div>
 	</div>
 </div>
 <div class="modal fade" id="simpleDialog" style="font-family:Microsoft YaHei">
