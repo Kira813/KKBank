@@ -29,7 +29,7 @@
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
 				    <li role="presentation">
-				        <a href="javascript:void(0)">Fund</a>
+				        <a href="fund/listFund">Fund</a>
 				    </li>
 				    <li role="presentation" class="active">
 				        <a href="toTimeDeposit">Time Deposit</a>
@@ -39,6 +39,9 @@
 				    </li>
 				    <li role="presentation">
 				        <a href="toForeignExchange">Foreign Exchange</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="user/toPayment">Payment</a>
 				    </li>
 				</ul>
 			</div>
@@ -89,6 +92,9 @@
 												<option name="period" value="36">3 years</option>
 												<option name="period" value="60">5 years</option>
 											</select>
+											<span class="input-group-addon">
+												<a class="fa fa-bar-chart-o bg-warning" id="box_btn" href="javascript:void(0)" style="color:#f39c12"></a>
+											</span>
 										</div>
 										<p></p>
 										<div class="input-group">
@@ -166,6 +172,20 @@ var dialog = {
 	}
 	$('select').on('change', function() { 
 		$('.info-custom').hide(); 
+	});
+	
+	$(function() {
+		$('#box_btn').click(function() {
+			/*var tips = <table><tr><th>+"Lump Fixed Deposit-Interest Rate"+</th></tr>+
+				<tr>+"3 months-1.35%"+</tr>
+				<tr>+"6 months-1.55%"+</tr>  
+				<tr>+"1 year -1.75%"+</tr>   
+				<tr>+"2 years-2.25%"+</tr>  
+				<tr>+"3 years-2.75%"+</tr>  
+				<tr>+"5 years-2.75%"+</tr></table>;*/
+			//dialog.show(tips);
+			dialog.show('3 months-1.35%,6 months-1.55%,1 year -1.75%,2 years-2.25%,3 years-2.75%,5 years-2.75%');
+		});
 	});
 	//setInterval(.., 200); 200ms
 	$(function() {

@@ -30,12 +30,12 @@
 			        <input type="password" name="pwd" class="form-control"required="required" id="pwd"
 			            	oninvalid="setCustomValidity('Please input password')" oninput="setCustomValidity('')" placeholder="Password"/>
 			     </div>
-			         <div class="alert-custom bg-warning" style="display:none">
+			     <s:if test="msg!=null">
+			     	    <div class=" alert-custom ">
 						  <a class="close" data-dismiss="alert">×</a>
-						  <strong>Error!</strong>${msg}
-					  </div>
-			      <div id="showText">${msg}</div>       
-			        
+						  <span class="glyphicon glyphicon-exclamation-sign"></span><strong> Error! </strong>${msg}
+						 </div>
+			     </s:if>     
 		   </div>
 		         <div class="footer" style="text-align:center">
 		            <input type="submit" value="Submit" class="btn btn-primary btn-block"/>

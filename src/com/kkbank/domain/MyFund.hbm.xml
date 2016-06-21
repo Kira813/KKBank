@@ -13,6 +13,7 @@
 		<property name="amount" not-null="true"/>
 		<property name="dealDate" not-null="true"/>
 		<property name="nav" not-null="false"/>	
+		<property name="share" not-null="false"/>
 		<property name="status" not-null="true"/>	
 		
 		<many-to-one name="fund" column="fCode"

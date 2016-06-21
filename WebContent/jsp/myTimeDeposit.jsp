@@ -29,7 +29,7 @@
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
 				    <li role="presentation">
-				        <a href="javascript:void(0)">Fund</a>
+				        <a href="fund/listFund">Fund</a>
 				    </li>
 				    <li role="presentation" class="active">
 				        <a href="toTimeDeposit">Time Deposit</a>
@@ -39,6 +39,9 @@
 				    </li>
 				    <li role="presentation">
 				        <a href="toForeignExchange">Foreign Exchange</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="user/toPayment">Payment</a>
 				    </li>
 				</ul>
 			</div>
@@ -54,12 +57,12 @@
                             <table class="table table-striped" style="text-align:center">
                            		<thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Deposit term</th>
-                                    <th>deposit amount</th>
-                                    <th>deposit type</th>
-                                    <th>interest rate</th>
-                                    <th>maturity date</th>
+                                    <th style="text-align:center">ID</th>
+                                    <th style="text-align:center">Deposit term</th>
+                                    <th style="text-align:center">deposit amount</th>
+                                    <th style="text-align:center">deposit type</th>
+                                    <th style="text-align:center">interest rate</th>
+                                    <th style="text-align:center">maturity date</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -77,7 +80,6 @@
 	                                    	<td><span format-balance>${amount}</span></td>
 	                                    	<td>${type }</td>
 	                                    	<td>${interestRate }</td>
-											<td>${mDate}</td>
 											<td><s:date name="maturityDate" format="yyyy-MM-dd hh：mm：ss"/></td>
 	                                  	</tr>
                                 </s:iterator>

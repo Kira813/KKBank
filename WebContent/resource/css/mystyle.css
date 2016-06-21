@@ -224,3 +224,6 @@ body {
 .center-side .content {
 	background: #fff;
 }
+.box.box-teal {
+  border-top-color: #39CCCC;
+}

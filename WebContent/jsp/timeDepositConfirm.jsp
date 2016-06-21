@@ -27,7 +27,7 @@
 					        <a href="toAccountEnquiry">Account Enquiry</a>
 					    </li>
 					    <li role="presentation">
-					        <a href="javascript:void(0)">Fund</a>
+					        <a href="fund/listFund">Fund</a>
 					    </li>
 					    <li role="presentation" class="active">
 					        <a href="toTimeDeposit">Time Deposit</a>
@@ -38,6 +38,9 @@
 					    <li role="presentation">
 					        <a href="toForeignExchange">Foreign Exchange</a>
 					    </li>
+					    <li role="presentation">
+				        	<a href="user/toPayment">Payment</a>
+				   		</li>
 					</ul>
 				</div>
 				<div class="col-md-9">
@@ -51,7 +54,7 @@
 									<table class="table table-striped" >
 										<tbody>
 											<tr>
-												<td style="width: 20%; padding-left:20px">Card Number</td>
+												<td style="width: 30%; padding-left:20px">Card Number</td>
 												<td>${ac_No}</td>
 											</tr>
 											<tr>
