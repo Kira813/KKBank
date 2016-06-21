@@ -78,7 +78,7 @@
 	                                    	<td>${type }</td>
 	                                    	<td>${interestRate }</td>
 											<td>${mDate}</td>
-											<td><s:date name="mDate" format="yyyy-MM-dd hh：mm：ss"/></td>
+											<td><s:date name="maturityDate" format="yyyy-MM-dd hh：mm：ss"/></td>
 	                                  	</tr>
                                 </s:iterator>
                                 </tbody>

@@ -8,7 +8,7 @@ import com.kkbank.domain.Account;
 import com.kkbank.domain.TimeDeposit;
 
 public interface ITimeDepositService {
-	public int addTimeDeposit(String type, int term, double amount,double interestRate, Date depositDate,Date mDate, Account account);
+	public int addTimeDeposit(String type, int term, double amount,double interestRate, Date depositDate,Date maturityDate, Account account);
 
 	public void delTimeDeposit(int id);
 

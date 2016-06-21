@@ -33,7 +33,7 @@ body {
 		<h3>Hello,${name}</h3>
 	</div>
 </div>
-<div class="container">
+<div class="container intro-container">
 	<div class="intro-wrap">
 		<ul class="row">
 			<li class="col-sm-4">
@@ -58,7 +58,7 @@ body {
 	</div>
 </div>
 <!-- downside intro -->
-<div class="container intro-container">
+<div class="container desc-container">
 	<div class="row">
 		<div class="col-sm-8">
 			<div class="row">

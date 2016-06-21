@@ -59,7 +59,6 @@ public class NavigationManageAction extends ActionSupport{
 		List<TimeDeposit> tlist = timeDepositService.listTimeDeposit(account);
 		ActionContext.getContext().put("tlist", tlist);
 		ActionContext.getContext().put("ac_No", ac_No);
-		System.out.println(tlist.get(0).getmDate());
 		return SUCCESS;
 	}
 	//OTHER TO RMB

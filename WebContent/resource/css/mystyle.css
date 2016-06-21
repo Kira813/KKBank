@@ -55,8 +55,9 @@ body {
 	font-size: 400%;
 }
 .intro-wrap .row {
-	margin: -50px auto 0;
+	margin: -70px auto 0;
 	padding: 0px;
+	
 	box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
 	font-size:20px;
 	color:white;
@@ -68,17 +69,20 @@ body {
 }
 .intro-wrap li {
 	position: relative;
+	padding: 0;
 	height: 100px;
 	list-style: none;
 	background: #696969;
-	border-right: 1px solid #ddd;
 }
-.intro-wrap li:nth-child(3) {
-	border-right: none;
+.intro-wrap div {
+	margin-left: 100px;
+	text-align: center;
+	background-image: -webkit-radial-gradient(#524436, #1a1205);
+  	background-image: radial-gradient(#524436, #1a1205);
+	
 }
 .intro-wrap p {
 	line-height: 100px;
-	text-indent: 110px;
 }
 .intro-wrap img {
 	position: absolute;
@@ -87,35 +91,72 @@ body {
 	width: 100px;
 	height: 100px;
 }
-.intro-container {
+.intro-container, .desc-container {
+	max-width: 1024px;
 	margin: 30px auto;
+	padding: 0 15px;
+}
+.desc-container {
 	padding: 0 30px;
 }
 .custom-tag {
+	position: relative;
 	text-align: center;
 	font-size: 200%;
 	font-weight: bold;
 	color: #111;
 }
 .custom-tag1 {
+	height: 200px;
+	line-height: 200x;
 	background: #f60;
-	height: 150px;
-	line-height: 150px;
 }
 .custom-tag2 {
+	height: 150px;
+	line-height: 150px;
 	background: #6cf;
-	height: 100px;
-	line-height: 100px;
 }
 .custom-tag3 {
+	height: 150px;
+	line-height: 150px;
 	background: #f00;
-	height: 100px;
-	line-height: 100px;
 }
 .custom-tag4 {
+	height: 350px;
+	line-height: 350px;
 	background: #0f0;
-	height: 250px;
-	line-height: 250px;
+}
+
+.custom-tag1::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0 auto;
+	width: 95%;
+	height: 2px;
+	background: #ccc
+}
+.custom-tag2::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 50%;
+	margin-top: -68px;
+	height: 135px;
+	width: 2px;
+	background: #ccc;
+}
+.custom-tag4::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	margin-top: -158px;
+	height: 315px;
+	width: 2px;
+	background: #ccc
 }
 
 @media (max-width: 775px) {
@@ -127,10 +168,8 @@ body {
 		box-shadow: none;
 	}
 	.intro-wrap ul {
-		background-color: #fff;
-	    border-color: #ddd;
-	    border-width: 1px;
-	    border-radius: 4px 4px 0 0;
+		background-color: transparent;
+		border: none;
 	    -webkit-box-shadow: none;
 	    box-shadow: none;
 	}
@@ -143,13 +182,14 @@ body {
 	.intro-wrap li {
 	    position: relative;
 	    display: block;
-	    padding: 0 15px;
-	    margin-bottom: -1px;
+	    margin-bottom: 5px;
 	    height: auto;
 	    font-size: 14px;
-	    color: #777;
 	    background-color: #fff;
 	    border: 1px solid #ddd;
+	}
+	.intro-wrap div {
+		margin-left: 0;
 	}
 	.intro-wrap p {
 		margin-bottom: 0;
@@ -158,6 +198,9 @@ body {
 	}
 	.intro-wrap img {
 		display: none;
+	}
+	.intro-container {
+		margin-top: 10px;
 	}
 }
 /* -------- userIndex end -------- */
