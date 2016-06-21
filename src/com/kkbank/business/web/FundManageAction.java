@@ -115,6 +115,9 @@ public class FundManageAction extends ActionSupport{
 		Object[] option = {"Return"};
 		
 		ID = (String) ActionContext.getContext().getSession().get("loginID");
+		acList = accountService.listAccount(ID);
+		fName = fundService.get(fCode).getfName();
+		
 		account = accountService.getAccount(ac_No);
 		
 		if(account.getStatus() == 2){
@@ -198,7 +201,7 @@ public class FundManageAction extends ActionSupport{
 		ac_No = myFund.getAc_No();
 		dealDate = myFund.getDealDate();
 		amount = myFund.getAmount();
-		share = (amount - amount * myFund.getFund().getfPur_rate())/myFund.getNav();
+		share = myFund.getShare();
 		income = ( myFund.getFund().getNav() - myFund.getNav())* share;
 		System.out.println(income);
 		return SUCCESS;
@@ -207,26 +210,52 @@ public class FundManageAction extends ActionSupport{
 	public String fundRedeem(){
 		Object[] option = {"Return"};
 		account = accountService.getAccount(ac_No);
+		myFund = myFundService.get(fund_id);
 		if(account.getPassword().equals(PIN)){
-			//delete the record in my fund
-			myFundService.delete(fund_id);
-			System.out.println("balance:" + account.getBalance());
-			System.out.println(income);
-			
-			//calculate the balance
-			balance = account.getBalance() + amount + income;
-			System.out.println(balance);
-			
-			//update my account
-			account.setBalance(balance);
-			accountService.updateAccount(account);
-			
-			//insert the transaction record
-			t_id = transactionService.addTransaction(t_id, new Date(), "Fund Sell", income + amount, account.getBalance(), account);
-			
-			JOptionPane.showOptionDialog(null, "You have redeemed successfully", 
-					"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
-			return SUCCESS;
+			if(share < myFund.getShare()){
+				//update my fund
+				amount = amount - myFund.getNav()* share;
+				myFund.setShare(myFund.getShare() - share);
+				myFund.setAmount(amount);
+				myFundService.update(myFund);
+				
+				//update my account
+				balance = account.getBalance() + myFund.getFund().getNav()* share * (1-0.005);
+				account.setBalance(balance);
+				accountService.updateAccount(account);
+				
+				//insert the transaction record
+				t_id = transactionService.addTransaction(t_id, new Date(), "Fund Sell", myFund.getFund().getNav()* share * (1-0.005), account.getBalance(), account);
+				
+				JOptionPane.showOptionDialog(null, "You have redeemed successfully", 
+						"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+				return SUCCESS;
+			}
+			else if(share == myFund.getShare()){
+				//delete the record in my fund
+				myFundService.delete(fund_id);
+				System.out.println("balance:" + account.getBalance());
+				System.out.println(income);
+				
+				//calculate the balance
+				balance = account.getBalance() + (amount + income)*(1-0.005);
+				System.out.println(balance);
+				
+				//update my account
+				account.setBalance(balance);
+				accountService.updateAccount(account);
+				
+				//insert the transaction record
+				t_id = transactionService.addTransaction(t_id, new Date(), "Fund Sell", (amount + income)*(1-0.005), account.getBalance(), account);
+				
+				JOptionPane.showOptionDialog(null, "You have redeemed successfully", 
+						"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+				return SUCCESS;
+			}
+			else{
+				msg = "Invalid share amount.";
+				return ERROR;
+			}
 		}
 		else{
 			msg = "Your card PIN is wrong.";
@@ -244,7 +273,7 @@ public class FundManageAction extends ActionSupport{
 	//ask real-time data
 	public void getRequest1(){
         String result =null;
-        String url ="http://apis.haoservice.com/lifeservice/netdata/all";//请求接口地址
+        String url ="http://apis.haoservice.com/lifeservice/netdata/stock";//请求接口地址
         Map params = new HashMap();//请求参数
             params.put("key", FundAPI.APPKEY);//APPKEY值
  
@@ -258,17 +287,18 @@ public class FundManageAction extends ActionSupport{
                 
             	for(int i = 0; i< res.size(); i++){
             		Fund fund1 = new Fund();
-            		fund1 = fundService.get(res.getJSONObject(i).get("code").toString());
-            		//fund1.setfCode(res.getJSONObject(i).get("code").toString());
-        			//System.out.println(res.getJSONObject(i).get("code").toString());
-        			//fund1.setfName(res.getJSONObject(i).get("name").toString());
-        			//System.out.println(res.getJSONObject(i).get("name").toString());
-        			//fund1.setfType("Open-End Fund");
+            		//fund1 = fundService.get(res.getJSONObject(i).get("code").toString());
+            		fund1.setfCode(res.getJSONObject(i).get("code").toString());
+        			System.out.println(res.getJSONObject(i).get("code").toString());
+        			fund1.setfName(res.getJSONObject(i).get("name").toString());
+        			System.out.println(res.getJSONObject(i).get("name").toString());
+        			fund1.setfType("Stock-Fund");
         			fund1.setfAnnualized_rate(Double.parseDouble(res.getJSONObject(i).get("annualincome").toString()));
         			System.out.println(Double.parseDouble(res.getJSONObject(i).get("annualincome").toString()));
         			fund1.setNav(Double.parseDouble(res.getJSONObject(i).get("newnet").toString()));
-        			//fund1.setfPur_rate(0.015);
-        			fundService.update(fund1);
+        			fund1.setfPur_rate(0.015);
+        			fundService.save(fund1);
+        			//fundService.update(fund1);
         		}
             }else{
                 System.out.println(object.get("error_code")+":"+object.get("reason"));
@@ -303,7 +333,7 @@ public class FundManageAction extends ActionSupport{
 			
 			List<MyFund> mylist = myFundService.findNotConfirm(0);
 			
-			System.out.println(mylist.size());
+			System.out.println("list size:" + mylist.size());
 			
 			if(mylist ==  null)
 				System.out.println("There is no apply to confirm");
@@ -311,9 +341,17 @@ public class FundManageAction extends ActionSupport{
 			else{
 				for(int i = 0; i < mylist.size(); i++){
 					fCode = mylist.get(i).getFund().getfCode();
-					nav = fundService.get(fCode).getNav();
 					myFund = mylist.get(i);
-					myFund.setNav(nav);			
+					
+					amount = myFund.getAmount();
+					System.out.println("amount:" + amount);
+					nav = fundService.get(fCode).getNav();
+					System.out.println("nav:" + nav);
+					share = (amount - amount * myFund.getFund().getfPur_rate())/nav;	
+					System.out.println("share:" + share);
+					
+					myFund.setNav(nav);	
+					myFund.setShare(share);
 					myFund.setStatus(1);
 					myFundService.update(myFund);
 				}			

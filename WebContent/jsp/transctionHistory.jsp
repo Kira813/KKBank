@@ -28,7 +28,7 @@
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
 				    <li role="presentation">
-				        <a href="javascript:void(0)">Fund</a>
+				        <a href="fund/listFund">Fund</a>
 				    </li>
 				    <li role="presentation">
 				        <a href="toTimeDeposit">Time Deposit</a>
@@ -170,7 +170,7 @@
 			this.bindEvent();
 			this.render();
 		},
-		formatAmount(item) {
+		formatAmount: function(item){
 			val = +item.amount; //转数字
 			val = val.toFixed(2) + ''; //加小数点
 			var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 

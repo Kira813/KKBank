@@ -57,7 +57,7 @@
 							<p>Details:${bDetail}</p><br/>
 							<p>Period: ${start_date} - ${end_date}</p><br/>
 							<p>Amount: <span format-balance>${bAmount}</span></p><br/>
-							<form action="user/pay" method="post">
+							<form action="user/payOthers" method="post">
 								<input type="hidden" name="bNo" value="${bNo}">
 								Please select an account:<br/>
 									<select name="ac_No" id="ac_No_select" onchange="showBalance()">
@@ -71,7 +71,7 @@
 										oninvalid="setCustomValidity('Please input your card PIN')" oninput="setCustomValidity('')"/><br/>
 									${msg}<br/>
 									<input class="btn btn-primary" type="submit" value="Confirm"/>
-									<a href="user/showPersonalBill"><input class="btn btn-default" type="button" value="Return"/></a>
+									<a href="user/toOtherBill"><input class="btn btn-default" type="button" value="Return"/></a>
 							</form>
 							</div>
 						</div>
@@ -112,6 +112,7 @@ var dialog2 = {
 			this.el.modal('hide');
 		}
 	};
+
 	function showBalance(){
 		var objS = document.getElementById("ac_No_select");
 		var seAC = objS.options[objS.selectedIndex].value;

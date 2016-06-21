@@ -233,17 +233,20 @@
 		</action>
 		<action name="activation" class="com.kkbank.business.web.UserManageAction" 
 			method="userActivation">
+			<interceptor-ref name="adiStack"></interceptor-ref>
 			<result name="success">/jsp/activation.jsp</result> 
 			<result name="error">/jsp/errorPage.jsp</result> <!-- user login page -->
 		</action>
 		<!-- forget pwd -->
 		<action name="verify" class="com.kkbank.business.web.UserManageAction"
 			method="userForgetPwd">
+			<interceptor-ref name="adiStack"></interceptor-ref>
 			<result name="success">/jsp/userLogin.jsp</result> 
 			<result name="error">/jsp/ForgetPwd.jsp</result>
 		</action>
 		<action name="changePwd" class="com.kkbank.business.web.UserManageAction"
 			method="userChangePwd">
+			<interceptor-ref name="adiStack"></interceptor-ref>
 			<result name="success">/jsp/userLogin.jsp</result> 
 			<result name="error">/jsp/resetPwd.jsp</result>
 		</action>
@@ -277,8 +280,8 @@
 		</action>
 		<action name="pay" class="com.kkbank.business.web.UserManageAction" 
 			method="pay">
-			<result name="success">/jsp/payment.jsp</result>
-			<result name="error" type="redirectAction">toPay</result>
+			<result name="success">/jsp/billStatus.jsp</result>
+			<result name="error">/jsp/payConfirm.jsp</result>
 		</action>
 		<action name="toOtherBill" class="com.kkbank.business.web.UserManageAction" 
 			method="toOtherBill">
@@ -286,8 +289,13 @@
 		</action>
 		<action name="toPayOthers" class="com.kkbank.business.web.UserManageAction" 
 			method="toPayOthers">
-			<result name="success">/jsp/payConfirm.jsp</result>
+			<result name="success">/jsp/payOtherConfirm.jsp</result>
 			<result name="error">/jsp/payOthers.jsp</result>
+		</action>
+		<action name="payOthers" class="com.kkbank.business.web.UserManageAction" 
+			method="payOthers">
+			<result name="success">/jsp/payOthers.jsp</result>
+			<result name="error">/jsp/payOtherConfirm.jsp</result>
 		</action>
 	</package>
 	
@@ -364,23 +372,28 @@
 		</action>
 		<action name="toFundTradingConfirm" class="com.kkbank.business.web.FundManageAction"
 			method="toFundTradingConfirm">
+			<interceptor-ref name="loginStack"></interceptor-ref>
 			<result name="success">/jsp/fundPurchase.jsp</result>
 		</action>
 		<action name="fundPurchase" class="com.kkbank.business.web.FundManageAction"
 			method="fundPurchase">
+			<interceptor-ref name="loginStack"></interceptor-ref>
 			<result name="success" type="redirectAction">listFund</result>
 			<result name="error">/jsp/fundPurchase.jsp</result>
 		</action>
 		<action name="listMyFund" class="com.kkbank.business.web.FundManageAction"
 			method="listMyFund">
+			<interceptor-ref name="loginStack"></interceptor-ref>
 			<result name="success">/jsp/myfund.jsp</result>
 		</action>
 		<action name="toFundRedeemConfirm" class="com.kkbank.business.web.FundManageAction"
 			method="toFundRedeemConfirm">
+			<interceptor-ref name="loginStack"></interceptor-ref>
 			<result name="success">/jsp/fundRedeem.jsp</result>
 		</action>
 		<action name="fundRedeem" class="com.kkbank.business.web.FundManageAction"
 			method="fundRedeem">
+			<interceptor-ref name="loginStack"></interceptor-ref>
 			<result name="success" type="redirectAction">listFund</result>
 			<result name="error" type="redirect">/jsp/fundRedeem.jsp</result>
 		</action>

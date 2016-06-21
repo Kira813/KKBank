@@ -28,7 +28,7 @@
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
 				    <li role="presentation">
-				        <a href="javascript:void(0)">Fund</a>
+				        <a href="fund/listFund">Fund</a>
 				    </li>
 				    <li role="presentation">
 				        <a href="toTimeDeposit">Time Deposit</a>
@@ -38,6 +38,9 @@
 				    </li>
 				    <li role="presentation" class="active">
 				        <a href="toForeignExchange" style="font-family:Microsoft YaHei">Foreign Exchange</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="user/toPayment">Payment</a>
 				    </li>
 				</ul>
 			</div>

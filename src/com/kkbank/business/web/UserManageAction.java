@@ -37,6 +37,7 @@ public class UserManageAction extends ActionSupport {
 	// user activation
 	User user = new User();
 
+	private int bType;
 	private String ID;
 	private String name;
 	private String pwd;
@@ -549,24 +550,103 @@ public class UserManageAction extends ActionSupport {
 		paylist = payService.findMyBill(ID, 0);
 		return SUCCESS;
 	}
-
 	public String toPay(){
-		Payment pp1 = new Payment();
 		ID = (String) ActionContext.getContext().getSession().get("loginID");
 		bNo = ServletActionContext.getRequest().getParameter("bNo");
 		ActionContext.getContext().put("bNo", bNo);
-		pp1 = payService.get(bNo);
+		pp = payService.get(bNo);
 		
-		item = pp1.getbItem();
-		start_date = pp1.getStart_date();
-		end_date = pp1.getEnd_date();
-		bAmount = pp1.getAmount();
-		bDetail = pp1.getDetail();
+		bType = pp.getbType();
+		ActionContext.getContext().put("bType", bType);
+		item = pp.getbItem();
+		ActionContext.getContext().put("item", item);
+		start_date = pp.getStart_date();
+		ActionContext.getContext().put("start_date", start_date);
+		end_date = pp.getEnd_date();
+		ActionContext.getContext().put("end_date", end_date);
+		bAmount = pp.getAmount();
+		ActionContext.getContext().put("bAmount", bAmount);
+		bDetail = pp.getDetail();
+		ActionContext.getContext().put("bDetail", bDetail);
 		name = customerService.getCustomer(ID).getName();
 		
 		acList = accountService.listAccount(ID);
 		ActionContext.getContext().put("acList", acList);
+		
 		return SUCCESS;
+	}
+	
+	public String pay(){
+		Object[] option = {"Return"};
+		ID = (String) ActionContext.getContext().getSession().get("loginID");
+		bNo =  ServletActionContext.getRequest().getParameter("bNo");
+		pp = payService.get(bNo);
+		item = pp.getbItem();
+		start_date = pp.getStart_date();
+		end_date = pp.getEnd_date();
+		bAmount = pp.getAmount();
+		bDetail = pp.getDetail();
+		acList = accountService.listAccount(ID);
+		
+		account = accountService.getAccount(ac_No);
+		if(ac_No == null){
+			msg = "Please select an account";
+			return ERROR;
+		}
+		
+		if(account.getStatus() == 2){
+			msg = "Your account is locked.";
+			return ERROR;
+		}
+		
+		if(account.getStatus()==5){
+			msg = "Your account is frozen. Please contact system administrator.";
+			return ERROR;
+		}
+		
+		if(pp.getStatus() == 1){
+			msg = "This bill has been paid. Don't repeat the operation.";
+			return ERROR;
+		}
+		//PIN is right or not
+		if(account.getPassword().equals(PIN)){
+			//balance is enough or not
+			if(pp.getAmount() <= account.getBalance()){
+				//status = 1, have paid; status = 0; not paid yet;
+				pp.setStatus(1);
+				payService.update(pp);
+				
+				//change the balance
+				account.setBalance(account.getBalance() - pp.getAmount());
+				accountService.updateAccount(account);
+				
+				//add transaction record
+				if(bType == 0){
+					type = "Pay eletricity bill"; 
+				}
+				else if(bType == 1){
+					type = "Pay water bill";
+				}
+				else if(bType == 2){
+					type = "Pay gas bill";
+				}
+				date = new Date();
+			    t_id = transactionService.addTransaction(t_id, date, type, pp.getAmount(), account.getBalance(), account);
+			    
+			    String msg4 = "Pay successfully.";
+				ActionContext.getContext().put("msg4", msg4);
+				return SUCCESS;
+			}
+			else{
+				msg = "Your balance is insufficient.";
+				return ERROR;
+			}
+		}
+		else{
+			lock(account);
+			//msg = "Wrong PIN. Please try again.";
+			return ERROR;
+		}
 	}
 	
 	public String toOtherBill(){
@@ -577,6 +657,7 @@ public class UserManageAction extends ActionSupport {
 		ID = (String) ActionContext.getContext().getSession().get("loginID");
 		pp = payService.get(bNo);
 		if(customerService.isValidAccount(pp.getID(), name)){
+			bType = pp.getbType();
 			item = pp.getbItem();
 			start_date = pp.getStart_date();
 			end_date = pp.getEnd_date();
@@ -592,8 +673,19 @@ public class UserManageAction extends ActionSupport {
 		}
 	}
 	
-	public String pay(){
+	
+	public String payOthers(){
 		Object[] option = {"Return"};
+		ID = (String) ActionContext.getContext().getSession().get("loginID");
+		bNo =  ServletActionContext.getRequest().getParameter("bNo");
+		pp = payService.get(bNo);
+		item = pp.getbItem();
+		start_date = pp.getStart_date();
+		end_date = pp.getEnd_date();
+		bAmount = pp.getAmount();
+		bDetail = pp.getDetail();
+		acList = accountService.listAccount(ID);
+		
 		pp = payService.get(bNo);
 		account = accountService.getAccount(ac_No);
 		if(ac_No == null){
@@ -628,12 +720,19 @@ public class UserManageAction extends ActionSupport {
 				accountService.updateAccount(account);
 				
 				//add transaction record
-				type= "Pay out";
+				if(bType == 0){
+					type = "Pay eletricity bill"; 
+				}
+				else if(bType == 1){
+					type = "Pay water bill";
+				}
+				else if(bType == 2){
+					type = "Pay gas bill";
+				}
 				date = new Date();
 			    t_id = transactionService.addTransaction(t_id, date, type, pp.getAmount(), account.getBalance(), account);
-			    
-				JOptionPane.showOptionDialog(null, "Pay successfully.", 
-						"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+			    String msg3 = "Pay successfully.";
+				ActionContext.getContext().put("msg3", msg3);
 				return SUCCESS;
 			}
 			else{
@@ -647,6 +746,7 @@ public class UserManageAction extends ActionSupport {
 			return ERROR;
 		}
 	}
+	
 	
 	public String getID() {
 		return ID;
@@ -690,6 +790,14 @@ public class UserManageAction extends ActionSupport {
 
 	public String getMsg() {
 		return msg;
+	}
+
+	public int getBType() {
+		return bType;
+	}
+
+	public void setBType(int bType) {
+		this.bType = bType;
 	}
 
 	public int getCount() {

@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Payment {
 	private String bNo;
+	private int bType;
 	private String bItem;
 	private Date start_date;
 	private Date end_date;
@@ -16,10 +17,11 @@ public class Payment {
 		super();
 	}
 
-	public Payment(String bNo, String bItem, Date start_date, Date end_date, double amount, String iD, String detail,
+	public Payment(String bNo, int bType, String bItem, Date start_date, Date end_date, double amount, String iD, String detail,
 			int status) {
 		super();
 		this.bNo = bNo;
+		this.bType = bType;
 		this.bItem = bItem;
 		this.start_date = start_date;
 		this.end_date = end_date;
@@ -36,6 +38,15 @@ public class Payment {
 	public void setbNo(String bNo) {
 		this.bNo = bNo;
 	}
+	
+	public int getbType() {
+		return bType;
+	}
+
+	public void setbType(int bType) {
+		this.bType = bType;
+	}
+
 	public String getbItem() {
 		return bItem;
 	}
@@ -81,8 +92,6 @@ public class Payment {
 		this.detail = detail;
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -93,6 +102,7 @@ public class Payment {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((bItem == null) ? 0 : bItem.hashCode());
 		result = prime * result + ((bNo == null) ? 0 : bNo.hashCode());
+		result = prime * result + bType;
 		result = prime * result + ((detail == null) ? 0 : detail.hashCode());
 		result = prime * result + ((end_date == null) ? 0 : end_date.hashCode());
 		result = prime * result + ((start_date == null) ? 0 : start_date.hashCode());
@@ -125,6 +135,8 @@ public class Payment {
 			if (other.bNo != null)
 				return false;
 		} else if (!bNo.equals(other.bNo))
+			return false;
+		if (bType != other.bType)
 			return false;
 		if (detail == null) {
 			if (other.detail != null)

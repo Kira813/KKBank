@@ -5,6 +5,7 @@
 <hibernate-mapping package="com.kkbank.domain">
 	<class name="Payment" table="payment">
 		<id name="bNo" column="bNo" ></id>
+		<property name="bType" not-null="true"/>
 		<property name="bItem" not-null="true"/>
 		<property name="detail" not-null="true"/>
 		<property name="start_date" not-null="true"/>

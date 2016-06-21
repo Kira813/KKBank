@@ -10,6 +10,7 @@ public class MyFund {
 	private double amount;
 	private Date dealDate;
 	private double nav;
+	private double share;
 	private int status;
 	private Fund fund;
 	
@@ -17,7 +18,7 @@ public class MyFund {
 		super();
 	}
 	
-	public MyFund(int fund_id, String iD, String ac_No, double amount, Date dealDate, double nav, int status,
+	public MyFund(int fund_id, String iD, String ac_No, double amount, Date dealDate, double nav, double share, int status,
 			Fund fund) {
 		super();
 		this.fund_id = fund_id;
@@ -26,6 +27,7 @@ public class MyFund {
 		this.amount = amount;
 		this.dealDate = dealDate;
 		this.nav = nav;
+		this.share = share;
 		this.status = status;
 		this.fund = fund;
 	}
@@ -98,6 +100,15 @@ public class MyFund {
 		this.fund = fund;
 	}
 
+	public double getShare() {
+		return share;
+	}
+
+	public void setShare(double share) {
+		this.share = share;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -108,10 +119,11 @@ public class MyFund {
 		temp = Double.doubleToLongBits(amount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((dealDate == null) ? 0 : dealDate.hashCode());
-		//result = prime * result + ((fCode == null) ? 0 : fCode.hashCode());
 		result = prime * result + ((fund == null) ? 0 : fund.hashCode());
 		result = prime * result + fund_id;
 		temp = Double.doubleToLongBits(nav);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(share);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + status;
 		return result;
@@ -143,11 +155,6 @@ public class MyFund {
 				return false;
 		} else if (!dealDate.equals(other.dealDate))
 			return false;
-		/*if (fCode == null) {
-			if (other.fCode != null)
-				return false;
-		} else if (!fCode.equals(other.fCode))
-			return false;*/
 		if (fund == null) {
 			if (other.fund != null)
 				return false;
@@ -157,11 +164,14 @@ public class MyFund {
 			return false;
 		if (Double.doubleToLongBits(nav) != Double.doubleToLongBits(other.nav))
 			return false;
+		if (Double.doubleToLongBits(share) != Double.doubleToLongBits(other.share))
+			return false;
 		if (status != other.status)
 			return false;
 		return true;
 	}
 
+	
 	
 
 }
