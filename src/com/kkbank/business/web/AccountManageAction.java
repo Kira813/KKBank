@@ -1,6 +1,7 @@
 package com.kkbank.business.web;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -53,8 +54,10 @@ public class AccountManageAction extends ActionSupport{
 
 	public String timeDepositConfirm() throws Exception{
 		Date depositDate = new Date();
+		Calendar cal = Calendar.getInstance();//使用默认时区和语言环境获得一个日历。    
+		cal.add(Calendar.MONTH, + term);//cal.getTime()
 		Account account = accountService.getAccount(ac_No);
-		timeDepositService.addTimeDeposit("Lump Fixed Deposit", term, amount, intRate, depositDate, account);
+		timeDepositService.addTimeDeposit("Lump Fixed Deposit", term, amount, intRate, depositDate,cal.getTime(), account);
 		
 		double bal = account.getBalance() - amount;
 		System.out.println(bal);

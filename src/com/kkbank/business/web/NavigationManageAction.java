@@ -15,10 +15,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.kkbank.business.service.IAccountService;
+import com.kkbank.business.service.ITimeDepositService;
 import com.kkbank.business.service.ITransactionService;
 import com.kkbank.business.service.impl.AccountService;
+import com.kkbank.business.service.impl.TimeDepositService;
 import com.kkbank.business.service.impl.TransactionService;
 import com.kkbank.domain.Account;
+import com.kkbank.domain.TimeDeposit;
 import com.kkbank.domain.Transaction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -45,7 +48,18 @@ public class NavigationManageAction extends ActionSupport{
 
 	IAccountService accountService = new AccountService();
 	ITransactionService transactionService = new TransactionService();
+	ITimeDepositService timeDepositService = new TimeDepositService();
+	
 	public String toChoiceInquiry() throws Exception{
+		return SUCCESS;
+	}
+	public String toMyTimeDeposit() throws Exception{
+		String ac_No = ServletActionContext.getRequest().getParameter("ac_No");
+		Account account = accountService.getAccount(ac_No);
+		List<TimeDeposit> tlist = timeDepositService.listTimeDeposit(account);
+		ActionContext.getContext().put("tlist", tlist);
+		ActionContext.getContext().put("ac_No", ac_No);
+		System.out.println(tlist.get(0).getmDate());
 		return SUCCESS;
 	}
 	//OTHER TO RMB
@@ -537,5 +551,14 @@ public class NavigationManageAction extends ActionSupport{
 
 	public void setTransactionService(ITransactionService transactionService) {
 		this.transactionService = transactionService;
+	}
+	public ITimeDepositService getTimeDepositService() {
+		return timeDepositService;
+	}
+	public void setTimeDepositService(ITimeDepositService timeDepositService) {
+		this.timeDepositService = timeDepositService;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}	
 }

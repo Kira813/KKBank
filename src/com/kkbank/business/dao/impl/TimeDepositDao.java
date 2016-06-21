@@ -31,6 +31,7 @@ public class TimeDepositDao extends HibernateDaoSupport implements ITimeDepositD
 		getHibernateTemplate().delete(get(id));
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<TimeDeposit> findAllTimeDeposit() {
 		return (List<TimeDeposit>) getHibernateTemplate().find("from TimeDeposit");
 	}

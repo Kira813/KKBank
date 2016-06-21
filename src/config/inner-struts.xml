@@ -98,6 +98,11 @@
 			<interceptor-ref name="loginStack"></interceptor-ref>
 			<result name="success">/jsp/toRmbConfirm.jsp</result> 
 		</action>
+		<action name="toMyTimeDeposit" class="com.kkbank.business.web.NavigationManageAction"
+			method="toMyTimeDeposit">
+			<result name="namespace">/</result> 
+			<result name="success">/jsp/myTimeDeposit.jsp</result>
+		</action>
 		<action name="toChoiceInquiry" class="com.kkbank.business.web.NavigationManageAction"
 			method="toChoiceInquiry">
 			<result name="namespace">/</result> 

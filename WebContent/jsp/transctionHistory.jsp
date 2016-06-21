@@ -1,29 +1,58 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-%>
-<!DOCTYPE html>
+	%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>KKBank | Transaction History</title>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./adminJsp/headMeta.jsp"%></head>
-<body class="skin-blue">
-<%@include file="./adminJsp/header.jsp"%>
+</head>
+<body>
+<div class="container">
+<%@include file="./userHeader.jsp"%>
+</div>
 <div class="wrapper row-offcanvas row-offcanvas-left">
-	<!-- Left side column. contains the logo and sidebar -->
-	<aside class="right-side" style="font-family:Microsoft YaHei">
-		<section class="content">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="box box-primary">
-						<div class="box-header">
-							<h3 class="box-title" style="font-family:Microsoft YaHei">History Transaction Records</h3>
-						</div>
-						<div class="row">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				    <li role="presentation" class="active">
+				        <a href="toAccountEnquiry">Account Enquiry</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="javascript:void(0)">Fund</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toTimeDeposit">Time Deposit</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toTransfer">Transfer</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toForeignExchange">Foreign Exchange</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="user/toPayment">Payment</a>
+				    </li>
+				</ul>
+			</div>
+			<div class="col-md-9">
+				<aside class="right-content-custom" style="font-family:Microsoft YaHei">
+					<section>
+						<div class="box box-primary">
+							<div class="box-header">
+								<h3 class="box-title" style="font-family:Microsoft YaHei">History Transaction Records</h3>
+							</div>
+							<div class="box-body">
+													<div class="row">
                         		<div class="col-md-10">
 									<div class="form-group" style="padding-left: 10px;">
 										<div class="input-group">
@@ -53,14 +82,18 @@
                             	</tbody>
                             </table>
                         </div>
-					</div>
-					<a class="btn btn-primary" href="javascript:void(0)" id="prev_btn">Prev</a>
-					<a class="btn btn-primary" href="javascript:void(0)" id="next_btn">Next</a>
-					<a class="btn btn-primary" href="toAccountEnquiry.action">Return</a>
-				</div>
+							</div>
+							<div class="box-footer">
+								<a class="btn btn-primary" href="javascript:void(0)" id="prev_btn">Prev</a>
+								<a class="btn btn-primary" href="javascript:void(0)" id="next_btn">Next</a>
+								<a class="btn btn-default" href="toAccountEnquiry.action">Return</a>
+							</div>
+						</div> 
+				    </section>
+				</aside>
 			</div>
-		</section>
-	</aside>
+		</div>
+	</div>
 </div>
 <div class="modal fade" id="simpleDialog" style="font-family:Microsoft YaHei">
 	<div class="modal-dialog">
@@ -81,6 +114,7 @@
 		</div>
 	</div>
 </div>
+</body>
 <%@include file="./adminJsp/javascript.jsp"%>
 <script type="text/javascript">
 	var list = [
@@ -202,5 +236,4 @@
 	    tableCtl.init();
 	});
 </script>
-</body>
 </html>

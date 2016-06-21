@@ -21,7 +21,7 @@ body {
 }
 
 .nav.nav-pills.nav-stacked > li.active > a, .nav.nav-pills.nav-stacked > li.active > a:hover {
-	border-left-color: #f39412;
+	border-left-color: #d81b60;  /*#f39412*/
 }
 .sidebar {
 	padding-bottom: 0;

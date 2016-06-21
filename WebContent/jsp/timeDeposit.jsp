@@ -63,6 +63,9 @@
 													<option name="ac_no" value="${ac_No}">${ac_No}</option>
 												</s:iterator>
 											</select>
+											<span class="input-group-btn">
+												<a class="btn btn-default btn-flat" id="check_btn" href="javascript:void(0)">My Time-Deposit</a>
+											</span>
 										</div>
 										<p></p>
 										<div class="input-group">
@@ -101,9 +104,10 @@
 										</div>
 									</div>
 								</form>
-							</div>
+							
 							<div class="box-footer">
 								<a class="btn btn-warning" id="next_btn" href="javascript:void(0)">Next</a>
+							</div>
 							</div>
 						</div>
 					</section>
@@ -193,6 +197,20 @@ var dialog = {
 					$('input[name="term"]').val(period);
 					$('form').submit();
 				}
+			}
+		});
+	});
+	$(function() {
+		var form = document.querySelector('form');
+		var action = 'toMyTimeDeposit.action';
+		$('#check_btn').click(function() {
+			var ac_no = $('option[name=ac_no]:checked').val();
+			if (!ac_no) {
+				$('#info1').text("Please select an account.");
+				$('.info-custom').show();
+				//dialog.show('Please select an account.');
+			} else {
+				window.location.href = action + '?ac_No=' + ac_no;
 			}
 		});
 	});

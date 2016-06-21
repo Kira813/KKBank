@@ -10,13 +10,14 @@ public class TimeDeposit {
 	private double interestRate;
 	private Date depositDate;
 	private Account account;
-	
+	private Date mDate;
+
 	public TimeDeposit() {
 		super();
 	}
 
 	public TimeDeposit(int id, String type, int term, double amount,
-			double interestRate, Date depositDate, Account account) {
+			double interestRate, Date depositDate, Account account, Date mDate) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -25,6 +26,15 @@ public class TimeDeposit {
 		this.interestRate = interestRate;
 		this.depositDate = depositDate;
 		this.account = account;
+		this.mDate = mDate;
+	}
+
+	public Date getmDate() {
+		return mDate;
+	}
+
+	public void setmDate(Date mDate) {
+		this.mDate = mDate;
 	}
 
 	public int getId() {
@@ -85,6 +95,7 @@ public class TimeDeposit {
 		result = prime * result + id;
 		temp = Double.doubleToLongBits(interestRate);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((mDate == null) ? 0 : mDate.hashCode());
 		result = prime * result + term;
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -116,6 +127,11 @@ public class TimeDeposit {
 			return false;
 		if (Double.doubleToLongBits(interestRate) != Double
 				.doubleToLongBits(other.interestRate))
+			return false;
+		if (mDate == null) {
+			if (other.mDate != null)
+				return false;
+		} else if (!mDate.equals(other.mDate))
 			return false;
 		if (term != other.term)
 			return false;
