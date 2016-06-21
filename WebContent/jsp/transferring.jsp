@@ -89,7 +89,7 @@
 						            <div class="input-group">
 										<span class="input-group-addon"><span class=" glyphicon glyphicon-edit"></span></span>
 						                <input type="text" class="form-control" name="toName" placeholder="Receiver's Name" required="required"
-											oninvalid="setCustomValidity('Please input receiver's name')" oninput="setCustomValidity('')">   
+											oninvalid="setCustomValidity('Please input receiver\'s name')" oninput="setCustomValidity('')">   
 						            </div>
 						            <p>
 						            <div class="input-group">
@@ -167,15 +167,15 @@
 		}
 	};
 	var dialog2 = {
-			el: $('#simpleDialog2'),
-			show: function(msg) {
-				this.el.find('.modal-body').text(msg);
-				this.el.modal('show');
-			},
-			hide: function() {
-				this.el.modal('hide');
-			}
-		};
+		el: $('#simpleDialog2'),
+		show: function(msg) {
+			this.el.find('.modal-body').text(msg);
+			this.el.modal('show');
+		},
+		hide: function() {
+			this.el.modal('hide');
+		}
+	};
 	function displayBalance() {
 		var getBalanceAjax = 'ajax/getBalanceAjax.action';
 

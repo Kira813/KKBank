@@ -12,7 +12,7 @@
 		<property name="amount" not-null="true"/>
 		<property name="interestRate" not-null="true"/>
 		<property name="depositDate" not-null="true"/>
-		<property name="mDate" not-null="true"/>
+		<property name="maturityDate" not-null="true"/>
 		
 		<many-to-one name="account" column="account_id"
 			class="Account" lazy="false" />

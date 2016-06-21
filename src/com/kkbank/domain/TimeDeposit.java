@@ -10,14 +10,14 @@ public class TimeDeposit {
 	private double interestRate;
 	private Date depositDate;
 	private Account account;
-	private Date mDate;
+	private Date maturityDate;
 
 	public TimeDeposit() {
 		super();
 	}
 
 	public TimeDeposit(int id, String type, int term, double amount,
-			double interestRate, Date depositDate, Account account, Date mDate) {
+			double interestRate, Date depositDate, Account account, Date maturityDate) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -26,16 +26,9 @@ public class TimeDeposit {
 		this.interestRate = interestRate;
 		this.depositDate = depositDate;
 		this.account = account;
-		this.mDate = mDate;
+		this.maturityDate = maturityDate;
 	}
 
-	public Date getmDate() {
-		return mDate;
-	}
-
-	public void setmDate(Date mDate) {
-		this.mDate = mDate;
-	}
 
 	public int getId() {
 		return id;
@@ -82,6 +75,14 @@ public class TimeDeposit {
 		this.account = account;
 	}
 
+	public Date getMaturityDate() {
+		return maturityDate;
+	}
+
+	public void setMaturityDate(Date maturityDate) {
+		this.maturityDate = maturityDate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -95,7 +96,7 @@ public class TimeDeposit {
 		result = prime * result + id;
 		temp = Double.doubleToLongBits(interestRate);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((mDate == null) ? 0 : mDate.hashCode());
+		result = prime * result + ((maturityDate == null) ? 0 : maturityDate.hashCode());
 		result = prime * result + term;
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -128,10 +129,10 @@ public class TimeDeposit {
 		if (Double.doubleToLongBits(interestRate) != Double
 				.doubleToLongBits(other.interestRate))
 			return false;
-		if (mDate == null) {
-			if (other.mDate != null)
+		if (maturityDate == null) {
+			if (other.maturityDate != null)
 				return false;
-		} else if (!mDate.equals(other.mDate))
+		} else if (!maturityDate.equals(other.maturityDate))
 			return false;
 		if (term != other.term)
 			return false;

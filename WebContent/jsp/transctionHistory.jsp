@@ -161,21 +161,32 @@
 	
 	var tableCtl = {
 		el: $('table tbody'),
-		list: list,
+		list: [],
 		page: 0,
-		tmpl: '<tr><td>{id}</td><td>{date}</td><td>{type}</td><td>{amount}</td></tr>',
+		tmpl: '<tr><td>{id}</td><td>{date}</td><td>{type}</td><td style="{inlineStyle}">{amount}</td></tr>',
 		nothing: '<tr><td colspan="4">No Records</td></tr>',
 		init: function() {
+			this.list = list.map(this.formatAmount);
 			this.bindEvent();
 			this.render();
+		},
+		formatAmount(item) {
+			val = +item.amount; //转数字
+			val = val.toFixed(2) + ''; //加小数点
+			var reg = /(\d)(?=(\d\d\d)+(?!\d))/g; 
+    		val = val.replace(reg, '$1,');
+    		item.amount = val;
+    		return item;
 		},
 		render: function() {
 			var list = ([]).concat(this.list);
 			var data = list.splice(this.page * 10, 10);
 			var content = [];
 			var tmpl = this.tmpl;
+			
 			data.map(function(item) {
-				content.push(tmpl.replace('{id}', item.id).replace('{type}', item.type).replace('{amount}', item.amount).replace('{date}', timer.render(item.date)));
+				var inlineStyle = item.amount.indexOf('-') > -1 ? 'color:red' : 'color:green';
+				content.push(tmpl.replace('{id}', item.id).replace('{type}', item.type).replace('{amount}', item.amount).replace('{date}', timer.render(item.date)).replace('{inlineStyle}', inlineStyle));
 			});
 			
 			var str = content.join('') || this.nothing;
