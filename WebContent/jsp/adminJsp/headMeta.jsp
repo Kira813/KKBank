@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="./resource/AdminLTE-2.3.3/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="./resource/AdminLTE-2.3.3/plugins/iCheck/square/blue.css">
+  <link rel="stylesheet" href="./css/loading.css">
   <!-- my style -->
   <link href="./resource/css/mystyle.css" rel="stylesheet" type="text/css" />
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

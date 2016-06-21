@@ -418,7 +418,18 @@ public class NavigationManageAction extends ActionSupport{
 		String ac_No = ServletActionContext.getRequest().getParameter("ac_No");
 		Account account = accountService.getAccount(ac_No);
 		List<Transaction> list = transactionService.listTransaction(account);
-		ActionContext.getContext().put("list", list);
+		List<Transaction> ret = new ArrayList<Transaction>();
+		
+		int i = list.size() - 1;
+		int j = 10;
+		
+		while(j >= 0 && i >= 0) {
+			ret.add(list.get(i));
+			i --;
+			j --;
+		}
+		
+		ActionContext.getContext().put("list", ret);
 		ActionContext.getContext().put("ac_No", ac_No);
 		return SUCCESS;
 	}

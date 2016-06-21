@@ -28,7 +28,7 @@
 
 <!-- Bootbox -->
 <script src="resource/js/bootbox.min.js" type="text/javascript"></script>
-
+<script src="js/loading.js" type="text/javascript"></script>
 <script type="text/javascript">
 	/**
 	 * 格式化金额

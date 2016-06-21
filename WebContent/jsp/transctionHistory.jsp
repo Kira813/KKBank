@@ -163,6 +163,7 @@
 		el: $('table tbody'),
 		list: [],
 		page: 0,
+		timer: null,
 		tmpl: '<tr><td>{id}</td><td>{date}</td><td>{type}</td><td style="{inlineStyle}">{amount}</td></tr>',
 		nothing: '<tr><td colspan="4">No Records</td></tr>',
 		init: function() {
@@ -185,12 +186,22 @@
 			var tmpl = this.tmpl;
 			
 			data.map(function(item) {
-				var inlineStyle = item.amount.indexOf('-') > -1 ? 'color:red' : 'color:green';
+				var inlineStyle = item.type.match(/deopsit/i) > -1 ? 'color:red' : 'color:green';
 				content.push(tmpl.replace('{id}', item.id).replace('{type}', item.type).replace('{amount}', item.amount).replace('{date}', timer.render(item.date)).replace('{inlineStyle}', inlineStyle));
 			});
 			
 			var str = content.join('') || this.nothing;
-			this.el.html(str);
+			
+			if(this.timer) {
+				loading.show();
+			}
+			
+			clearTimeout(this.timer);
+			this.timer = setTimeout(function() {
+				this.el.html(str);
+				loading.hide();
+			}.bind(this), 500);
+			
 		},
 		next: function() {
 			var page = this.page + 1;
@@ -217,7 +228,7 @@
 		search: function() {
 			this.updateList();
 			this.page = 0;
-			this.render();
+			this.render();			
 		},
 		updateList: function() {
 			var d = timer.getTime();

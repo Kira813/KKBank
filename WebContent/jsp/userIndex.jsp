@@ -30,7 +30,7 @@ body {
 <div class="custom-bg">
 	<div>
 		<h1>KKBank</h1>
-		<h3>Hello,${name}</h3>
+		<h3>${name ? "Hello, " + name : ""}</h3>
 	</div>
 </div>
 <div class="container intro-container">
