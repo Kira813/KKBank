@@ -28,11 +28,10 @@
 						<form role="form" action="admin/inquiry" method="post">
 							<div class="box-body">
 							<label>Please choose the inquiry type</label>
-							<div class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-menu-down"></i></span>
-								<select class="form-control">
-									<option value="">Debit Card Inquiry</option>
-									<option value="">Online Banking Account Inquiry</option>
+							<div class="form-group">
+								<select name="inquiryType" class="form-control">
+									<option value="1">Debit Card Inquiry</option>
+									<option value="2">Online Banking Account Inquiry</option>
 								</select>
 							</div>
 								<p></p>
@@ -48,7 +47,7 @@
 			     				</s:if>
 							</div>
 							<div class="box-footer">
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<a id="next_btn" href="javascript:void(0)" class="btn btn-primary">Submit</a>
 								<a class="btn btn-default" href="index.action">Return</a>
 							</div>
 						</form>
@@ -60,4 +59,29 @@
 </div>
 <%@include file="./javascript.jsp"%>
 </body>
+<script type="text/javascript">
+$('select').on('change', function() { 
+	$('.alert-custom').hide(); 
+});
+$('input').on('change', function() { 
+	$('.alert-custom').hide(); 
+});
+$(function() {
+	var form = document.querySelector('form');
+	var action = 'admin/inquiry2.action';
+	//debugger;
+	$('#next_btn').click(function() {
+		var type = $('select[name=inquiryType]').val();
+		var ID =  $('input[name="ID"]').val();
+		if (type==1) {
+			form.submit();
+			//$('#info1').text("Please select an account.");
+			//$('.info-custom').show();
+			
+		}else {
+			window.location.href = action + '?ID=' + ID;
+		}
+	});
+});
+</script>
 </html>

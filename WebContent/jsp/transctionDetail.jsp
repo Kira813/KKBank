@@ -52,12 +52,12 @@
 								<h3 class="box-title" style="font-family:Microsoft YaHei">Transaction Details</h3>
 							</div>
 							<div class="box-body">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Transaction Date</th>
-                                    <th>Transaction Type</th>
-                                    <th>Transaction Amount</th>
+                            <table class="table table-striped" style="text-align:center">
+                                <tr >
+                                    <th style="text-align:center">ID</th>
+                                    <th style="text-align:center">Transaction Date</th>
+                                    <th style="text-align:center">Transaction Type</th>
+                                    <th style="text-align:center">Transaction Amount</th>
                                 </tr>
                                 <s:iterator value="#list" status="st">
                                 	<s:if test="#st.index<10">
@@ -65,7 +65,14 @@
 	                                    	<td>${st.index + 1 }</td>
 											<td><s:date name="date" format="yyyy-MM-dd hh：mm：ss"/></td>
 											<td>${type }</td>
-											<td><span format-balance>${amount}</span></td>
+											<td>
+											<s:if test="type=='Deposit'">
+												<span style="color:red" format-balance>${amount}</span>
+											</s:if>
+											<s:else>
+												<span style="color:green" format-balance>-${amount}</span>
+											</s:else>
+											</td>
 	                                  	</tr>
                                   	</s:if>
                                 </s:iterator>

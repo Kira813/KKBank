@@ -16,7 +16,7 @@
                 </a>
             </li>
             <li data-tag="user">
-                <a href="admin/inquiry.action">
+                <a href="toChoiceInquiry">
                     <i class="fa fa-user"></i><span>Inquiry</span>
                 </a>
             </li>

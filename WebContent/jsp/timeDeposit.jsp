@@ -64,7 +64,7 @@
 												</s:iterator>
 											</select>
 											<span class="input-group-btn">
-												<a class="btn btn-default btn-flat" id="check_btn" href="javascript:void(0)">My Time-Deposit</a>
+												<a class="btn btn-warning btn-flat" id="check_btn" href="javascript:void(0)">My Time-Deposit</a>
 											</span>
 										</div>
 										<p></p>

@@ -161,7 +161,12 @@
 		<action name="inquiry" class="com.kkbank.business.web.AdminManageAction" 
 			method="inquiry">
 	    	<result name ="success">/jsp/adminJsp/status.jsp</result>
-	    	<result name ="error">/jsp/adminJsp/inquiry.jsp</result>
+	    	<result name ="error">/jsp/adminJsp/choiceInquiry.jsp</result>
+		</action>
+		<action name="inquiry2" class="com.kkbank.business.web.AdminManageAction" 
+			method="inquiry2">
+	    	<result name ="success">/jsp/adminJsp/choiceInquiry.jsp</result>
+	    	<result name ="error">/jsp/adminJsp/choiceInquiry.jsp</result>
 		</action>
 		<action name="deposit" class="com.kkbank.business.web.WithdrawAndDepositAction" 
 			method="deposit">

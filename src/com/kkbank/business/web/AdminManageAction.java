@@ -5,14 +5,18 @@ import java.util.Locale;
 
 import javax.swing.JOptionPane;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.kkbank.business.service.IAccountService;
 import com.kkbank.business.service.IAdminService;
 import com.kkbank.business.service.ICustomerService;
 import com.kkbank.business.service.ISupervisorService;
+import com.kkbank.business.service.IUserService;
 import com.kkbank.business.service.impl.AccountService;
 import com.kkbank.business.service.impl.AdminService;
 import com.kkbank.business.service.impl.CustomerService;
 import com.kkbank.business.service.impl.SupervisorService;
+import com.kkbank.business.service.impl.UserService;
 import com.kkbank.domain.Account;
 import com.kkbank.domain.Customer;
 import com.opensymphony.xwork2.ActionContext;
@@ -28,6 +32,7 @@ public class AdminManageAction extends ActionSupport{
 	Account account = new Account();
 	//inquiry +acountService
 	protected ICustomerService customerService = new CustomerService();
+	protected IUserService userService = new UserService();
 
 	private String ad_id;  
     private String psd;
@@ -154,6 +159,21 @@ public class AdminManageAction extends ActionSupport{
 			
 		}
 	}
+	public String inquiry2() throws Exception{
+		String ID = ServletActionContext.getRequest().getParameter("ID");
+		if(ID==null){
+			msg = "Please input ID.";
+		}else if(userService.getUser(ID)==null) {
+			msg = "The online banking account is not created.";
+		}else if(userService.getUser(ID).getStatus()==3){
+			msg = "The online banking account is not activated.";
+		}else if(userService.getUser(ID).getStatus()==1){
+			msg = "The online banking account is activated.";
+		}else{
+			msg = "Please input ID.";
+		}
+		return SUCCESS;
+	}
 	
 
 	public String getName() {
@@ -275,5 +295,21 @@ public class AdminManageAction extends ActionSupport{
 
 	public void setCustomerService(ICustomerService customerService) {
 		this.customerService = customerService;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public IUserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
 	}
 }

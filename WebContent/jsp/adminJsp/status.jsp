@@ -77,7 +77,7 @@
 					          </table>
 							</div>
 							<div class="box-footer">
-								<a class="btn btn-default " href="admin/inquiry.action">Return</a>
+								<a class="btn btn-default " href="toChoiceInquiry.action">Return</a>
 								<a class="btn btn-default " onclick="location.reload();">Refresh</a>
 							</div>
 					</div>
