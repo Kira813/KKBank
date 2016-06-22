@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom6">
 				    <li role="presentation">
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
@@ -51,14 +51,39 @@
 							<div class="box-header">
 								<h3 class="box-title" style="font-family:Microsoft YaHei">Pay for others</h3>
 							</div>
-							<div class="box-body">
+							<div class="box-body" style="margin-left:15px">
 								<form action="user/toPayOthers" method="get">
-									Bill Number: <input type="text" name="bNo" required="required"
-					oninvalid="setCustomValidity('Please input valid bill No.')" oninput="setCustomValidity('')"/><br/><br/>
-									Bill owner: <input type="text" name="name" required="required"
-					oninvalid="setCustomValidity('Please input valid name')" oninput="setCustomValidity('')"/><br/>
-									${msg }<br/>
-									<input type="submit" value="Next"/>
+								<table>
+								 <tr height="50px">
+								 	<td width="35%">
+								   		<label>Bill Number</label>
+								    </td>
+								 	<td>
+								    <input type="text" name="bNo" class="form-control" required="required"
+													oninvalid="setCustomValidity('Please input valid bill No.')" oninput="setCustomValidity('')"/>
+								    </td>
+								 </tr>
+								 
+								 <tr height="50px">
+								 	<td><label>Bill owner</label></td>
+								 	<td><input type="text" name="name" required="required" class="form-control"
+													oninvalid="setCustomValidity('Please input valid name')" oninput="setCustomValidity('')"/></td>
+								 </tr>
+								 
+								 </table>
+								  
+													
+							<p></p>
+							<s:if test="msg!=null">
+			     	    		<div class=" alert-custom ">
+						  		<a class="close" data-dismiss="alert">×</a>
+						  		<span class="glyphicon glyphicon-exclamation-sign"></span><strong> Error! </strong>${msg}
+						 		</div>
+			     			</s:if> 
+			     			<br/>
+			     			<div class="box-footer">
+								<input class="btn btn-primary" style="border-color:#39CCCC;background-color:#39CCCC;color:white" type="submit" value="Next"/>
+							</div>
 								</form>
 							</div>			      
 						</div> 

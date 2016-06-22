@@ -24,14 +24,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom3" style="border-left-color: yellow">
 				    <li role="presentation">
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
 				    <li role="presentation">
 				        <a href="fund/listFund">Fund</a>
 				    </li>
-				    <li role="presentation" class="active">
+				    <li role="presentation" class="active" style="border-left-color: yellow">
 				        <a href="toTimeDeposit">Time Deposit</a>
 				    </li>
 				    <li role="presentation">
@@ -141,11 +141,39 @@ aria-label="Close">Return</a>
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="simpleDialog2">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Annual Interest Rate(%)</h4>
+			</div>
+			<div class="modal-body"></div>
+			<div class="modal-footer">
+				<a class="btn btn-primary" href="javascript:void(0)" class="close" data-dismiss="modal"
+aria-label="Close">Return</a>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 <%@include file="./adminJsp/javascript.jsp"%>
 <script type="text/javascript">
 var dialog = {
 		el: $('#simpleDialog'),
+		show: function(msg) {
+			this.el.find('.modal-body').text(msg);
+			this.el.modal('show');
+		},
+		hide: function() {
+			this.el.modal('hide');
+		}
+	};
+var dialog2 = {
+		el: $('#simpleDialog2'),
 		show: function(msg) {
 			this.el.find('.modal-body').text(msg);
 			this.el.modal('show');
@@ -184,7 +212,7 @@ var dialog = {
 				<tr>+"3 years-2.75%"+</tr>  
 				<tr>+"5 years-2.75%"+</tr></table>;*/
 			//dialog.show(tips);
-			dialog.show('3 months-1.35%,6 months-1.55%,1 year -1.75%,2 years-2.25%,3 years-2.75%,5 years-2.75%');
+			dialog2.show('3 months-1.35,6 months-1.55,1 year -1.75,2 years-2.25,3 years-2.75,5 years-2.75');
 		});
 	});
 	//setInterval(.., 200); 200ms

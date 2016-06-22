@@ -24,7 +24,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom6">
 				    <li role="presentation">
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
@@ -53,7 +53,7 @@
 								<h3 class="box-title" style="font-family:Microsoft YaHei">Bill Status</h3>
 							</div>
 							<div class="box-body">
-								<table width="80%" class="table table-striped" style="text-align:center">
+								<table width="80%" class="table table-striped4" style="text-align:center">
 									<tr>
 										<th style="text-align:center">Bill number</th>
 										<th style="text-align:center">Bill item</th>
@@ -67,7 +67,7 @@
 											<td>${billList.bItem}</td>
 											<td>${billList.start_date} - ${billList.end_date}</td>
 											<td><span format-balance>${billList.amount}</span></td>
-											<td><a href="user/toPay?bNo=${billList.bNo}"><button class="btn btn-default">Pay</button></a></td>
+											<td><a class="btn btn-primary btn-xs" href="user/toPay?bNo=${billList.bNo}" style="border-color:#39CCCC;background-color:#39CCCC;color:white">Pay</a></td>
 										</tr>
 									</c:forEach>
 								</table>				

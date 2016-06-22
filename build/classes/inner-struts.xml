@@ -217,7 +217,8 @@
 		</action>
 		<action name="addUser" class="com.kkbank.business.web.UserManageAction" 
 			method="addUser">
-			<result name="success">/jsp/registerSuccess.jsp</result> <!--registerSuccess-->
+			<interceptor-ref name="adiStack"></interceptor-ref>
+			<result name="success">/jsp/userLogin.jsp</result> <!--registerSuccess-->
 			<result name="error">/jsp/register.jsp</result>
 		</action>
 		<action name="register" class="com.kkbank.business.web.NavigationManageAction"
@@ -378,7 +379,7 @@
 		<action name="fundPurchase" class="com.kkbank.business.web.FundManageAction"
 			method="fundPurchase">
 			<interceptor-ref name="loginStack"></interceptor-ref>
-			<result name="success" type="redirectAction">listFund</result>
+			<result name="success">/jsp/purchaseSuccess.jsp</result>
 			<result name="error">/jsp/fundPurchase.jsp</result>
 		</action>
 		<action name="listMyFund" class="com.kkbank.business.web.FundManageAction"
@@ -394,8 +395,8 @@
 		<action name="fundRedeem" class="com.kkbank.business.web.FundManageAction"
 			method="fundRedeem">
 			<interceptor-ref name="loginStack"></interceptor-ref>
-			<result name="success" type="redirectAction">listFund</result>
-			<result name="error" type="redirect">/jsp/fundRedeem.jsp</result>
+			<result name="success">/jsp/redeemSuccess.jsp</result>
+			<result name="error">/jsp/fundRedeem.jsp</result>
 		</action>
 	</package>
 	

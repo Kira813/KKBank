@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -50,21 +49,13 @@
 					<section>
 						<div class="box box-danger">
 							<div class="box-header">
-								<h3 class="box-title" style="font-family:Microsoft YaHei">Fund</h3>
+								<h3 class="box-title" style="font-family:Microsoft YaHei">Fund Purchase</h3>
 							</div>
-							<div class="box-body" style="padding-left:20px">
-								<c:forEach items="${fundli}" var="list">
-									<p>Fund Name: ${list.fName}</p>
-									<p>Fund Background: </p>
-									<P>${list.fBackground}</p>
-									<p>Fund Manager: ${list.fManage}</p>
-									<p>Investment portfolio:</p>
-									<p>${list.fInvest_portfolio}</p>
-									<p>Purchase rate: <span format-toPercent>${list.fPur_rate}</span></p>
-								</c:forEach>
-							</div>
-							<div class="box-footer">
-								<a class="btn btn-default" href="fund/listFund">Return</a>
+							<div class="box-body">
+									<div class="box-footer">
+										<input class="btn btn-danger" style="background-color: #dd4b39;border-color:#dd4b39" type="submit" value="Submit" />
+									</div>
+												
 							</div>
 						</div> 
 				    </section>
@@ -73,6 +64,40 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="simpleDialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Tips</h4>
+			</div>
+			<div class="modal-body"></div>
+			<div class="modal-footer">
+				<a class="btn btn-primary" href="fund/listFund">Return</a>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 <%@include file="./adminJsp/javascript.jsp"%>
+<script type="text/javascript">
+var dialog = {
+		el: $('#simpleDialog'),
+		show: function(msg) {
+			this.el.find('.modal-body').text(msg);
+			this.el.modal('show');
+		},
+		hide: function() {
+			this.el.modal('hide');
+		}
+	};
+$(function(){
+	dialog.show("You have purchased successfully.");	
+});
+
+
+</script>
 </html>

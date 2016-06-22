@@ -47,7 +47,7 @@
 			<div class="col-md-9">
 				<aside class="right-content-custom" style="font-family:Microsoft YaHei">
 					<section>
-						<div class="box box-primary">
+						<div class="box box-grey">
 							<div class="box-header">
 								<h3 class="box-title" style="font-family:Microsoft YaHei">Transaction Details</h3>
 							</div>
@@ -66,7 +66,7 @@
 											<td><s:date name="date" format="yyyy-MM-dd hh：mm：ss"/></td>
 											<td>${type }</td>
 											<td>
-											<s:if test="type=='Deposit'">
+											<s:if test="type=='Deposit'||type=='Transfer in'">
 												<span style="color:red" format-balance>${amount}</span>
 											</s:if>
 											<s:else>
@@ -79,7 +79,7 @@
                             </table>
                         </div>
                         <div class="box-footer">
-                        	<a class="btn btn-primary" href="toTransctionHistory.action?ac_No=${ac_No }">History Transaction Records</a>
+                        	<a class="btn" style="color:white;background-color:grey"  href="toTransctionHistory.action?ac_No=${ac_No }">History Transaction Records</a>
                         </div>
 						</div> 
 				    </section>

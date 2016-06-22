@@ -22,7 +22,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom6">
 				    <li role="presentation">
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
@@ -50,30 +50,41 @@
 							<div class="box-header">
 								<h3 class="box-title" style="font-family:Microsoft YaHei">Pay Confirmation</h3>
 							</div>
-							<div class="box-body">
-							<p>Bill Number:${bNo}</p><br/>
-							<p>Bill Owner:${name}</p><br/>
-							<p>Bill Item:${item}</p><br/>
-							<p>Details:${bDetail}</p><br/>
+							<form action="user/payOthers" method="post">
+							<div class="box-body" style="padding-left:20px">
+							<p>Bill Number: ${bNo}</p><br/>
+							<p>Bill Owner: ${name}</p><br/>
+							<p>Bill Item: ${item}</p><br/>
+							<p>Details: ${bDetail}</p><br/>
 							<p>Period: ${start_date} - ${end_date}</p><br/>
 							<p>Amount: <span format-balance>${bAmount}</span></p><br/>
-							<form action="user/payOthers" method="post">
+							
 								<input type="hidden" name="bNo" value="${bNo}">
-								Please select an account:<br/>
-									<select name="ac_No" id="ac_No_select" onchange="showBalance()">
+								<label>Please select an account:</label>
+									<select class="form-control" name="ac_No" id="ac_No_select" onchange="showBalance()">
 										<c:forEach items="${acList}" var="list">
 											<option value="${list.ac_No}">${list.ac_No}</option>
 										</c:forEach>
-									</select><br/>
-									<div id="showBal"></div><br/>
-								Card PIN:
-									<input type="password" name="PIN" placeholder="PIN" required="required"
-										oninvalid="setCustomValidity('Please input your card PIN')" oninput="setCustomValidity('')"/><br/>
-									${msg}<br/>
-									<input class="btn btn-primary" type="submit" value="Confirm"/>
-									<a href="user/toOtherBill"><input class="btn btn-default" type="button" value="Return"/></a>
+									</select><p></p>
+									<div id="showBal"></div><p></p>
+								<label>Card PIN:</label>
+									<input class="form-control" type="password" name="PIN" placeholder="PIN" required="required"
+										oninvalid="setCustomValidity('Please input your card PIN')" oninput="setCustomValidity('')"/>
+										<p></p>
+										<s:if test="msg!=null">
+									     	    <div class=" alert-custom ">
+												  <a class="close" data-dismiss="alert">×</a>
+												  <span class="glyphicon glyphicon-exclamation-sign"></span><strong> Error! </strong>${msg}
+												 </div>
+									     </s:if> 
+									     <p></p>
+									     </div>
+									<div class="box-footer" style="padding-left:20px">
+										<input class="btn btn-primary"style="border-color:#39CCCC;background-color:#39CCCC;color:white" type="submit" value="Confirm"/>
+										<a href="user/toOtherBill"><input class="btn btn-default" type="button" value="Return"/></a>
+									</div>
 							</form>
-							</div>
+							
 						</div>
 					</section>
 				</aside>

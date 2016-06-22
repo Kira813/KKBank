@@ -45,6 +45,44 @@
 		</form>
     </div>
 </div>
+<div class="modal fade" id="simpleDialog" style="font-family:Microsoft YaHei">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Warning</h4>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<a class="btn btn-primary" href="javascript:void(0)" class="close" data-dismiss="modal"
+				aria-label="Close">Return</a>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 <%@include file="./adminJsp/javascript.jsp"%>
+<script type="text/javascript">
+var dialog = {
+		el: $('#simpleDialog'),
+		show: function(msg) {
+			this.el.find('.modal-body').text(msg);
+			this.el.modal('show');
+		},
+		hide: function() {
+			this.el.modal('hide');
+		}
+	};	
+	$('input').on('change', function() { 
+		$('.alert-custom').hide(); 
+	});
+	var rTips = '${rTips}';
+	if(rTips){
+		dialog.show(rTips);
+	}
+</script>
 </html>

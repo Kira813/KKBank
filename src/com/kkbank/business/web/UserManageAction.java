@@ -99,7 +99,10 @@ public class UserManageAction extends ActionSupport {
 			msg = "The user does not exist.";
 			// this.result = "false";
 			return ERROR;
-		} else if (userService.login(ID, pwd)) {
+		} else if(userService.getUser(ID).getStatus()==3){
+			msg = "This account has not activated. Please activate your account first.";
+			return ERROR;
+		}else if (userService.login(ID, pwd)) {
 			// this.result="true";
 			ActionContext ctx = ActionContext.getContext();
 			ctx.getSession().put("loginID", ID);
@@ -359,14 +362,14 @@ public class UserManageAction extends ActionSupport {
 		ID = DES.decrypt(ID);
 		System.out.println("decryted ID:" + ID);
 
-		if (accountService.listAccount(ID).size() == 1) {
+		if (userService.listUser(ID).size() == 1) {
 			status = 1;
 
 			// account.setID(ID);
-			account = accountService.findAccount(ID);
+			user = userService.getUser(ID);
 
-			account.setStatus(status);
-			accountService.updateAccount(account);
+			user.setStatus(status);
+			userService.updateUser(user);
 			return SUCCESS;
 		} else {
 			msg = "The user does not exist, Please contact with our Bank: 0754-12345678";
@@ -491,10 +494,10 @@ public class UserManageAction extends ActionSupport {
 				ActionContext.getContext().getSession()
 						.put("customer", customer);
 				ActionContext.getContext().getSession().put("user", user);
-				// if(EmailUtils.sendAccountActivateEmail(user)){
-				// rTips="Create a user successfully.There will be an verification mail send to your security email.";
-				// ActionContext.getContext().put("rTips", rTips);
-				// }
+				 if(EmailUtils.sendAccountActivateEmail(user)){
+				 rTips="Create a user successfully.There will be an verification mail send to your security email.";
+				 ActionContext.getContext().put("rTips", rTips);
+				 }
 				return SUCCESS;
 			}
 		} else if (ID != null || name != null) {
@@ -656,6 +659,10 @@ public class UserManageAction extends ActionSupport {
 	public String toPayOthers(){
 		ID = (String) ActionContext.getContext().getSession().get("loginID");
 		pp = payService.get(bNo);
+		if(pp == null){
+			msg = "The bill does not exist. Please check your bill number.";
+			return ERROR;
+		}
 		if(customerService.isValidAccount(pp.getID(), name)){
 			bType = pp.getbType();
 			item = pp.getbItem();

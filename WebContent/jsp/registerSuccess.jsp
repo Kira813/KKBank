@@ -16,7 +16,7 @@
 <%@include file="./adminJsp/headMeta.jsp"%></head>
 </head>
 <body>
-<div class="modal fade" id="simpleDialog">
+<div class="modal fade" id="simpleDialog" style="font-family:Microsoft YaHei">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -24,7 +24,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warning</h4>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Warning</h4>
 			</div>
 			<div class="modal-body">
 			</div>

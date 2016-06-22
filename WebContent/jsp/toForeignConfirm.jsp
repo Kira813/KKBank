@@ -54,7 +54,7 @@
 							<div class="box-body">	
 							<table class="table table-striped" >
 					                <tbody>
-					                <tr>
+					                <tr class="success">
 					                  <td style="width: 30%; padding-left:20px">Card Number</td>
 					                  <td>${ac_No}</td>
 					                </tr>
@@ -62,7 +62,7 @@
 					                  <td style="padding-left:20px">RMB Balance</td>
 					                  <td><span format-balance>${balance}</span></td>
 					                </tr>
-					                <tr>
+					                <tr class="success">
 					                  <td style="padding-left:20px">Exchange Currency</td>
 					                  <td>${currency}</td>
 					                </tr>
@@ -70,7 +70,7 @@
 					                  <td style="padding-left:20px">Exchange Offer Rate</td>
 					                  <td>${rate}</td>
 					                </tr>
-					                <tr>
+					                <tr class="success">
 					                  <td style="padding-left:20px">Required RMB amount</td>
 					                  <td><span format-balance>${r}</span></td>
 					                </tr>    

@@ -22,21 +22,22 @@
                   <li><a href="toTransfer">Transfer</a></li>
                   <li><a href="toTimeDeposit">Time deposit</a></li>
                   <li><a href="toForeignExchange">Foreign exchange</a></li>
+                  <li><a href="user/toPayment">Payment</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Account Enquiry</li>
                   <li><a href="toAccountEnquiry">Balance Enquiry</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Fund</li>
-                  <li><a href="#">Purchase</a></li>
-                  <li><a href="#">Redeem</a></li>
-                  <li><a href="#">Inquiry</a></li>
+                  <li><a href="fund/listFund">Purchase</a></li>
+                  <li><a href="fund/listMyFund">Redeem</a></li>
+                  <li><a href="fund/listMyfund">Inquiry</a></li>
                 </ul>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
             	<s:if test="#session.loginID==null">
 	              <li><a href="user/userLogin">Log in</a></li>
-	              <li><a href="user/register">Sign in</a></li>
+	              <li><a href="user/register">Sign up</a></li>
 	            </s:if>
 	            <s:else>
 	              <li><a><i class="fa fa-user"></i><span> Hello,${name }</span></a></li>

@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom5">
 				    <li role="presentation">
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
@@ -58,7 +58,7 @@
 					              <p>Exchange Settlement</p>
 					            </div>
 					            <div class="icon">
-					              <i class="ion ion-stats-bars"></i>
+					              <i class="ion ion-arrow-graph-up-right"></i>
 					            </div>
 					            <a href="toExchange" class="small-box-footer">Exchange to other currency <i class="fa fa-arrow-circle-right"></i></a>
 					         </div>

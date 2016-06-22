@@ -50,8 +50,8 @@
 								<div class="box-header">
 									<h3 class="box-title" style="font-family:Microsoft YaHei">Time Deposit</h3>
 								</div>
-								<div class="box-body no-padding" >
-									<table class="table table-striped" >
+								<div class="box-body" >
+									<table class="table table-striped2" >
 										<tbody>
 											<tr>
 												<td style="width: 30%; padding-left:20px">Card Number</td>
@@ -87,12 +87,14 @@
 									</table>
 								</div>
 								<form role="form" action="account/timeDepositConfirm" method="post">
-									<div class="input-group" style="margin-top:10px">
-										<span class="input-group-addon">
-											<span class="fa fa-key"></span>
-										</span>
-										<input type="password" name="pin" id="pin" class="form-control"
-										placeholder="Please input card PIN" required="required">
+									<div class="box-body">
+										<div class="input-group" style="margin-top:10px">
+											<span class="input-group-addon">
+												<span class="fa fa-key"></span>
+											</span>
+											<input type="password" name="pin" id="pin" class="form-control"
+											placeholder="Please input card PIN" required="required">
+									</div>
 									</div>
 									<p></p>
 									<input name = "amount" style="display:none">

@@ -118,8 +118,13 @@ public class FundManageAction extends ActionSupport{
 		acList = accountService.listAccount(ID);
 		fName = fundService.get(fCode).getfName();
 		
+		/*if(ac_No == "null"){
+			msg="nullaaaa";
+			return ERROR;
+		}*/
+
+		System.out.println("account:" + ac_No);
 		account = accountService.getAccount(ac_No);
-		
 		if(account.getStatus() == 2){
 			msg = "This account is locked. Please contact system administrator";
 			return ERROR;
@@ -156,8 +161,9 @@ public class FundManageAction extends ActionSupport{
 					//insert transaction record
 					t_id = transactionService.addTransaction(t_id, new Date(), "Fund buy", amount, account.getBalance(), account);
 					
-					JOptionPane.showOptionDialog(null, "You have purchased successfully", 
-							"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+					//msg="You have purchased successfully";
+					//JOptionPane.showOptionDialog(null, "You have purchased successfully", 
+					//		"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
 					return SUCCESS;				
 				}
 				else{
@@ -209,9 +215,13 @@ public class FundManageAction extends ActionSupport{
 	
 	public String fundRedeem(){
 		Object[] option = {"Return"};
+		ID = (String) ActionContext.getContext().getSession().get("loginID");
 		account = accountService.getAccount(ac_No);
 		myFund = myFundService.get(fund_id);
+		
 		if(account.getPassword().equals(PIN)){
+			System.out.println("share:" + share);
+			System.out.println("my share" + myFund.getShare());
 			if(share < myFund.getShare()){
 				//update my fund
 				amount = amount - myFund.getNav()* share;
@@ -227,8 +237,8 @@ public class FundManageAction extends ActionSupport{
 				//insert the transaction record
 				t_id = transactionService.addTransaction(t_id, new Date(), "Fund Sell", myFund.getFund().getNav()* share * (1-0.005), account.getBalance(), account);
 				
-				JOptionPane.showOptionDialog(null, "You have redeemed successfully", 
-						"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+				//JOptionPane.showOptionDialog(null, "You have redeemed successfully", 
+				//		"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
 				return SUCCESS;
 			}
 			else if(share == myFund.getShare()){
@@ -248,16 +258,30 @@ public class FundManageAction extends ActionSupport{
 				//insert the transaction record
 				t_id = transactionService.addTransaction(t_id, new Date(), "Fund Sell", (amount + income)*(1-0.005), account.getBalance(), account);
 				
-				JOptionPane.showOptionDialog(null, "You have redeemed successfully", 
-						"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+				//JOptionPane.showOptionDialog(null, "You have redeemed successfully", 
+				//		"Tips", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
 				return SUCCESS;
 			}
 			else{
+				fCode = myFund.getFund().getfCode();
+				fName = myFund.getFund().getfName();
+				ac_No = myFund.getAc_No();
+				amount = myFund.getAmount();
+				dealDate = myFund.getDealDate();
+				share = myFund.getShare();
+				income = ( myFund.getFund().getNav() - myFund.getNav())* share;
 				msg = "Invalid share amount.";
 				return ERROR;
 			}
 		}
 		else{
+			fCode = myFund.getFund().getfCode();
+			fName = myFund.getFund().getfName();
+			ac_No = myFund.getAc_No();
+			amount = myFund.getAmount();
+			dealDate = myFund.getDealDate();
+			share = myFund.getShare();
+			income = ( myFund.getFund().getNav() - myFund.getNav())* share;
 			msg = "Your card PIN is wrong.";
 			return ERROR;
 		}

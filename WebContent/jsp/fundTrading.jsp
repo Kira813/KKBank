@@ -3,18 +3,20 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import= "com.opensymphony.xwork2.ActionContext" %>
 <%@ page import= "com.opensymphony.xwork2.ActionSupport" %>
-<%
+    <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-%>
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>KK Bank</title>
+<title>KKBank | Fund</title>
 <base href="<%=basePath%>">
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@include file="./adminJsp/headMeta.jsp"%></head>
 </head>
 	<script>		
 	/*var json={"error_code":0,
@@ -41,34 +43,102 @@
 
 	</script>
 <body>
-	<%ActionContext.getContext().getSession().get("result"); %>
-	<table width="60%" border="1">
-		<tr>
-			<td>Fund Name</td>
-			<td>Fund Code</td>
-			<td>Fund Type</td>
-			<td>Annualized rate of return(%)</td>
-		</tr>	
-		<!--<c:forEach items="${res}" var="list">
-			<tr>
-				<td><a href="fund/toFundDetail?fName=${list.name}">${list.name}</a></td>
-				<td>${list.code}</td>
-				<td>${list.jjlx}</td>
-				<td>${list.annualincome}</td>
-				<td><a href="toFundTradingConfirm?fCode=${list.symbol}"><button>Purchase</button></a></td>
-			</tr>
-		</c:forEach>-->
-		<c:forEach items="${fundli}" var="list">
-			<tr>
-				<td><a href="fund/toFundDetail?fCode=${list.fCode}">${list.fName}</a></td>
-				<td>${list.fCode}</td>
-				<td>${list.fType}</td>
-				<td>${list.fAnnualized_rate}</td>
-				<td><a href="fund/toFundTradingConfirm?fCode=${list.fCode}"><button>Purchase</button></a></td>
-			</tr>
-		</c:forEach>
-	</table>
-	<a href="userIndex"><button>Return</button></a>
+<div class="container">
+<%@include file="./userHeader.jsp"%>
+</div>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom2">
+				    <li role="presentation">
+				        <a href="toAccountEnquiry">Account Enquiry</a>
+				    </li>
+				    <li role="presentation" class="active">
+				        <a href="fund/listFund">Fund</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toTimeDeposit">Time Deposit</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toTransfer">Transfer</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="toForeignExchange">Foreign Exchange</a>
+				    </li>
+				    <li role="presentation">
+				        <a href="user/toPayment">Payment</a>
+				    </li>
+				</ul>
+			</div>
+			<div class="col-md-9">
+				<aside class="right-content-custom" style="font-family:Microsoft YaHei">
+					<section>
+						<div class="box box-danger">
+							<div class="box-header">
+								<h3 class="box-title" style="font-family:Microsoft YaHei">Fund</h3><a class="btn btn-default" style="margin-top:7px;float:right;margin-right:20px" href="fund/listMyFund"><span class="glyphicon glyphicon-search"></span> My Fund</a>
+							</div>
+							<div class="box-body">
+								<%ActionContext.getContext().getSession().get("result"); %>
+									<table class="table table-striped3" width="60%" style="text-align:center">
+										<tr>
+											<th style="text-align:center">Fund Name</th>
+											<th style="text-align:center">Fund Code</th>
+											<th style="text-align:center">Fund Type</th>
+											<th style="text-align:center">Annualized rate of return(%)</th>											
+											<th style="text-align:center">Purchase</th>
+										</tr>	
+										<!--<c:forEach items="${res}" var="list">
+											<tr>
+												<td><a href="fund/toFundDetail?fName=${list.name}">${list.name}</a></td>
+												<td>${list.code}</td>
+												<td>${list.jjlx}</td>
+												<td>${list.annualincome}</td>
+												<td><a href="toFundTradingConfirm?fCode=${list.symbol}"><button>Purchase</button></a></td>
+											</tr>
+										</c:forEach>-->
+										<c:forEach items="${fundli}" var="list">
+											<tr>
+												<td><div class="underline-custom"><a  style="color:#dd4b39" href="fund/toFundDetail?fCode=${list.fCode}">${list.fName}</a></div></td>
+												<td>${list.fCode}</td>
+												<td>${list.fType}</td>
+												<td>${list.fAnnualized_rate}</td>
+												<td><a class="btn btn-xs btn-danger" href="fund/toFundTradingConfirm?fCode=${list.fCode}">Purchase</a></td>
+											</tr>
+										</c:forEach>
+									</table>
+									<p></p>
+									
+							</div>
+							<div class="box-footer">
+								
+								<a class="btn btn-default" href="userIndex">Return</a>
+							</div>
+						</div> 
+				    </section>
+				</aside>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="simpleDialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Tips</h4>
+			</div>
+			<div class="modal-body"></div>
+			<div class="modal-footer">
+				<a class="btn btn-primary" href="javascript:void(0)" class="close" data-dismiss="modal"
+aria-label="Close">Return</a>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 <%@include file="./adminJsp/javascript.jsp"%>
 </html>

@@ -54,20 +54,25 @@
 							</div>
 							<div class="box-body">
 							
-                            <table class="table table-striped" style="text-align:center">
+                            <table class="table table-striped2" style="text-align:center">
                            		<thead>
                                 <tr>
                                     <th style="text-align:center">ID</th>
-                                    <th style="text-align:center">Deposit term</th>
-                                    <th style="text-align:center">deposit amount</th>
-                                    <th style="text-align:center">deposit type</th>
-                                    <th style="text-align:center">interest rate</th>
-                                    <th style="text-align:center">maturity date</th>
+                                    <th style="text-align:center">Deposit Term</th>
+                                    <th style="text-align:center">Deposit Amount</th>
+                                    <th style="text-align:center">Deposit Type</th>
+                                    <th style="text-align:center">Interest Rate</th>
+                                    <th style="text-align:center">Maturity Date</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <s:iterator value="tlist" status="st">
-	                                    <tr>
+                                	<s:if test="index==0">
+	                                    <tr class="warning">
+	                            	</s:if>
+	                             	<s:else>
+	                             		<tr>
+	                             	</s:else>
 	                                    	<td>${st.index + 1 }</td>
 	                                    	<td>
 	                                    	<s:if test="term==3">3 months</s:if>
@@ -80,7 +85,7 @@
 	                                    	<td><span format-balance>${amount}</span></td>
 	                                    	<td>${type }</td>
 	                                    	<td>${interestRate }</td>
-											<td><s:date name="maturityDate" format="yyyy-MM-dd hh：mm：ss"/></td>
+											<td><s:date name="maturityDate" format="yyyy-MM-dd"/></td>
 	                                  	</tr>
                                 </s:iterator>
                                 </tbody>

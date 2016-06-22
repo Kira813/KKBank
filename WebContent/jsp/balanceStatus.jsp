@@ -49,7 +49,7 @@
 			<div class="col-md-9">
 				<aside class="right-content-custom" style="font-family:Microsoft YaHei">
 					<section>
-						<div class="box box-primary">
+						<div class="box box-grey">
 							<div class="box-header">
 								<h3 class="box-title" style="font-family:Microsoft YaHei">Balance Status</h3>
 							</div>
@@ -126,7 +126,7 @@
 							</table>
 						</div>
 							<div class="box-footer">
-								<a class="btn  btn-primary" href="toTransctionDetail.action?ac_No=${ac_No }">The last 10 transaction records</a>
+								<a class="btn" style="color:white;background-color:grey" href="toTransctionDetail.action?ac_No=${ac_No }">The last 10 transaction records</a>
 							</div>
 							</div>
 				    </section>

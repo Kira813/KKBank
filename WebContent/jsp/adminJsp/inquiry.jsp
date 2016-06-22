@@ -34,7 +34,7 @@
 								<s:if test="msg!=null">
 						     	   <div class=" alert-custom ">
 									<a class="close" data-dismiss="alert">×</a>
-									<span class="glyphicon glyphicon-exclamation-sign"></span><strong> Error! </strong>${msg}
+									<span class="glyphicon glyphicon-exclamation-sign"></span><strong> Tips! </strong>${msg}
 									</div>
 			     				</s:if>
 							</div>

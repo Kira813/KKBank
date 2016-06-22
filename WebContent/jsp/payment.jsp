@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom6">
 				    <li role="presentation">
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
@@ -55,20 +55,20 @@
 							<div class="small-box bg-teal" style="width:400px">
 					            <div class="inner">
 					              <h3 style="font-family:Microsoft YaHei">Pay for myself<sup style="font-size: 20px"></sup></h3>
-					              <p></p>
+					              <p>You can pay your bills  here</p>
 					            </div>
 					            <div class="icon">
-					              <i class="ion ion-stats-bars"></i>
+					              <i class="ion ion-ios7-person"></i>
 					            </div>
-					            <a href="user/toPersonalBill" class="small-box-footer">My personal bill <i class="fa fa-arrow-circle-right"></i></a>
+					            <a href="user/showPersonalBill" class="small-box-footer">My personal bill <i class="fa fa-arrow-circle-right"></i></a>
 					         </div>
 					         <div class="small-box bg-maroon" style="width:400px">
 					            <div class="inner">
 					              <h3 style="font-family:Microsoft YaHei">Pay for others<sup style="font-size: 20px"></sup></h3>
-					              <p></p>
+					              <p>Pay for whoever you like </p>
 					            </div>
 					            <div class="icon">
-					              <i class="ion ion-stats-bars"></i>
+					              <i class="ion ion-ios7-people"></i>
 					            </div>
 					            <a href="user/toOtherBill" class="small-box-footer">Pay for others <i class="fa fa-arrow-circle-right"></i></a>
 					         </div>

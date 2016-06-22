@@ -18,30 +18,7 @@
             </li>
 	        <!-- s:if test="userIndex" -->
 	        	<li class="dropdown">
-	                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                    Banking
-	                    <span class="caret"></span>
-	                </a>
-	                <ul class="dropdown-menu" role="menu">
-	                	<li role="presentation">
-					        <a href="toAccountEnquiry">Account Enquiry</a>
-					    </li>
-					    <li role="presentation">
-					        <a href="fund/listFund">Fund</a>
-					    </li>
-					    <li role="presentation">
-					        <a href="toTimeDeposit">Time Deposit</a>
-					    </li>
-					    <li role="presentation">
-					        <a href="toTransfer">Transfer</a>
-					    </li>
-					    <li role="presentation">
-					        <a href="toForeignExchange">Foreign Exchange</a>
-					    </li>
-					    <li role="presentation">
-					        <a href="user/toPayment">Payment</a>
-					    </li>
-	                </ul>
+					<a href="toAccountEnquiry">Banking</a>	        
 	            </li>
 	        
             <li class="dropdown">

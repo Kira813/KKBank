@@ -29,7 +29,7 @@ body {
 </s:else>
 <div class="custom-bg">
 	<div>
-		<h1>KKBank</h1>
+		<h1>KK Bank</h1>
 		<h3>${name ? "Hello, " + name : ""}</h3>
 	</div>
 </div>

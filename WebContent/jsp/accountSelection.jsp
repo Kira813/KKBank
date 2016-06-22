@@ -47,7 +47,7 @@
 			<div class="col-md-9">
 				<aside class="right-content-custom" style="font-family:Microsoft YaHei">
 					<section>
-						<div class="box box-primary">
+						<div class="box box-grey">
 							<div class="box-header">
 								<h3 class="box-title" style="font-family:Microsoft YaHei">Account Selection</h3>
 							</div>
@@ -61,7 +61,7 @@
 							    </div>
 							</div>
 							<div class="box-footer">
-								<a class="btn  btn-primary" href="javascript:void(0)" id="next_btn">Next</a>
+								<a class="btn" style="color:white;background-color:grey"  href="javascript:void(0)" id="next_btn">Next</a>
 							</div>
 						</div> 
 				    </section>

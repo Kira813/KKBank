@@ -28,16 +28,17 @@
 							<h3 class="box-title" style="font-family:Microsoft YaHei">User: ${name}</h3>
 						</div>
 							<div class="box-body">
-						        <table cellpadding="6" height="90" class="table table-striped">		
-						            <tr bgcolor="#E6E6F7">
-						              <th>Card Number</th>
-						              <th>Balance </th>
-						              <th>USD</th>
-						              <th>JPY</th>
-						              <th>HKD</th>
-						              <th>GBP</th>
-						              <th>AUD</th>					              
-						              <th>Account Status</th>
+							
+							<h4 class="box-title" style="font-family:Microsoft YaHei;text-align:center">Card Status</h4>
+						        <table class="table table-striped">		
+						            <tr class="success">
+						              <th style="text-align:center">Card Number</th>
+						              <th style="text-align:center">Balance </th>					              
+						              <th style="text-align:center">Account Status</th>
+						              <th style="text-align:center"></th>
+						              <th style="text-align:center"></th>
+						              <th style="text-align:center"></th>
+						              <th style="text-align:center"></th>
 						            </tr>
 						            
 						            <s:iterator value="#listaccount" status="st">
@@ -46,6 +47,35 @@
 							            	<td><s:if test="Balance == 0">--</s:if>
 							            		<s:else><span format-balance>${balance }</span></s:else>
 							            	</td>
+							            	<td>
+												<s:if test="status == 1">Normal</s:if>  
+												<s:elseif test="status == 2">Locked</s:elseif>  
+												<s:elseif test="status == 3">Not activated  </s:elseif>  
+												<s:elseif test="status == 4">Not Available </s:elseif>
+												<s:elseif test= "status == 5">Frozen </s:elseif>
+											</td>
+											<td><a class="btn btn-xs btn-primary close_account" data-acno="${ac_No }" data-id="${ID }">Close</a></td>
+							            	<td><a class="btn btn-xs btn-primary unlock_account" data-acno="${ac_No }" data-id="${ID }">Unlock</a></td>
+							            	<td><a class="btn btn-xs btn-primary frozen_account" data-acno="${ac_No }" data-id="${ID }">Frozen</a></td>
+											<td><a class="btn btn-xs btn-primary unfreeze_account" data-acno="${ac_No }" data-id="${ID }">Unfreeze</a></td>
+						            	</tr>
+					          			</s:iterator>
+					          </table>
+					          <hr/>
+					          <h4 class="box-title" style="font-family:Microsoft YaHei;text-align:center"> Currency</h4>
+					          <table class="table table-striped">		
+						            <tr class="success" >
+						              <th style="text-align:center">Card Number</th>
+						              <th style="text-align:center">USD</th>
+						              <th style="text-align:center">JPY</th>
+						              <th style="text-align:center">HKD</th>
+						              <th style="text-align:center">GBP</th>
+						              <th style="text-align:center">AUD</th>					              
+						            </tr>
+						            
+						            <s:iterator value="#listaccount" status="st">
+						            	<tr align="center">
+							            	<td>${ac_No}</td>
 							            	<s:if test="status == 1">
 							            	<td><s:if test="USD == 0">--</s:if>
 							            		<s:else><span format-balance>${USD }</span></s:else>
@@ -61,17 +91,6 @@
 							            	<td><s:if test="AUD == 0">--</s:if>
 							            		<s:else><span format-balance>${AUD }</span></s:else></td>
 							            	</s:if>
-							            	<td>
-												<s:if test="status == 1">Normal</s:if>  
-												<s:elseif test="status == 2">Locked</s:elseif>  
-												<s:elseif test="status == 3">Not activated  </s:elseif>  
-												<s:elseif test="status == 4">Not Available </s:elseif>
-												<s:elseif test= "status == 5">Frozen </s:elseif>
-											</td>
-											<td><a class="btn btn-primary close_account" data-acno="${ac_No }" data-id="${ID }">Close</a></td>
-							            	<td><a class="btn btn-primary unlock_account" data-acno="${ac_No }" data-id="${ID }">Unlock</a></td>
-							            	<td><a class="btn btn-primary frozen_account" data-acno="${ac_No }" data-id="${ID }">Frozen</a></td>
-											<td><a class="btn btn-primary unfreeze_account" data-acno="${ac_No }" data-id="${ID }">Unfreeze</a></td>
 						            	</tr>
 					          			</s:iterator>
 					          </table>

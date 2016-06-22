@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>KKBank | Register</title>
 <base href="<%=basePath%>">
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@include file="./adminJsp/headMeta.jsp"%></head>
@@ -59,7 +59,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Warning</h4>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Warning</h4>
 			</div>
 			<div class="modal-body">
 			</div>
