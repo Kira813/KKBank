@@ -65,7 +65,7 @@
 											<span class="input-group-addon">
 												<i class="fa fa-money"></i> Foreign Currency Balance
 											</span>
-											<div class="form-control">
+											<div class="form-control"disabled="true">
 												${bal}
 											</div>
 										</div>
@@ -75,7 +75,7 @@
 												<span class="fa fa-bar-chart-o" ></span>
 												Buying Rate
 											</span>
-											<div class="form-control">
+											<div class="form-control"disabled="true">
 												<span id="rate_count"></span>
 											</div>
 										</div>
@@ -91,7 +91,7 @@
 										<p></p>
 										<div class="input-group">
 											<span class="input-group-addon">￥RMB Income</span>
-											<div class="form-control">
+											<div class="form-control"disabled="true">
 												<span id="income"></span>
 											</div>
 										</div>

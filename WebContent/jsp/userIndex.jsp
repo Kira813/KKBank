@@ -71,7 +71,7 @@ body {
 							<div style="color:grey;font-size:10px;padding-top:10px"><b>DETAILS OF FUNDS</b></div>
 							<div style="color:grey"><p><b>FUNDS</b></p></div>
 							<p>You can purchase whatever you like, which will help you gain benefits. </p>
-							<p><a href="" style="color:#dd4b39">More ></a></p>
+							<p><a href="fund/listFund" style="color:#dd4b39">More ></a></p>
 						</div>
 					</div>
 					
@@ -92,7 +92,7 @@ body {
 						<tr><td>
 						<div style="color:grey"><b>TIME DEPOSIT</b></div>
 						<p>You can deposit money here for a specified time and gain interest for benefit.</p>
-						<p><a href="" style="color:#dd4b39">More ></a></p>
+						<p><a href="toTimeDeposit" style="color:#dd4b39">Deposit ></a></p>
 						</td></tr>
 						</table>
 						</center>
@@ -107,17 +107,38 @@ body {
 					<div style="color:grey;font-size:10px;margin-top:5px"><b>FOREIGN EXCHANGE</b></div>
 					<div style="color:grey"><b>CURRENCY</b></div>
 					<p>You can exchange currency here.
-					<p><a href="" style="color:#dd4b39">More ></a></p>
+					<p><a href="toForeignExchange" style="color:#dd4b39">Exchange ></a></p>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-4 custom-tag custom-tag4" >
 			<div class="row" style="padding-left:20px">
-			 list
+			<div class="sidebar-custom b1">
+				<a href="toAccountEnquiry" style="color:black">Account Enquiry</a>
+            </div>
+            <div class="sidebar-custom b2">
+				<a href="fund/listFund"style="color:black">Funds</a>
+            </div>
+            <div class="sidebar-custom b3">
+				<a href="toTimeDeposit"style="color:black">Time Deposit</a>
+            </div>
+            <div class="sidebar-custom b4">
+				<a href="toTransfer"style="color:black">Transfer</a>
+            </div>
+            <div class="sidebar-custom b5">
+				<a href="toForeignExchange"style="color:black">Foreign Exchange</a>
+            </div>
+            <div class="sidebar-custom b6">
+				<a href="user/toPayment"style="color:black">Payment</a>
+            </div>
 			</div>
-			<div class="row" style="margin-left:20px">
+			<hr style="border-top: 3px solid #ccc"/>
+			<div class="row " style="margin-left:20px">
 				<img src="/KKBank/images/p4.jpg" width="200px">
-				<p>Payment</p>
+				<div style="color:grey;font-size:10px;margin-top:5px"><b>BILLS OF LIFE</b></div>
+				<div style="color:grey"><b>PAYMENT</b></div>
+				<p>You can pay bills here.</p>
+				<p><a href="user/toPayment" style="color:#dd4b39">Pay ></a></p>
 			</div>
 		</div>
 	</div>
@@ -143,6 +164,8 @@ body {
 	</div>
  </div>
 </body>
+
+
 <%@include file="./adminJsp/javascript.jsp"%>
 <script type="text/javascript">
 	var dialog = {

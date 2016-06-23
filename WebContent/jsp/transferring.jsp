@@ -71,7 +71,7 @@
 											<span class="input-group-addon"> <i class="glyphicon glyphicon-check"></i>
 												Balance
 											</span>
-											<div class="form-control">
+											<div class="form-control"disabled="true">
 												<span id="showbalance">${balance}</span>
 											</div>
 									</div>

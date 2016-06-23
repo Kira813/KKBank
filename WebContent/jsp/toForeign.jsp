@@ -68,7 +68,7 @@
 												<span class="fa fa-bar-chart-o" ></span>
 												Selling Rate
 											</span>
-											<div class="form-control">
+											<div class="form-control"disabled="true">
 												<span id="rate_count"></span>
 											</div>
 										</div>
@@ -77,7 +77,7 @@
 											<span class="input-group-addon"> <i class="glyphicon glyphicon-arrow-up"></i>
 												Maximum Exchange Amount
 											</span>
-											<div class="form-control">
+											<div class="form-control" disabled="true">
 												<span id="rate_maxchange"></span>
 											</div>
 											<span class="input-group-addon">.00</span>
@@ -95,7 +95,7 @@
 										<p></p>
 										<div class="input-group">
 											<span class="input-group-addon">￥ Required RMB</span>
-											<div class="form-control">
+											<div class="form-control"disabled="true">
 												<span id="rmb"></span>
 											</div>
 										</div>

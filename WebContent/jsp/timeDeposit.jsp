@@ -26,7 +26,7 @@
 			<div class="col-md-3">
 				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom3" style="border-left-color: yellow">
 				    <li role="presentation">
-				        <a href="toAccountEnquiry">Account Enquiry</a>
+				        <a href="toAccountEnquiry" style="display:block;">Account Enquiry</a>
 				    </li>
 				    <li role="presentation">
 				        <a href="fund/listFund">Fund</a>
@@ -75,7 +75,7 @@
 											<span class="input-group-addon"> <i class="glyphicon glyphicon-check"></i>
 												Balance
 											</span>
-											<div class="form-control">
+											<div class="form-control" disabled="true">
 												<span id="showbalance">${balance}</span>
 											</div>
 										</div>

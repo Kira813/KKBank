@@ -74,15 +74,15 @@
 									<h4 style="font-family:Microsoft YaHei">Balance details:</h4>
 									<div class="input-group">
 										<span class="input-group-addon">RMB</span>
-										<div class="form-control">
+										<div class="form-control"disabled="true">
 											<span id="showbalance">${balance}</span>
 										</div>
 									</div>
 									</form>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">USD</span>
-										<div class="form-control">
+										<span class="input-group-addon"style="width:56px">USD</span>
+										<div class="form-control"disabled="true">
 											<span id="showusd"></span>
 										</div>
 									
@@ -92,8 +92,8 @@
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">JPY</span>
-										<div class="form-control">
+										<span class="input-group-addon"style="width:56px">JPY</span>
+										<div class="form-control"disabled="true">
 											<span id="showjpy"></span>
 										</div>
 										
@@ -103,8 +103,8 @@
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">HKD</span>
-										<div class="form-control">
+										<span class="input-group-addon"style="width:56px">HKD</span>
+										<div class="form-control"disabled="true">
 											<span id="showhkd"></span>
 										</div>
 									
@@ -114,8 +114,8 @@
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">GBP</span>
-										<div class="form-control">
+										<span class="input-group-addon"style="width:56px">GBP</span>
+										<div class="form-control"disabled="true">
 											<span id="showgbp"></span>
 										</div>
 								
@@ -125,8 +125,8 @@
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">AUD</span>
-										<div class="form-control">
+										<span class="input-group-addon"style="width:56px">AUD</span>
+										<div class="form-control"disabled="true">
 											<span id="showaud"></span>
 										</div>
 							
