@@ -53,7 +53,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" style="font-family:Microsoft YaHei">Warning</h4>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Tips</h4>
 			</div>
 			<div class="modal-body">
 			</div>

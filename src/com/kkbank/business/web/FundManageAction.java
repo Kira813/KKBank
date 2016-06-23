@@ -84,10 +84,10 @@ public class FundManageAction extends ActionSupport{
 	//list all the fund
 	public String listFund() throws Exception{		
     	//getRequest1();
-    	/*fund = fundService.get("000001");
-    	fund.setfBackground("管理公司：华夏基金管理有限公司；托管人：中国建设银行股份有限公司；本基金属成长型基金，主要通过投资于具有良好成长性的上市公司的股票，在保持基金资产安全性和流动性的前提下，实现基金的长期资本增值。本基金在证券投资基金中属于中高风险的品种，其长期平均的预期收益和风险高于债券基金和混合基金。");
-    	fund.setfManage("李铧汶 董阳阳 许利明 孙萌");
-    	fund.setfInvest_portfolio("本基金属成长型基金，主要通过投资于具有良好成长性的上市公司的股票，在保持基金资产安全性和流动性的前提下，实现基金的长期资本增值。");
+    	/*fund = fundService.get("000997");
+    	fund.setfBackground("managementCompany:南方基金管理有限公司; custodian:交通银行股份有限公司; 本基金主要投资于国内依法发行和上市交易的国债、央行票据、金融债券、企业债券、公司债券、中期票据、短期融资券、超短期融资券、次级债券、政府机构债券、地方政府债券、资产支持证券、信贷资产支持证券、可交换债券、减记债券、中小企业私募债券、可转换债券、债券回购、银行存款、货币市场工具、国债期货以及经中国证监会允许基金投资的其他金融工具，但需符合中国证监会的相关规定。");
+    	fund.setfManage("何康");
+    	fund.setfInvest_portfolio("本基金为债券型基金，其长期平均风险和预期收益率低于股票型基金、混合型基金，高于货币市场基金。");
     	fundService.update(fund);*/
     	fundli = fundService.findAllFund();  
 		return SUCCESS;
@@ -297,7 +297,7 @@ public class FundManageAction extends ActionSupport{
 	//ask real-time data
 	public void getRequest1(){
         String result =null;
-        String url ="http://apis.haoservice.com/lifeservice/netdata/stock";//请求接口地址
+        String url ="http://apis.haoservice.com/lifeservice/netdata/all";//请求接口地址
         Map params = new HashMap();//请求参数
             params.put("key", FundAPI.APPKEY);//APPKEY值
  
@@ -316,7 +316,7 @@ public class FundManageAction extends ActionSupport{
         			System.out.println(res.getJSONObject(i).get("code").toString());
         			fund1.setfName(res.getJSONObject(i).get("name").toString());
         			System.out.println(res.getJSONObject(i).get("name").toString());
-        			fund1.setfType("Stock-Fund");
+        			fund1.setfType("Open-End Fund");
         			fund1.setfAnnualized_rate(Double.parseDouble(res.getJSONObject(i).get("annualincome").toString()));
         			System.out.println(Double.parseDouble(res.getJSONObject(i).get("annualincome").toString()));
         			fund1.setNav(Double.parseDouble(res.getJSONObject(i).get("newnet").toString()));

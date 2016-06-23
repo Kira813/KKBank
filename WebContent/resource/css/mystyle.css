@@ -125,14 +125,14 @@ body {
 	font-family:Microsoft YaHei;
 	position: relative;
 	/*text-align: center;*/
-	font-size: 150%;
+	font-size: 100%;
 	/*font-weight: bold;*/
 	color: #b2b2b2;
 	padding:15px;
 	
 }
 .custom-tag1 {
-	height: 250px;
+	height: 210px;
 	/*line-height: 200x;*/
 	/*background: #f60;*/
 	
@@ -162,7 +162,7 @@ body {
 	bottom: 0;
 	margin: 0 auto;
 	width: 95%;
-	height: 2px;
+	height: 1px;
 	background: #ccc
 }
 .custom-tag2::after {
@@ -171,8 +171,8 @@ body {
 	right: 0;
 	top: 50%;
 	margin-top: -68px;
-	height: 370px;
-	width: 2px;
+	height: 160px;
+	width: 1px;
 	background: #ccc;
 }
 .custom-tag4::after {
@@ -181,8 +181,8 @@ body {
 	left: 0;
 	top: 50%;
 	margin-top: -158px;
-	height: 610px;
-	width: 2.5px;
+	height: 360px;
+	width: 1px;
 	background: #ccc
 }
 
@@ -278,10 +278,10 @@ body {
   background-color:#eaf9f9;
 }
 .sidebar-custom{
-	width:290px;
+	width:265px;
 	font-family:Microsoft YaHei;
 	margin: 0 0 20px 0;
-	padding-left:10px;
+	padding-left:15px;
 	background-color: #f5f5f5;
 	border-left: 4px solid #e5e5e5;
 	color: black;

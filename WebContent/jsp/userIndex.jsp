@@ -65,14 +65,17 @@ body {
 				<div class="col-sm-12 custom-tag custom-tag1">
 					<div class="row">
 						<div class="col-sm-6">
-							<img src="/KKBank/images/p5.jpg" width="310px" height="200px">
+							<img src="/KKBank/images/p5.jpg" width="290px" height="180px">
 						</div>
-						<div class="col-sm-6">
-							<div style="color:grey;font-size:10px;padding-top:10px"><b>DETAILS OF FUNDS</b></div>
-							<div style="color:grey"><p><b>FUNDS</b></p></div>
+						<div class="col-sm-6" >
+						<div>
+							<div style="color:grey;font-size:5px;padding-top:25px"><b>DETAILS OF FUNDS</b></div>
+							<div style="color:grey;font-size:18px"><p><b>FUNDS</b></p></div>
 							<p>You can purchase whatever you like, which will help you gain benefits. </p>
 							<p><a href="fund/listFund" style="color:#dd4b39">More ></a></p>
 						</div>
+						</div>
+						
 					</div>
 					
 					
@@ -84,13 +87,13 @@ body {
 						<center>
 						<table>
 						<tr><td>
-						<img src="/KKBank/images/p7.jpg" width="350px" height="150px">
+							
 						</td></tr>
 						<tr><td>
-						<div style="color:grey;font-size:10px;margin-top:5px"><b>LUMP-SUM DEPOSIT AND WITHDRAW</b></div>
+						<div style="color:grey;font-size:5px;margin-top:5px"><b>LUMP-SUM DEPOSIT AND WITHDRAW</b></div>
 						</td></tr>
 						<tr><td>
-						<div style="color:grey"><b>TIME DEPOSIT</b></div>
+						<div style="color:grey;font-size:18px"><b>TIME DEPOSIT</b></div>
 						<p>You can deposit money here for a specified time and gain interest for benefit.</p>
 						<p><a href="toTimeDeposit" style="color:#dd4b39">Deposit ></a></p>
 						</td></tr>
@@ -102,10 +105,10 @@ body {
 				</div>
 				<div class="col-sm-5 custom-tag custom-tag3" style="padding-left:20px">
 					<div style="padding-top:13px;">
-					<img src="/KKBank/images/p6.jpg" width="230px" height="150px">
+					
 					</div>
-					<div style="color:grey;font-size:10px;margin-top:5px"><b>FOREIGN EXCHANGE</b></div>
-					<div style="color:grey"><b>CURRENCY</b></div>
+					<div style="color:grey;font-size:5px;margin-top:5px"><b>FOREIGN EXCHANGE</b></div>
+					<div style="color:grey;font-size:18px"><b>CURRENCY</b></div>
 					<p>You can exchange currency here.
 					<p><a href="toForeignExchange" style="color:#dd4b39">Exchange ></a></p>
 				</div>
@@ -131,14 +134,6 @@ body {
             <div class="sidebar-custom b6">
 				<a href="user/toPayment"style="color:black">Payment</a>
             </div>
-			</div>
-			<hr style="border-top: 3px solid #ccc"/>
-			<div class="row " style="margin-left:20px">
-				<img src="/KKBank/images/p4.jpg" width="200px">
-				<div style="color:grey;font-size:10px;margin-top:5px"><b>BILLS OF LIFE</b></div>
-				<div style="color:grey"><b>PAYMENT</b></div>
-				<p>You can pay bills here.</p>
-				<p><a href="user/toPayment" style="color:#dd4b39">Pay ></a></p>
 			</div>
 		</div>
 	</div>

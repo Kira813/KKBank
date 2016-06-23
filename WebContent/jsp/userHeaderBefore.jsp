@@ -9,13 +9,15 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+			<a class="navbar-brand" style="padding-left:10px;padding-top:6px;padding-right:3px">
+            <img src="/KKBank/images/logo.png" width=35px;height=35px></a>
             <a class="navbar-brand">KK Bank</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="active"><a href="userIndex">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="javascript:void(0)">About</a></li>
+              <li><a href="javascript:void(0)">Contact</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Banking<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -28,9 +30,9 @@
                   <li><a href="toAccountEnquiry">Balance Enquiry</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Fund</li>
-                  <li><a href="fund/listFund">Purchase</a></li>
-                  <li><a href="fund/listMyFund">Redeem</a></li>
-                  <li><a href="fund/listMyfund">Inquiry</a></li>
+                  <li><a href="toAccountEnquiry">Purchase</a></li>
+                  <li><a href="toAccountEnquiry">Redeem</a></li>
+                  <li><a href="toAccountEnquiry">Inquiry</a></li>
                 </ul>
               </li>
             </ul>

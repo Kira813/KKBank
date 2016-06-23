@@ -9,9 +9,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button> <i class="fa fa-bank"></i>
+            <a class="navbar-brand" style="padding-left:10px;padding-top:6px;padding-right:3px">
+            <img src="/KKBank/images/logo.png" width=35px;height=35px></a>
             <a class="navbar-brand">KK Bank</a>
         </div>
-
         <ul class="nav navbar-nav">
             <li class="active">
                 <a href="userIndex" onclick="loading.show()">Home</a>
