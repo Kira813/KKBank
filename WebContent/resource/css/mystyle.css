@@ -114,7 +114,7 @@ body {
 	height: 100px;
 }
 .intro-container, .desc-container {
-	max-width: 1024px;
+	max-width: 900px;
 	margin: 30px auto;
 	padding: 0 15px;
 }
@@ -278,7 +278,7 @@ body {
   background-color:#eaf9f9;
 }
 .sidebar-custom{
-	width:265px;
+	width:100%;
 	font-family:Microsoft YaHei;
 	margin: 0 0 20px 0;
 	padding-left:15px;
@@ -307,4 +307,8 @@ body {
 .b6{
 	border-color: #39CCCC;
 }
+footer {
+	padding-top: 20px;
+	text-align: center;
+	color: #999;
 }

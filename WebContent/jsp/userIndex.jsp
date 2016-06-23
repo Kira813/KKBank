@@ -60,11 +60,11 @@ body {
 <!-- downside intro -->
 <div class="container desc-container">
 	<div class="row">
-		<div class="col-sm-8" >
+		<div class="col-sm-9" >
 			<div class="row">
 				<div class="col-sm-12 custom-tag custom-tag1">
 					<div class="row">
-						<div class="col-sm-6">
+						<div class="col-sm-6" style="overflow:hidden">
 							<img src="/KKBank/images/p5.jpg" width="290px" height="180px">
 						</div>
 						<div class="col-sm-6" >
@@ -114,7 +114,7 @@ body {
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-4 custom-tag custom-tag4" >
+		<div class="col-sm-3 custom-tag custom-tag4" >
 			<div class="row" style="padding-left:20px">
 			<div class="sidebar-custom b1">
 				<a href="toAccountEnquiry" style="color:black">Account Enquiry</a>
@@ -158,6 +158,7 @@ body {
 		</div>
 	</div>
  </div>
+ <%@include file="./userFooter.jsp"%>
 </body>
 
 
