@@ -62,7 +62,7 @@
 					            </div>
 					            <a href="user/showPersonalBill" class="small-box-footer">My personal bill <i class="fa fa-arrow-circle-right"></i></a>
 					         </div>
-					         <div class="small-box bg-maroon" style="width:400px">
+					         <div class="small-box bg-lime" style="width:400px">
 					            <div class="inner">
 					              <h3 style="font-family:Microsoft YaHei">Pay for others<sup style="font-size: 20px"></sup></h3>
 					              <p>Pay for whoever you like </p>

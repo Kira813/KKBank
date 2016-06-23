@@ -186,7 +186,7 @@
 			var tmpl = this.tmpl;
 			
 			data.map(function(item) {
-				var plus = item.type.match(/^(Transfer in|Deposit)/i);
+				var plus = item.type.match(/^(Transfer in|Deposit|Fund Sell)/i);
 				var inlineStyle = plus ? 'color:red' : 'color:green';
 				if(plus){
 					content.push(tmpl.replace('{id}', item.id).replace('{type}', item.type).replace('{amount}', item.amount).replace('{date}', timer.render(item.date)).replace('{inlineStyle}', inlineStyle));

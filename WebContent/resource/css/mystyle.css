@@ -122,31 +122,36 @@ body {
 	padding: 0 30px;
 }
 .custom-tag {
+	font-family:Microsoft YaHei;
 	position: relative;
-	text-align: center;
-	font-size: 200%;
-	font-weight: bold;
-	color: #111;
+	/*text-align: center;*/
+	font-size: 150%;
+	/*font-weight: bold;*/
+	color: #b2b2b2;
+	padding:15px;
+	
 }
 .custom-tag1 {
-	height: 200px;
-	line-height: 200x;
-	background: #f60;
+	height: 250px;
+	/*line-height: 200x;*/
+	/*background: #f60;*/
+	
 }
 .custom-tag2 {
 	height: 150px;
-	line-height: 150px;
-	background: #6cf;
+	/*line-height: 150px;*/
+	/*background: #6cf;*/
+	
 }
 .custom-tag3 {
 	height: 150px;
-	line-height: 150px;
-	background: #f00;
+	/*line-height: 150px;*/
+	/*background: #f00;*/
 }
 .custom-tag4 {
 	height: 350px;
-	line-height: 350px;
-	background: #0f0;
+	/*line-height: 350px;*/
+	/*background: #0f0;*/
 }
 
 .custom-tag1::after {
@@ -166,7 +171,7 @@ body {
 	right: 0;
 	top: 50%;
 	margin-top: -68px;
-	height: 135px;
+	height: 370px;
 	width: 2px;
 	background: #ccc;
 }
@@ -176,7 +181,7 @@ body {
 	left: 0;
 	top: 50%;
 	margin-top: -158px;
-	height: 315px;
+	height: 500px;
 	width: 2px;
 	background: #ccc
 }

@@ -117,7 +117,7 @@
 							</div>
 						</div>
 					</section>
-					Tips：The deposit amount should be more than 50 yuan.
+					<div style="color:#f39412;margin-left:20px">Tips：The deposit amount should be more than 50 yuan.</div>
 				</aside>
 			</div>
 		</div>
@@ -149,11 +149,11 @@ aria-label="Close">Return</a>
 aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" style="font-family:Microsoft YaHei">Annual Interest Rate(%)</h4>
+				<h4 class="modal-title" style="font-family:Microsoft YaHei">Saving Accounts Interest Rate(%)</h4>
 			</div>
 			<div class="modal-body"></div>
 			<div class="modal-footer">
-				<a class="btn btn-primary" href="javascript:void(0)" class="close" data-dismiss="modal"
+				<a class="btn btn-warning" href="javascript:void(0)" class="close" data-dismiss="modal"
 aria-label="Close">Return</a>
 			</div>
 		</div>
@@ -244,6 +244,7 @@ var dialog2 = {
 					$('input[name="ac_No"]').val(ac_no);
 					$('input[name="term"]').val(period);
 					$('form').submit();
+					loading.show();
 				}
 			}
 		});

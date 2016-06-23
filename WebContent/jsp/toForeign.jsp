@@ -24,7 +24,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
-					<ul class="nav nav-pills nav-stacked left-nav-custom">
+					<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom5">
 						<li role="presentation">
 							<a href="toAccountEnquiry">Account Enquiry</a>
 						</li>
@@ -66,7 +66,7 @@
 										<div class="input-group">
 											<span class="input-group-addon" >
 												<span class="fa fa-bar-chart-o" ></span>
-												Exchange Rate
+												Selling Rate
 											</span>
 											<div class="form-control">
 												<span id="rate_count"></span>
@@ -239,6 +239,7 @@ $(function() {
 				//dialog.show('Balance is not enough.');		
 			} else {
 				$('form').submit();
+				loading.show();
 			}
 	});
 });

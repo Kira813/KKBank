@@ -196,7 +196,7 @@
 	}
 	$(function(){
 		$('form').on('submit', function(e) {
-			debugger;
+			//debugger;
 			var ac_No = $('select[name=ac_No1]').val();
 			if(!ac_No){
 				dialog.show('Please select an account.');

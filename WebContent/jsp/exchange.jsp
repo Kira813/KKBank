@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom5">
 				    <li role="presentation">
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
@@ -87,13 +87,15 @@
 										<div class="form-control">
 											<span id="showusd"></span>
 										</div>
+										<span class="input-group-addon">.00</span>
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
-										<span class="input-group-addon">JPY</span>
+										<span class="input-group-addon">JPY </span>
 										<div class="form-control">
 											<span id="showjpy"></span>
 										</div>
+										<span class="input-group-addon">.00</span>
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
@@ -101,6 +103,7 @@
 										<div class="form-control">
 											<span id="showhkd"></span>
 										</div>
+										<span class="input-group-addon">.00</span>
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
@@ -108,6 +111,7 @@
 										<div class="form-control">
 											<span id="showgbp"></span>
 										</div>
+										<span class="input-group-addon">.00</span>
 									</div>
 									<p></p>
 									<div class="input-group" style="display:">
@@ -115,6 +119,7 @@
 										<div class="form-control">
 											<span id="showaud"></span>
 										</div>
+										<span class="input-group-addon">.00</span>
 									</div>
 							</div>
 					    </div>
@@ -178,6 +183,7 @@
 					//$('.info-custom').hide();
 					$('input[name="ac_No"]').val(ac_no);
 					$('form').submit();
+					loading.show();
 				}
 			});
 	});

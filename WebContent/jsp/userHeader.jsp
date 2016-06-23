@@ -14,11 +14,11 @@
 
         <ul class="nav navbar-nav">
             <li class="active">
-                <a href="userIndex">Home</a>
+                <a href="userIndex" onclick="loading.show()">Home</a>
             </li>
 	        <!-- s:if test="userIndex" -->
 	        	<li class="dropdown">
-					<a href="toAccountEnquiry">Banking</a>	        
+					<a href="toAccountEnquiry" onclick="loading.show()">Banking</a>	        
 	            </li>
 	        
             <li class="dropdown">

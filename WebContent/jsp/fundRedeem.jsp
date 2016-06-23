@@ -82,7 +82,7 @@
 									</tr>
 									<tr height="30px">
 										<td>Share:</td>
-										<td>${share}</td>
+										<td><span format-balance>${share}</span></td>
 									</tr>
 									<tr height="30px">
 										<td>Income:</td>

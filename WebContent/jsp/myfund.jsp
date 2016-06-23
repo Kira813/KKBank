@@ -65,8 +65,8 @@
 										<th style="text-align:center">Fund code</th>
 										<th style="text-align:center">Fund type</th>
 										<th style="text-align:center">Rate of return</th>
-										<th style="text-align:center">Accumulated income</th>
 										<th style="text-align:center">Shares</th>
+										<th style="text-align:center">Accumulated income</th>
 										<th style="text-align:center">Redeem</th>
 									</tr>
 								</thead>
@@ -89,13 +89,13 @@
 													<td> -- </td>
 													<td>Unconfirmed</td>
 												<%} else{ %>
-													<td><%= share %></td>
+													<td><span format-balance><%= share %></span></td>
 													<td><% double income = (temp.getFund().getNav() - temp.getNav()) * share; %>
 														<%if(temp.getNav() == 0){ %>
 																0.0
 														<%}
 														else{%>
-															<%= income %>
+															<span format-balance><%= income %></span>
 														<%} %>
 													</td>						
 													<td><a class="btn btn-xs btn-danger" href="fund/toFundRedeemConfirm?fund_id=<%= temp.getFund_id() %>">Redeem</a></td>

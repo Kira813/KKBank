@@ -17,12 +17,14 @@
 	<%@include file="./adminJsp/headMeta.jsp"%></head>
 </head>
 <body>
+	<div class="container">
 	<%@include file="./userHeader.jsp"%>
+	</div>
 	<div class="wrapper row-offcanvas row-offcanvas-left" style="font-family:Microsoft YaHei">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
-					<ul class="nav nav-pills nav-stacked left-nav-custom">
+					<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom3">
 					    <li role="presentation">
 					        <a href="toAccountEnquiry">Account Enquiry</a>
 					    </li>

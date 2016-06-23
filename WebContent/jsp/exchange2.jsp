@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom5">
 				    <li role="presentation">
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
@@ -85,6 +85,7 @@
 										<div class="form-control">
 											<span id="showusd"></span>
 										</div>
+									
 										<span class="input-group-btn">
 											<a class="btn btn-success btn-flat" id="exchange_btn1" href="javascript:void(0)">Exchange to RMB</a>
 										</span>										
@@ -95,6 +96,7 @@
 										<div class="form-control">
 											<span id="showjpy"></span>
 										</div>
+										
 										<span class="input-group-btn">
 											<a class="btn btn-success btn-flat" id="exchange_btn2" href="javascript:void(0)">Exchange to RMB</a>
 										</span>										
@@ -105,6 +107,7 @@
 										<div class="form-control">
 											<span id="showhkd"></span>
 										</div>
+									
 										<span class="input-group-btn">
 											<a class="btn btn-success btn-flat" id="exchange_btn3" href="javascript:void(0)">Exchange to RMB</a>
 										</span>										
@@ -115,6 +118,7 @@
 										<div class="form-control">
 											<span id="showgbp"></span>
 										</div>
+								
 										<span class="input-group-btn">
 											<a class="btn btn-success btn-flat" id="exchange_btn4" href="javascript:void(0)">Exchange to RMB</a>
 										</span>										
@@ -125,6 +129,7 @@
 										<div class="form-control">
 											<span id="showaud"></span>
 										</div>
+							
 										<span class="input-group-btn">
 											<a class="btn btn-success btn-flat" id="exchange_btn5" href="javascript:void(0)">Exchange to RMB</a>
 										</span>										
@@ -191,6 +196,7 @@
 					$('input[name="ac_No"]').val(ac_no);
 					$('input[name="currency"]').val('USD');
 					$('form').submit();
+					loading.show();
 				}
 			});
 		$('#exchange_btn2').click(function() {
@@ -202,6 +208,7 @@
 					$('input[name="ac_No"]').val(ac_no);
 					$('input[name="currency"]').val('JPY');
 					$('form').submit();
+					loading.show();
 				}
 			});
 		$('#exchange_btn3').click(function() {
@@ -213,6 +220,7 @@
 					$('input[name="ac_No"]').val(ac_no);
 					$('input[name="currency"]').val('HKD');
 					$('form').submit();
+					loading.show();
 				}
 			});
 		$('#exchange_btn4').click(function() {
@@ -224,6 +232,7 @@
 					$('input[name="ac_No"]').val(ac_no);
 					$('input[name="currency"]').val('GBP');
 					$('form').submit();
+					loading.show();
 				}
 			});
 		$('#exchange_btn5').click(function() {
@@ -235,6 +244,7 @@
 					$('input[name="ac_No"]').val(ac_no);
 				$('input[name="currency"]').val('AUD');
 					$('form').submit();
+					loading.show();
 				}
 			});
 	});

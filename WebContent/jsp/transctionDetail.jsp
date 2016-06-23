@@ -66,7 +66,7 @@
 											<td><s:date name="date" format="yyyy-MM-dd hh：mm：ss"/></td>
 											<td>${type }</td>
 											<td>
-											<s:if test="type=='Deposit'||type=='Transfer in'">
+											<s:if test="type=='Deposit'||type=='Transfer in'||type=='Fund Sell'">
 												<span style="color:red" format-balance>${amount}</span>
 											</s:if>
 											<s:else>

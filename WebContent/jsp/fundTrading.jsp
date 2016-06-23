@@ -76,7 +76,10 @@
 					<section>
 						<div class="box box-danger">
 							<div class="box-header">
-								<h3 class="box-title" style="font-family:Microsoft YaHei">Fund</h3><a class="btn btn-default" style="margin-top:7px;float:right;margin-right:20px" href="fund/listMyFund"><span class="glyphicon glyphicon-search"></span> My Fund</a>
+								<h3 class="box-title" style="font-family:Microsoft YaHei">Fund</h3>
+								<a class="btn btn-primary" style="margin-top:7px;float:right;margin-right:20px;border-color:orange;background-color: orange;color:white" href="fund/listMyFund">
+								<span class="glyphicon glyphicon-user"></span> My Fund
+								</a>
 							</div>
 							<div class="box-body">
 								<%ActionContext.getContext().getSession().get("result"); %>

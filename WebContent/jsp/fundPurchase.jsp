@@ -126,7 +126,7 @@
 			});
 		}
 	}
-	
+
 	/*$(function() {
 		var action = 'fundPurchase.action';
 		

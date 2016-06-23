@@ -24,7 +24,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
-					<ul class="nav nav-pills nav-stacked left-nav-custom">
+					<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom5">
 						<li role="presentation">
 							<a href="toAccountEnquiry">Account Enquiry</a>
 						</li>
@@ -63,7 +63,7 @@
 										<p></p>
 										<div class="input-group">
 											<span class="input-group-addon">
-												<i class="fa fa-money"></i> Foreign currency balance
+												<i class="fa fa-money"></i> Foreign Currency Balance
 											</span>
 											<div class="form-control">
 												${bal}
@@ -73,7 +73,7 @@
 										<div class="input-group">
 											<span class="input-group-addon" >
 												<span class="fa fa-bar-chart-o" ></span>
-												Exchange Rate
+												Buying Rate
 											</span>
 											<div class="form-control">
 												<span id="rate_count"></span>
@@ -228,6 +228,7 @@ $(function() {
 				//alert('Balance is not enough.');		
 			} else {
 				$('form').submit();
+				loading.show();
 			}
 	});
 });

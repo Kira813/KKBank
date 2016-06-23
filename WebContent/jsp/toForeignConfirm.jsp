@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<ul class="nav nav-pills nav-stacked left-nav-custom">
+				<ul class="nav nav-pills nav-stacked left-nav-custom nav-custom5">
 				    <li role="presentation">
 				        <a href="toAccountEnquiry">Account Enquiry</a>
 				    </li>
@@ -67,7 +67,7 @@
 					                  <td>${currency}</td>
 					                </tr>
 					                <tr>
-					                  <td style="padding-left:20px">Exchange Offer Rate</td>
+					                  <td style="padding-left:20px">Selling Rate</td>
 					                  <td>${rate}</td>
 					                </tr>
 					                <tr class="success">
@@ -146,6 +146,7 @@ $(function() {
 			$('input[name=currency]').val(currency);
 			$('input[name=rmb]').val(rmb);
 			$('form').submit();
+			loading.show();
 		}else if(!pin){
 			dialog.show('Please input the card PIN.');
 		}else{
